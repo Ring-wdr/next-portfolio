@@ -1,9 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    'Poppins' Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
+  font-size: 1.3rem;
+  background-color: black;
+  background-image: url('https://github.com/judygab/web-dev-projects/blob/main/personal-portfolio/src/assets/img/banner-bg.png?raw=true');
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 a {

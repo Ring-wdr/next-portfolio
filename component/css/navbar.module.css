@@ -1,0 +1,80 @@
+.nav-bar {
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 4rem;
+  padding: 5px;
+  position: fixed;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-bar .logo-box {
+  display: flex;
+  position: static;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+  height: 50px;
+  margin: 20px;
+}
+.nav-bar .logo-box .logo-btn {
+  background: none;
+  border: none;
+}
+
+.logo-box span {
+  font-size: 24px;
+  font-weight: 900;
+  background: linear-gradient(to right, #fbcac9, #8ca6ce);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-ref {
+  color: white;
+  display: flex;
+  transition: 0.5s;
+}
+.nav-ref ul {
+  display: flex;
+  list-style: none;
+  margin-right: 10px;
+}
+.nav-ref ul li {
+  margin: 1rem;
+}
+.nav-ref ul li:hover {
+  color: crimson;
+  font-weight: 700;
+}
+.nav-ref .nav-github {
+  border: white 2px solid;
+  border-radius: 2px;
+  width: 15rem;
+  height: 3rem;
+  margin: auto;
+  color: white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* on moblie */
+@media (hover: none) and (pointer: coarse) {
+  .nav-bar {
+    flex-direction: column;
+    height: 4rem;
+  }
+  .nav-ref {
+    flex-direction: column;
+    align-items: center;
+  }
+  .inactive {
+    visibility: hidden;
+  }
+}
