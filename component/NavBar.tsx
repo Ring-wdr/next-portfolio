@@ -2,10 +2,21 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './css/navbar.module.css';
 import 'remixicon/fonts/remixicon.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function NavBar() {
+  const router = useRouter();
+  console.log(router);
   const [toggle, setToggle] = useState(false);
+  const removeNav = () => setToggle(false);
+
+  useEffect(() => {
+    window.addEventListener('scroll', removeNav);
+
+    return () => window.removeEventListener('scroll', removeNav);
+  }, [toggle]);
+
   return (
     <nav className={styles['nav-bar']}>
       <div className={styles['logo-box']}>
@@ -20,10 +31,22 @@ export default function NavBar() {
       <div className={`${styles['nav-ref']} ${toggle ? '' : styles.inactive}`}>
         <ul>
           <li>
-            <Link href={`/`}>HOME</Link>
+            <Link
+              href={`/`}
+              style={{ color: router.pathname === '/' ? 'crimson' : 'inherit' }}
+            >
+              HOME
+            </Link>
           </li>
           <li>
-            <Link href={`/project`}>PROJECT</Link>
+            <Link
+              href={`/project`}
+              style={{
+                color: router.pathname === '/project' ? 'crimson' : 'inherit',
+              }}
+            >
+              PROJECT
+            </Link>
           </li>
         </ul>
         <div className={styles['nav-github']}>

@@ -8,6 +8,9 @@ const nextConfig = {
       'raw.githubusercontent.com',
       'camo.githubusercontent.com',
       'upload.wikimedia.org',
+      'www.nextontop.com',
+      'techstack-generator.vercel.app',
+      'cdn.discordapp.com',
     ],
   },
 };

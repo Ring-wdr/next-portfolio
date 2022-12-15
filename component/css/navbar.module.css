@@ -65,16 +65,18 @@
 }
 
 /* on moblie */
-@media (hover: none) and (pointer: coarse) {
+@media (min-width: 320px) and (max-width: 480px) {
   .nav-bar {
     flex-direction: column;
+    justify-content: flex-start;
     height: 4rem;
   }
   .nav-ref {
     flex-direction: column;
+    justify-content: center;
     align-items: center;
   }
-  .inactive {
+  .nav-ref.inactive {
     visibility: hidden;
   }
 }

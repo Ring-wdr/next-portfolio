@@ -1,3 +1,10 @@
 .body {
   padding-top: 10rem;
 }
+
+/* on moblie */
+@media (min-width: 320px) and (max-width: 1024px) {
+  .body {
+    padding: 0;
+  }
+}
