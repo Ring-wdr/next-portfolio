@@ -40,8 +40,10 @@
   align-items: center;
   text-align: center;
 }
-.skill-list h2 {
-  font-size: 3rem;
+
+.skill-list h3 {
+  margin: 0;
+  text-align: center;
 }
 
 .skill-list button {
@@ -60,10 +62,10 @@
 .skill-category {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 3rem;
   align-content: center;
   justify-content: space-between;
   margin: 0;
+  padding: 0;
 }
 
 .skill-category li {
@@ -75,24 +77,36 @@
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-  .skill-list h2 {
+  .skill-list button {
     font-size: 2rem;
-  }
-  .skill-category {
-    grid-template-columns: 1fr 1fr;
   }
   .skill-desc {
     font-size: 1.5rem;
   }
+  .skill-category li {
+    width: 100px;
+    margin: 0.5rem;
+  }
+  .skill-category li h3 {
+    width: 60%;
+  }
+  .skill-category li img {
+    width: 60%;
+  }
 }
 @media (min-width: 320px) and (max-width: 768px) {
-  .skill-list h2 {
-    font-size: 2rem;
+  .skill-list button {
+    font-size: 1.5rem;
   }
   .skill-category {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
-
+  .skill-category li {
+    margin: 0.25rem;
+  }
+  .skill-category li h3 {
+    font-size: 1rem;
+  }
   .skill-desc {
     font-size: 0.75rem;
   }

@@ -17,12 +17,12 @@ export const SkillList = () => {
         입니다. 아래는 현재까지 습득한 기술들이며 이미 프로젝트에서 사용하였거나
         현재 학습 중인 모든 기술들을 작성하였습니다. 기술 하나에만 치우치지 않고
         최대한 다양한 것들을 접하여 필요한 상황이 발생할 때 적재적소에 사용할 수
-        있는 훌륭한 개발자가 되도록 노력하겠습니다.
+        있는 훌륭한 개발자가 되도록 노력중입니다.
       </div>
       <div className={styles['skill-list']}>
         <div>
           <button onClick={() => typeKey > 0 && onDecrease()}> &lt; </button>
-          <h2 style={{ color: 'white' }}>{skillType[typeKey]}</h2>
+          <h3 style={{ color: 'white' }}>{skillType[typeKey]}</h3>
           <button
             onClick={() => typeKey < skillType.length - 1 && onIncrease()}
           >
@@ -38,8 +38,8 @@ export const SkillList = () => {
                 <Image
                   src={skillImg}
                   alt={skillName}
-                  width={200}
-                  height={200}
+                  width={100}
+                  height={100}
                 />
               </li>
             ))}

@@ -7,7 +7,6 @@ import { useRouter } from 'next/router';
 
 export default function NavBar() {
   const router = useRouter();
-  console.log(router);
   const [toggle, setToggle] = useState(false);
   const removeNav = () => setToggle(false);
 
@@ -22,11 +21,16 @@ export default function NavBar() {
       <div className={styles['logo-box']}>
         <button
           onClick={() => setToggle((prev) => !prev)}
-          className={styles['logo-btn']}
+          className={`${styles['logo-btn']} ${toggle ? styles.active : ''} `}
         >
-          <Image src='/ms-icon-150x150.png' alt='logo' width={50} height={50} />
+          {toggle ? (
+            <i className='ri-menu-4-line'></i>
+          ) : (
+            <i className='ri-menu-line'></i>
+          )}
         </button>
-        <span className={styles['logo-name']}>RING-WDR</span>
+        <Image src='/ms-icon-150x150.png' alt='logo' width={50} height={50} />
+        <div className={styles['logo-name']}>RING-WDR</div>
       </div>
       <div className={`${styles['nav-ref']} ${toggle ? '' : styles.inactive}`}>
         <ul>
