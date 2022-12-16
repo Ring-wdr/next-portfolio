@@ -55,12 +55,24 @@
 }
 .desc {
   color: lightgray;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.5) 50%,
+    #ff5858 50%,
+    #cc2e5d
+  );
+  background-size: 200%;
+  transition: 0.25s ease-out;
   border-radius: 5px;
   padding: 1.5rem;
   max-width: 40rem;
   width: 50vw;
   margin: 1rem 0rem;
+}
+
+.desc:hover {
+  background-position: -100%;
+  color: white;
 }
 
 .desc .blog {
@@ -69,7 +81,7 @@
 }
 
 .desc .blog:hover {
-  color: chartreuse;
+  color: rgb(197, 242, 152);
   text-decoration: underline;
 }
 
@@ -96,7 +108,7 @@
     font-size: 0.75rem;
   }
   .desc .blog {
-    color: chartreuse;
+    color: rgb(197, 242, 152);
     font-size: 1.2rem;
     text-decoration: underline;
   }

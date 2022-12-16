@@ -81,17 +81,13 @@
     font-size: 2rem;
   }
   .skill-desc {
-    font-size: 1.5rem;
+    font-size: 0.75rem;
+  }
+  .skill-category {
+    width: 60vw;
   }
   .skill-category li {
-    width: 100px;
     margin: 0.5rem;
-  }
-  .skill-category li h3 {
-    width: 60%;
-  }
-  .skill-category li img {
-    width: 60%;
   }
 }
 @media (min-width: 320px) and (max-width: 768px) {

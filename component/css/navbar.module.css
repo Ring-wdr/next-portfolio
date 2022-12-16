@@ -81,6 +81,17 @@
   border: white 3px solid;
   font-weight: 900;
 }
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .nav-ref {
+    width: 60vw;
+    height: auto;
+  }
+  .nav-ref .nav-github {
+    font-size: 0.75rem;
+  }
+}
+
 /* on moblie */
 @media (min-width: 320px) and (max-width: 480px) {
   .nav-bar {
@@ -99,10 +110,21 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.8);
+    font-size: 0.7 5rem;
+    width: 80vw;
+    height: 80vh;
+    padding: 0;
+  }
+
+  .nav-ref ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
   }
   .nav-ref .nav-github {
-    margin: auto;
+    display: none;
   }
   .nav-ref.inactive {
     visibility: hidden;
