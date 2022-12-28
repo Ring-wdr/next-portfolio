@@ -1,6 +1,6 @@
 import { useDeferredValue, useEffect, useMemo, useState } from 'react';
 
-export default function Calender() {
+export default function Calendar() {
   const [curYear, setCurYear] = useState('');
   const [curMonth, setCurMonth] = useState('');
 
@@ -38,11 +38,6 @@ export default function Calender() {
       Intl.DateTimeFormat().formatToParts();
     setCurYear(year);
     setCurMonth(month);
-
-    return () => {
-      setCurYear('');
-      setCurMonth('');
-    };
   }, []);
 
   return (
@@ -53,6 +48,21 @@ export default function Calender() {
         </span>
       </div>
       <div className='current'>
+        <button
+          onClick={() =>
+            setCurMonth((prev) => {
+              const temp = Number(prev) - 1;
+              if (temp === 0) {
+                setCurYear((prevYear) => String(Number(prevYear) - 1));
+                return '12';
+              } else {
+                return String(Number(prev) - 1);
+              }
+            })
+          }
+        >
+          &lt;
+        </button>
         <label style={{ color: 'slategrey' }}>
           년도 바꾸기
           <input value={curYear} onChange={(e) => setCurYear(e.target.value)} />
@@ -64,6 +74,21 @@ export default function Calender() {
             onChange={(e) => setCurMonth(e.target.value)}
           />
         </label>
+        <button
+          onClick={() =>
+            setCurMonth((prev) => {
+              const temp = Number(prev) + 1;
+              if (temp === 13) {
+                setCurYear((prevYear) => String(Number(prevYear) + 1));
+                return '1';
+              } else {
+                return String(Number(prev) + 1);
+              }
+            })
+          }
+        >
+          &gt;
+        </button>
       </div>
       <div
         className='inner-body'
@@ -106,10 +131,19 @@ export default function Calender() {
         .calander .current {
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
             background: rgba(255, 0, 0, 0.1);
             border-radius: 10px;
             padding: 10px;
             margin: 2rem;
+        }
+
+        .calander .current button {
+          background: none;
+          border: none;
+          color: white;
+          font-size: 2rem;
         }
 
         .calander .current label {

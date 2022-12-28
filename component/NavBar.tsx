@@ -5,6 +5,12 @@ import 'remixicon/fonts/remixicon.css';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
+const idxArr: [number, string, string][] = [
+  [1, '/', 'HOME'],
+  [2, '/project', 'PROJECT'],
+  [3, '/calendar', 'CALENDAR'],
+];
+
 export default function NavBar() {
   const router = useRouter();
   const [toggle, setToggle] = useState(false);
@@ -34,24 +40,18 @@ export default function NavBar() {
       </div>
       <div className={`${styles['nav-ref']} ${toggle ? '' : styles.inactive}`}>
         <ul>
-          <li>
-            <Link
-              href={`/`}
-              style={{ color: router.pathname === '/' ? 'crimson' : 'inherit' }}
-            >
-              HOME
-            </Link>
-          </li>
-          <li>
-            <Link
-              href={`/project`}
-              style={{
-                color: router.pathname === '/project' ? 'crimson' : 'inherit',
-              }}
-            >
-              PROJECT
-            </Link>
-          </li>
+          {idxArr.map(([key, route, label]) => (
+            <li key={key}>
+              <Link
+                href={route}
+                style={{
+                  color: router.pathname === route ? 'crimson' : 'inherit',
+                }}
+              >
+                {label}
+              </Link>
+            </li>
+          ))}
         </ul>
         <div className={styles['nav-github']}>
           <a
