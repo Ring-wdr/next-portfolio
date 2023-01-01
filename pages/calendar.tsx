@@ -25,21 +25,26 @@ export default function Calendar() {
       date: idx + 1,
       day: (pday + idx + 1) % 7,
     }));
-    const nextMonth = Array.from({ length: 6 - cday }, (_, idx) => ({
-      date: idx + 1,
-      day: cday + idx + 1,
-    }));
+
+    const prevDays = lastMonth.length + currMonth.length;
+
+    const nextMonth = Array.from(
+      { length: prevDays === 28 ? 14 : prevDays > 35 ? 6 - cday : 13 - cday },
+      (_, idx) => ({
+        date: idx + 1,
+        day: (cday + idx + 1) % 7,
+      })
+    );
 
     return [lastMonth, currMonth, nextMonth];
   }, [deferredYear, deferredMonth]);
 
   useEffect(() => {
     const [{ value: year }, , { value: month }] =
-      Intl.DateTimeFormat().formatToParts();
+      Intl.DateTimeFormat('ko-KR').formatToParts();
     setCurYear(year);
     setCurMonth(month);
   }, []);
-
   return (
     <div className='calander'>
       <div>
@@ -104,18 +109,23 @@ export default function Calendar() {
         {last.map(({ date, day }) => (
           <div
             key={`${date}-${day}`}
-            style={{ color: day === 0 ? 'crimson' : 'lightgray' }}
+            style={{ color: day === 0 ? '#850000' : 'gray' }}
           >
             {date}
           </div>
         ))}
         {curr.map(({ date, day }) => (
-          <div key={`${date}-${day}`}>{date}</div>
+          <div
+            key={`${date}-${day}`}
+            style={{ color: day === 0 ? 'red' : 'white' }}
+          >
+            {date}
+          </div>
         ))}
         {next.map(({ date, day }) => (
           <div
             key={`${date}-${day}`}
-            style={{ color: day === 0 ? 'crimson' : 'lightgray' }}
+            style={{ color: day === 0 ? '#850000' : 'gray' }}
           >
             {date}
           </div>
