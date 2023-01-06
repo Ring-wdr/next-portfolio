@@ -68,6 +68,7 @@
   max-width: 40rem;
   width: 50vw;
   margin: 1rem 0rem;
+  line-height: 120%;
 }
 
 .desc:hover {

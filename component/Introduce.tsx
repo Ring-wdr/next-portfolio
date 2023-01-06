@@ -10,13 +10,13 @@ export const Introduce = () => {
           <h3 style={{ color: 'white', marginBottom: '2rem' }}>
             🥰&nbsp;WHY FRONTEND Developer?? 👨🏻‍💻
           </h3>
-          데이터 분석 공부 중 SW개발에 흥미가 생기게 되어 진로를 변경하여 공부를
+          데이터 분석 공부 중 SW개발에 흥미가 생기게 되어 진로 변경 후 공부를
           시작하였습니다. &nbsp;
           <b style={{ color: '#FFFBC1' }}>JavaScript</b> 기본기를 다지면서 개발
           트렌드를 살펴보았고 트렌드의 변화로 인해 개발의 많은 부분이
           프론트엔드로 넘어가는 것을 보았습니다. 코드 작성 후 결과물의 즉각적인
           변화를 확인할 수 있는 점이 흥미에도 맞다고 생각하여 현재는&nbsp;
-          <strong>프론트엔드 직무를 희망</strong>하는 예비 주니어 개발자입니다.
+          <strong>프론트엔드 직무</strong>로 근무하는 주니어 개발자입니다.
           &nbsp;
           <b style={{ color: 'cyan' }}>
             <i className='ri-reactjs-fill'></i>React 18
@@ -25,8 +25,9 @@ export const Introduce = () => {
           위해서는 기다리기보다 먼저 다양한 관점에서 도전하려고 합니다. 제가
           작성한 코드나 결과물을 팀원이 사용하고나서 피드백할 때 뿌듯함을
           느낍니다. 그래서 개발 환경 내에서 팀원들이 API를 바로 테스트 할 수
-          있게 swagger를 사용했습니다. 현재{' '}
-          <b style={{ color: '#9ca3e7' }}>TypeScript</b> , Next 학습 중입니다.
+          있게 swagger를 사용했습니다. 현재는{' '}
+          <b style={{ color: '#9ca3e7' }}>TypeScript</b> , Next 13을 이용하여
+          실무를 진행 중 입니다.
         </div>
         <div className={styles.desc}>
           <h3 className={styles.blog}>
