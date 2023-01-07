@@ -29,6 +29,7 @@ export default function Calendar() {
         <input
           type='text'
           value={defInput}
+          data-testid='dateInput'
           onChange={(e) => {
             onChange(e);
             const tempInput = e.target.value.split('-');
@@ -43,7 +44,7 @@ export default function Calendar() {
         />
         <button onClick={() => monthChange('1')}>&gt;</button>
       </div>
-      <ul className='inner-body'>
+      <ul className='inner-body' data-testid='calendarcomp'>
         {calendar && calendar.length !== 0
           ? calendar.map(({ month, date, day }) => (
               <li key={`${month}-${date}-${day}`}>
