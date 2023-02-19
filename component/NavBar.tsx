@@ -1,9 +1,9 @@
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './css/navbar.module.css';
 import 'remixicon/fonts/remixicon.css';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 
 const idxArr: [number, string, string][] = [
   [1, '/', 'HOME'],

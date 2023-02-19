@@ -1,0 +1,19 @@
+img.float {
+  position: absolute;
+  z-index: 0;
+  top: 20rem;
+  right: 5rem;
+  animation: updown 3s linear infinite;
+}
+
+@keyframes updown {
+  0% {
+    transform: translateY(-20px);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(-20px);
+  }
+}
