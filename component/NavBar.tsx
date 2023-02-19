@@ -11,7 +11,7 @@ const idxArr: [number, string, string][] = [
   [3, '/calendar', 'CALENDAR'],
 ];
 
-export default function NavBar() {
+export default function NavBar({ onClick }: { onClick?: () => void }) {
   const router = useRouter();
   const [toggle, setToggle] = useState(false);
   const removeNav = () => setToggle(false);
@@ -53,15 +53,9 @@ export default function NavBar() {
             </li>
           ))}
         </ul>
-        <div className={styles['nav-github']}>
-          <a
-            href='https://github.com/Ring-wdr'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            GO TO Github &nbsp;<i className='ri-github-fill'></i>
-          </a>
-        </div>
+        <button className={styles['nav-github']} onClick={onClick}>
+          GO TO Github &nbsp;<i className='ri-github-fill'></i>
+        </button>
       </div>
     </nav>
   );

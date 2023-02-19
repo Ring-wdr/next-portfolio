@@ -1,0 +1,33 @@
+.modal {
+  border-radius: 2rem;
+  background: rgba(255, 255, 255, 0.5);
+  width: 15rem;
+  backdrop-filter: blur(3px);
+}
+
+.modal_in {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal_in a:hover {
+  text-decoration: underline;
+  text-underline-position: under;
+}
+
+.modal_in button {
+  margin-top: 1.5rem;
+  width: 4rem;
+  height: 2rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: aliceblue;
+  font-size: 1rem;
+  border-radius: 2rem;
+}
+
+.modal_in button:hover {
+  background: rgba(125, 125, 125, 0.7);
+  color: cornsilk;
+}

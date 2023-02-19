@@ -4,10 +4,10 @@ import { SkillList } from '../component/SkillList';
 
 export default function Home() {
   return (
-    <div>
+    <>
       <Introduce />
       <SkillList />
       <Floating />
-    </div>
+    </>
   );
 }
