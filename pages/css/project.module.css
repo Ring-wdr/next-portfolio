@@ -45,7 +45,7 @@
   padding: 1rem;
 }
 
-@media (min-width: 320px) and (max-width: 768px) {
+@media (min-width: 320px) and (max-width: 1024px) {
   .page {
     font-size: 0.75rem;
   }

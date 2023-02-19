@@ -11,6 +11,7 @@ const nextConfig = {
       'www.nextontop.com',
       'techstack-generator.vercel.app',
       'cdn.discordapp.com',
+      'kit.svelte.dev',
     ],
   },
 };
