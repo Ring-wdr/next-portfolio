@@ -133,6 +133,7 @@ body {
     'Poppins' Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
     sans-serif;
   font-size: 1.3rem;
+  min-height: 100vh;
   background-color: black;
   background-image: url('https://github.com/judygab/web-dev-projects/blob/main/personal-portfolio/src/assets/img/banner-bg.png?raw=true');
   background-position: top center;

@@ -93,7 +93,7 @@ export default function Calendar() {
         }
         .calendar .current input {
           text-align: center;
-          width: 20rem;
+          width: 15rem;
           height: 5rem;
           font-size: 2rem;
           color: white;
@@ -125,7 +125,7 @@ export default function Calendar() {
         .calendar .inner-body {
           display: grid;
           grid-template-columns: repeat(7, 1fr);
-          grid-gap: 1rem;
+          grid-gap: 0.5rem;
           color: wheat;
           margin: 2rem;
           text-align: center;
