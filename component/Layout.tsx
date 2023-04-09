@@ -1,7 +1,7 @@
 import styles from "./css/layout.module.css";
 import Head from "next/head";
 import { useRef } from "react";
-import { Modal } from "./Modal";
+import { Modal } from "./common/Modal/Modal";
 
 export default function Layout({ children }: React.PropsWithChildren) {
   const modalRef = useRef<HTMLDialogElement>(null);

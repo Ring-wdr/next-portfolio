@@ -3,6 +3,7 @@ import Script from "next/script";
 import { NavBar } from "../component/NavBar";
 import { GA_TRACKING_ID } from "../lib/gtag";
 import "../styles/globals.css";
+import "remixicon/fonts/remixicon.css";
 
 export const metadata = {
   title: "포트폴리오에 오신 것을 환영합니다",
@@ -25,7 +26,7 @@ export const metadata = {
     icon: [{ url: "/favicon.ico" }],
     apple: [
       { url: "/icon/apple-icon-57x57.png", sizes: "57x57" },
-      // { url: "/icon/apple-icon-60x60.png", sizes: "60x60" },
+      { url: "/icon/apple-icon-60x60.png", sizes: "60x60" },
       { url: "/icon/apple-icon-72x72.png" },
       { url: "/icon/apple-icon-76x76.png" },
       { url: "/icon/apple-icon-120x120.png" },

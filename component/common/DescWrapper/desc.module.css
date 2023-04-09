@@ -1,0 +1,47 @@
+.desc {
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.1) 50%,
+    #ff5858 50%,
+    #cc2e5d
+  );
+  background-size: 200%;
+  font-size: 1.5rem;
+  transition: 0.25s ease-out;
+  border-radius: 5px;
+  padding: 1.5rem;
+  margin: 1rem 0rem;
+  line-height: 120%;
+  backdrop-filter: blur(3px);
+}
+
+.desc:hover {
+  background-position: -100%;
+  color: white;
+}
+
+.desc:hover a {
+  text-shadow: rgb(255, 229, 126) 1px 0 10px;
+}
+
+.desc .blog {
+  color: aquamarine;
+  margin-bottom: 2rem;
+}
+
+.desc .blog:hover {
+  color: rgb(197, 242, 152);
+  text-decoration: underline;
+}
+
+/* on moblie */
+@media (max-width: 768px) {
+  .desc {
+    font-size: 1rem;
+  }
+  .desc .blog {
+    color: rgb(197, 242, 152);
+    font-size: 1.2rem;
+    text-decoration: underline;
+  }
+}

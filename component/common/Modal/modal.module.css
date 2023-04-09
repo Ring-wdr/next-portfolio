@@ -4,12 +4,27 @@
   width: 15rem;
   backdrop-filter: blur(3px);
 }
+.modal .close {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal button.empty {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+}
+.modal button.empty:hover {
+  font-weight: 900;
+}
 
 .modal_in {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-size: 1.5rem;
+  font-weight: 900;
 }
 
 .modal_in a:hover {
