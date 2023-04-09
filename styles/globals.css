@@ -132,16 +132,42 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     "Poppins" Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
     sans-serif;
-  font-size: 1.3rem;
+  /* font-size: 1.3rem; */
   min-height: 100vh;
-  background-color: black;
-  background-image: url("https://github.com/judygab/web-dev-projects/blob/main/personal-portfolio/src/assets/img/banner-bg.png?raw=true");
+  background-color: #f0ece4;
+  /* background-image: url("https://github.com/judygab/web-dev-projects/blob/main/personal-portfolio/src/assets/img/banner-bg.png?raw=true"); */
   background-position: top center;
   background-size: cover;
   background-repeat: no-repeat;
-  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='42' height='64' viewport='0 0 100 100' style='fill:black;font-size:36px;'><text y='50%'>👻</text></svg>")
+  /* cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='42' height='64' viewport='0 0 100 100' style='fill:black;font-size:36px;'><text y='50%'>👻</text></svg>")
       16 0,
-    auto;
+    auto; */
+}
+
+/** contents container*/
+#container {
+  margin: auto;
+  position: relative;
+  padding: 5rem 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* align-items: center; */
+  width: 80vw;
+  z-index: 10;
+}
+
+/** on PC sb, on Mobile d-column */
+#d-variaty {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* on moblie */
+@media (min-width: 320px) and (max-width: 920px) {
+  #d-variaty {
+    flex-direction: column;
+  }
 }
 
 a {
@@ -156,4 +182,110 @@ a {
 ul {
   margin: none;
   padding: none;
+}
+
+.circle {
+  border-radius: 100%;
+}
+
+.modify-big {
+  position: relative;
+  overflow: hidden;
+}
+
+.modify-big img {
+  transition: all 0.2s linear;
+}
+
+.modify-big:hover img {
+  scale: 1.2;
+}
+
+.d-flex {
+  display: flex;
+}
+.flex-column {
+  flex-direction: column;
+}
+
+.justify-cc {
+  justify-content: center;
+}
+.justify-sb {
+  justify-content: space-between;
+}
+
+.c-100 {
+  width: 100%;
+}
+
+.align-ic {
+  align-items: center;
+}
+
+.p-05 {
+  padding: 0.5rem;
+}
+
+.p-1 {
+  padding: 1rem;
+}
+.p-2 {
+  padding: 2rem;
+}
+.p-3 {
+  padding: 3rem;
+}
+.p-4 {
+  padding: 4rem;
+}
+.p-5 {
+  padding: 5rem;
+}
+.p-6 {
+  padding: 6rem;
+}
+
+.w-10 {
+  width: 10rem;
+}
+
+.w-15 {
+  width: 15rem;
+}
+
+.w-20 {
+  width: 20rem;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+.mt-2 {
+  margin-top: 2rem;
+}
+.mt-3 {
+  margin-top: 3rem;
+}
+.mt-4 {
+  margin-top: 4rem;
+}
+.mt-5 {
+  margin-top: 5rem;
+}
+
+.mb-1 {
+  margin-bottom: 1rem;
+}
+.mb-2 {
+  margin-bottom: 2rem;
+}
+.mb-3 {
+  margin-bottom: 3rem;
+}
+.mb-4 {
+  margin-bottom: 4rem;
+}
+.mb-5 {
+  margin-bottom: 5rem;
 }

@@ -1,0 +1,52 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  border-radius: 5px;
+}
+
+.logo span {
+  margin: 0.15rem 0 0.15rem 0.5rem;
+}
+
+.logo span:first-child {
+  font-size: 24px;
+  font-weight: 900;
+  background: linear-gradient(to right, #fbcac9, #8ca6ce);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-link {
+  display: flex;
+}
+
+.nav-link li {
+  margin: 0 1rem;
+  width: 4rem;
+  text-align: center;
+}
+
+.nav-link li:hover {
+  font-weight: 900;
+}
+
+/* on moblie */
+@media (min-width: 320px) and (max-width: 920px) {
+  .nav {
+    justify-content: center;
+  }
+  .nav-link {
+    display: none;
+  }
+}
