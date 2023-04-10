@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import Script from "next/script";
 import { NavBar } from "../component/NavBar";
 import { GA_TRACKING_ID } from "../lib/gtag";
-import "../styles/globals.css";
+import "./globals.css";
 import "remixicon/fonts/remixicon.css";
 
 export const metadata = {
