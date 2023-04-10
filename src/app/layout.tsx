@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Script from "next/script";
-import { NavBar } from "../component/NavBar";
+import { NavBar } from "@/component/NavBar";
+import { ScrollUpButton } from "@/component/common";
 import { GA_TRACKING_ID } from "../lib/gtag";
 import "./globals.css";
 import "remixicon/fonts/remixicon.css";
@@ -61,6 +62,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <NavBar />
         <div id="container">{children}</div>
+        <ScrollUpButton />
       </body>
     </html>
   );
