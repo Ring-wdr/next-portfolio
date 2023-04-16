@@ -1,5 +1,6 @@
 "use client";
 
+import { useInterObs } from "@/hooks/useInterObs";
 import Link from "next/link";
 import { useRef } from "react";
 import { Button, IconWrapper, Modal } from "../common";
@@ -10,6 +11,7 @@ export const Container = () => {
   const instaRef = useRef<HTMLDialogElement>(null);
   const onGithubClick = () => githubRef.current?.showModal();
   const onInstaClick = () => instaRef.current?.showModal();
+  const { ref: shortRef, inView } = useInterObs<HTMLParagraphElement>();
   return (
     <>
       <div>
@@ -18,7 +20,12 @@ export const Container = () => {
           <br /> Welcome to PORTFOLIO
           <br /> of Ring-Wdr
         </div>
-        <p className={styles["short-desc"]}>and I&apos;m FrondEnd Developer</p>
+        <p
+          ref={shortRef}
+          className={`${styles["short-desc"]} ${inView ? styles.show : ""}`}
+        >
+          and I&apos;m FrondEnd Developer
+        </p>
 
         <div className={styles.contact}>
           <div className="d-flex mb-1">

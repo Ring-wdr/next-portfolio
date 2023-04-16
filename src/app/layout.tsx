@@ -5,6 +5,7 @@ import { ScrollUpButton } from "@/component/common";
 import { GA_TRACKING_ID } from "../lib/gtag";
 import "./globals.css";
 import "remixicon/fonts/remixicon.css";
+import { Footer } from "@/component/Footer";
 
 export const metadata = {
   title: "포트폴리오에 오신 것을 환영합니다",
@@ -63,6 +64,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <NavBar />
         <div id="container">{children}</div>
         <ScrollUpButton />
+        <Footer />
       </body>
     </html>
   );
