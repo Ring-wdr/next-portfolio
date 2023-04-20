@@ -22,10 +22,11 @@ export default function Page() {
   return (
     <div className="d-flex flex-column justify-cc mt-3">
       <div className={styles["proj-list"]}>
-        {projectList.map(({ src, title, description }) => (
+        {projectList.map(({ src, title, href, description }) => (
           <DynamicItem
             key={title}
             src={src}
+            href={href}
             title={title}
             description={description}
           />
