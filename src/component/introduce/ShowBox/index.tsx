@@ -12,7 +12,12 @@ export const ShowBox = () => {
 
   return (
     <div className={styles.showbox}>
-      <div className={`${styles.box} ${inView ? styles.active : ""}`} ref={ref}>
+      <div
+        className={`${styles.box} ${styles.left} ${
+          inView ? styles.active : ""
+        }`}
+        ref={ref}
+      >
         Language
         <p>JavaScript</p>
         <p>TypeScript</p>

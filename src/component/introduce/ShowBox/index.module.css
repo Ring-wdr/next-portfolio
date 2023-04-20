@@ -1,5 +1,5 @@
 .showbox {
-  margin-top: 100px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,7 +20,7 @@
 }
 
 .showbox .box.left {
-  translate: 30%;
+  translate: -30%;
 }
 
 .showbox .box p {
