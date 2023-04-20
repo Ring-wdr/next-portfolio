@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { DescWrapper } from "../../component/common";
+import { DescWrapper } from "@/component/common";
 
 export default function Page() {
   return (

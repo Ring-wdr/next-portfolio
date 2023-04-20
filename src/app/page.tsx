@@ -4,7 +4,7 @@ import { Container, Header, ShowBox } from "@/component/introduce";
 export default function Page() {
   return (
     <>
-      <div id="d-variaty">
+      <div id="d-variaty" className="mt-5">
         <Container />
         <div className="p-rel d-flex justify-cc">
           <div

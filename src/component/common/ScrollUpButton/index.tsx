@@ -32,7 +32,7 @@ export const ScrollUpButton = () => {
       }`}
       onClick={handleTop}
     >
-      ⬆️
+      ⇪
     </button>
   );
 };

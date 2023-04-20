@@ -33,13 +33,15 @@ export const NavBar = () => {
           <div className={styles["menu-button"]}></div>
         </label>
         <div className={styles.logo}>
-          <Image
-            src="/icon/apple-icon-60x60.png"
-            alt="logo"
-            width={60}
-            height={60}
-            className={styles.logo}
-          />
+          <Link href={"/"}>
+            <Image
+              src="/icon/apple-icon-60x60.png"
+              alt="logo"
+              width={60}
+              height={60}
+              className={styles.logo}
+            />
+          </Link>
           <div className="d-flex flex-column justify-sb">
             <span>Ring-Wdr</span>
             <span>Personal</span>
