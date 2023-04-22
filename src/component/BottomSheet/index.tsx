@@ -63,6 +63,7 @@ export const BottomSheet = ({
   const elementDrag = (e: TouchEvent) => {
     if (divRef.current === null) return;
     const { clientY } = e.touches[0];
+    console.log(clientY, divRef.current.style.translate);
     clientY < topPosition
       ? divRef.current.style.setProperty(
           "translate",
@@ -79,7 +80,7 @@ export const BottomSheet = ({
           "translate",
           `-50% ${(topPosition + e.clientY) / 2}px`
         )
-      : divRef.current.style.setProperty("transltate", `-50% ${e.clientY}px`);
+      : divRef.current.style.setProperty("translate", `-50% ${e.clientY}px`);
   };
 
   const closeDragElement = () => {
