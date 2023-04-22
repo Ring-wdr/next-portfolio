@@ -3,8 +3,8 @@ import {
   useEffect,
   HTMLAttributes,
   MouseEvent as ReactMouseEvent,
-  useCallback,
 } from "react";
+import { useScreenSize } from "@/hooks/useScreenSize";
 import styles from "./sheet.module.css";
 
 const mobileKeywords = [
@@ -18,6 +18,14 @@ const mobileKeywords = [
 ];
 const isMobileBrowser = (input: string) =>
   mobileKeywords.some((keyword) => input.indexOf(keyword) > -1);
+/**
+ * 설정할 위치값을 반환하는 함수
+ * @param pos 현재 위치
+ * @param height 브라우저의 세로 크기
+ * @returns
+ */
+const getPosition = (pos: number | `${number}%`, height: number) =>
+  typeof pos === "number" ? pos : ~~((Number(pos.slice(0, -1)) * height) / 100);
 
 export interface BottomSheetProps extends HTMLAttributes<HTMLDivElement> {
   /** 바텀 시트 활성화 여부 */
@@ -46,16 +54,13 @@ export const BottomSheet = ({
   ...props
 }: BottomSheetProps) => {
   /** 페이지의 크기 */
-  const bodySize = document.body.scrollHeight;
+  const bodyHeight = useScreenSize();
   const userAgent = navigator.userAgent.toLowerCase();
 
   const divRef = useRef<HTMLDivElement>(null);
-  const topPosition =
-    typeof initPosition === "number"
-      ? initPosition
-      : ~~((Number(initPosition.slice(0, -1)) * bodySize) / 100);
+  const topPosition = getPosition(initPosition, bodyHeight);
 
-  const elementDrag = useCallback((e: TouchEvent) => {
+  const elementDrag = (e: TouchEvent) => {
     if (divRef.current === null) return;
     const { clientY } = e.touches[0];
     clientY < topPosition
@@ -64,9 +69,9 @@ export const BottomSheet = ({
           `${(topPosition + clientY) / 2}px`
         )
       : divRef.current.style.setProperty("top", `${clientY}px`);
-  }, []);
+  };
 
-  const elementMouseDrag = useCallback((e: MouseEvent) => {
+  const elementMouseDrag = (e: MouseEvent) => {
     e.preventDefault();
     if (divRef.current === null) return;
     e.clientY < topPosition
@@ -75,9 +80,9 @@ export const BottomSheet = ({
           `${(topPosition + e.clientY) / 2}px`
         )
       : divRef.current.style.setProperty("top", `${e.clientY}px`);
-  }, []);
+  };
 
-  const closeDragElement = useCallback(() => {
+  const closeDragElement = () => {
     if (divRef.current === null) return;
     /**
      * ```
@@ -93,7 +98,7 @@ export const BottomSheet = ({
     );
     /** 바텀 시트가 닫히는 기준 위치 */
     const standardClosePosition =
-      bodySize * dividePercentage + topPosition * (1 - dividePercentage);
+      bodyHeight * dividePercentage + topPosition * (1 - dividePercentage);
 
     currentTopPosition < standardClosePosition
       ? divRef.current.style.setProperty("top", `${topPosition}px`)
@@ -106,7 +111,7 @@ export const BottomSheet = ({
       document.removeEventListener("mouseup", closeDragElement);
       document.removeEventListener("mousemove", elementMouseDrag);
     }
-  }, []);
+  };
 
   const dragTouchDown = () => {
     document.addEventListener("touchend", closeDragElement);
@@ -142,9 +147,10 @@ export const BottomSheet = ({
           onMouseDown={dragMouseDown}
           onTouchStart={dragTouchDown}
         >
+          {/* bottomSheet height: {bodyHeight} */}
           <span />
         </div>
-        <div style={{ overflowY: "auto", height: "100%" }}>{children}</div>
+        <div className={styles.children}>{children}</div>
       </div>
     </div>
   );
