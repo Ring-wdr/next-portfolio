@@ -65,10 +65,10 @@ export const BottomSheet = ({
     const { clientY } = e.touches[0];
     clientY < topPosition
       ? divRef.current.style.setProperty(
-          "top",
-          `${(topPosition + clientY) / 2}px`
+          "translate",
+          `-50% ${(topPosition + clientY) / 2}px`
         )
-      : divRef.current.style.setProperty("top", `${clientY}px`);
+      : divRef.current.style.setProperty("translate", `-50% ${clientY}px`);
   };
 
   const elementMouseDrag = (e: MouseEvent) => {
@@ -76,10 +76,10 @@ export const BottomSheet = ({
     if (divRef.current === null) return;
     e.clientY < topPosition
       ? divRef.current.style.setProperty(
-          "top",
-          `${(topPosition + e.clientY) / 2}px`
+          "translate",
+          `-50% ${(topPosition + e.clientY) / 2}px`
         )
-      : divRef.current.style.setProperty("top", `${e.clientY}px`);
+      : divRef.current.style.setProperty("transltate", `-50% ${e.clientY}px`);
   };
 
   const closeDragElement = () => {
@@ -94,14 +94,14 @@ export const BottomSheet = ({
     const dividePercentage = Number(closePosition.slice(0, -1)) / 100;
     /** 현재 위치 */
     const currentTopPosition = Number(
-      divRef.current.style.top.replace("px", "")
+      divRef.current.style.translate.split(" ")[1].slice(0, -2)
     );
     /** 바텀 시트가 닫히는 기준 위치 */
     const standardClosePosition =
       bodyHeight * dividePercentage + topPosition * (1 - dividePercentage);
 
     currentTopPosition < standardClosePosition
-      ? divRef.current.style.setProperty("top", `${topPosition}px`)
+      ? divRef.current.style.setProperty("translate", `-50% ${topPosition}px`)
       : onClose();
 
     if (isMobileBrowser(userAgent)) {
@@ -128,10 +128,10 @@ export const BottomSheet = ({
     if (divRef.current === null) return;
     if (isOpen) {
       document.body.style.setProperty("overflow", "hidden");
-      divRef.current.style.setProperty("top", `${topPosition}px`);
+      divRef.current.style.setProperty("translate", `-50% ${topPosition}px`);
     } else {
       document.body.style.setProperty("overflow", "auto");
-      divRef.current.style.setProperty("top", `100%`);
+      divRef.current.style.setProperty("translate", `-50% 100%`);
     }
   }, [isOpen, topPosition]);
 
