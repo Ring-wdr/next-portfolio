@@ -2,22 +2,29 @@
 
 import { useReducer } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { Button, IconWrapper, Modal, toggleReducer } from "../common";
 import { useInterObs } from "@/hooks/useInterObs";
 import styles from "./container.module.css";
 
+const DynamicEmailSender = dynamic(() => import("./EmailSender"), {
+  ssr: false,
+});
+
 const initValue = {
   github: false,
   instagram: false,
+  sendEmail: false,
 };
 
 export const Container = () => {
-  const [{ github, instagram }, dispatch] = useReducer(
+  const [{ github, instagram, sendEmail }, dispatch] = useReducer(
     toggleReducer<typeof initValue>,
     initValue
   );
   const onGithubClick = () => dispatch({ type: "github" });
   const onInstaClick = () => dispatch({ type: "instagram" });
+  const onSendEmail = () => dispatch({ type: "sendEmail" });
   const { ref: shortRef, inView } = useInterObs<HTMLParagraphElement>();
   return (
     <>
@@ -43,7 +50,7 @@ export const Container = () => {
               <i className="ri-instagram-line"></i>
             </IconWrapper>
           </div>
-          <Button className="w-15 mt-1 mb-2" onClick={onInstaClick}>
+          <Button className="w-15 mt-1 mb-2" onClick={onSendEmail}>
             Contact me!
           </Button>
         </div>
@@ -67,6 +74,9 @@ export const Container = () => {
         <div className="text-center">
           <button onClick={onInstaClick}>BACK</button>
         </div>
+      </Modal>
+      <Modal isOpen={sendEmail} onClose={onSendEmail}>
+        <DynamicEmailSender onClose={onSendEmail} />
       </Modal>
     </>
   );

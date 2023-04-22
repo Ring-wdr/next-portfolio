@@ -3,8 +3,8 @@ import Script from "next/script";
 import { NavBar } from "@/component/NavBar";
 import { ScrollUpButton } from "@/component/common";
 import { GA_TRACKING_ID } from "../lib/gtag";
-import "./globals.css";
 import "remixicon/fonts/remixicon.css";
+import "./globals.css";
 import { Footer } from "@/component/Footer";
 
 export const metadata = {
