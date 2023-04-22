@@ -3,6 +3,8 @@ import {
   useEffect,
   HTMLAttributes,
   MouseEvent as ReactMouseEvent,
+  TouchEvent as ReactTouchEvent,
+  useState,
 } from "react";
 import { useScreenSize } from "@/hooks/useScreenSize";
 import styles from "./sheet.module.css";
@@ -60,10 +62,9 @@ export const BottomSheet = ({
   const divRef = useRef<HTMLDivElement>(null);
   const topPosition = getPosition(initPosition, bodyHeight);
 
-  const elementDrag = (e: TouchEvent) => {
+  const elementDrag = (e: ReactTouchEvent<HTMLDivElement>) => {
     if (divRef.current === null) return;
     const { clientY } = e.touches[0];
-    console.log(clientY, divRef.current.style.translate);
     clientY < topPosition
       ? divRef.current.style.setProperty(
           "translate",
@@ -105,18 +106,10 @@ export const BottomSheet = ({
       ? divRef.current.style.setProperty("translate", `-50% ${topPosition}px`)
       : onClose();
 
-    if (isMobileBrowser(userAgent)) {
-      document.removeEventListener("touchend", closeDragElement);
-      document.removeEventListener("touchmove", elementDrag);
-    } else {
+    if (!isMobileBrowser(userAgent)) {
       document.removeEventListener("mouseup", closeDragElement);
       document.removeEventListener("mousemove", elementMouseDrag);
     }
-  };
-
-  const dragTouchDown = () => {
-    document.addEventListener("touchend", closeDragElement);
-    document.addEventListener("touchmove", elementDrag);
   };
 
   const dragMouseDown = (e: ReactMouseEvent<HTMLDivElement>) => {
@@ -132,7 +125,7 @@ export const BottomSheet = ({
       divRef.current.style.setProperty("translate", `-50% ${topPosition}px`);
     } else {
       document.body.style.setProperty("overflow", "auto");
-      divRef.current.style.setProperty("translate", `-50% 100%`);
+      divRef.current.style.setProperty("translate", "");
     }
   }, [isOpen, topPosition]);
 
@@ -146,7 +139,8 @@ export const BottomSheet = ({
         <div
           className={styles.handle}
           onMouseDown={dragMouseDown}
-          onTouchStart={dragTouchDown}
+          onTouchMove={elementDrag}
+          onTouchEnd={closeDragElement}
         >
           {/* bottomSheet height: {bodyHeight} */}
           <span />
