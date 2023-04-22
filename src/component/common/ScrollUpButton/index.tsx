@@ -32,7 +32,7 @@ export const ScrollUpButton = () => {
       }`}
       onClick={handleTop}
     >
-      ⇪
+      <i className="ri-arrow-up-circle-fill font-20"></i>
     </button>
   );
 };

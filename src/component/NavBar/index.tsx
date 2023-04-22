@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { navLinkList } from "../../lib/route";
+import Link from "next/link";
+import Image from "next/image";
+import { NavMenu } from "./NavMenu";
 import styles from "./navbar.module.css";
 
 export const NavBar = () => {
@@ -33,7 +33,7 @@ export const NavBar = () => {
           <div className={styles["menu-button"]}></div>
         </label>
         <div className={styles.logo}>
-          <Link href={"/"}>
+          <Link href="/">
             <Image
               src="/icon/apple-icon-60x60.png"
               alt="logo"
@@ -47,13 +47,7 @@ export const NavBar = () => {
             <span>Personal</span>
           </div>
         </div>
-        <ul className={[styles["nav-link"], "align-ic"].join(" ")}>
-          {navLinkList.map(([key, route, label]) => (
-            <Link href={route} key={key} onClick={rmMenu}>
-              <li>{label}</li>
-            </Link>
-          ))}
-        </ul>
+        <NavMenu onClose={rmMenu} />
       </div>
     </nav>
   );

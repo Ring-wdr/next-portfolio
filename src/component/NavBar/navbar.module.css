@@ -49,7 +49,8 @@
   text-align: center;
 }
 
-.nav-link li:hover {
+.nav-link li:hover,
+.nav-link li.active {
   font-weight: 900;
 }
 

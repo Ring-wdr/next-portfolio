@@ -56,23 +56,27 @@ export const Container = () => {
         </div>
       </div>
       <Modal isOpen={github} onClose={onGithubClick}>
-        <Link
-          href="https://github.com/Ring-wdr"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="d-flex flex-column align-ic"
-        >
-          MOVE TO MY <br />
-          <i className="ri-github-fill mt-1 font-20"></i>
-        </Link>
-        <div className="text-center">
-          <button onClick={onGithubClick}>BACK</button>
+        <div className="w-15 mt-1">
+          <Link
+            href="https://github.com/Ring-wdr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="d-flex flex-column align-ic"
+          >
+            MOVE TO MY GITHUB
+            <i className="ri-github-fill mt-1 font-20"></i>
+          </Link>
+          <div className="text-center">
+            <button onClick={onGithubClick}>BACK</button>
+          </div>
         </div>
       </Modal>
       <Modal isOpen={instagram} onClose={onInstaClick}>
-        비공개입니다.
-        <div className="text-center">
-          <button onClick={onInstaClick}>BACK</button>
+        <div className="w-10 text-center mt-1">
+          비공개입니다.
+          <div className="text-center">
+            <button onClick={onInstaClick}>BACK</button>
+          </div>
         </div>
       </Modal>
       <Modal isOpen={sendEmail} onClose={onSendEmail}>
