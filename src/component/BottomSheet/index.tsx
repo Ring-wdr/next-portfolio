@@ -128,7 +128,7 @@ export const BottomSheet = ({
       document.body.style.setProperty("overflow", "auto");
       divRef.current.style.setProperty("top", `100%`);
     }
-  }, [isOpen]);
+  }, [isOpen, topPosition]);
 
   return (
     <div className={isOpen ? styles.backdrop : ""}>
