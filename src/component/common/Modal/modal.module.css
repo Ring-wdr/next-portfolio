@@ -1,5 +1,6 @@
 .modal {
-  border-radius: 2rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
   background: rgba(255, 255, 255, 0.5);
   width: 15rem;
   backdrop-filter: blur(3px);
@@ -7,15 +8,45 @@
 .modal .close {
   display: flex;
   justify-content: flex-end;
+  position: relative;
+  height: 2rem;
 }
 
 .modal button.empty {
+  position: absolute;
+  top: 50%;
+  translate: -20% -50%;
   background: none;
   border: none;
   font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
 }
-.modal button.empty:hover {
-  font-weight: 900;
+
+/* X shape styles */
+
+.modal button.empty::before,
+.modal button.empty::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  background-color: black;
+  transform-origin: center;
+}
+
+.modal button.empty::before {
+  rotate: 45deg;
+}
+
+.modal button.empty::after {
+  rotate: -45deg;
+}
+
+.modal button.empty:hover::after,
+.modal button.empty:hover::before {
+  height: 4px;
+  border-radius: 1px;
 }
 
 .modal_in {
@@ -39,10 +70,11 @@
   background: rgba(0, 0, 0, 0.7);
   color: aliceblue;
   font-size: 1rem;
-  border-radius: 2rem;
+  border-radius: 0.25rem;
+  border: 1px solid black;
 }
 
 .modal_in button:hover {
-  background: rgba(125, 125, 125, 0.7);
+  background: rgba(168, 166, 160, 0.7);
   color: cornsilk;
 }

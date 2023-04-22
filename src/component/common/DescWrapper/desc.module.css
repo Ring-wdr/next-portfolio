@@ -1,7 +1,7 @@
 .desc {
   background: linear-gradient(
     to right,
-    rgba(0, 0, 0, 0.1) 50%,
+    rgba(240, 228, 237, 0.8) 50%,
     #ff5858 50%,
     #cc2e5d
   );
@@ -13,6 +13,7 @@
   margin: 1rem 0rem;
   line-height: 120%;
   backdrop-filter: blur(3px);
+  border: 1px solid #a0a8a8;
 }
 
 .desc:hover {
@@ -20,8 +21,11 @@
   color: white;
 }
 
+.desc a {
+  text-shadow: rgba(0, 0, 0, 0.5) 1px 0 10px;
+}
 .desc:hover a {
-  text-shadow: rgb(255, 229, 126) 1px 0 10px;
+  text-shadow: rgba(255, 230, 0, 1) 1px 0 10px;
 }
 
 .desc .blog {

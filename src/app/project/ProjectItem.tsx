@@ -32,7 +32,7 @@ export const ProjectItem = ({
         <div className="d-flex justify-cc mt-3">{title}</div>
         <BottomSheet
           isOpen={isOpen}
-          setOpen={closeBottomSheet}
+          onClose={closeBottomSheet}
           closePosition="25%"
         >
           <div className={`d-flex justify-cc ${styles["height-300"]}`}>

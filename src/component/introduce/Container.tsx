@@ -1,16 +1,23 @@
 "use client";
 
-import { useInterObs } from "@/hooks/useInterObs";
+import { useReducer } from "react";
 import Link from "next/link";
-import { useRef } from "react";
-import { Button, IconWrapper, Modal } from "../common";
+import { Button, IconWrapper, Modal, toggleReducer } from "../common";
+import { useInterObs } from "@/hooks/useInterObs";
 import styles from "./container.module.css";
 
+const initValue = {
+  github: false,
+  instagram: false,
+};
+
 export const Container = () => {
-  const githubRef = useRef<HTMLDialogElement>(null);
-  const instaRef = useRef<HTMLDialogElement>(null);
-  const onGithubClick = () => githubRef.current?.showModal();
-  const onInstaClick = () => instaRef.current?.showModal();
+  const [{ github, instagram }, dispatch] = useReducer(
+    toggleReducer<typeof initValue>,
+    initValue
+  );
+  const onGithubClick = () => dispatch({ type: "github" });
+  const onInstaClick = () => dispatch({ type: "instagram" });
   const { ref: shortRef, inView } = useInterObs<HTMLParagraphElement>();
   return (
     <>
@@ -41,7 +48,7 @@ export const Container = () => {
           </Button>
         </div>
       </div>
-      <Modal ref={githubRef}>
+      <Modal isOpen={github} onClose={onGithubClick}>
         <Link
           href="https://github.com/Ring-wdr"
           target="_blank"
@@ -51,15 +58,15 @@ export const Container = () => {
           MOVE TO MY <br />
           <i className="ri-github-fill mt-1 font-20"></i>
         </Link>
-        <form method="dialog">
-          <button>BACK</button>
-        </form>
+        <div className="text-center">
+          <button onClick={onGithubClick}>BACK</button>
+        </div>
       </Modal>
-      <Modal ref={instaRef}>
+      <Modal isOpen={instagram} onClose={onInstaClick}>
         비공개입니다.
-        <form method="dialog">
-          <button>BACK</button>
-        </form>
+        <div className="text-center">
+          <button onClick={onInstaClick}>BACK</button>
+        </div>
       </Modal>
     </>
   );
