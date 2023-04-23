@@ -4,6 +4,7 @@ import { Modal } from "./Modal/Modal";
 import { DescWrapper } from "./DescWrapper/DescWrapper";
 import { ScrollUpButton } from "./ScrollUpButton";
 import { toggleReducer } from "./reducer";
+import { LoadingImage } from "./Loading";
 
 export {
   Button,
@@ -12,4 +13,5 @@ export {
   DescWrapper,
   ScrollUpButton,
   toggleReducer,
+  LoadingImage,
 };

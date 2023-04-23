@@ -10,6 +10,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 300px;
   background: rgba(211, 211, 211, 0.1);
   padding: 2rem 0;
 }

@@ -65,23 +65,22 @@ export const BottomSheet = ({
   const elementDrag = (e: ReactTouchEvent<HTMLDivElement>) => {
     if (divRef.current === null) return;
     const { clientY } = e.touches[0];
-    clientY < topPosition
-      ? divRef.current.style.setProperty(
-          "translate",
-          `-50% ${(topPosition + clientY) / 2}px`
-        )
-      : divRef.current.style.setProperty("translate", `-50% ${clientY}px`);
+    divRef.current.style.setProperty(
+      "translate",
+      `-50% ${clientY < topPosition ? (topPosition + clientY) / 2 : clientY}px`
+    );
   };
 
   const elementMouseDrag = (e: MouseEvent) => {
     e.preventDefault();
     if (divRef.current === null) return;
-    e.clientY < topPosition
-      ? divRef.current.style.setProperty(
-          "translate",
-          `-50% ${(topPosition + e.clientY) / 2}px`
-        )
-      : divRef.current.style.setProperty("translate", `-50% ${e.clientY}px`);
+
+    divRef.current.style.setProperty(
+      "translate",
+      `-50% ${
+        e.clientY < topPosition ? (topPosition + e.clientY) / 2 : e.clientY
+      }px`
+    );
   };
 
   const closeDragElement = () => {

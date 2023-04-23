@@ -2,10 +2,11 @@
 
 import dynamic from "next/dynamic";
 import { projectList } from "./projectList";
+import { LoadingImage as loading } from "@/component/common";
 
 const DynamicItem = dynamic(
   () => import("./ProjectItem").then(({ ProjectItem }) => ProjectItem),
-  { ssr: false }
+  { ssr: false, loading }
 );
 
 export const ClientComponent = () => {
