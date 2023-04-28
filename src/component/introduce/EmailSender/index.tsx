@@ -26,7 +26,7 @@ export default function EmailSender({ onClose }: { onClose: () => void }) {
     }
   };
   return (
-    <div className="d-flex flex-column justify-cc mr-3 ml-3 w-20">
+    <div className="d-flex flex-column justify-cc mr-3 ml-3 mb-3 w-20">
       <div className={styles["email-form-container"]}>
         <h2 className="mb-1">Contact me!</h2>
         <p>Asked me whatever you want to</p>

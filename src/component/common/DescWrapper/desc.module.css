@@ -1,9 +1,9 @@
 .desc {
   background: linear-gradient(
     to right,
-    rgba(240, 228, 237, 0.8) 50%,
-    #ff5858 50%,
-    #cc2e5d
+    rgba(160, 168, 168, 0.5) 50%,
+    #7eaffa 50%,
+    #94b9b9
   );
   background-size: 200%;
   font-size: 1.5rem;
