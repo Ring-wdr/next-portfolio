@@ -123,8 +123,8 @@ export const BottomSheet = ({
       document.body.style.setProperty("overflow", "hidden");
       divRef.current.style.setProperty("translate", `-50% ${topPosition}px`);
     } else {
-      document.body.style.setProperty("overflow", "auto");
-      divRef.current.style.setProperty("translate", "");
+      document.body.style.removeProperty("overflow");
+      divRef.current.style.removeProperty("translate");
     }
   }, [isOpen, topPosition]);
 
