@@ -17,6 +17,7 @@ const nextConfig = {
       "avatars.githubusercontent.com",
       "cdn.discordapp.com",
       "kit.svelte.dev",
+      "postfiles.pstatic.net",
     ],
   },
   experimental: {

@@ -18,4 +18,20 @@ export const projectList: ProjectProps[] = [
       </div>
     ),
   },
+  {
+    src: "https://postfiles.pstatic.net/MjAyMzA0MThfODQg/MDAxNjgxNzk3MDYyNDc4.2uzOQ-Oiw-XsNK013YGZYSH7pvmBB63HXt-RpL8OFdUg.M3YvSedp13rgsbfXfxK-PVt-dF5TtnMm6ubigz8I-Gog.PNG.gsh113/%EB%8C%80%EB%8F%84_%ED%98%84%ED%8C%90.png?type=w773",
+    title: "법률사무소 대도",
+    href: "https://www.daedolaw.com/",
+    description: (
+      <div className="d-flex flex-column justify-cc p-2">
+        <h3 className="d-flex justify-cc font-20 mb-2">
+          법률사무소 대도 홈페이지
+        </h3>
+        sveltekit + superbase로 진행한 법률사무소 대도 홈페이지입니다. 내부
+        라우터 설정, 프로젝트 내부에서 사용되는 공통 컴포넌트 작업, 소개 페이지
+        마크업, 데이터베이스 테이블 설계 및 관리자 페이지 마크업 및 프론트
+        작업을 진행하였습니다.
+      </div>
+    ),
+  },
 ];
