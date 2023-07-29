@@ -11,6 +11,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: 0.25s ease-out;
+  word-break: keep-all;
 }
 
 .welcome:hover {

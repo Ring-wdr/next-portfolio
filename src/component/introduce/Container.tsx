@@ -3,6 +3,7 @@
 import { useReducer } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { useTranslations } from "next-intl";
 import { Button, IconWrapper, Modal, toggleReducer } from "../common";
 import { useInterObs } from "@/hooks/useInterObs";
 import styles from "./container.module.css";
@@ -15,9 +16,10 @@ const initValue = {
   github: false,
   instagram: false,
   sendEmail: false,
-};
+} as const;
 
 export const Container = () => {
+  const t = useTranslations("index");
   const [{ github, instagram, sendEmail }, dispatch] = useReducer(
     toggleReducer<typeof initValue>,
     initValue
@@ -30,15 +32,15 @@ export const Container = () => {
     <>
       <div>
         <div className={styles.welcome}>
-          Hi,
-          <br /> Welcome to PORTFOLIO
+          {t("greeting")}
+          <br /> {t("title")}
           <br /> of Ring-Wdr
         </div>
         <p
           ref={shortRef}
           className={`${styles["short-desc"]} ${inView ? styles.show : ""}`}
         >
-          and I&apos;m FrondEnd Developer
+          {t("desc")}
         </p>
 
         <div className={styles.contact}>

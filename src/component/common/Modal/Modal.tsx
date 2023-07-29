@@ -1,6 +1,7 @@
 "use client";
 
 import { DialogHTMLAttributes, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import styles from "./modal.module.css";
 
 export interface ModalProps extends DialogHTMLAttributes<HTMLDialogElement> {
@@ -13,12 +14,18 @@ export const Modal = ({ isOpen, onClose, children, ...props }: ModalProps) => {
   useEffect(() => {
     isOpen ? ref.current?.showModal() : ref.current?.close();
   }, [isOpen]);
-  return (
-    <dialog className={styles.modal} ref={ref} {...props}>
-      <div className={styles.close}>
-        <button className={[styles.empty, ""].join(" ")} onClick={onClose} />
-      </div>
-      <div className={styles.modal_in}>{children}</div>
-    </dialog>
-  );
+  return isOpen
+    ? createPortal(
+        <dialog className={styles.modal} ref={ref} {...props}>
+          <div className={styles.close}>
+            <button
+              className={[styles.empty, ""].join(" ")}
+              onClick={onClose}
+            />
+          </div>
+          <div className={styles.modal_in}>{children}</div>
+        </dialog>,
+        document.getElementById("modal") as Element
+      )
+    : null;
 };
