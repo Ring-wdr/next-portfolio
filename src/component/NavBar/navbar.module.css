@@ -168,3 +168,10 @@
     width: 100%;
   }
 }
+
+/* on moblie */
+@media (max-width: 480px) {
+  .logo > :not(:first-child) {
+    display: none;
+  }
+}

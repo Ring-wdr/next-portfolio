@@ -1,19 +1,19 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import Link from "next-intl/link";
 import Image from "next/image";
-import { NavMenu } from "./NavMenu";
-import styles from "./navbar.module.css";
-import LocaleSwitcher from "../LocaleSwitcher";
 import { useLocale } from "next-intl";
+import { NavMenu } from "./NavMenu";
+import LocaleSwitcher from "../LocaleSwitcher";
+import styles from "./navbar.module.css";
 
 export const NavBar = () => {
   const locale = useLocale();
   const btnRef = useRef<HTMLInputElement>(null);
-  const rmMenu = () => {
+  const rmMenu = useCallback(() => {
     if (btnRef.current) btnRef.current.checked = false;
-  };
+  }, []);
   useEffect(() => {
     window.addEventListener("scroll", rmMenu);
     return () => window.removeEventListener("scroll", rmMenu);
