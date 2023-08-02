@@ -72,9 +72,10 @@ export default async function RootLayout({
         `}
       </Script>
       <body>
-        <NavBar />
-        <div id="modal"></div>
         <NextIntlClientProvider locale={locale} messages={messages}>
+          <div id="modal"></div>
+          <div id="bottom-sheet"></div>
+          <NavBar />
           <div id="container">{children}</div>
         </NextIntlClientProvider>
         <ScrollUpButton />

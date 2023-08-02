@@ -1,12 +1,15 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Link from "next/link";
+import Link from "next-intl/link";
 import Image from "next/image";
 import { NavMenu } from "./NavMenu";
 import styles from "./navbar.module.css";
+import LocaleSwitcher from "../LocaleSwitcher";
+import { useLocale } from "next-intl";
 
 export const NavBar = () => {
+  const locale = useLocale();
   const btnRef = useRef<HTMLInputElement>(null);
   const rmMenu = () => {
     if (btnRef.current) btnRef.current.checked = false;
@@ -32,6 +35,7 @@ export const NavBar = () => {
         >
           <div className={styles["menu-button"]}></div>
         </label>
+        <LocaleSwitcher />
         <div className={styles.logo}>
           <Link href="/">
             <Image
@@ -39,7 +43,6 @@ export const NavBar = () => {
               alt="logo"
               width={60}
               height={60}
-              className={styles.logo}
             />
           </Link>
           <div className="d-flex flex-column justify-sb">
@@ -47,7 +50,7 @@ export const NavBar = () => {
             <span>Personal</span>
           </div>
         </div>
-        <NavMenu onClose={rmMenu} />
+        <NavMenu locale={locale} onClose={rmMenu} />
       </div>
     </nav>
   );

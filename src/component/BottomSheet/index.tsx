@@ -8,6 +8,8 @@ import {
 } from "react";
 import { useScreenSize } from "@/hooks/useScreenSize";
 import styles from "./sheet.module.css";
+import clsx from "clsx";
+import { createPortal } from "react-dom";
 
 const mobileKeywords = [
   "android",
@@ -17,7 +19,7 @@ const mobileKeywords = [
   "ipod",
   "blackberry",
   "windows phone",
-];
+] as const;
 const isMobileBrowser = (input: string) =>
   mobileKeywords.some((keyword) => input.indexOf(keyword) > -1);
 /**
@@ -57,8 +59,9 @@ export const BottomSheet = ({
 }: BottomSheetProps) => {
   /** 페이지의 크기 */
   const bodyHeight = useScreenSize();
-  const userAgent = navigator.userAgent.toLowerCase();
+  // const userAgent = navigator.userAgent.toLowerCase();
 
+  const [isDragging, setDragging] = useState(false);
   const divRef = useRef<HTMLDivElement>(null);
   const topPosition = getPosition(initPosition, bodyHeight);
 
@@ -71,9 +74,9 @@ export const BottomSheet = ({
     );
   };
 
-  const elementMouseDrag = (e: MouseEvent) => {
+  const elementMouseDrag = (e: ReactMouseEvent) => {
     e.preventDefault();
-    if (divRef.current === null) return;
+    if (divRef.current === null || !isDragging) return;
 
     divRef.current.style.setProperty(
       "translate",
@@ -85,6 +88,7 @@ export const BottomSheet = ({
 
   const closeDragElement = () => {
     if (divRef.current === null) return;
+    setDragging(false);
     /**
      * ```
      * 0%: topPosition
@@ -103,49 +107,65 @@ export const BottomSheet = ({
 
     currentTopPosition < standardClosePosition
       ? divRef.current.style.setProperty("translate", `-50% ${topPosition}px`)
-      : onClose();
-
-    if (!isMobileBrowser(userAgent)) {
-      document.removeEventListener("mouseup", closeDragElement);
-      document.removeEventListener("mousemove", elementMouseDrag);
-    }
-  };
-
-  const dragMouseDown = (e: ReactMouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    document.addEventListener("mouseup", closeDragElement);
-    document.addEventListener("mousemove", elementMouseDrag);
+      : (() => {
+          let _position = currentTopPosition;
+          const timer = setInterval(() => {
+            _position += 30;
+            divRef.current?.style.setProperty(
+              "translate",
+              `-50% ${_position}px`
+            );
+            _position > document.body.clientHeight && clearInterval(timer);
+          }, 30);
+          setTimeout(onClose, 300);
+        })();
   };
 
   useEffect(() => {
     if (divRef.current === null) return;
     if (isOpen) {
-      document.body.style.setProperty("overflow", "hidden");
-      divRef.current.style.setProperty("translate", `-50% ${topPosition}px`);
+      setTimeout(() => {
+        document.body.style.setProperty("overflow", "hidden");
+        divRef.current?.style.setProperty("translate", `-50% ${topPosition}px`);
+      }, 100);
     } else {
-      document.body.style.removeProperty("overflow");
-      divRef.current.style.removeProperty("translate");
+      setDragging(false);
+      setTimeout(() => {
+        document.body.style.removeProperty("overflow");
+        divRef.current?.style.removeProperty("translate");
+      }, 100);
     }
   }, [isOpen, topPosition]);
 
-  return (
-    <div className={isOpen ? styles.backdrop : ""}>
-      <div
-        ref={divRef}
-        className={[styles.bottomSheet, className].join(" ")}
-        {...props}
-      >
+  return isOpen
+    ? createPortal(
         <div
-          className={styles.handle}
-          onMouseDown={dragMouseDown}
-          onTouchMove={elementDrag}
-          onTouchEnd={closeDragElement}
+          className={styles.backdrop}
+          onMouseUp={closeDragElement}
+          onMouseMove={elementMouseDrag}
+          onClick={closeDragElement}
+          onMouseLeave={closeDragElement}
         >
-          {/* bottomSheet height: {bodyHeight} */}
-          <span />
-        </div>
-        <div className={styles.children}>{children}</div>
-      </div>
-    </div>
-  );
+          <div
+            ref={divRef}
+            className={clsx(styles.bottomSheet, className)}
+            {...props}
+          >
+            <div
+              className={styles.handle}
+              onMouseDown={() => setDragging(true)}
+              onTouchStart={() => setDragging(true)}
+              onMouseUp={() => setDragging(false)}
+              onTouchMove={elementDrag}
+              onTouchEnd={closeDragElement}
+            >
+              {/* bottomSheet height: {bodyHeight} */}
+              <span />
+            </div>
+            <div className={styles.children}>{children}</div>
+          </div>
+        </div>,
+        document.getElementById("bottom-sheet") as HTMLElement
+      )
+    : null;
 };
