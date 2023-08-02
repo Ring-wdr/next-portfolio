@@ -7,9 +7,9 @@ import {
   useState,
 } from "react";
 import { useScreenSize } from "@/hooks/useScreenSize";
-import styles from "./sheet.module.css";
-import clsx from "clsx";
 import { createPortal } from "react-dom";
+import clsx from "clsx";
+import styles from "./sheet.module.css";
 
 const mobileKeywords = [
   "android",
@@ -108,6 +108,7 @@ export const BottomSheet = ({
     currentTopPosition < standardClosePosition
       ? divRef.current.style.setProperty("translate", `-50% ${topPosition}px`)
       : (() => {
+          document.body.style.removeProperty("overflow");
           let _position = currentTopPosition;
           const timer = setInterval(() => {
             _position += 30;
@@ -129,9 +130,9 @@ export const BottomSheet = ({
         divRef.current?.style.setProperty("translate", `-50% ${topPosition}px`);
       }, 100);
     } else {
+      document.body.style.removeProperty("overflow");
       setDragging(false);
       setTimeout(() => {
-        document.body.style.removeProperty("overflow");
         divRef.current?.style.removeProperty("translate");
       }, 100);
     }
