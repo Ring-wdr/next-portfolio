@@ -149,7 +149,11 @@ export const BottomSheet = ({
         >
           <div
             ref={divRef}
-            className={clsx(styles.bottomSheet, className)}
+            className={clsx(
+              styles.bottomSheet,
+              { [styles.dragging]: isDragging },
+              className
+            )}
             {...props}
           >
             <div
