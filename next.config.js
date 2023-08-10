@@ -25,6 +25,9 @@ const nextConfig = {
       "postfiles.pstatic.net",
     ],
   },
+  experimental: {
+    serverActions: true,
+  },
 };
 
 module.exports = withBundleAnalyzer(withNextIntl(nextConfig));

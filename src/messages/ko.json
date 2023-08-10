@@ -18,5 +18,13 @@
   "LocaleSwitcher": {
     "label": "언어 선택",
     "locale": "{locale, select, ko {korean} en {English} other {Unknown}}"
+  },
+  "mailSend": {
+    "title": "메일 보내기",
+    "description": "문의하고 싶은 내용을 보내세요.",
+    "placeholder": {
+      "userName": "이름 혹은 소속",
+      "content": "묻고 싶은 내용"
+    }
   }
 }

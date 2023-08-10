@@ -18,5 +18,13 @@
   "LocaleSwitcher": {
     "label": "Change language",
     "locale": "{locale, select, ko {korean} en {English} other {Unknown}}"
+  },
+  "mailSend": {
+    "title": "Contact me!",
+    "description": "Asked me whatever you want to",
+    "placeholder": {
+      "userName": "Your name or organization",
+      "content": "Input question about me"
+    }
   }
 }
