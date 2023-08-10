@@ -41,7 +41,7 @@ export const ProjectItem = ({
         <DynamicBottomSheet
           isOpen={isOpen}
           onClose={closeBottomSheet}
-          closePosition="25%"
+          closePosition="50%"
         >
           <div className={`d-flex justify-cc ${styles["height-300"]}`}>
             <div className={styles["img-container"]}>

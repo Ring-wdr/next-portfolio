@@ -1,13 +1,13 @@
 import {
+  useState,
   useRef,
   useEffect,
   HTMLAttributes,
   MouseEvent as ReactMouseEvent,
   TouchEvent as ReactTouchEvent,
-  useState,
 } from "react";
 import { useScreenSize } from "@/hooks/useScreenSize";
-import { createPortal } from "react-dom";
+import { createPortal, flushSync } from "react-dom";
 import clsx from "clsx";
 import styles from "./sheet.module.css";
 
@@ -88,7 +88,7 @@ export const BottomSheet = ({
 
   const closeDragElement = () => {
     if (divRef.current === null) return;
-    setDragging(false);
+    flushSync(() => setDragging(false));
     /**
      * ```
      * 0%: topPosition
