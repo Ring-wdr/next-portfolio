@@ -17,7 +17,7 @@ export const ScrollUpButton = () => {
   useEffect(() => {
     let timer: NodeJS.Timer;
     const handleFlow = () => {
-      timer && clearTimeout(timer);
+      timer && clearTimeout(timer as unknown as number);
       setStatus(true);
       timer = setTimeout(() => setStatus(false), 1000);
     };

@@ -17,7 +17,7 @@ export const NavBar = () => {
   useEffect(() => {
     window.addEventListener("scroll", rmMenu);
     return () => window.removeEventListener("scroll", rmMenu);
-  }, []);
+  }, [rmMenu]);
 
   return (
     <nav className={styles.wrapper}>
