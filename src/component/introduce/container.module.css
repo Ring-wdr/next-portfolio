@@ -1,0 +1,56 @@
+.welcome {
+  display: flex;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  background: linear-gradient(to right, #333 50%, #ff5858 50%, #cc2e5d);
+  background-size: 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: 0.25s ease-out;
+  word-break: keep-all;
+}
+
+.welcome:hover {
+  background-position: -100%;
+}
+
+.short-desc {
+  font-size: x-large;
+  font-weight: 800;
+  margin-top: 2rem;
+  translate: -200px;
+  transition: 0.5s ease;
+}
+
+.short-desc.show {
+  translate: 0px;
+}
+
+.contact {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* on moblie */
+@media (max-width: 920px) {
+  .welcome {
+    background-position: -100%;
+    justify-content: center;
+    text-align: center;
+  }
+  .short-desc {
+    font-size: x-large;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  .contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -1,0 +1,38 @@
+.container {
+  position: relative;
+  color: rgb(207, 207, 207);
+  transition: opacity 0.3s;
+}
+
+.container.pending {
+  opacity: 0.3;
+}
+
+.paragraph {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+.dropdown {
+  display: inline-flex;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 0.5rem;
+  padding-right: 1.5rem;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 2px;
+}
+.arrow {
+  position: absolute;
+  top: 8px;
+  right: 0.5rem;
+}

@@ -1,0 +1,20 @@
+.custom-icon {
+  border-radius: 100%;
+  border: 3px solid black;
+  width: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-size: 2rem;
+  padding: 0.15rem;
+}
+
+.custom-icon:hover {
+  border-color: #9aabce;
+  box-shadow: 0 0 10px 5px #aff9f9;
+}
+
+.custom-icon:hover i {
+  color: #9aabce;
+}
