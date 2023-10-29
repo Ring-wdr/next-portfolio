@@ -1,3 +1,12 @@
+## 포트폴리오 페이지
+
+Next.js + TS로 제작된 포트폴리오 페이지입니다.<br>
+
+<<<<<<<<< Temporary merge branch 1
+Home: 간략 자기소개 및 보유 기술<br>
+Project: 진행했던 + 진행중인 프로젝트<br>
+배포 링크(by vercel):[https://next-portfolio-ringring.vercel.app/](https://next-portfolio-ringring.vercel.app/)
+=========
 First, run the development server:
 
 ```bash
@@ -30,3 +39,5 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+> > > > > > > > > Temporary merge branch 2
