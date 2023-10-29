@@ -13,20 +13,17 @@ const nextConfig = {
   swcMinify: true,
   images: {
     minimumCacheTTL: 60,
-    domains: [
-      "raw.githubusercontent.com",
-      "camo.githubusercontent.com",
-      "upload.wikimedia.org",
-      "www.nextontop.com",
-      "techstack-generator.vercel.app",
-      "avatars.githubusercontent.com",
-      "cdn.discordapp.com",
-      "kit.svelte.dev",
-      "postfiles.pstatic.net",
+    remotePatterns: [
+      { hostname: "raw.githubusercontent.com" },
+      { hostname: "camo.githubusercontent.com" },
+      { hostname: "upload.wikimedia.org" },
+      { hostname: "www.nextontop.com" },
+      { hostname: "techstack-generator.vercel.app" },
+      { hostname: "avatars.githubusercontent.com" },
+      { hostname: "cdn.discordapp.com" },
+      { hostname: "kit.svelte.dev" },
+      { hostname: "postfiles.pstatic.net" },
     ],
-  },
-  experimental: {
-    serverActions: true,
   },
 };
 

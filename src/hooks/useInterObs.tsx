@@ -10,6 +10,6 @@ export const useInterObs = <T,>(options?: IntersectionObserverInit) => {
       );
     }, options);
     io.observe(ref.current as Element);
-  }, []);
+  }, [options]);
   return { ref, inView };
 };
