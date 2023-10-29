@@ -1,0 +1,10 @@
+.header {
+  margin-top: 6rem;
+  text-align: center;
+  font-size: xx-large;
+}
+
+.header p {
+  margin-top: 3rem;
+  font-size: medium;
+}

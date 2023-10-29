@@ -4,10 +4,14 @@
 /node_modules
 /.pnp
 .pnp.js
+.idea
+
+# ide
+.vscode
 
 # testing
 /coverage
-
+/temp
 # next.js
 /.next/
 /out/
@@ -26,7 +30,11 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # local env files
-.env*.local
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
 
 # vercel
 .vercel
@@ -34,3 +42,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# test code
+__test__
