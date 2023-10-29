@@ -1,30 +1,23 @@
-import { FormButton } from "@/component/common/Button/FormButton";
+import { useEffect } from "react";
+import { useFormState } from "react-dom";
 import { useTranslations } from "next-intl";
+import { FormButton } from "@/component/common/Button/FormButton";
+import { sendEmail } from "./action";
 import styles from "./index.module.css";
 
-export default function EmailSender({ onClose }: { onClose: () => void }) {
+export default function EmailSender({ onClose }: { onClose?: () => void }) {
   const t = useTranslations("mailSend");
-  const sendEmail = async (data: FormData) => {
-    const { userName, content } = Object.fromEntries(data);
-    if (!userName || !content) return;
-    const result = await fetch("/api/email", {
-      method: "POST",
-      body: JSON.stringify({
-        from: userName,
-        content: content,
-      }),
-    });
-    if (result.status === 200) {
-      alert("전송되었습니다.");
-      onClose();
-    }
-  };
+  const [sendState, formAction] = useFormState(sendEmail, false);
+  useEffect(() => {
+    sendState && onClose && onClose();
+  }, [sendState, onClose]);
+
   return (
     <div className="d-flex flex-column justify-cc mr-3 ml-3 mb-3 w-20">
       <div className={styles["email-form-container"]}>
         <h2 className="mb-1">{t("title")}</h2>
         <p>{t("title")}</p>
-        <form action={sendEmail} className={styles["email-form"]}>
+        <form action={formAction} className={styles["email-form"]}>
           <input
             type="text"
             name="userName"
