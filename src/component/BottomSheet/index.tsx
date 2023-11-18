@@ -6,9 +6,10 @@ import {
   MouseEvent as ReactMouseEvent,
   TouchEvent as ReactTouchEvent,
 } from "react";
-import { useScreenSize } from "@/hooks/useScreenSize";
-import { createPortal, flushSync } from "react-dom";
+import { createPortal } from "react-dom";
 import clsx from "clsx";
+import { useScreenSize } from "@/hooks/useScreenSize";
+import executeAnimate from "@/hooks/executeAnimate";
 import styles from "./sheet.module.css";
 
 const mobileKeywords = [
@@ -61,7 +62,8 @@ export const BottomSheet = ({
   const bodyHeight = useScreenSize();
   // const userAgent = navigator.userAgent.toLowerCase();
 
-  const [isDragging, setDragging] = useState(false);
+  /** control drag state */
+  const dragRef = useRef(false);
   const divRef = useRef<HTMLDivElement>(null);
   const topPosition = getPosition(initPosition, bodyHeight);
 
@@ -76,7 +78,7 @@ export const BottomSheet = ({
 
   const elementMouseDrag = (e: ReactMouseEvent) => {
     e.preventDefault();
-    if (divRef.current === null || !isDragging) return;
+    if (divRef.current === null || !dragRef.current) return;
 
     divRef.current.style.setProperty(
       "translate",
@@ -88,7 +90,7 @@ export const BottomSheet = ({
 
   const closeDragElement = () => {
     if (divRef.current === null) return;
-    flushSync(() => setDragging(false));
+    dragRef.current = false;
     /**
      * ```
      * 0%: topPosition
@@ -109,15 +111,18 @@ export const BottomSheet = ({
       ? divRef.current.style.setProperty("translate", `-50% ${topPosition}px`)
       : (() => {
           document.body.style.removeProperty("overflow");
-          let _position = currentTopPosition;
-          const timer = setInterval(() => {
-            _position += 30;
-            divRef.current?.style.setProperty(
-              "translate",
-              `-50% ${_position}px`
-            );
-            _position > document.body.clientHeight && clearInterval(timer);
-          }, 30);
+          executeAnimate(
+            currentTopPosition,
+            (position) => {
+              console.log("closing...");
+              divRef.current?.style.setProperty(
+                "translate",
+                `-50% ${position}px`
+              );
+              return position + 30;
+            },
+            (position) => position < document.body.clientHeight
+          );
           setTimeout(onClose, 300);
         })();
   };
@@ -131,7 +136,7 @@ export const BottomSheet = ({
       }, 100);
     } else {
       document.body.style.removeProperty("overflow");
-      setDragging(false);
+      dragRef.current = false;
       setTimeout(() => {
         divRef.current?.style.removeProperty("translate");
       }, 100);
@@ -151,16 +156,16 @@ export const BottomSheet = ({
             ref={divRef}
             className={clsx(
               styles.bottomSheet,
-              { [styles.dragging]: isDragging },
+              { [styles.dragging]: dragRef.current },
               className
             )}
             {...props}
           >
             <div
               className={styles.handle}
-              onMouseDown={() => setDragging(true)}
-              onTouchStart={() => setDragging(true)}
-              onMouseUp={() => setDragging(false)}
+              onMouseDown={() => (dragRef.current = true)}
+              onTouchStart={() => (dragRef.current = true)}
+              onMouseUp={() => (dragRef.current = false)}
               onTouchMove={elementDrag}
               onTouchEnd={closeDragElement}
             >
