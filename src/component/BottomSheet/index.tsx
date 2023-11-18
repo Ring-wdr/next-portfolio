@@ -113,14 +113,13 @@ export const BottomSheet = ({
           document.body.style.removeProperty("overflow");
           executeAnimate(
             currentTopPosition,
-            (position) => {
-              console.log("closing...");
+            (position) => (
               divRef.current?.style.setProperty(
                 "translate",
                 `-50% ${position}px`
-              );
-              return position + 30;
-            },
+              ),
+              position + 30
+            ),
             (position) => position < document.body.clientHeight
           );
           setTimeout(onClose, 300);
