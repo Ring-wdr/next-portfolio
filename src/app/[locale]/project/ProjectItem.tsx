@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ReactNode, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import clsx from "clsx";
 import styles from "./index.module.css";
 
 export interface ProjectProps {
@@ -43,7 +44,7 @@ export const ProjectItem = ({
           onClose={closeBottomSheet}
           closePosition="50%"
         >
-          <div className={`d-flex justify-cc ${styles["height-300"]}`}>
+          <div className={clsx("d-flex", "justify-cc", styles["height-300"])}>
             <div className={styles["img-container"]}>
               <Link href={href} target="_blank" referrerPolicy="no-referrer">
                 <Image

@@ -2,6 +2,7 @@
 
 import { useInterObs } from "@/hooks/useInterObs";
 import styles from "./index.module.css";
+import clsx from "clsx";
 
 export const ShowBox = () => {
   const { ref, inView } = useInterObs<HTMLDivElement>({ threshold: 0.75 });
@@ -13,9 +14,7 @@ export const ShowBox = () => {
   return (
     <div className={styles.showbox}>
       <div
-        className={`${styles.box} ${styles.left} ${
-          inView ? styles.active : ""
-        }`}
+        className={clsx(styles.box, styles.left, { [styles.active]: inView })}
         ref={ref}
       >
         Language
@@ -24,7 +23,7 @@ export const ShowBox = () => {
         <p>CSS</p>
       </div>
       <div
-        className={`${styles.box} ${styles.left} ${iv2 ? styles.active : ""}`}
+        className={clsx(styles.box, styles.left, { [styles.active]: iv2 })}
         ref={ref2}
       >
         FrameWork/Library
@@ -35,7 +34,10 @@ export const ShowBox = () => {
         <p>Express</p>
         <p>tanstack query</p>
       </div>
-      <div className={`${styles.box} ${iv3 ? styles.active : ""}`} ref={ref3}>
+      <div
+        className={clsx(styles.box, styles.left, { [styles.active]: iv3 })}
+        ref={ref3}
+      >
         Dev. environment
         <p>Visual Studio Code</p>
         <p>Eslint</p>

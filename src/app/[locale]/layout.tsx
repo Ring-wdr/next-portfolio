@@ -7,6 +7,11 @@ import { Footer } from "@/component/Footer";
 import { GA_TRACKING_ID } from "../../lib/gtag";
 
 export const metadata = {
+  metadataBase: new URL(
+    process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "https://localhost:3000"
+  ),
   title: "포트폴리오에 오신 것을 환영합니다",
   manifest: "/icon/manifest.json",
   openGraph: {

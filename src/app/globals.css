@@ -249,6 +249,10 @@ ul {
   width: 100%;
 }
 
+.h-full {
+  height: 100%;
+}
+
 .align-ic {
   align-items: center;
 }

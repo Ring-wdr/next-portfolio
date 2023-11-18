@@ -6,18 +6,15 @@ export default function Page() {
     <>
       <div id="d-variaty" className="mt-5">
         <Container />
-        <div className="p-rel d-flex justify-cc">
-          <div
-            style={{ width: "300px", height: "300px" }}
+        <div className="p-rel d-flex justify-cc ">
+          <Image
+            src={"https://avatars.githubusercontent.com/u/70439662?v=4"}
+            alt="profile"
+            width={300}
+            height={300}
             className="modify-big circle float"
-          >
-            <Image
-              src={"https://avatars.githubusercontent.com/u/70439662?v=4"}
-              alt="profile"
-              className="circle"
-              fill
-            />
-          </div>
+            priority
+          />
         </div>
       </div>
       <Header>

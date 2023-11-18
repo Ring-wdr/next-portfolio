@@ -11,7 +11,7 @@ export default function Page() {
         {t.rich("reason.desc", {
           a: splitLinkChucks,
           strong: (chunks) => <strong>{chunks}</strong>,
-          br: () => <br />,
+          p: (chunks) => <p>{chunks}</p>,
         })}
       </DescWrapper>
       <h3 className="mt-5 mb-2 text-center font-20">
@@ -24,7 +24,11 @@ export default function Page() {
           🧾Recording... ⌨️
         </Link>
       </h3>
-      <DescWrapper>{t("record")}</DescWrapper>
+      <DescWrapper>
+        {t.rich("record", {
+          p: (chunks) => <p>{chunks}</p>,
+        })}
+      </DescWrapper>
     </div>
   );
 }
