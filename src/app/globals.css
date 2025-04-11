@@ -188,16 +188,6 @@ ul {
   text-align: center;
 }
 
-.float {
-  position: absolute;
-  z-index: 0;
-  animation: updown 3s linear infinite;
-}
-
-.float:hover {
-  box-shadow: 0 0 10px 5px #00a0a0;
-}
-
 @keyframes updown {
   0% {
     transform: translateY(-20px);
@@ -212,19 +202,6 @@ ul {
 
 .circle {
   border-radius: 100%;
-}
-
-.modify-big {
-  position: relative;
-  overflow: hidden;
-}
-
-.modify-big img {
-  transition: all 0.2s linear;
-}
-
-.modify-big:hover img {
-  scale: 1.2;
 }
 
 .d-flex {

@@ -1,6 +1,9 @@
 import BundleAnalyzer from "@next/bundle-analyzer";
 import { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
+import stylexPlugin from "@stylexswc/nextjs-plugin";
+import path from "path";
+const rootDir = __dirname;
 
 const withBundleAnalyzer = BundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
@@ -26,4 +29,19 @@ const nextConfig = {
   },
 } satisfies NextConfig;
 
-export default withBundleAnalyzer(withNextIntl(nextConfig));
+export default withBundleAnalyzer(
+  withNextIntl(
+    stylexPlugin({
+      rsOptions: {
+        dev: process.env.NODE_ENV !== "production",
+        useRemForFontSize: true,
+        aliases: {
+          "@/*": [path.join(rootDir, "*")],
+        },
+        unstable_moduleResolution: {
+          type: "commonJS",
+        },
+      },
+    })(nextConfig)
+  )
+);

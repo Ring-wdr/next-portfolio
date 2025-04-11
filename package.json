@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@stylexjs/open-props": "^0.11.1",
+    "@stylexjs/stylex": "^0.12.0",
     "clsx": "^2.1.1",
     "next": "15.3.0",
     "next-intl": "^4.0.2",
@@ -21,6 +23,7 @@
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.24.0",
     "@next/bundle-analyzer": "15.3.0",
+    "@stylexswc/nextjs-plugin": "^0.7.1",
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.13",
     "@types/react": "19.1.1",
