@@ -1,5 +1,4 @@
-import Link from "next-intl/link";
-import { usePathname } from "next-intl/client";
+import { usePathname, Link } from "@/i18n/navigation";
 import { navLinkList } from "@/lib/route";
 import styles from "./navbar.module.css";
 import clsx from "clsx";

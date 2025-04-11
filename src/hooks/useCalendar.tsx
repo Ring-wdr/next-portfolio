@@ -1,4 +1,4 @@
-import { useCallback, useDeferredValue, useMemo, useState } from "react";
+import { useDeferredValue, useMemo, useState } from "react";
 import { getCalendar } from "./getCalendar";
 
 const [initYear, initMonth] = Intl.DateTimeFormat("ko-KR").format().split(".");

@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Script from "next/script";
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
@@ -6,7 +7,7 @@ import { ScrollUpButton } from "@/component/common";
 import { Footer } from "@/component/Footer";
 import { GA_TRACKING_ID } from "../../lib/gtag";
 
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.VERCEL_URL
       ? `https://${process.env.VERCEL_URL}`
@@ -50,15 +51,17 @@ export const metadata = {
 
 interface RootLayoutProps {
   children: React.ReactNode;
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 }
 
 export default async function RootLayout({
   children,
-  params: { locale },
+  params,
 }: RootLayoutProps) {
+  const { locale } = await params;
+
   const messages = await getMessages(locale);
 
   return (

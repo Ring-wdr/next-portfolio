@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import styles from "./index.module.css";
+import clsx from "clsx";
 
 export const ScrollUpButton = () => {
   const [btnStatus, setStatus] = useState(false);
@@ -15,9 +16,9 @@ export const ScrollUpButton = () => {
   };
 
   useEffect(() => {
-    let timer: NodeJS.Timer;
+    let timer: NodeJS.Timeout;
     const handleFlow = () => {
-      timer && clearTimeout(timer as unknown as number);
+      timer && clearTimeout(timer);
       setStatus(true);
       timer = setTimeout(() => setStatus(false), 1000);
     };
@@ -27,9 +28,7 @@ export const ScrollUpButton = () => {
 
   return (
     <button
-      className={`${styles["scroll-top-btn"]} ${
-        btnStatus ? "" : styles.inactive
-      }`}
+      className={clsx(styles["scroll-top-btn"], !btnStatus && styles.inactive)}
       onClick={handleTop}
     >
       <i className="ri-arrow-up-circle-fill font-20"></i>

@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useFormState } from "react-dom";
+import { useEffect, useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { FormButton } from "@/component/common/Button/FormButton";
 import { sendEmail } from "./action";
@@ -7,7 +6,7 @@ import styles from "./index.module.css";
 
 export default function EmailSender({ onClose }: { onClose?: () => void }) {
   const t = useTranslations("mailSend");
-  const [sendState, formAction] = useFormState(sendEmail, false);
+  const [sendState, formAction] = useActionState(sendEmail, false);
   useEffect(() => {
     sendState && onClose && onClose();
   }, [sendState, onClose]);

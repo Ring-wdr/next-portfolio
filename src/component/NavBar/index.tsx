@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef } from "react";
-import Link from "next-intl/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { useLocale } from "next-intl";
 import { NavMenu } from "./NavMenu";

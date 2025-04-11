@@ -59,13 +59,13 @@ function splitLinkChucks(chunks: React.ReactNode) {
     case "next":
       return (
         <Link href="https://nextjs.org/" style={{ color: "black" }}>
-          Next 13
+          Next.js
         </Link>
       );
     case "sveltekit":
       return (
         <Link href="https://kit.svelte.dev/" style={{ color: "crimson" }}>
-          sveltekit
+          Sveltekit
         </Link>
       );
   }

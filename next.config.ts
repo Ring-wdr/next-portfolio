@@ -1,16 +1,15 @@
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
+import BundleAnalyzer from "@next/bundle-analyzer";
+import { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withBundleAnalyzer = BundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
 
-const withNextIntl = require("next-intl/plugin")(
-  // This is the default (also the `src` folder is supported out of the box)
-  "./src/i18n.ts"
-);
+const withNextIntl = createNextIntlPlugin();
 
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   images: {
     minimumCacheTTL: 60,
     remotePatterns: [
@@ -25,6 +24,6 @@ const nextConfig = {
       { hostname: "postfiles.pstatic.net" },
     ],
   },
-};
+} satisfies NextConfig;
 
-module.exports = withBundleAnalyzer(withNextIntl(nextConfig));
+export default withBundleAnalyzer(withNextIntl(nextConfig));

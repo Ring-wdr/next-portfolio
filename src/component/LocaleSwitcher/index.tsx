@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { usePathname, useRouter } from "next-intl/client";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { clsx } from "clsx";
 import styles from "./index.module.css";
 
