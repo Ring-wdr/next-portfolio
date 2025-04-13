@@ -1,12 +1,46 @@
 import Link from "next/link";
 import { DescWrapper } from "@/component/common";
 import { useTranslations } from "next-intl";
+import * as stylex from "@stylexjs/stylex";
+
+const aboutStyle = stylex.create({
+  wrapper: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    marginTop: 3 * 16,
+    gap: 2 * 16,
+  },
+  title: {
+    marginBottom: 2 * 16,
+    textAlign: "center",
+    fontSize: 32,
+  },
+  mt20: {
+    marginTop: 2 * 16,
+  },
+  colorGreen: {
+    color: "green",
+  },
+  colorCyan: {
+    color: "cyan",
+  },
+  colorBlue: {
+    color: "blue",
+  },
+  colorBlack: {
+    color: "black",
+  },
+  colorCrimson: {
+    color: "crimson",
+  },
+});
 
 export default function Page() {
   const t = useTranslations("about");
   return (
-    <div className="d-flex flex-column justify-cc mt-3">
-      <h3 className="mb-2 text-center font-20">{t("reason.title")}</h3>
+    <div {...stylex.props(aboutStyle.wrapper)}>
+      <h3 {...stylex.props(aboutStyle.title)}>{t("reason.title")}</h3>
       <DescWrapper>
         {t.rich("reason.desc", {
           a: splitLinkChucks,
@@ -14,9 +48,9 @@ export default function Page() {
           p: (chunks) => <p>{chunks}</p>,
         })}
       </DescWrapper>
-      <h3 className="mt-5 mb-2 text-center font-20">
+      <h3 {...stylex.props(aboutStyle.title, aboutStyle.mt20)}>
         <Link
-          className="tc-green"
+          {...stylex.props(aboutStyle.colorGreen)}
           href="https://blog.naver.com/enne123"
           target="_blank"
           rel="noopener noreferrer"
@@ -46,25 +80,37 @@ function splitLinkChucks(chunks: React.ReactNode) {
       );
     case "react":
       return (
-        <Link href={"https://react.dev/"} style={{ color: "cyan" }}>
+        <Link
+          href={"https://react.dev/"}
+          {...stylex.props(aboutStyle.colorCyan)}
+        >
           <i className="ri-reactjs-fill"></i>React 18
         </Link>
       );
     case "TypeScript":
       return (
-        <Link href={"https://www.typescriptlang.org/"} className="tc-blue">
+        <Link
+          href={"https://www.typescriptlang.org/"}
+          {...stylex.props(aboutStyle.colorBlue)}
+        >
           TypeScript
         </Link>
       );
     case "next":
       return (
-        <Link href="https://nextjs.org/" style={{ color: "black" }}>
+        <Link
+          href="https://nextjs.org/"
+          {...stylex.props(aboutStyle.colorBlack)}
+        >
           Next.js
         </Link>
       );
     case "sveltekit":
       return (
-        <Link href="https://kit.svelte.dev/" style={{ color: "crimson" }}>
+        <Link
+          href="https://kit.svelte.dev/"
+          {...stylex.props(aboutStyle.colorCrimson)}
+        >
           Sveltekit
         </Link>
       );

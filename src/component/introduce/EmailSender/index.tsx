@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { FormButton } from "@/component/common/Button/FormButton";
