@@ -4,25 +4,25 @@ export const useScreenSize = () => {
   // Initialize height to 0 for SSR safety
   const [height, setHeight] = useState(0);
 
-  // Debounced resize handler
-  const detectHeight = () => {
-    if (typeof window !== "undefined") {
-      setHeight(window.innerHeight);
-    }
-  };
-
   useEffect(() => {
-    // Set initial height on client-side
+    // All window interactions should be guarded
     if (typeof window !== "undefined") {
-      setHeight(window.innerHeight);
-    }
+      // Define detectHeight *inside* useEffect to ensure the same reference
+      const detectHeight = () => {
+        setHeight(window.innerHeight);
+      };
 
-    // Add event listener only on client-side
-    if (typeof window !== "undefined") {
+      // Set initial height on client-side
+      setHeight(window.innerHeight);
+
+      // Add event listener
       window.addEventListener("resize", detectHeight);
+
       // Cleanup function to remove event listener
       return () => window.removeEventListener("resize", detectHeight);
     }
+    // If window is not defined (e.g., during SSR), return a no-op cleanup function
+    return () => {};
   }, []); // Empty dependency array ensures this effect runs only once on mount and unmount
 
   return height;
