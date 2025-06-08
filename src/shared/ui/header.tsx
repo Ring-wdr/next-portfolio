@@ -2,9 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import LogoImage from "../../../public/ms-icon-150x150.png";
-import { Text } from "./text";
-import { LinkedinIcon } from "./icon/linkedin";
-import { GithubIcon } from "./icon/github";
+import { LinkedinIcon, GithubIcon } from "./icon/brand";
 
 export function Header() {
   return (
@@ -17,35 +15,30 @@ export function Header() {
       </Link>
       <div className="flex-1 flex justify-end gap-8">
         <div className="items-center gap-9 hidden md:flex">
-          <Text asChild>
-            <Link
-              href="/project"
-              className="text-sm font-medium leading-normal"
-            >
-              Projects
-            </Link>
-          </Text>
-          <Text asChild>
-            <Link
-              href="/tech-stack"
-              className="text-sm font-medium leading-normal"
-            >
-              Tech Stack
-            </Link>
-          </Text>
-          <Text asChild>
-            <Link href="/about" className="text-sm font-medium leading-normal">
-              About Me
-            </Link>
-          </Text>
-          <Text asChild>
-            <Link
-              href="/contact"
-              className="text-sm font-medium leading-normal"
-            >
-              Contact
-            </Link>
-          </Text>
+          <Link
+            href="/project"
+            className="text-sm font-medium leading-normal hover:text-primary"
+          >
+            Projects
+          </Link>
+          <Link
+            href="/tech-stack"
+            className="text-sm font-medium leading-normal hover:text-primary"
+          >
+            Tech Stack
+          </Link>
+          <Link
+            href="/about"
+            className="text-sm font-medium leading-normal hover:text-primary"
+          >
+            About Me
+          </Link>
+          <Link
+            href="/contact"
+            className="text-sm font-medium leading-normal hover:text-primary"
+          >
+            Contact
+          </Link>
         </div>
         <div className="flex gap-2">
           <Link

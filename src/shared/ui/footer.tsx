@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Mail } from "lucide-react";
-import { GithubIcon } from "./icon/github";
-import { LinkedinIcon } from "./icon/linkedin";
+import { GithubIcon, LinkedinIcon } from "./icon/brand";
 
 export function Footer() {
   return (

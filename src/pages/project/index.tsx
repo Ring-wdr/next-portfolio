@@ -1,4 +1,18 @@
+"use client";
+
+import { TechStack } from "@/shared/constant/tech-stack";
+import { classNames } from "@/shared/utils/classnames";
+import { useState } from "react";
+
+const frameworks = [
+  "All",
+  ...TechStack.filter((tech) => tech.category === "Frameworks & Libraries").map(
+    (tech) => tech.name
+  ),
+];
+
 export function ProjectPage() {
+  const [selectedFramework, setSelectedFramework] = useState("All");
   return (
     <div className="px-40 flex flex-1 justify-center py-5">
       <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
@@ -15,18 +29,21 @@ export function ProjectPage() {
           </div>
         </div>
         <div className="flex gap-3 p-3 flex-wrap pr-4">
-          <div className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-secondary pl-4 pr-4">
-            <p className="text-sm font-medium leading-normal">All</p>
-          </div>
-          <div className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-secondary pl-4 pr-4">
-            <p className="text-sm font-medium leading-normal">React</p>
-          </div>
-          <div className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-secondary pl-4 pr-4">
-            <p className="text-sm font-medium leading-normal">Vue</p>
-          </div>
-          <div className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-secondary pl-4 pr-4">
-            <p className="text-sm font-medium leading-normal">Angular</p>
-          </div>
+          {frameworks.map((framework) => (
+            <button
+              key={framework}
+              type="button"
+              className={classNames(
+                "flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg pl-4 pr-4 cursor-pointer",
+                selectedFramework === framework
+                  ? "bg-primary text-background"
+                  : "bg-secondary text-primary"
+              )}
+              onClick={() => setSelectedFramework(framework)}
+            >
+              <p className="text-sm font-medium leading-normal">{framework}</p>
+            </button>
+          ))}
         </div>
         <div className="p-4 @container">
           <div className="flex flex-col items-stretch justify-start rounded-lg @xl:flex-row @xl:items-start">

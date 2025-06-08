@@ -1,4 +1,3 @@
-import { Text } from "@/shared/ui/text";
 import Image from "next/image";
 
 export function AboutPage() {
@@ -16,37 +15,34 @@ export function AboutPage() {
               priority
             />
             <div className="flex flex-col justify-center gap-2">
-              <Text className="text-[22px] font-bold leading-tight tracking-[-0.015em]">
+              <h1 className="text-[22px] font-bold leading-tight tracking-[-0.015em]">
                 Hi, I&apos;m Manjoong
-              </Text>
-              <Text className="text-[#9cabba] text-base font-normal leading-normal">
+              </h1>
+              <p className="text-[#9cabba] text-base font-normal leading-normal">
                 Front-End Developer
-              </Text>
-              <Text className="text-[#9cabba] text-base font-normal leading-normal">
+              </p>
+              <p className="text-[#9cabba] text-base font-normal leading-normal">
                 I&apos;m a passionate front-end developer with a focus on
                 creating intuitive and engaging user experiences. My goal is to
                 build products that are not only visually appealing but also
                 highly functional and accessible.
-              </Text>
+              </p>
             </div>
           </div>
         </div>
         <h2 className="text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
           About Me
         </h2>
-        <Text asChild>
-          <p className="text-base font-normal leading-normal pb-3 pt-1 px-4">
-            I&apos;m a front-end developer with 3+ years of experience in
-            building web applications using modern technologies like React. I
-            have a strong understanding of HTML, CSS, and JavaScript, and
-            I&apos;m always eager to learn new frameworks and libraries. My
-            development philosophy centers around clean, maintainable code and a
-            user-first approach. I believe that great design is not just about
-            aesthetics but also about usability and accessibility. I strive to
-            create products that are both beautiful and easy to use for
-            everyone.
-          </p>
-        </Text>
+        <p className="text-base font-normal leading-normal pb-3 pt-1 px-4">
+          I&apos;m a front-end developer with 3+ years of experience in building
+          web applications using modern technologies like React. I have a strong
+          understanding of HTML, CSS, and JavaScript, and I&apos;m always eager
+          to learn new frameworks and libraries. My development philosophy
+          centers around clean, maintainable code and a user-first approach. I
+          believe that great design is not just about aesthetics but also about
+          usability and accessibility. I strive to create products that are both
+          beautiful and easy to use for everyone.
+        </p>
         <h2 className="text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
           My Strengths
         </h2>

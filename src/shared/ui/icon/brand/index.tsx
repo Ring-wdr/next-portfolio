@@ -1,0 +1,17 @@
+export { CssIcon } from "./css";
+export { GithubIcon } from "./github";
+export { HtmlIcon } from "./html";
+export { JavascriptIcon } from "./javascript";
+export { LinkedinIcon } from "./linkedin";
+export { NextjsIcon } from "./nextjs";
+export { ReactIcon } from "./react";
+export { SvelteIcon } from "./svelte";
+export { TypescriptIcon } from "./typescript";
+export { TailwindIcon } from "./tailwind";
+export { FigmaIcon } from "./figma";
+export { TerminalIcon } from "./terminal";
+export { VanillaExtractIcon } from "./vanilla-extract";
+export { WebComponentIcon } from "./web-component";
+export { MysqlIcon } from "./mysql";
+export { MongoIcon } from "./mongo";
+export { ExpressIcon } from "./express";
