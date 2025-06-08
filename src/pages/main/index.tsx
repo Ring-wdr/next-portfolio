@@ -23,7 +23,7 @@ export function MainPage() {
               />
               <div className="flex flex-col gap-2 text-left relative z-20">
                 <h1 className="flex items-center text-4xl font-black mb-4 no-underline bg-gradient-to-r from-primary from-50% via-[#ff5858] via-50% to-[#cc2e5d] bg-[length:200%_100%] bg-clip-text text-transparent transition-all duration-300 ease-out break-keep hover:bg-[position:100%_0]">
-                  Hi, I'm Manjoong, a Front-End Developer
+                  Hi, I&apos;m Manjoong, a Front-End Developer
                 </h1>
                 <h2 className="text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
                   I build beautiful and functional web experiences using modern

@@ -6,8 +6,8 @@ export function ContactPage() {
           Contact
         </h2>
         <p className="text-base font-normal leading-normal pb-3 pt-1 px-4">
-          I'm always open to new opportunities and collaborations. Feel free to
-          reach out to me via email or connect with me on LinkedIn.
+          I&apos;m always open to new opportunities and collaborations. Feel
+          free to reach out to me via email or connect with me on LinkedIn.
         </p>
         <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
           <label className="flex flex-col min-w-40 flex-1">

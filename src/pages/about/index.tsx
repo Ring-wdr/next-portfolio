@@ -17,16 +17,16 @@ export function AboutPage() {
             />
             <div className="flex flex-col justify-center gap-2">
               <Text className="text-[22px] font-bold leading-tight tracking-[-0.015em]">
-                Hi, I'm Manjoong
+                Hi, I&apos;m Manjoong
               </Text>
               <Text className="text-[#9cabba] text-base font-normal leading-normal">
                 Front-End Developer
               </Text>
               <Text className="text-[#9cabba] text-base font-normal leading-normal">
-                I'm a passionate front-end developer with a focus on creating
-                intuitive and engaging user experiences. My goal is to build
-                products that are not only visually appealing but also highly
-                functional and accessible.
+                I&apos;m a passionate front-end developer with a focus on
+                creating intuitive and engaging user experiences. My goal is to
+                build products that are not only visually appealing but also
+                highly functional and accessible.
               </Text>
             </div>
           </div>
@@ -36,14 +36,15 @@ export function AboutPage() {
         </h2>
         <Text asChild>
           <p className="text-base font-normal leading-normal pb-3 pt-1 px-4">
-            I'm a front-end developer with 3+ years of experience in building
-            web applications using modern technologies like React. I have a
-            strong understanding of HTML, CSS, and JavaScript, and I'm always
-            eager to learn new frameworks and libraries. My development
-            philosophy centers around clean, maintainable code and a user-first
-            approach. I believe that great design is not just about aesthetics
-            but also about usability and accessibility. I strive to create
-            products that are both beautiful and easy to use for everyone.
+            I&apos;m a front-end developer with 3+ years of experience in
+            building web applications using modern technologies like React. I
+            have a strong understanding of HTML, CSS, and JavaScript, and
+            I&apos;m always eager to learn new frameworks and libraries. My
+            development philosophy centers around clean, maintainable code and a
+            user-first approach. I believe that great design is not just about
+            aesthetics but also about usability and accessibility. I strive to
+            create products that are both beautiful and easy to use for
+            everyone.
           </p>
         </Text>
         <h2 className="text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
