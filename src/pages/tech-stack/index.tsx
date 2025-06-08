@@ -8,9 +8,9 @@ export function TechStackPage() {
               Skills
             </p>
             <p className="text-[#9cabba] text-sm font-normal leading-normal">
-              I'm proficient in a variety of front-end technologies and tools,
-              constantly expanding my knowledge to stay current with industry
-              trends.
+              I&apos;m proficient in a variety of front-end technologies and
+              tools, constantly expanding my knowledge to stay current with
+              industry trends.
             </p>
           </div>
         </div>
