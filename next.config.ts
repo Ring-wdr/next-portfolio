@@ -1,17 +1,6 @@
-import BundleAnalyzer from "@next/bundle-analyzer";
-import { NextConfig } from "next";
-import createNextIntlPlugin from "next-intl/plugin";
-import stylexPlugin from "@stylexswc/nextjs-plugin";
-import path from "path";
-const rootDir = __dirname;
+import type { NextConfig } from "next";
 
-const withBundleAnalyzer = BundleAnalyzer({
-  enabled: process.env.ANALYZE === "true",
-});
-
-const withNextIntl = createNextIntlPlugin();
-
-const nextConfig = {
+const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
     minimumCacheTTL: 60,
@@ -25,23 +14,9 @@ const nextConfig = {
       { hostname: "cdn.discordapp.com" },
       { hostname: "kit.svelte.dev" },
       { hostname: "postfiles.pstatic.net" },
+      { hostname: "lh3.googleusercontent.com" },
     ],
   },
-} satisfies NextConfig;
+};
 
-export default withBundleAnalyzer(
-  withNextIntl(
-    stylexPlugin({
-      rsOptions: {
-        dev: process.env.NODE_ENV !== "production",
-        useRemForFontSize: true,
-        aliases: {
-          "@/*": [path.join(rootDir, "*")],
-        },
-        unstable_moduleResolution: {
-          type: "commonJS",
-        },
-      },
-    })(nextConfig)
-  )
-);
+export default nextConfig;
