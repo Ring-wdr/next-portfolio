@@ -14,9 +14,6 @@ test.describe("Contact Page E2E Test", () => {
       .getByPlaceholder("내용")
       .fill("This is a test message from Playwright.");
 
-    // Click the send button
-    await page.getByRole("button", { name: "Send" }).click();
-
     // For this test, we assume the server action will succeed.
     // In a real scenario, you might mock the network request or check for a success message.
     // Since our form shows an alert, we can listen for the dialog event.
@@ -24,6 +21,13 @@ test.describe("Contact Page E2E Test", () => {
       expect(dialog.message()).toContain("메일이 성공적으로 전송되었습니다.");
       await dialog.accept();
     });
+
+    // Click the send button
+    await page.getByRole("button", { name: "Send" }).click();
+
+    // For this test, we assume the server action will succeed.
+    // In a real scenario, you might mock the network request or check for a success message.
+    // Since our form shows an alert, we can listen for the dialog event.
 
     // Wait for the 'Sending...' text to disappear, indicating the action is complete.
     await expect(page.getByRole("button", { name: "Sending..." })).toBeHidden({
