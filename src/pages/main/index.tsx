@@ -1,3 +1,4 @@
+import { TechStack } from "@/shared/constant/tech-stack";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -102,38 +103,14 @@ export function MainPage() {
           Tech Stack
         </h2>
         <div className="flex gap-3 p-3 flex-wrap pr-4">
-          <div className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-secondary pl-4 pr-4">
-            <p className="text-sm font-medium leading-normal">React</p>
-          </div>
-          <div className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-secondary pl-4 pr-4">
-            <p className="text-sm font-medium leading-normal">JavaScript</p>
-          </div>
-          <div className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-secondary pl-4 pr-4">
-            <p className="text-sm font-medium leading-normal">HTML</p>
-          </div>
-          <div className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-secondary pl-4 pr-4">
-            <p className="text-sm font-medium leading-normal">CSS</p>
-          </div>
-          <div className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-secondary pl-4 pr-4">
-            <p className="text-sm font-medium leading-normal">Node.js</p>
-          </div>
-          <div className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-secondary pl-4 pr-4">
-            <p className="text-sm font-medium leading-normal">Express</p>
-          </div>
-          <div className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-secondary pl-4 pr-4">
-            <p className="text-sm font-medium leading-normal">MongoDB</p>
-          </div>
-          <div className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-secondary pl-4 pr-4">
-            <p className="text-sm font-medium leading-normal">Git</p>
-          </div>
-          <div className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-secondary pl-4 pr-4">
-            <p className="text-sm font-medium leading-normal">Webpack</p>
-          </div>
-          <div className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-secondary pl-4 pr-4">
-            <p className="text-sm font-medium leading-normal">
-              Responsive Design
-            </p>
-          </div>
+          {TechStack.map((tech) => (
+            <button
+              key={tech.name}
+              className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-secondary pl-4 pr-4 hover:bg-primary hover:text-background"
+            >
+              <p className="text-sm font-medium leading-normal">{tech.name}</p>
+            </button>
+          ))}
         </div>
       </div>
     </div>
