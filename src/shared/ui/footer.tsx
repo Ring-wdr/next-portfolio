@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./icon/brand";
+import { ModeToggle } from "./theme-toggle";
 
 export function Footer() {
   return (
@@ -38,6 +39,7 @@ export function Footer() {
             >
               <Mail size={18} />
             </Link>
+            <ModeToggle />
           </div>
         </div>
       </div>
