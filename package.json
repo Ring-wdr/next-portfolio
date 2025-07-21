@@ -4,12 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+        "dev:test": "E2E_TESTING=true next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:e2e-log": "playwright test -c playwright.config.log.ts"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
