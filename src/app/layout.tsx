@@ -65,7 +65,6 @@ export default function RootLayout({
           "antialiased relative flex size-full min-h-screen flex-col overflow-x-hidden"
         )}
       >
-        <GoogleAnalytics gaId={env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -79,6 +78,7 @@ export default function RootLayout({
           </div>
         </ThemeProvider>
       </body>
+      <GoogleAnalytics gaId={env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
     </html>
   );
 }
