@@ -28,6 +28,7 @@ yarn-error.log*
 # local env files
 .env*.local
 .env
+.test.env
 
 # vercel
 .vercel
@@ -37,3 +38,8 @@ yarn-error.log*
 next-env.d.ts
 
 certificates
+
+# playwright
+test-results
+playwright-report
+playwright-video
