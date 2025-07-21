@@ -18,6 +18,8 @@ import {
 } from "../ui/icon/brand";
 import { PlaywrightIcon } from "../ui/icon/brand/playwright";
 import { StorybookIcon } from "../ui/icon/brand/storybook";
+import { TanstackIcon } from "../ui/icon/brand/tanstack";
+import { XStateIcon } from "../ui/icon/brand/xstate";
 
 export const TechStackCategory = [
   "Languages",
@@ -74,8 +76,23 @@ export const TechStack: {
     category: "Frameworks & Libraries",
   },
   {
+    name: "Express.js",
+    icon: <ExpressIcon />,
+    category: "Frameworks & Libraries",
+  },
+  {
     name: "Web Component",
     icon: <WebComponentIcon />,
+    category: "Frameworks & Libraries",
+  },
+  {
+    name: "TanStack Query",
+    icon: <TanstackIcon width={18} height={18} />,
+    category: "Frameworks & Libraries",
+  },
+  {
+    name: "XState",
+    icon: <XStateIcon width={18} height={18} />,
     category: "Frameworks & Libraries",
   },
   {
@@ -117,10 +134,5 @@ export const TechStack: {
     name: "MongoDB",
     icon: <MongoIcon />,
     category: "Database",
-  },
-  {
-    name: "Express.js",
-    icon: <ExpressIcon />,
-    category: "Frameworks & Libraries",
   },
 ];
