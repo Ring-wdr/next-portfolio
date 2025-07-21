@@ -5,6 +5,8 @@ import { Header } from "@/shared/ui/header";
 import { classNames } from "@/shared/utils/classnames";
 import { ThemeProvider } from "./_provider/theme";
 import { Footer } from "@/shared/ui/footer";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { env } from "@/env";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -63,6 +65,7 @@ export default function RootLayout({
           "antialiased relative flex size-full min-h-screen flex-col overflow-x-hidden"
         )}
       >
+        <GoogleAnalytics gaId={env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
