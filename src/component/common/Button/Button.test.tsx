@@ -1,28 +1,29 @@
-import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
-import { Button } from './Button'; // Adjust path if necessary
-import styles from './button.module.css';
+import { describe, it, expect } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { Button } from "@/shared/ui/button";
 
-describe('Button component', () => {
-  it('renders correctly with default props', () => {
+describe("Button component", () => {
+  it("renders correctly with default props", () => {
     render(<Button>Click Me</Button>);
-    const buttonElement = screen.getByRole('button', { name: /Click Me/i });
+    const buttonElement = screen.getByRole("button", { name: /Click Me/i });
     expect(buttonElement).toBeInTheDocument();
-    expect(buttonElement).toHaveClass(styles['custom-button']);
   });
 
-  it('applies additional className', () => {
-    const additionalClass = 'my-custom-class';
+  it("applies additional className", () => {
+    const additionalClass = "my-custom-class";
     render(<Button className={additionalClass}>Submit</Button>);
-    const buttonElement = screen.getByRole('button', { name: /Submit/i });
-    expect(buttonElement).toHaveClass(styles['custom-button']);
+    const buttonElement = screen.getByRole("button", { name: /Submit/i });
     expect(buttonElement).toHaveClass(additionalClass);
   });
 
-  it('passes other HTML button attributes', () => {
-    render(<Button type="submit" disabled>Send</Button>);
-    const buttonElement = screen.getByRole('button', { name: /Send/i });
-    expect(buttonElement).toHaveAttribute('type', 'submit');
+  it("passes other HTML button attributes", () => {
+    render(
+      <Button type="submit" disabled>
+        Send
+      </Button>
+    );
+    const buttonElement = screen.getByRole("button", { name: /Send/i });
+    expect(buttonElement).toHaveAttribute("type", "submit");
     expect(buttonElement).toBeDisabled();
   });
 });

@@ -7,7 +7,7 @@ import { env } from "@/env";
 
 const { NEXT_MAIL_ADDRESS: user, NEXT_APP_PASSWORD: pass } = env;
 
-type MailSendType = {
+export type MailSendType = {
   type: boolean;
   message: string;
 } | null;
