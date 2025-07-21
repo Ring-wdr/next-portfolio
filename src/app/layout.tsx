@@ -5,7 +5,7 @@ import { Header } from "@/shared/ui/header";
 import { classNames } from "@/shared/utils/classnames";
 import { ThemeProvider } from "./_provider/theme";
 import { Footer } from "@/shared/ui/footer";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
 import { env } from "@/env";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -65,6 +65,21 @@ export default function RootLayout({
           "antialiased relative flex size-full min-h-screen flex-col overflow-x-hidden"
         )}
       >
+        <Script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+        />
+        <Script
+          id="google-analytics"
+          dangerouslySetInnerHTML={{
+            __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-FYE8VGZT9B');`,
+          }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -78,7 +93,6 @@ export default function RootLayout({
           </div>
         </ThemeProvider>
       </body>
-      <GoogleAnalytics gaId={env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
     </html>
   );
 }
