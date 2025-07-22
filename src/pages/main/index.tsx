@@ -1,6 +1,9 @@
-import { TechStack } from "@/shared/constant/tech-stack";
 import Image from "next/image";
 import Link from "next/link";
+
+import { projectList } from "@/shared/constant/project";
+import { TechStack } from "@/shared/constant/tech-stack";
+import { MainProjectItem } from "./project/item";
 
 export function MainPage() {
   return (
@@ -46,57 +49,15 @@ export function MainPage() {
         </h2>
         <div className="flex overflow-y-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden">
           <div className="flex items-stretch p-4 gap-3">
-            <div className="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60">
-              <div
-                className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col"
-                style={{
-                  backgroundImage:
-                    "url(https://lh3.googleusercontent.com/aida-public/AB6AXuAGqyVjkpGTbUfqLGfvx33jlW8rzpGMyMtsaHh7bijR99ho6kRN9p4FWNmJi7ej2VA_gsk6jvsfMJ3w6Ok1kYs0IDnTCmaYLnnv9m9IfXoxBgf1Io0XO4zpGZBAP8D77AjxOg1jhQSXjXdASyzxJEDHbmt-XARzGxy2wq9k-Wp_1LTSwhc65js0BniYkSoqH30QariJtUiDNw5RvzmuCWfXw_XM9TntqIbXlgovSTMauh6VaQia1fxfgU4HqptkewUV5oEneX1ZqN0)",
-                }}
-              ></div>
-              <div>
-                <p className="text-base font-medium leading-normal">
-                  Project Zenith
-                </p>
-                <p className="text-[#9cabba] text-sm font-normal leading-normal">
-                  A responsive web application built with React and Node.js.
-                </p>
-              </div>
-            </div>
-            <div className="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60">
-              <div
-                className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col"
-                style={{
-                  backgroundImage:
-                    "url(https://lh3.googleusercontent.com/aida-public/AB6AXuBTu3xgmc_veUOS6xE2aMagggf3XlQClWI_TJb-ekMTbdVg6x8ad6Uv1Ezp7r7IvfZHY8Y7hYIHIAQNKPJVuS7X8RTtUR5aVDccGz9jxM3HRb4p9KUpTAIVW15l8YloGWFXNicK9pX8Rtd-yGBvepXOqEsloQFL8Ob5FMaKVrcD5ewPz7w_0EwbN1rlVj2uO7T-J8ME6Zhfh0i6gC8JMySjAaMaBHlxGXfRumvJ0Kk6xBDgYMEingwyGhfV75T9b1Kda1tBC9D9ews)",
-                }}
-              ></div>
-              <div>
-                <p className="text-base font-medium leading-normal">
-                  Online Storefront
-                </p>
-                <p className="text-[#9cabba] text-sm font-normal leading-normal">
-                  An e-commerce platform with a focus on user experience.
-                </p>
-              </div>
-            </div>
-            <div className="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60">
-              <div
-                className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col"
-                style={{
-                  backgroundImage:
-                    "url(https://lh3.googleusercontent.com/aida-public/AB6AXuA29ACvBscUID3sMtFUqW4ihOrW0Lv7wKi1U4wnybVU8xeDIpBYxWjBDiVLI9ERf8NRZ2ZgQcie2lwSB42byFhi_TyGZFSRb6cdWPVlNTatyijXg-TLaCu3p6NRjeZaBB1FUS7XBweu0NFrqS5yin8bjZS_7u3HlFQ808nIKnD_Rzgzc_OBFvubYWvG_zabc3lcYbxe892mFoVJ6zHeYlFuyj10r-0PIynnVEeC2Z9A-5R-9-Y5LOK0i9oIA0VmWEGcRZ_DqqmDRCE)",
-                }}
-              ></div>
-              <div>
-                <p className="text-base font-medium leading-normal">
-                  Admin Dashboard
-                </p>
-                <p className="text-[#9cabba] text-sm font-normal leading-normal">
-                  A comprehensive dashboard for managing business operations.
-                </p>
-              </div>
-            </div>
+            {projectList.slice(0, 3).map((project) => (
+              <MainProjectItem
+                key={project.title}
+                title={project.title}
+                description={project.description}
+                src={project.src}
+                href={project.href}
+              />
+            ))}
           </div>
         </div>
         <h2 className="text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
