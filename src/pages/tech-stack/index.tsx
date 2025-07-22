@@ -24,22 +24,18 @@ export function TechStackPage() {
             </h3>
             <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-3 p-4">
               {TechStack.filter((tech) =>
-                Array.isArray(tech.category)
-                  ? tech.category.includes(category)
-                  : tech.category === category
-              ).map(
-                (tech) => (
-                  <div
-                    key={tech.name}
-                    className="flex flex-1 gap-3 rounded-lg border border-[#3b4754] bg-secondary p-4 items-center"
-                  >
-                    {tech.icon}
-                    <h2 className="text-base font-bold leading-tight">
-                      {tech.name}
-                    </h2>
-                  </div>
-                )
-              )}
+                tech.category.some((_category) => _category === category)
+              ).map((tech) => (
+                <div
+                  key={tech.name}
+                  className="flex flex-1 gap-3 rounded-lg border border-[#3b4754] bg-secondary p-4 items-center"
+                >
+                  {tech.icon}
+                  <h2 className="text-base font-bold leading-tight">
+                    {tech.name}
+                  </h2>
+                </div>
+              ))}
             </div>
           </Fragment>
         ))}
