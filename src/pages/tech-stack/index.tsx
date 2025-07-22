@@ -23,7 +23,11 @@ export function TechStackPage() {
               {category}
             </h3>
             <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-3 p-4">
-              {TechStack.filter((tech) => tech.category === category).map(
+              {TechStack.filter((tech) =>
+                Array.isArray(tech.category)
+                  ? tech.category.includes(category)
+                  : tech.category === category
+              ).map(
                 (tech) => (
                   <div
                     key={tech.name}

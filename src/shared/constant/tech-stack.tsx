@@ -20,6 +20,7 @@ import { PlaywrightIcon } from "../ui/icon/brand/playwright";
 import { StorybookIcon } from "../ui/icon/brand/storybook";
 import { TanstackIcon } from "../ui/icon/brand/tanstack";
 import { XStateIcon } from "../ui/icon/brand/xstate";
+import { SupabaseIcon } from "../ui/icon/brand/supabase";
 
 export const TechStackCategory = [
   "Languages",
@@ -28,13 +29,20 @@ export const TechStackCategory = [
   "Styling",
   "Testing",
   "Tools",
+  "Backend",
 ] as const;
 
-export const TechStack: {
+export type TechStackType = {
   name: string;
   icon: React.ReactNode;
-  category: (typeof TechStackCategory)[number];
-}[] = [
+  category:
+    | (typeof TechStackCategory)[number]
+    | (typeof TechStackCategory)[number][];
+};
+
+export type TechStackEnum = (typeof TechStack)[number]["name"];
+
+export const TechStack: TechStackType[] = [
   {
     name: "JavaScript",
     icon: <JavascriptIcon />,
@@ -68,17 +76,17 @@ export const TechStack: {
   {
     name: "Next.js",
     icon: <NextjsIcon />,
-    category: "Frameworks & Libraries",
+    category: ["Frameworks & Libraries", "Backend"],
   },
   {
-    name: "Svelte",
+    name: "SvelteKit",
     icon: <SvelteIcon />,
-    category: "Frameworks & Libraries",
+    category: ["Frameworks & Libraries", "Backend"],
   },
   {
     name: "Express.js",
     icon: <ExpressIcon />,
-    category: "Frameworks & Libraries",
+    category: ["Frameworks & Libraries", "Backend"],
   },
   {
     name: "Web Component",
@@ -118,7 +126,7 @@ export const TechStack: {
   {
     name: "Storybook",
     icon: <StorybookIcon />,
-    category: "Testing",
+    category: ["Tools", "Testing"],
   },
   {
     name: "Playwright",
@@ -135,4 +143,9 @@ export const TechStack: {
     icon: <MongoIcon />,
     category: "Database",
   },
-];
+  {
+    name: "Supabase",
+    icon: <SupabaseIcon width={18} height={18} />,
+    category: ["Database", "Backend"],
+  },
+] as const satisfies TechStackType[];
