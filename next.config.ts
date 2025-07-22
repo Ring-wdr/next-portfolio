@@ -9,12 +9,10 @@ const nextConfig: NextConfig = {
       { hostname: "camo.githubusercontent.com" },
       { hostname: "upload.wikimedia.org" },
       { hostname: "www.nextontop.com" },
-      { hostname: "techstack-generator.vercel.app" },
       { hostname: "avatars.githubusercontent.com" },
-      { hostname: "cdn.discordapp.com" },
-      { hostname: "kit.svelte.dev" },
       { hostname: "postfiles.pstatic.net" },
       { hostname: "lh3.googleusercontent.com" },
+      { hostname: "fastly.picsum.photos" },
     ],
   },
 };

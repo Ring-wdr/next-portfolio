@@ -13,7 +13,7 @@ export function MainPage() {
           <div className="p-0 md:p-4">
             <div className="relative flex min-h-[350px] md:min-h-[480px] flex-col gap-6 md:gap-8 md:rounded-lg items-start justify-end px-10 pb-10 overflow-hidden w-full py-10">
               <Image
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0jtvmiLDAyk9NLnW1f-lS4Dvi4fFMew9yJkP5GIlpgrIqaGvOl728dCzcMwBda6vXEpWZ9eygiin21vsImApXgVrK2fIiN-vWs0GZwJtsaeBSZEspdOZLdECuD9yfjbBPwaozIt2YnSy3h5Gpmbhrtcb5tlRwV9zolMWtswMgUsCwm_aDIMycu6tgqoOhMDyd1fbb9lncWIKEIDKgG6rgwIitNxILvR1eC_mJioFjm6Wigu-dLbVFGPKqk-GT8X-BcdTSzmgfJrU"
+                src="https://fastly.picsum.photos/id/42/3456/2304.jpg?hmac=dhQvd1Qp19zg26MEwYMnfz34eLnGv8meGk_lFNAJR3g"
                 alt="Manjoong profile background"
                 fill
                 priority
