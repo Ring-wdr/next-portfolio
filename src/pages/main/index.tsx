@@ -54,7 +54,8 @@ export function MainPage() {
                 key={project.title}
                 title={project.title}
                 description={project.description}
-                image={project.src}
+                src={project.src}
+                href={project.href}
               />
             ))}
           </div>

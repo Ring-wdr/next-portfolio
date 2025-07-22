@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
+import type { ProjectProps } from "@/shared/constant/project";
 
 export function ProjectItem({
   src,
@@ -8,13 +8,7 @@ export function ProjectItem({
   href,
   techStack,
   description,
-}: {
-  src: string;
-  title: string;
-  href: string;
-  techStack: string[];
-  description?: ReactNode;
-}) {
+}: ProjectProps) {
   return (
     <div className="p-4 @container">
       <div className="flex flex-col items-stretch justify-start rounded-lg @xl:flex-row @xl:items-start">

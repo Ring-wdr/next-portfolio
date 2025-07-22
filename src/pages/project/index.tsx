@@ -1,20 +1,20 @@
 "use client";
 
-import { projectList } from "@/shared/constant/project";
-import { TechStack } from "@/shared/constant/tech-stack";
-import { classNames } from "@/shared/utils/classnames";
 import { useState } from "react";
+import type { TechStackEnum } from "@/shared/constant/tech-stack";
+import { projectList } from "@/shared/constant/project";
+import { classNames } from "@/shared/utils/classnames";
 import { ProjectItem } from "./item";
 
-const frameworks = [
-  "All",
-  ...TechStack.filter((tech) => tech.category === "Frameworks & Libraries").map(
-    (tech) => tech.name
-  ),
-];
+const frameworks = ["All", "Next.js", "SvelteKit", "React"] satisfies Array<
+  TechStackEnum | "All"
+>;
 
 export function ProjectPage() {
-  const [selectedFramework, setSelectedFramework] = useState("All");
+  const [selectedFramework, setSelectedFramework] = useState<
+    TechStackEnum | "All"
+  >("All");
+
   return (
     <div className="px-40 flex flex-1 justify-center py-5">
       <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
@@ -47,16 +47,21 @@ export function ProjectPage() {
             </button>
           ))}
         </div>
-        {projectList.map((project) => (
-          <ProjectItem
-            key={project.title}
-            src={project.src}
-            title={project.title}
-            href={project.href}
-            techStack={project.techStack}
-            description={project.description}
-          />
-        ))}
+        {projectList
+          .filter((project) => {
+            if (selectedFramework === "All") return true;
+            return project.techStack.includes(selectedFramework);
+          })
+          .map((project) => (
+            <ProjectItem
+              key={project.title}
+              src={project.src}
+              title={project.title}
+              href={project.href}
+              techStack={project.techStack}
+              description={project.description}
+            />
+          ))}
       </div>
     </div>
   );
