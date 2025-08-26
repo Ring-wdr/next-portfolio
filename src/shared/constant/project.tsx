@@ -4,6 +4,7 @@ import { TechStackEnum } from "./tech-stack";
 
 import POCAZThumbnail from "@/../public/thumbnail/project/pocaz.png";
 import ChooseMenuThumbnail from "@/../public/thumbnail/project/choose-menu.png";
+import AlltimeCarThumbnail from "@/../public/thumbnail/project/alltime-car.png";
 
 export type ProjectProps = {
   src: string | StaticImageData;
@@ -57,5 +58,17 @@ export const projectList: ProjectProps[] = [
       </>
     ),
     techStack: ["Next.js", "TypeScript", "MongoDB"],
+  },
+  {
+    src: AlltimeCarThumbnail,
+    title: "역대카",
+    href: "https://alltime-car.com/",
+    description: (
+      <>
+        렌트사를 비교하여 가장 저렴한 차량 렌트 비용을 추천하는 서비스입니다.
+        Next.js와 Supabase를 사용하여 프로토타입을 개발했습니다.
+      </>
+    ),
+    techStack: ["Next.js", "Supabase", "Tailwind CSS", "TypeScript"],
   },
 ];

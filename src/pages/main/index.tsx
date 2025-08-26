@@ -49,15 +49,18 @@ export function MainPage() {
         </h2>
         <div className="flex overflow-y-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden">
           <div className="flex items-stretch p-4 gap-3">
-            {projectList.slice(0, 3).map((project) => (
-              <MainProjectItem
-                key={project.title}
-                title={project.title}
-                description={project.description}
-                src={project.src}
-                href={project.href}
-              />
-            ))}
+            {projectList
+              .toReversed()
+              .slice(0, 3)
+              .map((project) => (
+                <MainProjectItem
+                  key={project.title}
+                  title={project.title}
+                  description={project.description}
+                  src={project.src}
+                  href={project.href}
+                />
+              ))}
           </div>
         </div>
         <h2 className="text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
