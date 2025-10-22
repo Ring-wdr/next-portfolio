@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
     minimumCacheTTL: 60,
+    qualities: [75, 90],
     remotePatterns: [
       { hostname: "raw.githubusercontent.com" },
       { hostname: "camo.githubusercontent.com" },

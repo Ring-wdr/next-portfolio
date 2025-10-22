@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/shared/ui/header";
 import { classNames } from "@/shared/utils/classnames";
-import { ThemeProvider } from "./_provider/theme";
+import { ThemeProvider } from "@/app/_provider/theme";
 import { Footer } from "@/shared/ui/footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { env } from "@/env";
