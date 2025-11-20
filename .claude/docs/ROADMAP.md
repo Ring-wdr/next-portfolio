@@ -10,15 +10,19 @@
 ## 📅 로드맵 개요
 
 ### Phase 1: 핵심 콘텐츠 강화 (1-2주)
+
 **목표**: 프로젝트와 경력을 효과적으로 전달
 
 ### Phase 2: 사용자 경험 개선 (2주)
+
 **목표**: 현대적이고 인터랙티브한 UX 구현
 
 ### Phase 3: 콘텐츠 확장 (2-3주)
+
 **목표**: 블로그 및 추가 콘텐츠 생성
 
 ### Phase 4: 최적화 및 완성 (1주)
+
 **목표**: 성능, SEO, 접근성 최적화
 
 ---
@@ -33,6 +37,7 @@
 **예상 시간**: 4-6시간
 
 **체크리스트**:
+
 - [ ] `/project/[slug]` 동적 라우트 생성
 - [ ] 프로젝트 데이터 구조 확장 (slug, 상세 설명, 스크린샷 등)
 - [ ] 프로젝트 상세 페이지 레이아웃 디자인
@@ -44,6 +49,7 @@
 - [ ] 메타데이터 설정 (SEO)
 
 **산출물**:
+
 - `src/app/project/[slug]/page.tsx`
 - `src/pages-layer/project/[slug]/index.tsx`
 - `src/shared/constant/project-detail.tsx`
@@ -58,6 +64,7 @@
 **예상 시간**: 3-4시간
 
 **체크리스트**:
+
 - [ ] 경력 데이터 구조 설계
 - [ ] Timeline UI 컴포넌트 구현
 - [ ] About 페이지에 경력 섹션 추가
@@ -68,6 +75,7 @@
 - [ ] 반응형 타임라인 디자인
 
 **산출물**:
+
 - `src/shared/constant/career.tsx`
 - `src/shared/ui/timeline.tsx`
 - `src/pages-layer/about/index.tsx` (수정)
@@ -81,6 +89,7 @@
 **예상 시간**: 4-5시간
 
 **체크리스트**:
+
 - [ ] 기술 스택 데이터에 숙련도 추가
 - [ ] 숙련도 레벨 시스템 설계 (Beginner/Intermediate/Advanced)
 - [ ] 프로그레스 바 또는 차트 컴포넌트 구현
@@ -91,6 +100,7 @@
 - [ ] 애니메이션 효과 추가
 
 **산출물**:
+
 - `src/shared/constant/tech-stack.tsx` (수정)
 - `src/shared/ui/skill-bar.tsx`
 - `src/shared/ui/skill-chart.tsx`
@@ -120,7 +130,8 @@
 **예상 시간**: 5-6시간
 
 **체크리스트**:
-- [ ] Framer Motion 설치 및 설정
+
+- [ ] Motion 설치 및 설정
 - [ ] 페이지 전환 애니메이션 구현
 - [ ] 스크롤 기반 애니메이션 추가
 - [ ] 카드 호버 효과 개선
@@ -130,6 +141,7 @@
 - [ ] 애니메이션 성능 최적화
 
 **산출물**:
+
 - `src/app/template.tsx` (페이지 전환)
 - `src/shared/ui/animated-section.tsx`
 - `src/shared/ui/loading-skeleton.tsx`
@@ -143,6 +155,7 @@
 **예상 시간**: 3-4시간
 
 **체크리스트**:
+
 - [ ] 필터 UI 컴포넌트 구현
 - [ ] 기술 스택별 다중 필터
 - [ ] 검색 기능 구현
@@ -153,6 +166,7 @@
 - [ ] 모바일 필터 UI 최적화
 
 **산출물**:
+
 - `src/shared/ui/project-filter.tsx`
 - `src/pages-layer/project/index.tsx` (수정)
 
@@ -179,6 +193,7 @@
 **예상 시간**: 8-10시간
 
 **체크리스트**:
+
 - [ ] MDX 설정 및 구성
 - [ ] `/blog` 라우트 생성
 - [ ] 블로그 목록 페이지 구현
@@ -192,6 +207,7 @@
 - [ ] RSS 피드 생성 (선택)
 
 **산출물**:
+
 - `src/app/blog/page.tsx`
 - `src/app/blog/[slug]/page.tsx`
 - `src/lib/mdx.ts`
@@ -201,24 +217,53 @@
 
 ---
 
-### 3.2 다국어 지원 (i18n)
+### 3.2 다국어 지원 (i18n) ✅ **완료**
 
 **예상 시간**: 6-8시간
+**실제 소요 시간**: ~6시간
+**완료일**: 2025-11-21
 
 **체크리스트**:
-- [ ] next-intl 설치 및 설정
-- [ ] 언어 전환 토글 구현
-- [ ] 번역 파일 구조 생성
-- [ ] 모든 정적 텍스트 번역 (한국어/영어)
-- [ ] 프로젝트 설명 다국어 버전
-- [ ] 블로그 포스트 다국어 지원
-- [ ] 날짜 포맷 로케일 적용
-- [ ] URL 기반 로케일 라우팅
+
+- [x] next-intl 설치 및 설정
+- [x] 언어 전환 토글 구현 (Header에 KO/EN 버튼)
+- [x] 번역 파일 구조 생성 (`messages/ko.json`, `messages/en.json`)
+- [x] 모든 정적 텍스트 번역 (한국어/영어)
+  - [x] Header 네비게이션
+  - [x] Footer
+  - [x] Home 페이지
+  - [x] About 페이지
+  - [x] Projects 페이지
+  - [x] Tech Stack 페이지 (모든 카테고리)
+  - [x] Contact 페이지
+- [x] URL 기반 로케일 라우팅 (`/`, `/en`)
+- [x] Next.js 16 proxy 파일로 마이그레이션
+- [ ] 프로젝트 설명 다국어 버전 (추후 프로젝트 상세 페이지 구현 시)
+- [ ] 블로그 포스트 다국어 지원 (추후 블로그 시스템 구현 시)
+- [ ] 날짜 포맷 로케일 적용 (추후 필요시)
 
 **산출물**:
-- `src/i18n/` (번역 파일)
-- `src/middleware.ts` (로케일 라우팅)
-- 모든 컴포넌트 (다국어 적용)
+
+- ✅ `src/i18n/request.ts` - i18n 설정
+- ✅ `src/i18n/routing.ts` - 라우팅 설정
+- ✅ `messages/ko.json` - 한국어 번역 파일
+- ✅ `messages/en.json` - 영어 번역 파일
+- ✅ `src/proxy.ts` - Next.js 16 proxy (middleware 대체)
+- ✅ `src/shared/ui/language-toggle.tsx` - 언어 전환 컴포넌트
+- ✅ `src/app/[locale]/layout.tsx` - locale별 레이아웃
+- ✅ 모든 페이지 컴포넌트 다국어 적용
+
+**주요 구현 내용**:
+
+1. **next-intl 4.5.5** 통합
+2. **기본 locale**: 한국어 (ko), 지원 locale: 영어 (en)
+3. **URL 구조**:
+   - `/` → 한국어 (default)
+   - `/about`, `/project` 등 → 한국어
+   - `/en` → 영어
+   - `/en/about`, `/en/project` 등 → 영어
+4. **번역 범위**: 7개 카테고리 포함 모든 UI 텍스트
+   - Languages, Frameworks & Libraries, Database, Styling, Testing, Tools, Backend
 
 **참고 문서**: [다국어 지원 가이드](./features/I18N.md)
 
@@ -243,6 +288,7 @@
 **예상 시간**: 4-5시간
 
 **체크리스트**:
+
 - [ ] Open Graph 메타태그 최적화
 - [ ] sitemap.xml 생성
 - [ ] robots.txt 설정
@@ -254,6 +300,7 @@
 - [ ] Lighthouse 점수 95+ 달성
 
 **산출물**:
+
 - `next-sitemap.config.js`
 - `public/robots.txt`
 - 최적화된 이미지 파일들
@@ -265,6 +312,7 @@
 **예상 시간**: 2-3시간
 
 **체크리스트**:
+
 - [ ] Header/Footer에 소셜 링크 추가
 - [ ] 프로젝트 공유 버튼 구현
 - [ ] 블로그 공유 버튼 구현
@@ -272,6 +320,7 @@
 - [ ] Twitter/LinkedIn 메타태그
 
 **산출물**:
+
 - `src/shared/ui/social-links.tsx`
 - `src/shared/ui/share-button.tsx`
 
@@ -303,33 +352,41 @@
 ### 추천 작업 순서
 
 **세션 1** (4-6시간):
+
 1. 프로젝트 상세 페이지 구현
 2. README 업데이트
 
 **세션 2** (3-4시간):
+
 1. 이력서/경력 타임라인 구현
 2. About 페이지 개선
 
 **세션 3** (4-5시간):
+
 1. Skills 시각화 강화
 2. Tech Stack 페이지 전면 개선
 
 **세션 4** (5-6시간):
+
 1. 애니메이션 & 인터랙션 추가
 2. 전체 페이지 UX 개선
 
 **세션 5** (3-4시간):
+
 1. 프로젝트 필터링 & 검색 구현
 
 **세션 6-8** (8-10시간):
+
 1. 블로그 시스템 구축
 2. 첫 블로그 포스트 작성
 
 **세션 9-10** (6-8시간):
+
 1. 다국어 지원 구현
 2. 모든 콘텐츠 번역
 
 **세션 11** (4-5시간):
+
 1. SEO 최적화
 2. 성능 최적화
 3. 최종 점검

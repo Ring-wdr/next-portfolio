@@ -246,7 +246,7 @@ Framer Motion으로 마이크로 인터랙션 추가
 
 **기술 스택**:
 
-- Framer Motion
+- Motion
 - Intersection Observer API
 - CSS transforms & transitions
 

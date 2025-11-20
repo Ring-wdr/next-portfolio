@@ -1,0 +1,60 @@
+{
+  "Header": {
+    "portfolio": "Portfolio",
+    "projects": "Projects",
+    "techStack": "Tech Stack",
+    "about": "About Me",
+    "contact": "Contact"
+  },
+  "Footer": {
+    "allRightsReserved": "All rights reserved.",
+    "builtWith": "Built with Next.js and Tailwind CSS"
+  },
+  "HomePage": {
+    "greeting": "Hi, I'm Manjoong, a Front-End Developer",
+    "description": "I build beautiful and functional web experiences using modern technologies. Explore my portfolio to see my work and learn more about my skills.",
+    "viewProjects": "View Projects",
+    "featuredProjects": "Featured Projects",
+    "techStack": "Tech Stack"
+  },
+  "ProjectsPage": {
+    "title": "Projects",
+    "description": "Explore a selection of my recent projects, showcasing my skills in front-end development. Each project will include a brief description, screenshots, and links to live demos or repositories.",
+    "all": "All"
+  },
+  "TechStackPage": {
+    "title": "Tech Stack",
+    "description": "Technologies and tools I use",
+    "Languages": "Languages",
+    "Frameworks & Libraries": "Frameworks & Libraries",
+    "Database": "Database",
+    "Styling": "Styling",
+    "Testing": "Testing",
+    "Tools": "Tools",
+    "Backend": "Backend"
+  },
+  "AboutPage": {
+    "title": "About Me",
+    "greeting": "Hi, I'm Manjoong",
+    "role": "Front-End Developer",
+    "intro": "I'm a passionate front-end developer with a focus on creating intuitive and engaging user experiences. My goal is to build products that are not only visually appealing but also highly functional and accessible.",
+    "aboutMeTitle": "About Me",
+    "aboutMeDescription": "I'm a front-end developer with 3+ years of experience in building web applications using modern technologies like React. I have a strong understanding of HTML, CSS, and JavaScript, and I'm always eager to learn new frameworks and libraries. My development philosophy centers around clean, maintainable code and a user-first approach. I believe that great design is not just about aesthetics but also about usability and accessibility. I strive to create products that are both beautiful and easy to use for everyone.",
+    "strengthsTitle": "My Strengths",
+    "cleanCode": "Clean Code",
+    "uiuxDesign": "UI/UX Design",
+    "accessibility": "Accessibility",
+    "performance": "Performance Optimization"
+  },
+  "ContactPage": {
+    "title": "Contact",
+    "description": "I'm always open to new opportunities and collaborations. Feel free to reach out to me via email or connect with me on LinkedIn.",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send",
+    "sending": "Sending...",
+    "success": "Message sent successfully!",
+    "error": "Failed to send message. Please try again."
+  }
+}
