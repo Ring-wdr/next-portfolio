@@ -88,20 +88,49 @@
   navigation: auto;
 }
 
-/* Completely hide old root during transition to prevent overlap */
-::view-transition-old(root) {
-  animation-name: hide-instantly;
-  animation-duration: 0.001s;
-  animation-fill-mode: forwards;
+/* Route-level fade/blur */
+::view-transition-old(.vt-route),
+::view-transition-old(route),
+::view-transition-old(vt-route) {
+  animation: route-fade-out 0.35s ease-out forwards;
+  filter: blur(12px) saturate(0.75);
 }
 
-::view-transition-new(root) {
-  animation-name: fade-in, slide-in;
-  animation-duration: 0.4s;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+::view-transition-new(.vt-route),
+::view-transition-new(route),
+::view-transition-new(vt-route) {
+  animation: route-fade-in 0.45s ease-out forwards;
 }
 
+/* Modal transitions */
+::view-transition-old(.vt-modal),
+::view-transition-old(vt-modal),
+::view-transition-old(project-modal),
+::view-transition-old(.vt-modal-content),
+::view-transition-old(vt-modal-content),
+::view-transition-old(project-modal-content) {
+  animation: modal-fade-out 0.2s ease-out forwards;
+  filter: blur(12px) saturate(0.8);
+}
+
+::view-transition-new(.vt-modal),
+::view-transition-new(vt-modal),
+::view-transition-new(project-modal) {
+  animation: modal-fade-in 0.35s ease-out forwards;
+}
+
+::view-transition-new(.vt-modal-content),
+::view-transition-new(vt-modal-content),
+::view-transition-new(project-modal-content) {
+  animation: modal-pop-in 0.35s ease-out forwards;
+}
+
+/* Project media/title transitions */
+::view-transition-old(.vt-project-image),
+::view-transition-old(vt-project-image),
 ::view-transition-old(project-image),
+::view-transition-new(.vt-project-image),
+::view-transition-new(vt-project-image),
 ::view-transition-new(project-image) {
   height: 100%;
   overflow: clip;
@@ -111,30 +140,41 @@
   z-index: 1;
 }
 
+::view-transition-new(.vt-project-image),
+::view-transition-new(vt-project-image),
 ::view-transition-new(project-image) {
+  animation-name: media-zoom-in;
   z-index: 2;
 }
 
+::view-transition-old(.vt-project-image),
+::view-transition-old(vt-project-image),
+::view-transition-old(project-image) {
+  animation-name: media-shrink-out;
+}
+
+::view-transition-old(.vt-project-title),
+::view-transition-old(vt-project-title),
 ::view-transition-old(project-title),
+::view-transition-new(.vt-project-title),
+::view-transition-new(vt-project-title),
 ::view-transition-new(project-title) {
-  animation-duration: 0.5s;
+  animation-duration: 0.45s;
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1;
 }
 
+::view-transition-new(.vt-project-title),
+::view-transition-new(vt-project-title),
 ::view-transition-new(project-title) {
+  animation-name: fade-in;
   z-index: 2;
 }
 
-@keyframes hide-instantly {
-  from {
-    opacity: 0;
-    display: none;
-  }
-  to {
-    opacity: 0;
-    display: none;
-  }
+::view-transition-old(.vt-project-title),
+::view-transition-old(vt-project-title),
+::view-transition-old(project-title) {
+  animation-name: fade-out;
 }
 
 @keyframes fade-in {
@@ -170,6 +210,79 @@
   }
   to {
     transform: translateY(-8px) scale(0.98);
+  }
+}
+
+@keyframes modal-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes modal-fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+}
+
+@keyframes modal-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes route-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes route-fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes media-zoom-in {
+  from {
+    transform: scale(0.98);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes media-shrink-out {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.98);
   }
 }
 

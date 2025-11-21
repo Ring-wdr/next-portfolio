@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { ImageGallery } from "@/shared/ui/image-gallery";
 import { useTranslations } from "next-intl";
+import { ViewTransition } from "@/shared/ui/view-transition";
 
 type ProjectDetailPageProps = {
   project: ProjectDetail;
@@ -19,12 +20,18 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
         {/* Header Section */}
         <div className="flex flex-col gap-6 pb-8 border-b border-[#3b4754]">
           <div className="flex flex-col gap-3">
-            <h1
-              className="text-4xl font-bold tracking-tight"
-              style={{ viewTransitionName: `project-title-${project.slug}` }}
+            <ViewTransition
+              name={`project-detail-title-${project.slug}`}
+              default="vt-project-title"
+              enter="vt-project-title"
+              exit="vt-project-title"
+              share="vt-project-title"
+              update="vt-project-title"
             >
-              {project.title}
-            </h1>
+              <h1 className="text-4xl font-bold tracking-tight">
+                {project.title}
+              </h1>
+            </ViewTransition>
             <p className="text-xl text-[#9cabba]">{project.summary}</p>
           </div>
 
@@ -81,18 +88,24 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 
         {/* Hero Image */}
         <div className="py-8">
-          <div
-            className="relative w-full aspect-video rounded-xl overflow-hidden"
-            style={{ viewTransitionName: `project-image-${project.slug}` }}
+          <ViewTransition
+            name={`project-detail-image-${project.slug}`}
+            default="vt-project-image"
+            enter="vt-project-image"
+            exit="vt-project-image"
+            share="vt-project-image"
+            update="vt-project-image"
           >
-            <Image
-              src={project.thumbnail}
-              alt={project.title}
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
+            <div className="relative w-full aspect-video rounded-xl overflow-hidden">
+              <Image
+                src={project.thumbnail}
+                alt={project.title}
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          </ViewTransition>
         </div>
 
         {/* Overview Section */}

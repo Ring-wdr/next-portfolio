@@ -11,6 +11,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
+import { RouteTransition } from "@/shared/ui/route-transition";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -95,12 +96,14 @@ export default async function LocaleLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="flex h-full grow flex-col">
-              <Header />
-              {children}
-              {modal}
-              <Footer />
-            </div>
+            <RouteTransition>
+              <div className="flex h-full grow flex-col">
+                <Header />
+                {children}
+                {modal}
+                <Footer />
+              </div>
+            </RouteTransition>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

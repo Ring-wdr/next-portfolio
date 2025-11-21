@@ -2,28 +2,51 @@
 
 import { Link as I18nLink } from "@/i18n/routing";
 import { useRouter } from "@/i18n/routing";
-import type { ComponentProps } from "react";
+import { startTransition, useCallback } from "react";
+import type { ComponentProps, MouseEvent } from "react";
 
 type TransitionLinkProps = ComponentProps<typeof I18nLink>;
 
-export function TransitionLink({ href, children, ...props }: TransitionLinkProps) {
+export function TransitionLink({
+  href,
+  children,
+  onClick,
+  ...props
+}: TransitionLinkProps) {
   const router = useRouter();
+  const handleClick = useCallback(
+    (e: MouseEvent<HTMLAnchorElement>) => {
+      onClick?.(e);
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // Check if View Transition API is supported
-    if (typeof document !== "undefined" && "startViewTransition" in document) {
+      if (
+        e.defaultPrevented ||
+        e.button !== 0 ||
+        e.metaKey ||
+        e.altKey ||
+        e.ctrlKey ||
+        e.shiftKey
+      ) {
+        return;
+      }
       e.preventDefault();
+      const navigate = () => {
+        startTransition(() => {
+          const hrefString = href.toString();
+          router.push(hrefString);
+        });
+      };
 
-      // Convert href to string path
-      const path = typeof href === 'string' ? href : href.pathname || '/';
-
-      // Start view transition
-      (document as any).startViewTransition(() => {
-        router.push(path);
-      });
-    }
-    // If not supported, let the default link behavior happen
-  };
+      if (
+        typeof document !== "undefined" &&
+        "startViewTransition" in document
+      ) {
+        document.startViewTransition(navigate);
+      } else {
+        navigate();
+      }
+    },
+    [href, onClick, router]
+  );
 
   return (
     <I18nLink href={href} onClick={handleClick} {...props}>
