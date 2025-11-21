@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
+import { ChevronLeftIcon, ChevronRightIcon, XIcon } from "lucide-react";
 
 type GalleryImage = {
   src: string | StaticImageData;
@@ -90,7 +91,6 @@ export function ImageGallery({ images }: ImageGalleryProps) {
         ))}
       </div>
 
-      {/* Modal */}
       {selectedIndex !== null && (
         <div
           className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4"
@@ -102,10 +102,9 @@ export function ImageGallery({ images }: ImageGalleryProps) {
             className="absolute top-4 right-4 text-white text-4xl font-light hover:text-primary transition-colors z-10"
             aria-label="Close"
           >
-            ×
+            <XIcon />
           </button>
 
-          {/* Navigation Buttons */}
           {images.length > 1 && (
             <>
               <button
@@ -116,7 +115,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
                 className="absolute left-4 text-white text-4xl font-light hover:text-primary transition-colors z-10"
                 aria-label="Previous"
               >
-                ‹
+                <ChevronLeftIcon />
               </button>
               <button
                 onClick={(e) => {
@@ -126,12 +125,11 @@ export function ImageGallery({ images }: ImageGalleryProps) {
                 className="absolute right-4 text-white text-4xl font-light hover:text-primary transition-colors z-10"
                 aria-label="Next"
               >
-                ›
+                <ChevronRightIcon />
               </button>
             </>
           )}
 
-          {/* Image Container */}
           <div
             className="relative w-full h-full max-w-6xl max-h-[90vh] flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
@@ -146,14 +144,12 @@ export function ImageGallery({ images }: ImageGalleryProps) {
               />
             </div>
 
-            {/* Caption */}
             {images[selectedIndex].caption && (
               <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 p-4 text-center text-white">
                 {images[selectedIndex].caption}
               </div>
             )}
 
-            {/* Counter */}
             {images.length > 1 && (
               <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 px-4 py-2 rounded-full text-white text-sm">
                 {selectedIndex + 1} / {images.length}

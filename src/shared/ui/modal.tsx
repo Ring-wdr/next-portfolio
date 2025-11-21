@@ -1,12 +1,7 @@
 "use client";
 
 import { useRouter } from "@/i18n/routing";
-import {
-  startTransition,
-  useLayoutEffect,
-  useRef,
-  type ElementRef,
-} from "react";
+import { ComponentRef, startTransition, useLayoutEffect, useRef } from "react";
 import { ViewTransition } from "react";
 
 type ModalProps = {
@@ -15,7 +10,7 @@ type ModalProps = {
 
 export function Modal({ children }: ModalProps) {
   const router = useRouter();
-  const dialogRef = useRef<ElementRef<"dialog">>(null);
+  const dialogRef = useRef<ComponentRef<"dialog">>(null);
 
   useLayoutEffect(() => {
     const dialog = dialogRef.current;
@@ -26,17 +21,9 @@ export function Modal({ children }: ModalProps) {
   }, []);
 
   function onDismiss() {
-    const dismiss = () => {
-      startTransition(() => {
-        router.back();
-      });
-    };
-
-    if (typeof document !== "undefined" && "startViewTransition" in document) {
-      document.startViewTransition(dismiss);
-    } else {
-      dismiss();
-    }
+    startTransition(() => {
+      router.back();
+    });
   }
 
   return (
