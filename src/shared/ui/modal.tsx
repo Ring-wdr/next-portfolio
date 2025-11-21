@@ -1,8 +1,13 @@
 "use client";
 
 import { useRouter } from "@/i18n/routing";
-import { startTransition, useLayoutEffect, useRef, type ElementRef } from "react";
-import { ViewTransition } from "@/shared/ui/view-transition";
+import {
+  startTransition,
+  useLayoutEffect,
+  useRef,
+  type ElementRef,
+} from "react";
+import { ViewTransition } from "react";
 
 type ModalProps = {
   children: React.ReactNode;
@@ -28,7 +33,7 @@ export function Modal({ children }: ModalProps) {
     };
 
     if (typeof document !== "undefined" && "startViewTransition" in document) {
-      (document as any).startViewTransition(dismiss);
+      document.startViewTransition(dismiss);
     } else {
       dismiss();
     }
@@ -57,10 +62,9 @@ export function Modal({ children }: ModalProps) {
           update="vt-modal-content"
         >
           <div className="relative h-full w-full flex items-start justify-center overflow-y-auto py-8">
-            {/* Close button */}
             <button
               onClick={onDismiss}
-              className="fixed top-4 right-4 z-[60] p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
+              className="fixed top-4 right-4 z-60 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
               aria-label="Close modal"
             >
               <svg
@@ -79,7 +83,6 @@ export function Modal({ children }: ModalProps) {
               </svg>
             </button>
 
-            {/* Modal content */}
             <div className="relative w-full max-w-[1200px] bg-background rounded-lg shadow-xl mx-4">
               {children}
             </div>

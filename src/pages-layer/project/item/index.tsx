@@ -1,10 +1,10 @@
 "use client";
 
+import { ViewTransition } from "react";
 import Image from "next/image";
 import { TransitionLink } from "@/shared/ui/transition-link";
 import type { ProjectProps } from "@/shared/constant/project";
 import { useTranslations } from "next-intl";
-import { ViewTransition } from "@/shared/ui/view-transition";
 
 export function ProjectItem({
   src,
@@ -20,7 +20,6 @@ export function ProjectItem({
     <div className="p-4 @container">
       <div className="flex flex-col items-stretch justify-start rounded-lg @xl:flex-row @xl:items-start">
         <ViewTransition
-          name={`project-card-image-${slug}`}
           default="vt-project-image"
           enter="vt-project-image"
           exit="vt-project-image"
@@ -64,7 +63,6 @@ export function ProjectItem({
               </div>
             </div>
           </div>
-          {/* External Link Button */}
           {href && (
             <div className="mt-3">
               <a

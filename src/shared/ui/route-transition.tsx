@@ -1,6 +1,6 @@
 "use client";
 
-import { ViewTransition } from "@/shared/ui/view-transition";
+import { ViewTransition } from "react";
 
 type RouteTransitionProps = {
   children: React.ReactNode;

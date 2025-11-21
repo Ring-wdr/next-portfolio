@@ -1,11 +1,11 @@
 "use client";
 
-import { ProjectDetail } from "@/shared/constant/project-detail";
+import { ViewTransition } from "react";
 import Image from "next/image";
-import { Link } from "@/i18n/routing";
-import { ImageGallery } from "@/shared/ui/image-gallery";
 import { useTranslations } from "next-intl";
-import { ViewTransition } from "@/shared/ui/view-transition";
+import { Link } from "@/i18n/routing";
+import { ProjectDetail } from "@/shared/constant/project-detail";
+import { ImageGallery } from "@/shared/ui/image-gallery";
 
 type ProjectDetailPageProps = {
   project: ProjectDetail;
@@ -160,7 +160,9 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 
         {/* Challenges & Solutions Section */}
         <section className="py-8 border-b border-[#3b4754]">
-          <h2 className="text-2xl font-bold mb-6">{t("challengesAndSolutions")}</h2>
+          <h2 className="text-2xl font-bold mb-6">
+            {t("challengesAndSolutions")}
+          </h2>
           <div className="flex flex-col gap-8">
             {project.tech.challenges.map((challenge, index) => (
               <div key={index} className="flex flex-col gap-4">
@@ -169,9 +171,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
                     <span className="text-sm font-bold text-primary">
                       {t("challenge")} {index + 1}
                     </span>
-                    <h3 className="text-lg font-semibold">
-                      {challenge.title}
-                    </h3>
+                    <h3 className="text-lg font-semibold">{challenge.title}</h3>
                   </div>
                   <p className="text-base leading-relaxed text-[#9cabba]">
                     {challenge.description}
