@@ -24,14 +24,14 @@ export function Modal({ children }: ModalProps) {
   return (
     <dialog
       ref={dialogRef}
-      className="fixed inset-0 z-50 w-screen h-screen bg-black/80 backdrop-blur-sm"
+      className="fixed inset-0 z-50 w-screen h-screen overflow-hidden"
       onClose={onDismiss}
     >
       <div className="relative h-full w-full flex items-start justify-center overflow-y-auto py-8">
         {/* Close button */}
         <button
           onClick={onDismiss}
-          className="fixed top-4 right-4 z-50 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
+          className="fixed top-4 right-4 z-[60] p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
           aria-label="Close modal"
         >
           <svg

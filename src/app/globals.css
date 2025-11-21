@@ -177,12 +177,13 @@
 dialog {
   border: none;
   padding: 0;
-  background: transparent;
-  overflow: visible;
+  max-width: 100vw;
+  max-height: 100vh;
 }
 
 dialog::backdrop {
-  display: none;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
 }
 
 /* Hide content behind modal during view transition */
