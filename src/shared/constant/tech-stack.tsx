@@ -15,6 +15,7 @@ import {
   MysqlIcon,
   MongoIcon,
   ExpressIcon,
+  PrismaIcon,
 } from "../ui/icon/brand";
 import { PlaywrightIcon } from "../ui/icon/brand/playwright";
 import { StorybookIcon } from "../ui/icon/brand/storybook";
@@ -144,6 +145,11 @@ export const TechStack = [
   {
     name: "Supabase",
     icon: <SupabaseIcon width={18} height={18} />,
+    category: ["Database", "Backend"],
+  },
+  {
+    name: "Prisma",
+    icon: <PrismaIcon width={18} height={18} />,
     category: ["Database", "Backend"],
   },
 ] as const satisfies TechStackType[];

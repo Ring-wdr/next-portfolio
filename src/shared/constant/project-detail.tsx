@@ -6,53 +6,75 @@ import ChooseMenuThumbnail from "@/../public/thumbnail/project/choose-menu.png";
 import AlltimeCarThumbnail from "@/../public/thumbnail/project/alltime-car.png";
 
 export type ProjectDetail = {
-  slug: string; // URL 경로용
+  /** URL 경로용 */
+  slug: string;
+  /** 프로젝트 제목 */
   title: string;
+  /** 프로젝트 썸네일 */
   thumbnail: string | StaticImageData;
-  summary: string; // 한 줄 요약
-  period: string; // "2023.03 - 2023.06"
-  team: string; // "4인 팀 프로젝트"
-  role: string; // "프론트엔드 개발"
+  /** 프로젝트 한 줄 요약 */
+  summary: string;
+  /** 프로젝트 기간 */
+  period: string;
+  /** 프로젝트 팀 규모 */
+  team: string;
+  /** 프로젝트 역할 */
+  role: string;
 
-  // 링크
+  /** 프로젝트 링크 */
   links: {
+    /** 프로젝트 GitHub 링크 */
     github?: string;
+    /** 프로젝트 Demo 링크 */
     demo?: string;
+    /** 프로젝트 기타 링크 */
     etc?: { label: string; url: string }[];
   };
 
-  // 메인 콘텐츠
+  /** 프로젝트 메인 콘텐츠 */
   overview: {
-    background: string; // 프로젝트 배경
-    goal: string; // 목표
-    features: string[]; // 주요 기능 목록
+    /** 프로젝트 배경 */
+    background: string;
+    /** 프로젝트 목표 */
+    goal: string;
+    /** 프로젝트 주요 기능 목록 */
+    features: string[];
   };
 
-  // 기술적 내용
+  /** 기술적 내용 */
   tech: {
-    stack: TechStackEnum[]; // 기술 스택
-    challenges: { title: string; description: string }[]; // 챌린지
-    solutions: { title: string; description: string }[]; // 해결책
+    /** 프로젝트 기술 스택 */
+    stack: TechStackEnum[];
+    /** 프로젝트 챌린지 */
+    challenges: { title: string; description: string }[];
+    /** 프로젝트 해결책 */
+    solutions: { title: string; description: string }[];
   };
 
-  // 성과
+  /** 성과 */
   achievements: {
-    metrics?: { label: string; value: string }[]; // "사용자 수", "1000+"
-    feedback?: string[]; // 피드백 목록
-    improvements?: string[]; // 개선사항
+    /** 성과 메트릭 */
+    metrics?: { label: string; value: string }[];
+    /** 성과 피드백 목록 */
+    feedback?: string[];
+    /** 성과 개선사항 */
+    improvements?: string[];
   };
 
-  // 갤러리
+  /** 프로젝트 갤러리 */
   gallery: {
     src: string | StaticImageData;
     alt: string;
     caption?: string;
   }[];
 
-  // 메타데이터
+  /** 프로젝트 메타데이터 */
   metadata: {
-    publishedAt: string; // ISO 8601
+    /** 프로젝트 발행일 */
+    publishedAt: string;
+    /** 프로젝트 업데이트일 */
     updatedAt?: string;
+    /** 프로젝트 태그 */
     tags: string[];
   };
 };
@@ -108,26 +130,21 @@ export const projectDetailList: ProjectDetail[] = [
         {
           title: "이미지 Lazy Loading 및 최적화",
           description:
-            "Intersection Observer API를 활용한 lazy loading을 구현하고, 썸네일 이미지를 WebP 포맷으로 변환하여 용량을 약 60% 절감했습니다. 또한 이미지 CDN을 도입하여 로딩 속도를 개선했습니다.",
+            "Intersection Observer API를 활용한 lazy loading을 구현하였습니다.",
         },
         {
           title: "Socket.io를 활용한 실시간 통신",
           description:
             "Socket.io 라이브러리를 도입하여 실시간 채팅 기능을 구현했습니다. 채팅방 입장/퇴장, 메시지 전송/수신, 읽음 표시 등의 기능을 안정적으로 처리할 수 있었습니다.",
         },
-        {
-          title: "Context API를 활용한 전역 상태 관리",
-          description:
-            "필터링 상태를 Context API로 관리하여 컴포넌트 간 props drilling을 방지하고, 복잡한 필터 조건도 효율적으로 처리할 수 있었습니다.",
-        },
       ],
     },
 
     achievements: {
       metrics: [
-        { label: "개발 기간", value: "6개월" },
+        { label: "개발 기간", value: "2개월" },
         { label: "팀 규모", value: "4명" },
-        { label: "등록된 카드", value: "500+" },
+        { label: "등록된 카드", value: "100+" },
       ],
       feedback: [
         "포토카드 전문 플랫폼이어서 원하는 카드를 쉽게 찾을 수 있었습니다.",
@@ -223,7 +240,7 @@ export const projectDetailList: ProjectDetail[] = [
     achievements: {
       metrics: [
         { label: "개발 기간", value: "2개월" },
-        { label: "팀 규모", value: "2명" },
+        { label: "팀 규모", value: "3명" },
         { label: "페이지 수", value: "15+" },
       ],
       feedback: [
@@ -233,7 +250,6 @@ export const projectDetailList: ProjectDetail[] = [
       ],
       improvements: [
         "관리자 페이지 도입으로 콘텐츠 업데이트 시간 80% 단축",
-        "반응형 디자인으로 모바일 사용자 비율 40% 증가",
         "상담 예약 시스템으로 고객 문의 처리 효율성 50% 향상",
       ],
     },
@@ -338,12 +354,7 @@ export const projectDetailList: ProjectDetail[] = [
 
     metadata: {
       publishedAt: "2024-03-01T00:00:00Z",
-      tags: [
-        "Next.js",
-        "MongoDB",
-        "Web Scraping",
-        "Recommendation System",
-      ],
+      tags: ["Next.js", "MongoDB", "Web Scraping", "Recommendation System"],
     },
   },
   {
@@ -374,7 +385,7 @@ export const projectDetailList: ProjectDetail[] = [
     },
 
     tech: {
-      stack: ["Next.js", "Supabase", "Tailwind CSS", "TypeScript"],
+      stack: ["Next.js", "Supabase", "Prisma", "Tailwind CSS", "TypeScript"],
       challenges: [
         {
           title: "실시간 가격 데이터 수집",
@@ -394,11 +405,6 @@ export const projectDetailList: ProjectDetail[] = [
       ],
       solutions: [
         {
-          title: "스케줄러를 활용한 데이터 수집",
-          description:
-            "Next.js API Routes와 Vercel Cron Jobs를 활용하여 주기적으로 렌트카 가격 정보를 수집하고 Supabase에 저장하는 시스템을 구축했습니다.",
-        },
-        {
           title: "정규화된 가격 비교 알고리즘",
           description:
             "차량 등급, 보험 옵션 등의 조건을 표준화하여 공정한 비교가 가능하도록 했습니다. 가격뿐만 아니라 추가 서비스, 평점 등을 종합적으로 고려한 점수 시스템을 도입했습니다.",
@@ -406,7 +412,7 @@ export const projectDetailList: ProjectDetail[] = [
         {
           title: "Supabase 인덱싱 및 쿼리 최적화",
           description:
-            "자주 사용되는 필터 조건(날짜, 지역, 차량 종류)에 대해 복합 인덱스를 생성하여 조회 성능을 개선했습니다. Supabase의 RPC 함수를 활용하여 복잡한 쿼리를 효율적으로 처리했습니다.",
+            "자주 사용되는 필터 조건(날짜, 지역, 차량 종류)에 대해 복합 인덱스를 생성하여 조회 성능을 개선했습니다. Supabase와 Prisma를 활용하여 복잡한 쿼리를 효율적으로 처리했습니다.",
         },
       ],
     },
