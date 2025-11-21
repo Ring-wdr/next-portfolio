@@ -60,6 +60,7 @@ export function MainPage() {
                   description={project.description}
                   src={project.src}
                   href={project.href}
+                  slug={project.slug}
                 />
               ))}
           </div>

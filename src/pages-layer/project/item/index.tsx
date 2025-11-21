@@ -1,22 +1,27 @@
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
+import { TransitionLink } from "@/shared/ui/transition-link";
 import type { ProjectProps } from "@/shared/constant/project";
+import { useTranslations } from "next-intl";
 
 export function ProjectItem({
   src,
   title,
   href,
+  slug,
   techStack,
   description,
 }: ProjectProps) {
+  const t = useTranslations("ProjectDetailPage");
+
   return (
     <div className="p-4 @container">
       <div className="flex flex-col items-stretch justify-start rounded-lg @xl:flex-row @xl:items-start">
-        <Link
-          href={href}
+        <TransitionLink
+          href={`/project/${slug}`}
           className="relative w-full aspect-video rounded-lg overflow-hidden group"
-          target="_blank"
-          rel="noopener noreferrer"
+          style={{ viewTransitionName: `project-image-${slug}` }}
         >
           <Image
             src={src}
@@ -24,11 +29,16 @@ export function ProjectItem({
             fill
             className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
           />
-        </Link>
+        </TransitionLink>
         <div className="flex w-full min-w-72 grow flex-col items-stretch justify-center gap-1 py-4 @xl:px-4">
-          <p className="text-lg font-bold leading-tight tracking-[-0.015em]">
-            {title}
-          </p>
+          <TransitionLink href={`/project/${slug}`}>
+            <p
+              className="text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors"
+              style={{ viewTransitionName: `project-title-${slug}` }}
+            >
+              {title}
+            </p>
+          </TransitionLink>
           <div className="flex items-end gap-3 justify-between">
             <div className="flex flex-col gap-1">
               <p className="text-[#9cabba] text-base font-normal leading-normal">
@@ -39,6 +49,20 @@ export function ProjectItem({
               </div>
             </div>
           </div>
+          {/* External Link Button */}
+          {href && (
+            <div className="mt-3">
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-primary hover:underline"
+              >
+                <span>{t("externalLink")}</span>
+                <span>↗</span>
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </div>

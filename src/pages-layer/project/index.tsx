@@ -60,6 +60,7 @@ export function ProjectPage() {
               src={project.src}
               title={project.title}
               href={project.href}
+              slug={project.slug}
               techStack={project.techStack}
               description={project.description}
             />

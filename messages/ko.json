@@ -56,5 +56,27 @@
     "sending": "전송 중...",
     "success": "메시지가 성공적으로 전송되었습니다!",
     "error": "메시지 전송에 실패했습니다. 다시 시도해주세요."
+  },
+  "ProjectDetailPage": {
+    "period": "기간",
+    "team": "팀",
+    "role": "역할",
+    "github": "GitHub",
+    "liveDemo": "Live Demo",
+    "externalLink": "외부 링크",
+    "overview": "프로젝트 개요",
+    "background": "배경",
+    "goal": "목표",
+    "features": "주요 기능",
+    "techStack": "기술 스택",
+    "challengesAndSolutions": "기술적 챌린지 & 해결",
+    "challenge": "챌린지",
+    "solution": "해결책",
+    "achievements": "성과",
+    "metrics": "주요 지표",
+    "feedback": "사용자 피드백",
+    "improvements": "개선 사항",
+    "screenshots": "스크린샷",
+    "backToProjects": "프로젝트 목록으로 돌아가기"
   }
 }

@@ -62,9 +62,11 @@ export function generateStaticParams() {
 
 export default async function LocaleLayout({
   children,
+  modal,
   params,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
   params: Promise<{ locale: string }>;
 }>) {
   const { locale } = await params;
@@ -96,6 +98,7 @@ export default async function LocaleLayout({
             <div className="flex h-full grow flex-col">
               <Header />
               {children}
+              {modal}
               <Footer />
             </div>
           </ThemeProvider>

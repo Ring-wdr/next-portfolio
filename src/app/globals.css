@@ -82,3 +82,117 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* View Transition API Support */
+@view-transition {
+  navigation: auto;
+}
+
+/* Completely hide old root during transition to prevent overlap */
+::view-transition-old(root) {
+  animation-name: hide-instantly;
+  animation-duration: 0.001s;
+  animation-fill-mode: forwards;
+}
+
+::view-transition-new(root) {
+  animation-name: fade-in, slide-in;
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::view-transition-old(project-image),
+::view-transition-new(project-image) {
+  height: 100%;
+  overflow: clip;
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  mix-blend-mode: normal;
+  z-index: 1;
+}
+
+::view-transition-new(project-image) {
+  z-index: 2;
+}
+
+::view-transition-old(project-title),
+::view-transition-new(project-title) {
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+::view-transition-new(project-title) {
+  z-index: 2;
+}
+
+@keyframes hide-instantly {
+  from {
+    opacity: 0;
+    display: none;
+  }
+  to {
+    opacity: 0;
+    display: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateY(0) scale(1);
+  }
+  to {
+    transform: translateY(-8px) scale(0.98);
+  }
+}
+
+/* Modal and Dialog Styles */
+dialog {
+  border: none;
+  padding: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+dialog::backdrop {
+  display: none;
+}
+
+/* Hide content behind modal during view transition */
+@supports (view-transition-name: none) {
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  /* Ensure modal appears above everything during transition */
+  dialog[open] {
+    z-index: 9999;
+  }
+}

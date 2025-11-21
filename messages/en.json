@@ -56,5 +56,27 @@
     "sending": "Sending...",
     "success": "Message sent successfully!",
     "error": "Failed to send message. Please try again."
+  },
+  "ProjectDetailPage": {
+    "period": "Period",
+    "team": "Team",
+    "role": "Role",
+    "github": "GitHub",
+    "liveDemo": "Live Demo",
+    "externalLink": "External Link",
+    "overview": "Project Overview",
+    "background": "Background",
+    "goal": "Goal",
+    "features": "Key Features",
+    "techStack": "Tech Stack",
+    "challengesAndSolutions": "Technical Challenges & Solutions",
+    "challenge": "Challenge",
+    "solution": "Solution",
+    "achievements": "Achievements",
+    "metrics": "Key Metrics",
+    "feedback": "User Feedback",
+    "improvements": "Improvements",
+    "screenshots": "Screenshots",
+    "backToProjects": "Back to Projects"
   }
 }
