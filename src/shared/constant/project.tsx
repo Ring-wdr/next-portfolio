@@ -10,6 +10,7 @@ export type ProjectProps = {
   src: string | StaticImageData;
   title: string;
   href: string;
+  slug: string; // 상세 페이지 경로
   description?: ReactNode;
   techStack: TechStackEnum[];
 };
@@ -19,6 +20,7 @@ export const projectList: ProjectProps[] = [
     src: POCAZThumbnail,
     title: "POCAZ",
     href: "https://github.com/TEAM-POCAZ/PocaZ",
+    slug: "pocaz",
     description: (
       <>
         국내 외 아이돌 굿즈 시장이 8000억 규모 이상으로 확대되고 있는 걸 알고
@@ -36,6 +38,7 @@ export const projectList: ProjectProps[] = [
     src: "https://postfiles.pstatic.net/MjAyMzA0MThfODQg/MDAxNjgxNzk3MDYyNDc4.2uzOQ-Oiw-XsNK013YGZYSH7pvmBB63HXt-RpL8OFdUg.M3YvSedp13rgsbfXfxK-PVt-dF5TtnMm6ubigz8I-Gog.PNG.gsh113/%EB%8C%80%EB%8F%84_%ED%98%84%ED%8C%90.png?type=w773",
     title: "법률사무소 대도",
     href: "https://www.daedolaw.com/",
+    slug: "daedo-law",
     description: (
       <>
         sveltekit + supabase로 진행한 법률사무소 대도 홈페이지입니다. 내부
@@ -50,6 +53,7 @@ export const projectList: ProjectProps[] = [
     src: ChooseMenuThumbnail,
     title: "메뉴 고르기 앱",
     href: "https://choose-menu.vercel.app/",
+    slug: "choose-menu",
     description: (
       <>
         카페 메뉴 크롤링, 사용자별 메뉴 선택 및 관리자 기능 등을 제공하는 메뉴
@@ -63,6 +67,7 @@ export const projectList: ProjectProps[] = [
     src: AlltimeCarThumbnail,
     title: "역대카",
     href: "https://alltime-car.com/",
+    slug: "alltime-car",
     description: (
       <>
         렌트사를 비교하여 가장 저렴한 차량 렌트 비용을 추천하는 서비스입니다.

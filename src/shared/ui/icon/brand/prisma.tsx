@@ -1,0 +1,18 @@
+import type { SVGProps } from "react";
+
+export function PrismaIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 28 28"
+      fill="currentColor"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M.21 19.007a1.35 1.35 0 0 1-.011-1.427l10.13-16.523a1.349 1.349 0 0 1 2.374.14l9.254 20.074a1.35 1.35 0 0 1-.838 1.856L6.725 27.446a1.35 1.35 0 0 1-1.527-.57zM11.497 5.888a.506.506 0 0 1 .96-.1l6.383 14.77a.506.506 0 0 1-.32.684l-9.945 2.97a.506.506 0 0 1-.64-.585z"
+      />
+    </svg>
+  );
+}

@@ -1,0 +1,82 @@
+{
+  "Header": {
+    "portfolio": "포트폴리오",
+    "projects": "프로젝트",
+    "techStack": "기술 스택",
+    "about": "소개",
+    "contact": "연락하기"
+  },
+  "Footer": {
+    "allRightsReserved": "All rights reserved.",
+    "builtWith": "Next.js와 Tailwind CSS로 제작하였습니다."
+  },
+  "HomePage": {
+    "greeting": "안녕하세요, 저는 김만중입니다. 프론트엔드 개발자입니다",
+    "description": "최신 기술을 사용하여 아름답고 기능적인 웹 경험을 구축합니다. 포트폴리오를 탐색하여 제 작업을 확인하고 기술에 대해 자세히 알아보세요.",
+    "viewProjects": "프로젝트 보기",
+    "featuredProjects": "주요 프로젝트",
+    "techStack": "기술 스택"
+  },
+  "ProjectsPage": {
+    "title": "프로젝트",
+    "description": "프론트엔드 개발 기술을 보여주는 최근 프로젝트 모음을 살펴보세요. 각 프로젝트에는 간단한 설명, 스크린샷, 라이브 데모 또는 저장소 링크가 포함될 것입니다.",
+    "all": "전체"
+  },
+  "TechStackPage": {
+    "title": "기술 스택",
+    "description": "제가 사용하는 기술과 도구들입니다",
+    "Languages": "언어",
+    "Frameworks & Libraries": "프레임워크 & 라이브러리",
+    "Database": "데이터베이스",
+    "Styling": "스타일링",
+    "Testing": "테스팅",
+    "Tools": "도구",
+    "Backend": "백엔드"
+  },
+  "AboutPage": {
+    "title": "소개",
+    "greeting": "안녕하세요, 저는 김만중입니다",
+    "role": "프론트엔드 개발자",
+    "intro": "직관적이고 매력적인 사용자 경험을 만드는 데 집중하는 열정적인 프론트엔드 개발자입니다. 시각적으로 매력적일 뿐만 아니라 기능적이고 접근 가능한 제품을 만드는 것이 제 목표입니다.",
+    "aboutMeTitle": "소개",
+    "aboutMeDescription": "React와 같은 최신 기술을 사용하여 웹 애플리케이션을 구축한 3년 이상의 경험을 가진 프론트엔드 개발자입니다. HTML, CSS, JavaScript에 대한 깊은 이해를 가지고 있으며 항상 새로운 프레임워크와 라이브러리를 배우고자 합니다. 제 개발 철학은 깔끔하고 유지보수 가능한 코드와 사용자 우선 접근 방식을 중심으로 합니다. 훌륭한 디자인은 미학뿐만 아니라 사용성과 접근성에 관한 것이라고 믿습니다. 모두가 사용하기 쉬운 아름다운 제품을 만들기 위해 노력합니다.",
+    "strengthsTitle": "저의 강점",
+    "cleanCode": "깔끔한 코드",
+    "uiuxDesign": "UI/UX 디자인",
+    "accessibility": "접근성",
+    "performance": "성능 최적화"
+  },
+  "ContactPage": {
+    "title": "연락하기",
+    "description": "항상 새로운 기회와 협업에 열려있습니다. 이메일로 연락하시거나 LinkedIn에서 연결해주세요.",
+    "name": "이름",
+    "email": "이메일",
+    "message": "메시지",
+    "send": "보내기",
+    "sending": "전송 중...",
+    "success": "메시지가 성공적으로 전송되었습니다!",
+    "error": "메시지 전송에 실패했습니다. 다시 시도해주세요."
+  },
+  "ProjectDetailPage": {
+    "period": "기간",
+    "team": "팀",
+    "role": "역할",
+    "github": "GitHub",
+    "liveDemo": "Live Demo",
+    "externalLink": "외부 링크",
+    "overview": "프로젝트 개요",
+    "background": "배경",
+    "goal": "목표",
+    "features": "주요 기능",
+    "techStack": "기술 스택",
+    "challengesAndSolutions": "기술적 챌린지 & 해결",
+    "challenge": "챌린지",
+    "solution": "해결책",
+    "achievements": "성과",
+    "metrics": "주요 지표",
+    "feedback": "사용자 피드백",
+    "improvements": "개선 사항",
+    "screenshots": "스크린샷",
+    "backToProjects": "프로젝트 목록으로 돌아가기"
+  }
+}

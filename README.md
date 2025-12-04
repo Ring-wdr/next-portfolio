@@ -11,10 +11,14 @@
 
 - 🏠 **Home**: 간략한 자기소개 및 보유 기술 스택
 - 📁 **Projects**: 진행한 프로젝트 포트폴리오 (4개 프로젝트)
+  - 프로젝트 상세 페이지 (URL 및 모달 뷰 지원)
+  - 프로젝트별 기술 스택, 챌린지, 해결책, 성과 등 상세 정보
+  - 이미지 갤러리 (라이트박스 기능 지원)
 - 🛠️ **Tech Stack**: 카테고리별 기술 스택 시각화
 - 📧 **Contact**: 이메일 문의 폼 (nodemailer 연동)
 - 🌓 **Dark Mode**: 다크/라이트 테마 지원
 - 📱 **Responsive**: 모바일 친화적 반응형 디자인
+- 🎭 **View Transitions**: React 19의 View Transition API를 활용한 부드러운 화면 전환
 
 ## 🌐 배포
 
@@ -53,25 +57,44 @@
 
 ```
 src/
-├── app/                    # Next.js App Router
-│   ├── _provider/         # 전역 Provider (Theme)
-│   ├── layout.tsx         # 루트 레이아웃
-│   └── [pages]/           # 라우트 페이지들
-├── pages-layer/           # 페이지별 컴포넌트
-│   ├── main/              # 메인 페이지
-│   ├── about/             # 소개 페이지
-│   ├── project/           # 프로젝트 페이지
-│   ├── tech-stack/        # 기술 스택 페이지
-│   └── contact/           # 연락 페이지
-├── feature/               # 기능별 모듈
-│   └── mail/              # 이메일 기능
-│       ├── action/        # Server Actions
-│       ├── ui/            # UI 컴포넌트
-│       └── template/      # Email 템플릿
-└── shared/                # 공유 리소스
-    ├── ui/                # 공통 UI 컴포넌트
-    ├── constant/          # 상수 (프로젝트, 기술스택)
-    └── utils/             # 유틸리티 함수
+├── app/                                    # Next.js App Router
+│   ├── _provider/                         # 전역 Provider (Theme)
+│   ├── layout.tsx                         # 루트 레이아웃
+│   ├── [locale]/                          # 다국어 지원 라우팅
+│   │   ├── page.tsx                       # 메인 페이지
+│   │   ├── about/                         # 소개 페이지
+│   │   ├── project/                       # 프로젝트 목록
+│   │   │   ├── page.tsx                   # 프로젝트 목록 페이지
+│   │   │   └── [slug]/                    # 프로젝트 상세
+│   │   │       └── page.tsx               # 상세 페이지 (URL)
+│   │   ├── @modal/                        # 병렬 라우트 (모달)
+│   │   │   └── (.)project/[slug]/         # 인터셉팅 라우트
+│   │   │       └── page.tsx               # 상세 페이지 (모달)
+│   │   ├── tech-stack/                    # 기술 스택 페이지
+│   │   └── contact/                       # 연락 페이지
+│   └── page.tsx                           # 루트 리다이렉트
+├── pages-layer/                           # 페이지별 컴포넌트
+│   ├── main/                              # 메인 페이지
+│   ├── about/                             # 소개 페이지
+│   ├── project/                           # 프로젝트 페이지
+│   │   ├── index.tsx                      # 프로젝트 목록
+│   │   ├── [slug]/index.tsx               # 프로젝트 상세 페이지
+│   │   └── item/                          # 프로젝트 카드 컴포넌트
+│   ├── tech-stack/                        # 기술 스택 페이지
+│   └── contact/                           # 연락 페이지
+├── feature/                               # 기능별 모듈
+│   └── mail/                              # 이메일 기능
+│       ├── action/                        # Server Actions
+│       ├── ui/                            # UI 컴포넌트
+│       └── template/                      # Email 템플릿
+└── shared/                                # 공유 리소스
+    ├── ui/                                # 공통 UI 컴포넌트
+    │   ├── modal.tsx                      # 모달 컴포넌트
+    │   └── image-gallery.tsx              # 이미지 갤러리 (라이트박스)
+    ├── constant/                          # 상수
+    │   ├── project-detail.tsx             # 프로젝트 상세 데이터
+    │   └── tech-stack.ts                  # 기술스택 데이터
+    └── utils/                             # 유틸리티 함수
 ```
 
 ## 🚀 시작하기
@@ -180,6 +203,26 @@ pnpm test:e2e-log
 - 모듈화된 아키텍처로 유지보수성 향상
 - 계층별 명확한 책임 분리 (app, pages-layer, features, shared)
 
+### 고급 라우팅 패턴
+
+- **병렬 라우트 (Parallel Routes)**: `@modal` 슬롯을 활용한 모달 UI
+- **인터셉팅 라우트 (Intercepting Routes)**: `(.)project/[slug]`로 모달/페이지 이중 지원
+- **동적 라우트 (Dynamic Routes)**: `[slug]` 기반 프로젝트 상세 페이지
+- **generateStaticParams**: 빌드 타임에 모든 프로젝트 페이지 정적 생성
+
+### React 19 기능 활용
+
+- **View Transition API**: 페이지 전환 시 자연스러운 애니메이션
+- **Server Components**: 기본 서버 컴포넌트로 성능 최적화
+- **새로운 Hooks**: useLayoutEffect, startTransition 등 활용
+
+### 이미지 갤러리 시스템
+
+- **라이트박스 기능**: 클릭 시 전체 화면 이미지 뷰어
+- **키보드 내비게이션**: 화살표 키로 이미지 이동, ESC로 닫기
+- **반응형 그리드**: 1/2/3단 자동 조정 레이아웃
+- **줌 애니메이션**: hover 시 부드러운 확대 효과
+
 ### Type Safety
 
 - TypeScript strict mode
@@ -198,6 +241,7 @@ pnpm test:e2e-log
 - 이미지 최적화 (next/image)
 - Code splitting 자동 적용
 - Server Actions를 통한 최적화된 데이터 처리
+- ISR (Incremental Static Regeneration) 지원
 
 ## 🌐 배포 정보
 

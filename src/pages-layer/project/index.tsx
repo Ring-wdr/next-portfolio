@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import type { TechStackEnum } from "@/shared/constant/tech-stack";
 import { projectList } from "@/shared/constant/project";
 import { classNames } from "@/shared/utils/classnames";
@@ -11,6 +12,7 @@ const frameworks = ["All", "Next.js", "SvelteKit", "React"] satisfies Array<
 >;
 
 export function ProjectPage() {
+  const t = useTranslations("ProjectsPage");
   const [selectedFramework, setSelectedFramework] = useState<
     TechStackEnum | "All"
   >("All");
@@ -21,12 +23,10 @@ export function ProjectPage() {
         <div className="flex flex-wrap justify-between gap-3 p-4">
           <div className="flex min-w-72 flex-col gap-3">
             <p className="tracking-light text-[32px] font-bold leading-tight">
-              Projects
+              {t("title")}
             </p>
             <p className="text-[#9cabba] text-sm font-normal leading-normal">
-              Explore a selection of my recent projects, showcasing my skills in
-              front-end development. Each project includes a brief description,
-              screenshots, and links to live demos or repositories.
+              {t("description")}
             </p>
           </div>
         </div>
@@ -43,7 +43,9 @@ export function ProjectPage() {
               )}
               onClick={() => setSelectedFramework(framework)}
             >
-              <p className="text-sm font-medium leading-normal">{framework}</p>
+              <p className="text-sm font-medium leading-normal">
+                {framework === "All" ? t("all") : framework}
+              </p>
             </button>
           ))}
         </div>
@@ -58,6 +60,7 @@ export function ProjectPage() {
               src={project.src}
               title={project.title}
               href={project.href}
+              slug={project.slug}
               techStack={project.techStack}
               description={project.description}
             />
