@@ -16,12 +16,16 @@ import {
   MongoIcon,
   ExpressIcon,
   PrismaIcon,
+  PostgreSQLIcon,
+  ElysiaIcon,
+  BunJSIcon,
 } from "../ui/icon/brand";
 import { PlaywrightIcon } from "../ui/icon/brand/playwright";
 import { StorybookIcon } from "../ui/icon/brand/storybook";
 import { TanstackIcon } from "../ui/icon/brand/tanstack";
 import { XStateIcon } from "../ui/icon/brand/xstate";
 import { SupabaseIcon } from "../ui/icon/brand/supabase";
+import { StyleXIcon } from "../ui/icon/brand/stylex";
 
 export const TechStackCategory = [
   "Languages",
@@ -88,6 +92,11 @@ export const TechStack = [
     category: ["Frameworks & Libraries", "Backend"],
   },
   {
+    name: "Elysia.js",
+    icon: <ElysiaIcon />,
+    category: ["Frameworks & Libraries", "Backend"],
+  },
+  {
     name: "Web Component",
     icon: <WebComponentIcon />,
     category: ["Frameworks & Libraries"],
@@ -106,6 +115,16 @@ export const TechStack = [
     name: "Tailwind CSS",
     icon: <TailwindIcon />,
     category: ["Styling"],
+  },
+  {
+    name: "StyleX",
+    icon: <StyleXIcon />,
+    category: ["Styling"],
+  },
+  {
+    name: "Bun.js",
+    icon: <BunJSIcon />,
+    category: ["Tools"],
   },
   {
     name: "Github",
@@ -150,6 +169,11 @@ export const TechStack = [
   {
     name: "Prisma",
     icon: <PrismaIcon width={18} height={18} />,
+    category: ["Database", "Backend"],
+  },
+  {
+    name: "PostgreSQL",
+    icon: <PostgreSQLIcon width={18} height={18} />,
     category: ["Database", "Backend"],
   },
 ] as const satisfies TechStackType[];

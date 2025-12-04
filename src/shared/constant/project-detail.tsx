@@ -82,15 +82,16 @@ export type ProjectDetail = {
 export const projectDetailList: ProjectDetail[] = [
   {
     slug: "pocaz",
-    title: "POCAZ",
+    title: "POCAZ-Remake(진행중)",
     thumbnail: POCAZThumbnail,
-    summary: "아이돌 포토카드 전문 리셀 거래 플랫폼",
-    period: "2023.01 - 2023.06",
-    team: "4인 팀 프로젝트",
-    role: "프론트엔드 개발 (React, 상태관리, API 연동)",
+    summary: "아이돌 포토카드 전문 리셀 거래 플랫폼(Remake)",
+    period: "2025.12 -",
+    team: "1인 프로젝트",
+    role: "풀스택 개발 (Next.js, 상태관리, API 연동)",
 
     links: {
-      github: "https://github.com/TEAM-POCAZ/PocaZ",
+      github: "https://github.com/Ring-wdr/pocaz-remake",
+      demo: "https://pocaz-remake.vercel.app/",
     },
 
     overview: {
@@ -108,7 +109,16 @@ export const projectDetailList: ProjectDetail[] = [
     },
 
     tech: {
-      stack: ["React", "JavaScript", "Tailwind CSS", "Express.js", "MySQL"],
+      stack: [
+        "React",
+        "Next.js",
+        "StyleX",
+        "Elysia.js",
+        "PostgreSQL",
+        "Prisma",
+        "Supabase",
+        "Bun.js",
+      ],
       challenges: [
         {
           title: "대량의 이미지 데이터 최적화",

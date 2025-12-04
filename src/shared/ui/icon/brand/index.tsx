@@ -16,3 +16,6 @@ export { MysqlIcon } from "./mysql";
 export { MongoIcon } from "./mongo";
 export { ExpressIcon } from "./express";
 export { PrismaIcon } from "./prisma";
+export { PostgreSQLIcon } from "./postgre";
+export { ElysiaIcon } from "./elysia";
+export { BunJSIcon } from "./bunjs";
