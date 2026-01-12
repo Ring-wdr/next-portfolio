@@ -57,7 +57,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
                 href={project.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-all font-medium"
+                className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-opacity-90 transition-all font-medium"
               >
                 {t("github")}
               </a>

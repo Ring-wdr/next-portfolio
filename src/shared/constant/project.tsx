@@ -5,6 +5,7 @@ import { TechStackEnum } from "./tech-stack";
 import POCAZThumbnail from "@/../public/thumbnail/project/pocaz.png";
 import ChooseMenuThumbnail from "@/../public/thumbnail/project/choose-menu.png";
 import AlltimeCarThumbnail from "@/../public/thumbnail/project/alltime-car.png";
+import FrontendJuniorStudyThumbnail from "@/../public/thumbnail/project/frontend-junior-study.png";
 
 export type ProjectProps = {
   src: string | StaticImageData;
@@ -75,5 +76,19 @@ export const projectList: ProjectProps[] = [
       </>
     ),
     techStack: ["Next.js", "Supabase", "Tailwind CSS", "TypeScript"],
+  },
+  {
+    src: FrontendJuniorStudyThumbnail,
+    title: "프론트엔드 주니어 스터디",
+    href: "https://github.com/Ring-wdr/frontend-junior-study",
+    slug: "frontend-junior-study",
+    description: (
+      <>
+        프론트엔드 개인 학습 커리큘럼에 맞게 업데이트 할 공부 기록
+        레포지토리입니다. 15주간의 체계적인 학습 과정으로 JavaScript 심화,
+        디자인 패턴, React/Next.js, 스타일링, 테스팅, 성능 최적화 등을 다룹니다.
+      </>
+    ),
+    techStack: ["TypeScript", "Bun.js", "CSS"],
   },
 ];

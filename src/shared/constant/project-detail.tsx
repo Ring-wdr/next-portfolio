@@ -4,6 +4,7 @@ import { TechStackEnum } from "./tech-stack";
 import POCAZThumbnail from "@/../public/thumbnail/project/pocaz.png";
 import ChooseMenuThumbnail from "@/../public/thumbnail/project/choose-menu.png";
 import AlltimeCarThumbnail from "@/../public/thumbnail/project/alltime-car.png";
+import FrontendJuniorStudyThumbnail from "@/../public/thumbnail/project/frontend-junior-study.png";
 
 export type ProjectDetail = {
   /** URL 경로용 */
@@ -456,6 +457,97 @@ export const projectDetailList: ProjectDetail[] = [
     metadata: {
       publishedAt: "2024-08-01T00:00:00Z",
       tags: ["Next.js", "Price Comparison", "Supabase", "Real-time Data"],
+    },
+  },
+  {
+    slug: "frontend-junior-study",
+    title: "프론트엔드 주니어 스터디",
+    thumbnail: FrontendJuniorStudyThumbnail,
+    summary: "15주간의 체계적인 프론트엔드 학습 커리큘럼 레포지토리",
+    period: "2025.11 - 2026.01",
+    team: "개인 프로젝트",
+    role: "커리큘럼 설계 및 학습 자료 정리",
+
+    links: {
+      github: "https://github.com/Ring-wdr/frontend-junior-study",
+      demo: "https://ring-wdr.github.io/frontend-junior-study/",  
+    },
+
+    overview: {
+      background:
+        "프론트엔드 개발자로서 체계적인 학습의 필요성을 느끼고, 개인 학습 커리큘럼을 정리하기 위해 시작한 프로젝트입니다. 단순 이론 학습이 아닌 실습을 병행하며 기록하는 것을 목표로 했습니다.",
+      goal: "15주간의 체계적인 프론트엔드 학습 커리큘럼을 구성하고, 각 주차별 핵심 개념 요약, 공부 자료, 블로그 링크를 포함하여 이론과 실습을 병행하는 학습 환경을 구축하는 것이 목표였습니다.",
+      features: [
+        "1-5주: JavaScript 심화, 디자인 패턴, React/Next.js 심화",
+        "6-10주: 스타일링, 폼 관리, 테스팅, 애니메이션",
+        "11-15주: 성능 최적화, 보안, PWA, 접근성, 개발 도구",
+        "주차별 핵심 개념 요약 및 정리",
+        "실습 예제 코드 및 블로그 연동",
+      ],
+    },
+
+    tech: {
+      stack: ["TypeScript", "Bun.js", "CSS"],
+      challenges: [
+        {
+          title: "모던 빌드 도구 학습",
+          description:
+            "기존 Webpack 대신 Rsbuild를 도입하면서 새로운 빌드 시스템의 설정과 최적화 방법을 학습해야 했습니다.",
+        },
+        {
+          title: "테스트 환경 구축",
+          description:
+            "RSTest를 활용한 테스트 환경 구축과 테스트 작성 패턴을 학습하며 실습 환경을 구성해야 했습니다.",
+        },
+        {
+          title: "커리큘럼 구조화",
+          description:
+            "방대한 프론트엔드 학습 범위를 15주라는 기간에 맞게 체계적으로 구조화하는 것이 도전이었습니다.",
+        },
+      ],
+      solutions: [
+        {
+          title: "Rsbuild 기반 개발 환경 구축",
+          description:
+            "Rsbuild를 활용하여 빠른 빌드와 개발 서버 환경을 구축했습니다. Bun을 패키지 매니저로 사용하여 의존성 설치 속도를 개선했습니다.",
+        },
+        {
+          title: "Biome 린팅 도입",
+          description:
+            "ESLint와 Prettier 대신 Biome를 도입하여 린팅과 포매팅을 단일 도구로 통합하고 설정을 간소화했습니다.",
+        },
+        {
+          title: "주차별 모듈화된 구조",
+          description:
+            "각 주차를 독립적인 모듈로 구성하여 순서대로 학습하거나 필요한 주제만 선택적으로 학습할 수 있도록 구조화했습니다.",
+        },
+      ],
+    },
+
+    achievements: {
+      metrics: [
+        { label: "학습 기간", value: "15주" },
+        { label: "주요 토픽", value: "15개" },
+        { label: "기술 스택", value: "6개" },
+      ],
+      improvements: [
+        "모던 빌드 도구(Rsbuild) 실무 활용 능력 향상",
+        "테스트 주도 개발(TDD) 패턴 학습",
+        "체계적인 학습 기록 습관 형성",
+      ],
+    },
+
+    gallery: [
+      {
+        src: FrontendJuniorStudyThumbnail,
+        alt: "프론트엔드 주니어 스터디 레포지토리",
+        caption: "프론트엔드 학습 커리큘럼 GitHub 레포지토리",
+      },
+    ],
+
+    metadata: {
+      publishedAt: "2024-09-01T00:00:00Z",
+      tags: ["TypeScript", "Learning", "Curriculum", "Frontend"],
     },
   },
 ];
