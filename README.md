@@ -3,22 +3,31 @@
 > Next.js 16 + React 19 + TypeScript로 제작된 개인 포트폴리오 웹사이트
 
 [![Deployment](https://img.shields.io/badge/Vercel-Deployed-success)](https://next-portfolio-ringring.vercel.app/)
-[![Next.js](https://img.shields.io/badge/Next.js-16.0-black)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16.1-black)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19.2-blue)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)](https://www.typescriptlang.org/)
 
 ## ✨ 주요 기능
 
 - 🏠 **Home**: 간략한 자기소개 및 보유 기술 스택
-- 📁 **Projects**: 진행한 프로젝트 포트폴리오 (4개 프로젝트)
+- 📁 **Projects**: 진행한 프로젝트 포트폴리오 (5개 프로젝트)
   - 프로젝트 상세 페이지 (URL 및 모달 뷰 지원)
   - 프로젝트별 기술 스택, 챌린지, 해결책, 성과 등 상세 정보
   - 이미지 갤러리 (라이트박스 기능 지원)
 - 🛠️ **Tech Stack**: 카테고리별 기술 스택 시각화
+- 👤 **About**: 커리어 타임라인/작업 원칙/집중 분야 중심 내러티브 섹션
 - 📧 **Contact**: 이메일 문의 폼 (nodemailer 연동)
 - 🌓 **Dark Mode**: 다크/라이트 테마 지원
 - 📱 **Responsive**: 모바일 친화적 반응형 디자인
+- 🌍 **i18n**: 한국어/영어 전환 (`next-intl`)
 - 🎭 **View Transitions**: React 19의 View Transition API를 활용한 부드러운 화면 전환
+
+## 🧭 2026 리빌드 진행 상태
+
+- ✅ **M1**: 디자인 토큰 재정의, 홈/레이아웃 비주얼 시스템 개편
+- ✅ **M2**: About/Tech Stack 페이지를 데이터 중심 내러티브 구조로 확장
+- ✅ **M3**: Projects 목록/상세를 스토리 중심 정보 구조로 개선
+- ✅ **M4**: 접근성/SEO/성능 하드닝 + 린트 워크플로우 정비
 
 ## 🌐 배포
 
@@ -28,7 +37,7 @@
 
 ### Core
 
-- **Framework**: Next.js 16.0 (App Router)
+- **Framework**: Next.js 16.1 (App Router)
 - **Language**: TypeScript 5.9
 - **Runtime**: React 19.2
 - **Styling**: Tailwind CSS 4.1
@@ -93,7 +102,8 @@ src/
     │   └── image-gallery.tsx              # 이미지 갤러리 (라이트박스)
     ├── constant/                          # 상수
     │   ├── project-detail.tsx             # 프로젝트 상세 데이터
-    │   └── tech-stack.ts                  # 기술스택 데이터
+    │   ├── tech-stack.tsx                 # 기술스택 데이터
+    │   └── profile.ts                     # About/Tech narrative 데이터
     └── utils/                             # 유틸리티 함수
 ```
 
@@ -102,7 +112,7 @@ src/
 ### 사전 요구사항
 
 - Node.js 20.x 이상
-- pnpm 또는 npm
+- pnpm
 
 ### 설치
 
@@ -112,8 +122,6 @@ git clone https://github.com/[your-username]/next-portfolio.git
 cd next-portfolio
 
 # 의존성 설치
-npm install
-# 또는
 pnpm install
 ```
 
@@ -153,6 +161,9 @@ pnpm start
 ### 테스트
 
 ```bash
+# 린트
+pnpm lint
+
 # 단위 테스트
 pnpm test
 
@@ -164,6 +175,9 @@ pnpm test:e2e
 
 # E2E 테스트 (로그 포함)
 pnpm test:e2e-log
+
+# 배포 전 권장 검증
+pnpm lint && pnpm test -- --run && pnpm build
 ```
 
 ## 📌 포트폴리오 프로젝트
