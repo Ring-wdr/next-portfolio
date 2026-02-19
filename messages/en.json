@@ -20,7 +20,26 @@
   "ProjectsPage": {
     "title": "Projects",
     "description": "Explore a selection of my recent projects, showcasing my skills in front-end development. Each project will include a brief description, screenshots, and links to live demos or repositories.",
-    "all": "All"
+    "all": "All",
+    "featured": "Featured",
+    "allCategory": "All categories",
+    "allTech": "All tech",
+    "results": "{count} projects",
+    "emptyTitle": "No projects found",
+    "emptyDescription": "Try a different category or tech filter.",
+    "roleLabel": "Role",
+    "impactLabel": "Impact",
+    "resultLabel": "Outcome",
+    "categories": {
+      "Product": "Product",
+      "Client": "Client",
+      "Study": "Study"
+    },
+    "status": {
+      "Live": "Live",
+      "Prototype": "Prototype",
+      "Archived": "Archived"
+    }
   },
   "TechStackPage": {
     "title": "Tech Stack",

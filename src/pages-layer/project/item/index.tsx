@@ -13,12 +13,19 @@ export function ProjectItem({
   slug,
   techStack,
   description,
+  category,
+  year,
+  role,
+  impact,
+  result,
+  status,
 }: ProjectProps) {
-  const t = useTranslations("ProjectDetailPage");
+  const t = useTranslations("ProjectsPage");
+  const tDetail = useTranslations("ProjectDetailPage");
 
   return (
     <div className="p-4 @container">
-      <div className="flex flex-col items-stretch justify-start rounded-lg @xl:flex-row @xl:items-start">
+      <article className="flex flex-col items-stretch justify-start rounded-xl border border-border bg-card/70 backdrop-blur-sm @xl:flex-row @xl:items-stretch">
         <ViewTransition
           default="vt-project-image"
           enter="vt-project-image"
@@ -28,7 +35,7 @@ export function ProjectItem({
         >
           <TransitionLink
             href={`/project/${slug}`}
-            className="relative w-full aspect-video rounded-lg overflow-hidden group"
+            className="relative w-full aspect-[16/10] overflow-hidden rounded-t-xl group @xl:w-[360px] @xl:min-w-[360px] @xl:aspect-auto @xl:rounded-l-xl @xl:rounded-tr-none"
           >
             <Image
               src={src}
@@ -38,7 +45,18 @@ export function ProjectItem({
             />
           </TransitionLink>
         </ViewTransition>
-        <div className="flex w-full min-w-72 grow flex-col items-stretch justify-center gap-1 py-4 @xl:px-4">
+        <div className="flex w-full min-w-72 grow flex-col items-stretch justify-center gap-3 p-5 @xl:px-6">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-foreground">
+              {t(`categories.${category}`)}
+            </span>
+            <span className="rounded-full border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground">
+              {year}
+            </span>
+            <span className="rounded-full border border-primary/40 bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
+              {t(`status.${status}`)}
+            </span>
+          </div>
           <TransitionLink href={`/project/${slug}`}>
             <ViewTransition
               name={`project-card-title-${slug}`}
@@ -53,14 +71,25 @@ export function ProjectItem({
               </p>
             </ViewTransition>
           </TransitionLink>
+          <p className="text-sm font-medium text-muted-foreground">
+            {t("roleLabel")}: {role}
+          </p>
           <div className="flex items-end gap-3 justify-between">
-            <div className="flex flex-col gap-1">
-              <p className="text-[#9cabba] text-base font-normal leading-normal">
-                {techStack.join(", ")}
-              </p>
-              <div className="text-[#9cabba] text-base font-normal leading-normal">
+            <div className="flex flex-col gap-2">
+              <div className="text-sm leading-normal text-muted-foreground line-clamp-3">
                 {description}
               </div>
+              <p className="text-sm leading-normal text-muted-foreground">
+                <span className="font-semibold text-foreground">{t("impactLabel")}: </span>
+                {impact}
+              </p>
+              <p className="text-sm leading-normal text-muted-foreground">
+                <span className="font-semibold text-foreground">{t("resultLabel")}: </span>
+                {result}
+              </p>
+              <p className="text-sm font-normal leading-normal text-muted-foreground">
+                {techStack.join(" • ")}
+              </p>
             </div>
           </div>
           {href && (
@@ -71,13 +100,13 @@ export function ProjectItem({
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-sm text-primary hover:underline"
               >
-                <span>{t("externalLink")}</span>
+                <span>{tDetail("externalLink")}</span>
                 <span>↗</span>
               </a>
             </div>
           )}
         </div>
-      </div>
+      </article>
     </div>
   );
 }

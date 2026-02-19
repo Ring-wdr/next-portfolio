@@ -14,6 +14,13 @@ export type ProjectProps = {
   slug: string; // 상세 페이지 경로
   description?: ReactNode;
   techStack: TechStackEnum[];
+  featured: boolean;
+  category: "Product" | "Client" | "Study";
+  year: number;
+  role: string;
+  impact: string;
+  result: string;
+  status: "Live" | "Prototype" | "Archived";
 };
 
 export const projectList: ProjectProps[] = [
@@ -34,6 +41,13 @@ export const projectList: ProjectProps[] = [
       </>
     ),
     techStack: ["React", "JavaScript", "Tailwind CSS", "Express.js", "MySQL"],
+    featured: true,
+    category: "Product",
+    year: 2023,
+    role: "Frontend Developer",
+    impact: "Focused marketplace UX for photocard resale workflows",
+    result: "Shipped a specialized trading experience from discovery to listing",
+    status: "Archived",
   },
   {
     src: "https://postfiles.pstatic.net/MjAyMzA0MThfODQg/MDAxNjgxNzk3MDYyNDc4.2uzOQ-Oiw-XsNK013YGZYSH7pvmBB63HXt-RpL8OFdUg.M3YvSedp13rgsbfXfxK-PVt-dF5TtnMm6ubigz8I-Gog.PNG.gsh113/%EB%8C%80%EB%8F%84_%ED%98%84%ED%8C%90.png?type=w773",
@@ -49,6 +63,13 @@ export const projectList: ProjectProps[] = [
       </>
     ),
     techStack: ["SvelteKit", "Supabase", "Tailwind CSS", "TypeScript"],
+    featured: true,
+    category: "Client",
+    year: 2023,
+    role: "Frontend Developer",
+    impact: "Improved legal-office web presence with streamlined information flow",
+    result: "Delivered production website and admin-facing foundations",
+    status: "Live",
   },
   {
     src: ChooseMenuThumbnail,
@@ -63,6 +84,13 @@ export const projectList: ProjectProps[] = [
       </>
     ),
     techStack: ["Next.js", "TypeScript", "MongoDB"],
+    featured: true,
+    category: "Product",
+    year: 2024,
+    role: "Product Engineer",
+    impact: "Validated personalized menu recommendation and management concepts",
+    result: "Released working prototype with user and admin workflows",
+    status: "Live",
   },
   {
     src: AlltimeCarThumbnail,
@@ -76,6 +104,13 @@ export const projectList: ProjectProps[] = [
       </>
     ),
     techStack: ["Next.js", "Supabase", "Tailwind CSS", "TypeScript"],
+    featured: true,
+    category: "Product",
+    year: 2024,
+    role: "Frontend Developer",
+    impact: "Simplified price comparison across multiple rental providers",
+    result: "Built prototype that surfaces low-cost options quickly",
+    status: "Live",
   },
   {
     src: FrontendJuniorStudyThumbnail,
@@ -90,5 +125,12 @@ export const projectList: ProjectProps[] = [
       </>
     ),
     techStack: ["TypeScript", "Bun.js", "CSS"],
+    featured: false,
+    category: "Study",
+    year: 2026,
+    role: "Study Lead",
+    impact: "Built repeatable learning cadence for junior frontend depth",
+    result: "Completed 15-week curriculum with documented practical outcomes",
+    status: "Archived",
   },
 ];
