@@ -53,6 +53,11 @@
   "ProjectsPage": {
     "title": "프로젝트",
     "description": "프론트엔드 개발 기술을 보여주는 최근 프로젝트 모음을 살펴보세요. 각 프로젝트에는 간단한 설명, 스크린샷, 라이브 데모 또는 저장소 링크가 포함될 것입니다.",
+    "stats": {
+      "total": "전체 프로젝트",
+      "featured": "주요 프로젝트",
+      "filtered": "필터 결과"
+    },
     "all": "전체",
     "featured": "주요",
     "allCategory": "전체 카테고리",
@@ -60,8 +65,11 @@
     "results": "총 {count}개 프로젝트",
     "emptyTitle": "조건에 맞는 프로젝트가 없습니다",
     "emptyDescription": "카테고리 또는 기술 필터를 변경해보세요.",
+    "storyLabel": "프로젝트 스토리",
+    "openDetail": "전체 케이스 보기",
     "roleLabel": "역할",
     "impactLabel": "임팩트",
+    "stackLabel": "기술 스택",
     "resultLabel": "결과",
     "categories": {
       "Product": "프로덕트",

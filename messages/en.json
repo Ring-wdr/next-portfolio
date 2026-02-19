@@ -53,6 +53,11 @@
   "ProjectsPage": {
     "title": "Projects",
     "description": "Explore a selection of my recent projects, showcasing my skills in front-end development. Each project will include a brief description, screenshots, and links to live demos or repositories.",
+    "stats": {
+      "total": "Total projects",
+      "featured": "Featured projects",
+      "filtered": "Filtered result"
+    },
     "all": "All",
     "featured": "Featured",
     "allCategory": "All categories",
@@ -60,8 +65,11 @@
     "results": "{count} projects",
     "emptyTitle": "No projects found",
     "emptyDescription": "Try a different category or tech filter.",
+    "storyLabel": "Project Story",
+    "openDetail": "Read full case",
     "roleLabel": "Role",
     "impactLabel": "Impact",
+    "stackLabel": "Stack",
     "resultLabel": "Outcome",
     "categories": {
       "Product": "Product",
