@@ -2,12 +2,17 @@ import Link from "next/link";
 import Image from "next/image";
 import type { ProjectProps } from "@/shared/constant/project";
 
+type MainProjectItemProps = Pick<
+  ProjectProps,
+  "title" | "description" | "src" | "href"
+>;
+
 export function MainProjectItem({
   title,
   description,
   src,
   href,
-}: Omit<ProjectProps, "techStack">) {
+}: MainProjectItemProps) {
   return (
     <div className="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60">
       <Link
