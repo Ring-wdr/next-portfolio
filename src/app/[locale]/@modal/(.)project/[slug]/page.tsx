@@ -3,11 +3,7 @@ import { ProjectDetailPage } from "@/pages-layer/project/[slug]";
 import { projectDetailList } from "@/shared/constant/project-detail";
 import { notFound } from "next/navigation";
 
-type Props = {
-  params: Promise<{ slug: string; locale: string }>;
-};
-
-export default async function ProjectModal({ params }: Props) {
+export default async function ProjectModal({ params }: PageProps<"/[locale]/project/[slug]">) {
   const { slug } = await params;
   const project = projectDetailList.find((p) => p.slug === slug);
 

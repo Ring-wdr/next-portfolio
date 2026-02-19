@@ -73,11 +73,9 @@ export default async function LocaleLayout({
   children,
   modal,
   params,
-}: Readonly<{
-  children: React.ReactNode;
+}: LayoutProps<"/[locale]"> & {
   modal: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}>) {
+}) {
   const { locale } = await params;
 
   // Ensure that the incoming `locale` is valid

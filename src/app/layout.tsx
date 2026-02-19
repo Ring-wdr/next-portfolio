@@ -1,7 +1,5 @@
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+}: LayoutProps<"/">) {
   return children;
 }

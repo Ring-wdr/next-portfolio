@@ -67,7 +67,7 @@ export function MainPage() {
                 href={`/project/${mainProject.slug}`}
                 className="group glass-panel relative block overflow-hidden rounded-2xl"
               >
-                <div className="relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-4/3 overflow-hidden">
                   <Image
                     src={mainProject.src}
                     alt={mainProject.title}

@@ -77,6 +77,28 @@
   "TechStackPage": {
     "title": "Tech Stack",
     "description": "Technologies and tools I use",
+    "stats": {
+      "totalTech": "Total technologies",
+      "categories": "Categories",
+      "primaryTrack": "Primary track"
+    },
+    "categoryDescriptions": {
+      "languages": "Core programming languages used in product delivery and frontend systems.",
+      "frameworksLibraries": "Framework and state patterns for scalable interfaces.",
+      "database": "Data layer technologies used for product persistence and analytics.",
+      "styling": "Design-system and styling approaches for maintainable UI.",
+      "testing": "Quality and confidence tooling for stable releases.",
+      "tools": "Execution environment and collaboration tools used daily.",
+      "backend": "Server and platform technologies used in full-stack delivery."
+    },
+    "methodTitle": "How I apply this stack",
+    "methodDescription": "I optimize for predictable delivery: clear architecture, reusable design systems, measurable performance, and collaboration-friendly code.",
+    "methodTags": {
+      "architecture": "Architecture-first",
+      "designSystem": "Design system",
+      "performance": "Performance budget",
+      "collaboration": "Team collaboration"
+    },
     "Languages": "Languages",
     "Frameworks & Libraries": "Frameworks & Libraries",
     "Database": "Database",
@@ -96,7 +118,48 @@
     "cleanCode": "Clean Code",
     "uiuxDesign": "UI/UX Design",
     "accessibility": "Accessibility",
-    "performance": "Performance Optimization"
+    "performance": "Performance Optimization",
+    "stats": {
+      "projects": "Projects shipped",
+      "technologies": "Technologies used",
+      "years": "Years of practice"
+    },
+    "timelineTitle": "Career Timeline",
+    "timeline": {
+      "2026": {
+        "title": "Portfolio rebuild and narrative-driven architecture",
+        "description": "Redesigned this portfolio around story-first sections, tokenized theming, and stronger international UX consistency."
+      },
+      "2025": {
+        "title": "Product-focused frontend delivery",
+        "description": "Built and shipped multiple product interfaces with improved filtering, modal flows, and maintainable component boundaries."
+      },
+      "2024": {
+        "title": "Foundation in modern React ecosystem",
+        "description": "Expanded expertise in React, Next.js, and TypeScript with a strong emphasis on accessibility and performance."
+      }
+    },
+    "principlesTitle": "Working Principles",
+    "principles": {
+      "product": {
+        "title": "Solve product problems first",
+        "description": "Start from user and business goals, then select the simplest implementation that can scale."
+      },
+      "craft": {
+        "title": "Design and code as one system",
+        "description": "Build reusable UI primitives and design tokens so consistency improves as features grow."
+      },
+      "team": {
+        "title": "Communicate with clarity",
+        "description": "Prefer explicit naming, predictable structures, and documentation-ready code for fast team onboarding."
+      }
+    },
+    "focus": {
+      "reactArchitecture": "React architecture",
+      "designSystem": "Design system",
+      "performance": "Performance tuning",
+      "testing": "Testing culture"
+    }
   },
   "ContactPage": {
     "title": "Contact",

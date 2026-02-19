@@ -77,6 +77,28 @@
   "TechStackPage": {
     "title": "기술 스택",
     "description": "제가 사용하는 기술과 도구들입니다",
+    "stats": {
+      "totalTech": "총 기술 수",
+      "categories": "카테고리",
+      "primaryTrack": "주요 트랙"
+    },
+    "categoryDescriptions": {
+      "languages": "제품 개발과 프론트엔드 시스템 구현에 사용하는 핵심 언어입니다.",
+      "frameworksLibraries": "확장 가능한 인터페이스를 위한 프레임워크와 상태 관리 패턴입니다.",
+      "database": "제품 데이터 저장과 분석 흐름에 활용하는 데이터 레이어 기술입니다.",
+      "styling": "유지보수 가능한 UI를 위한 디자인 시스템 및 스타일링 전략입니다.",
+      "testing": "안정적인 배포를 위한 품질 검증 도구입니다.",
+      "tools": "일상적인 개발 실행과 협업에 사용하는 도구입니다.",
+      "backend": "풀스택 구현에서 사용하는 서버 및 플랫폼 기술입니다."
+    },
+    "methodTitle": "이 스택을 활용하는 방식",
+    "methodDescription": "명확한 아키텍처, 재사용 가능한 디자인 시스템, 측정 가능한 성능, 협업 친화적인 코드를 기준으로 구현합니다.",
+    "methodTags": {
+      "architecture": "아키텍처 우선",
+      "designSystem": "디자인 시스템",
+      "performance": "성능 예산",
+      "collaboration": "협업 중심"
+    },
     "Languages": "언어",
     "Frameworks & Libraries": "프레임워크 & 라이브러리",
     "Database": "데이터베이스",
@@ -96,7 +118,48 @@
     "cleanCode": "깔끔한 코드",
     "uiuxDesign": "UI/UX 디자인",
     "accessibility": "접근성",
-    "performance": "성능 최적화"
+    "performance": "성능 최적화",
+    "stats": {
+      "projects": "출시한 프로젝트",
+      "technologies": "사용 기술",
+      "years": "실무/학습 연차"
+    },
+    "timelineTitle": "커리어 타임라인",
+    "timeline": {
+      "2026": {
+        "title": "포트폴리오 리빌드와 스토리 중심 구조화",
+        "description": "스토리 중심 섹션, 토큰 기반 테마, 다국어 UX 일관성을 강화해 포트폴리오를 재설계했습니다."
+      },
+      "2025": {
+        "title": "프로덕트 중심 프론트엔드 전달력 강화",
+        "description": "필터링, 모달 플로우, 컴포넌트 경계를 개선하며 여러 제품 인터페이스를 구현·배포했습니다."
+      },
+      "2024": {
+        "title": "현대적 React 생태계 기반 구축",
+        "description": "React, Next.js, TypeScript 역량을 확장하며 접근성과 성능 중심 개발 습관을 정립했습니다."
+      }
+    },
+    "principlesTitle": "일하는 원칙",
+    "principles": {
+      "product": {
+        "title": "먼저 제품 문제를 해결합니다",
+        "description": "사용자와 비즈니스 목표를 먼저 정의하고, 확장 가능한 최소 구현을 선택합니다."
+      },
+      "craft": {
+        "title": "디자인과 코드를 하나의 시스템으로 봅니다",
+        "description": "재사용 가능한 UI 프리미티브와 토큰을 설계해 기능이 늘어도 일관성이 유지되도록 합니다."
+      },
+      "team": {
+        "title": "명확하게 소통합니다",
+        "description": "명시적인 네이밍, 예측 가능한 구조, 문서화 가능한 코드를 통해 팀 온보딩 속도를 높입니다."
+      }
+    },
+    "focus": {
+      "reactArchitecture": "React 아키텍처",
+      "designSystem": "디자인 시스템",
+      "performance": "성능 최적화",
+      "testing": "테스트 문화"
+    }
   },
   "ContactPage": {
     "title": "연락하기",
