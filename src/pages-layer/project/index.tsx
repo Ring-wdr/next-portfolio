@@ -48,7 +48,7 @@ export function ProjectPage() {
             <p className="tracking-light text-[32px] font-bold leading-tight">
               {t("title")}
             </p>
-            <p className="text-[#9cabba] text-sm font-normal leading-normal">
+            <p className="text-muted-foreground text-sm font-normal leading-normal">
               {t("description")}
             </p>
           </div>

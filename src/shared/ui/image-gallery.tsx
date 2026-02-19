@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
 import { ChevronLeftIcon, ChevronRightIcon, XIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type GalleryImage = {
   src: string | StaticImageData;
@@ -16,6 +17,7 @@ type ImageGalleryProps = {
 };
 
 export function ImageGallery({ images }: ImageGalleryProps) {
+  const t = useTranslations("Common");
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const openModal = (index: number) => {
@@ -74,7 +76,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
           <button
             key={index}
             onClick={() => openModal(index)}
-            className="relative aspect-video rounded-lg overflow-hidden border border-[#3b4754] hover:border-primary transition-colors cursor-pointer group"
+            className="relative aspect-video rounded-lg overflow-hidden border border-border hover:border-primary transition-colors cursor-pointer group"
           >
             <Image
               src={image.src}
@@ -83,7 +85,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
               className="object-cover group-hover:scale-105 transition-transform duration-300"
             />
             {image.caption && (
-              <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 p-2 text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute bottom-0 left-0 right-0 bg-background/80 p-2 text-sm text-foreground opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
                 {image.caption}
               </div>
             )}
@@ -93,17 +95,17 @@ export function ImageGallery({ images }: ImageGalleryProps) {
 
       {selectedIndex !== null && (
         <div
-          className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 p-4 backdrop-blur-sm"
           onClick={closeModal}
         >
           {/* Close Button */}
-          <button
-            onClick={closeModal}
-            className="absolute top-4 right-4 text-white text-4xl font-light hover:text-primary transition-colors z-10"
-            aria-label="Close"
-          >
-            <XIcon />
-          </button>
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 z-10 rounded-full border border-border/70 bg-background/70 p-1.5 text-foreground transition-colors hover:bg-secondary"
+              aria-label={t("close")}
+            >
+              <XIcon />
+            </button>
 
           {images.length > 1 && (
             <>
@@ -112,8 +114,8 @@ export function ImageGallery({ images }: ImageGalleryProps) {
                   e.stopPropagation();
                   goToPrevious();
                 }}
-                className="absolute left-4 text-white text-4xl font-light hover:text-primary transition-colors z-10"
-                aria-label="Previous"
+                className="absolute left-4 z-10 rounded-full border border-border/70 bg-background/70 p-1.5 text-foreground transition-colors hover:bg-secondary"
+                aria-label={t("previous")}
               >
                 <ChevronLeftIcon />
               </button>
@@ -122,8 +124,8 @@ export function ImageGallery({ images }: ImageGalleryProps) {
                   e.stopPropagation();
                   goToNext();
                 }}
-                className="absolute right-4 text-white text-4xl font-light hover:text-primary transition-colors z-10"
-                aria-label="Next"
+                className="absolute right-4 z-10 rounded-full border border-border/70 bg-background/70 p-1.5 text-foreground transition-colors hover:bg-secondary"
+                aria-label={t("next")}
               >
                 <ChevronRightIcon />
               </button>
@@ -145,13 +147,13 @@ export function ImageGallery({ images }: ImageGalleryProps) {
             </div>
 
             {images[selectedIndex].caption && (
-              <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 p-4 text-center text-white">
+              <div className="absolute bottom-0 left-0 right-0 bg-background/80 p-4 text-center text-foreground backdrop-blur-sm">
                 {images[selectedIndex].caption}
               </div>
             )}
 
             {images.length > 1 && (
-              <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 px-4 py-2 rounded-full text-white text-sm">
+              <div className="absolute top-4 left-1/2 -translate-x-1/2 rounded-full border border-border/70 bg-background/80 px-4 py-2 text-sm text-foreground backdrop-blur-sm">
                 {selectedIndex + 1} / {images.length}
               </div>
             )}

@@ -2,11 +2,13 @@
 
 import { useFormStatus } from "react-dom";
 import { classNames } from "@/shared/utils/classnames";
+import { useTranslations } from "next-intl";
 
 export function FormButton({
   className,
   ...props
 }: React.ComponentProps<"button">) {
+  const t = useTranslations("ContactPage");
   const { pending } = useFormStatus();
   return (
     <button
@@ -20,7 +22,7 @@ export function FormButton({
       disabled={pending}
       {...props}
     >
-      {pending ? "Sending..." : "Send"}
+      {pending ? t("sending") : t("send")}
     </button>
   );
 }

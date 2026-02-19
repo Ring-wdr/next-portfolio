@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Noto_Sans_KR, Space_Grotesk } from "next/font/google";
 import "../globals.css";
 import { Header } from "@/shared/ui/header";
 import { classNames } from "@/shared/utils/classnames";
@@ -13,7 +13,15 @@ import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { RouteTransition } from "@/shared/ui/route-transition";
 
-const inter = Inter({ subsets: ["latin"] });
+const displayFont = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-display",
+});
+
+const bodyFont = Noto_Sans_KR({
+  subsets: ["latin"],
+  variable: "--font-body",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -85,10 +93,12 @@ export default async function LocaleLayout({
     <html lang={locale} suppressHydrationWarning>
       <body
         className={classNames(
-          inter.className,
-          "antialiased relative flex size-full min-h-screen flex-col overflow-x-hidden"
+          displayFont.variable,
+          bodyFont.variable,
+          "antialiased relative flex size-full min-h-screen flex-col overflow-x-hidden bg-background text-foreground"
         )}
       >
+        <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_15%_15%,color-mix(in_oklch,var(--color-highlight),transparent_84%),transparent_42%),radial-gradient(circle_at_85%_0%,color-mix(in_oklch,var(--color-surface-strong),transparent_86%),transparent_48%),linear-gradient(180deg,var(--background),color-mix(in_oklch,var(--background),black_5%))]" />
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
             attribute="class"

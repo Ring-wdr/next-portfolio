@@ -4,6 +4,23 @@ import { describe, it, expect, vi } from "vitest";
 import { EmailForm } from "./email-form";
 import { sendEmail } from "../action/send-mail";
 
+vi.mock("next-intl", () => ({
+  useTranslations: (namespace: string) => (key: string) => {
+    if (namespace === "ContactPage") {
+      const messages = {
+        name: "Name",
+        message: "Message",
+        send: "Send",
+        sending: "Sending...",
+      } as const;
+
+      return messages[key as keyof typeof messages] ?? key;
+    }
+
+    return key;
+  },
+}));
+
 // Mock the server action
 vi.mock("../action/send-mail", () => ({
   sendEmail: vi.fn(),
@@ -32,8 +49,8 @@ describe("EmailForm Component Test", () => {
   it("should render form elements correctly", () => {
     render(<EmailForm />);
 
-    expect(screen.getByPlaceholderText("이름")).toBeInTheDocument();
-    expect(screen.getByPlaceholderText("내용")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Name")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Message")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Send" })).toBeInTheDocument();
   });
 
@@ -41,8 +58,8 @@ describe("EmailForm Component Test", () => {
     const user = userEvent.setup();
     render(<EmailForm />);
 
-    const nameInput = screen.getByPlaceholderText("이름");
-    const contentTextarea = screen.getByPlaceholderText("내용");
+    const nameInput = screen.getByPlaceholderText("Name");
+    const contentTextarea = screen.getByPlaceholderText("Message");
 
     await user.type(nameInput, "John Doe");
     await user.type(contentTextarea, "Hello, this is a test.");
@@ -55,9 +72,9 @@ describe("EmailForm Component Test", () => {
     const user = userEvent.setup();
     render(<EmailForm />);
 
-    await user.type(screen.getByPlaceholderText("이름"), "Jane Doe");
+    await user.type(screen.getByPlaceholderText("Name"), "Jane Doe");
     await user.type(
-      screen.getByPlaceholderText("내용"),
+      screen.getByPlaceholderText("Message"),
       "Another test message."
     );
     await user.click(screen.getByRole("button", { name: "Send" }));

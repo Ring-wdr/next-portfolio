@@ -23,7 +23,7 @@ export function MainProjectItem({
       </Link>
       <div>
         <p className="text-base font-medium leading-normal">{title}</p>
-        <p className="text-[#9cabba] text-sm font-normal leading-normal line-clamp-4">
+        <p className="text-muted-foreground text-sm font-normal leading-normal line-clamp-4">
           {description}
         </p>
       </div>

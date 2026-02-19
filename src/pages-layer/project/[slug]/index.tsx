@@ -18,7 +18,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
     <div className="flex flex-1 justify-center py-8">
       <div className="layout-content-container flex flex-col max-w-[1200px] flex-1 px-4">
         {/* Header Section */}
-        <div className="flex flex-col gap-6 pb-8 border-b border-[#3b4754]">
+        <div className="flex flex-col gap-6 pb-8 border-b border-border">
           <div className="flex flex-col gap-3">
             <ViewTransition
               name={`project-detail-title-${project.slug}`}
@@ -32,10 +32,10 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
                 {project.title}
               </h1>
             </ViewTransition>
-            <p className="text-xl text-[#9cabba]">{project.summary}</p>
+            <p className="text-xl text-muted-foreground">{project.summary}</p>
           </div>
 
-          <div className="flex flex-wrap gap-4 text-sm text-[#9cabba]">
+          <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
               <span className="font-semibold">{t("period")}:</span>
               <span>{project.period}</span>
@@ -57,7 +57,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
                 href={project.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-opacity-90 transition-all font-medium"
+                className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all font-medium"
               >
                 {t("github")}
               </a>
@@ -67,7 +67,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
                 href={project.links.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-2.5 border border-[#3b4754] rounded-lg hover:bg-secondary transition-all font-medium"
+                className="px-6 py-2.5 border border-border rounded-lg hover:bg-secondary transition-all font-medium"
               >
                 {t("liveDemo")}
               </a>
@@ -78,7 +78,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-2.5 border border-[#3b4754] rounded-lg hover:bg-secondary transition-all font-medium"
+                className="px-6 py-2.5 border border-border rounded-lg hover:bg-secondary transition-all font-medium"
               >
                 {link.label}
               </a>
@@ -109,11 +109,11 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
         </div>
 
         {/* Overview Section */}
-        <section className="py-8 border-b border-[#3b4754]">
+        <section className="py-8 border-b border-border">
           <h2 className="text-2xl font-bold mb-6">{t("overview")}</h2>
           <div className="flex flex-col gap-6">
             <div>
-              <h3 className="text-lg font-semibold mb-2 text-[#9cabba]">
+              <h3 className="text-lg font-semibold mb-2 text-muted-foreground">
                 {t("background")}
               </h3>
               <p className="text-base leading-relaxed">
@@ -121,7 +121,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-2 text-[#9cabba]">
+              <h3 className="text-lg font-semibold mb-2 text-muted-foreground">
                 {t("goal")}
               </h3>
               <p className="text-base leading-relaxed">
@@ -129,7 +129,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-2 text-[#9cabba]">
+              <h3 className="text-lg font-semibold mb-2 text-muted-foreground">
                 {t("features")}
               </h3>
               <ul className="list-disc list-inside space-y-2">
@@ -144,13 +144,13 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
         </section>
 
         {/* Tech Stack Section */}
-        <section className="py-8 border-b border-[#3b4754]">
+        <section className="py-8 border-b border-border">
           <h2 className="text-2xl font-bold mb-6">{t("techStack")}</h2>
           <div className="flex flex-wrap gap-3">
             {project.tech.stack.map((tech) => (
               <span
                 key={tech}
-                className="px-4 py-2 bg-secondary border border-[#3b4754] rounded-lg text-sm font-medium"
+                className="px-4 py-2 bg-secondary border border-border rounded-lg text-sm font-medium"
               >
                 {tech}
               </span>
@@ -159,7 +159,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
         </section>
 
         {/* Challenges & Solutions Section */}
-        <section className="py-8 border-b border-[#3b4754]">
+        <section className="py-8 border-b border-border">
           <h2 className="text-2xl font-bold mb-6">
             {t("challengesAndSolutions")}
           </h2>
@@ -173,7 +173,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
                     </span>
                     <h3 className="text-lg font-semibold">{challenge.title}</h3>
                   </div>
-                  <p className="text-base leading-relaxed text-[#9cabba]">
+                  <p className="text-base leading-relaxed text-muted-foreground">
                     {challenge.description}
                   </p>
                 </div>
@@ -199,21 +199,21 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
         </section>
 
         {/* Achievements Section */}
-        <section className="py-8 border-b border-[#3b4754]">
+        <section className="py-8 border-b border-border">
           <h2 className="text-2xl font-bold mb-6">{t("achievements")}</h2>
           <div className="flex flex-col gap-6">
             {project.achievements.metrics && (
               <div>
-                <h3 className="text-lg font-semibold mb-4 text-[#9cabba]">
+                <h3 className="text-lg font-semibold mb-4 text-muted-foreground">
                   {t("metrics")}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {project.achievements.metrics.map((metric, index) => (
                     <div
                       key={index}
-                      className="p-4 bg-secondary border border-[#3b4754] rounded-lg"
+                      className="p-4 bg-secondary border border-border rounded-lg"
                     >
-                      <div className="text-sm text-[#9cabba] mb-1">
+                      <div className="text-sm text-muted-foreground mb-1">
                         {metric.label}
                       </div>
                       <div className="text-2xl font-bold">{metric.value}</div>
@@ -225,7 +225,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 
             {project.achievements.feedback && (
               <div>
-                <h3 className="text-lg font-semibold mb-4 text-[#9cabba]">
+                <h3 className="text-lg font-semibold mb-4 text-muted-foreground">
                   {t("feedback")}
                 </h3>
                 <ul className="space-y-2">
@@ -244,7 +244,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 
             {project.achievements.improvements && (
               <div>
-                <h3 className="text-lg font-semibold mb-4 text-[#9cabba]">
+                <h3 className="text-lg font-semibold mb-4 text-muted-foreground">
                   {t("improvements")}
                 </h3>
                 <ul className="space-y-2">
@@ -265,7 +265,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 
         {/* Gallery Section */}
         {project.gallery.length > 0 && (
-          <section className="py-8 border-b border-[#3b4754]">
+          <section className="py-8 border-b border-border">
             <h2 className="text-2xl font-bold mb-6">{t("screenshots")}</h2>
             <ImageGallery images={project.gallery} />
           </section>

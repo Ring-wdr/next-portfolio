@@ -8,14 +8,47 @@
   },
   "Footer": {
     "allRightsReserved": "All rights reserved.",
-    "builtWith": "Next.js와 Tailwind CSS로 제작하였습니다."
+    "builtWith": "Next.js와 Tailwind CSS로 제작하였습니다.",
+    "github": "깃허브",
+    "linkedin": "링크드인",
+    "email": "이메일"
+  },
+  "Common": {
+    "toggleTheme": "테마 전환",
+    "closeModal": "모달 닫기",
+    "close": "닫기",
+    "previous": "이전",
+    "next": "다음"
   },
   "HomePage": {
+    "eyebrow": "프론트엔드 엔지니어 포트폴리오",
     "greeting": "안녕하세요, 저는 김만중입니다. 프론트엔드 개발자입니다",
     "description": "최신 기술을 사용하여 아름답고 기능적인 웹 경험을 구축합니다. 포트폴리오를 탐색하여 제 작업을 확인하고 기술에 대해 자세히 알아보세요.",
     "viewProjects": "프로젝트 보기",
+    "aboutCta": "소개",
     "featuredProjects": "주요 프로젝트",
-    "techStack": "기술 스택"
+    "techStack": "기술 스택",
+    "featuredStory": "추천 스토리",
+    "viewAll": "전체 보기",
+    "stats": {
+      "projects": "프로젝트",
+      "tech": "기술",
+      "currentFocus": "현재 집중 분야"
+    },
+    "pillars": {
+      "productThinking": {
+        "title": "프로덕트 사고",
+        "description": "사용자 흐름을 먼저 설계하고, 실제 성과를 위한 엔지니어링 디테일을 최적화합니다."
+      },
+      "modernFrontend": {
+        "title": "모던 프론트엔드",
+        "description": "React 19와 App Router 패턴, 전환 중심 인터페이스를 실용적으로 적용합니다."
+      },
+      "deliveryFocus": {
+        "title": "실행 중심",
+        "description": "프로토타입부터 운영까지 품질, 성능, 유지보수성을 균형 있게 가져갑니다."
+      }
+    }
   },
   "ProjectsPage": {
     "title": "프로젝트",

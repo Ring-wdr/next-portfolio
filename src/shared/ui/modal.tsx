@@ -3,6 +3,7 @@
 import { useRouter } from "@/i18n/routing";
 import { ComponentRef, startTransition, useLayoutEffect, useRef } from "react";
 import { ViewTransition } from "react";
+import { useTranslations } from "next-intl";
 
 type ModalProps = {
   children: React.ReactNode;
@@ -10,6 +11,7 @@ type ModalProps = {
 
 export function Modal({ children }: ModalProps) {
   const router = useRouter();
+  const t = useTranslations("Common");
   const dialogRef = useRef<ComponentRef<"dialog">>(null);
 
   useLayoutEffect(() => {
@@ -51,8 +53,8 @@ export function Modal({ children }: ModalProps) {
           <div className="relative h-full w-full flex items-start justify-center overflow-y-auto py-8">
             <button
               onClick={onDismiss}
-              className="fixed top-4 right-4 z-60 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
-              aria-label="Close modal"
+              className="fixed top-4 right-4 z-60 rounded-full border border-border/70 bg-background/70 p-2 text-foreground backdrop-blur-sm transition-colors hover:bg-secondary"
+              aria-label={t("closeModal")}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -8,14 +8,47 @@
   },
   "Footer": {
     "allRightsReserved": "All rights reserved.",
-    "builtWith": "Built with Next.js and Tailwind CSS"
+    "builtWith": "Built with Next.js and Tailwind CSS",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "email": "Email"
+  },
+  "Common": {
+    "toggleTheme": "Toggle theme",
+    "closeModal": "Close modal",
+    "close": "Close",
+    "previous": "Previous",
+    "next": "Next"
   },
   "HomePage": {
+    "eyebrow": "Frontend Engineer Portfolio",
     "greeting": "Hi, I'm Manjoong, a Front-End Developer",
     "description": "I build beautiful and functional web experiences using modern technologies. Explore my portfolio to see my work and learn more about my skills.",
     "viewProjects": "View Projects",
+    "aboutCta": "About",
     "featuredProjects": "Featured Projects",
-    "techStack": "Tech Stack"
+    "techStack": "Tech Stack",
+    "featuredStory": "Featured Story",
+    "viewAll": "View all",
+    "stats": {
+      "projects": "Projects",
+      "tech": "Tech",
+      "currentFocus": "Current Focus"
+    },
+    "pillars": {
+      "productThinking": {
+        "title": "Product Thinking",
+        "description": "Build clear user flows first, then optimize engineering details for real outcomes."
+      },
+      "modernFrontend": {
+        "title": "Modern Frontend",
+        "description": "Practical use of React 19, App Router patterns, and transition-rich interfaces."
+      },
+      "deliveryFocus": {
+        "title": "Delivery Focus",
+        "description": "Balance quality, performance, and maintainability from prototype to production."
+      }
+    }
   },
   "ProjectsPage": {
     "title": "Projects",

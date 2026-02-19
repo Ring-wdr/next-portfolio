@@ -21,10 +21,10 @@ export function AboutPage() {
               <h1 className="text-[22px] font-bold leading-tight tracking-[-0.015em]">
                 {t("greeting")}
               </h1>
-              <p className="text-[#9cabba] text-base font-normal leading-normal">
+              <p className="text-muted-foreground text-base font-normal leading-normal">
                 {t("role")}
               </p>
-              <p className="text-[#9cabba] text-base font-normal leading-normal">
+              <p className="text-muted-foreground text-base font-normal leading-normal">
                 {t("intro")}
               </p>
             </div>
@@ -40,7 +40,7 @@ export function AboutPage() {
           {t("strengthsTitle")}
         </h2>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
-          <div className="flex flex-1 gap-3 rounded-lg border border-[#3b4754] bg-secondary p-4 items-center">
+          <div className="flex flex-1 gap-3 rounded-lg border border-border bg-secondary p-4 items-center">
             <div data-icon="Code" data-size="24px" data-weight="regular">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +54,7 @@ export function AboutPage() {
             </div>
             <h2 className="text-base font-bold leading-tight">{t("cleanCode")}</h2>
           </div>
-          <div className="flex flex-1 gap-3 rounded-lg border border-[#3b4754] bg-secondary p-4 items-center">
+          <div className="flex flex-1 gap-3 rounded-lg border border-border bg-secondary p-4 items-center">
             <div data-icon="Palette" data-size="24px" data-weight="regular">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +68,7 @@ export function AboutPage() {
             </div>
             <h2 className="text-base font-bold leading-tight">{t("uiuxDesign")}</h2>
           </div>
-          <div className="flex flex-1 gap-3 rounded-lg border border-[#3b4754] bg-secondary p-4 items-center">
+          <div className="flex flex-1 gap-3 rounded-lg border border-border bg-secondary p-4 items-center">
             <div
               data-icon="PersonArmsSpread"
               data-size="24px"
@@ -86,7 +86,7 @@ export function AboutPage() {
             </div>
             <h2 className="text-base font-bold leading-tight">{t("accessibility")}</h2>
           </div>
-          <div className="flex flex-1 gap-3 rounded-lg border border-[#3b4754] bg-secondary p-4 items-center">
+          <div className="flex flex-1 gap-3 rounded-lg border border-border bg-secondary p-4 items-center">
             <div
               data-icon="RocketLaunch"
               data-size="24px"

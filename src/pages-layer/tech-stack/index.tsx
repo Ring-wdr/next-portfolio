@@ -13,7 +13,7 @@ export function TechStackPage() {
             <p className="tracking-light text-[32px] font-bold leading-tight">
               {t("title")}
             </p>
-            <p className="text-[#9cabba] text-sm font-normal leading-normal">
+            <p className="text-muted-foreground text-sm font-normal leading-normal">
               {t("description")}
             </p>
           </div>
@@ -29,7 +29,7 @@ export function TechStackPage() {
               ).map((tech) => (
                 <div
                   key={tech.name}
-                  className="flex flex-1 gap-3 rounded-lg border border-[#3b4754] bg-secondary p-4 items-center"
+                  className="flex flex-1 gap-3 rounded-lg border border-border bg-secondary p-4 items-center"
                 >
                   {tech.icon}
                   <h2 className="text-base font-bold leading-tight">

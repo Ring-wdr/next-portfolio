@@ -8,52 +8,101 @@ import { Link } from "@/i18n/routing";
 
 export function MainPage() {
   const t = useTranslations("HomePage");
+  const featuredProjects = projectList.toReversed().slice(0, 3);
+  const mainProject = featuredProjects[0];
+  const spotlightTech = TechStack.slice(0, 8);
 
   return (
-    <div className="md:px-8 lg:px-16 xl:px-24 flex flex-1 justify-center">
-      <div className="flex flex-col w-full max-w-full md:max-w-4xl flex-1">
-        <div className="w-full">
-          <div className="p-0 md:p-4">
-            <div className="relative flex min-h-[350px] md:min-h-[480px] flex-col gap-6 md:gap-8 md:rounded-lg items-start justify-end px-10 pb-10 overflow-hidden w-full py-10">
-              <Image
-                src="https://fastly.picsum.photos/id/42/3456/2304.jpg?hmac=dhQvd1Qp19zg26MEwYMnfz34eLnGv8meGk_lFNAJR3g"
-                alt="Manjoong profile background"
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 960px"
-                quality={90}
-                className="object-cover object-center z-0"
-              />
-              <div
-                className="absolute inset-0 z-10 bg-gradient-to-b from-background/10 to-background/40"
-                aria-hidden="true"
-              />
-              <div className="flex flex-col gap-2 text-left relative z-20">
-                <h1 className="flex items-center text-4xl font-black mb-4 no-underline bg-gradient-to-r from-primary from-50% via-[#ff5858] via-50% to-[#cc2e5d] bg-[length:200%_100%] bg-clip-text text-transparent transition-all duration-300 ease-out break-keep hover:bg-[position:100%_0]">
+    <main className="flex flex-1 justify-center py-6 md:py-10">
+      <div className="section-shell flex w-full flex-1 flex-col gap-10 md:gap-12">
+        <section className="glass-panel relative overflow-hidden rounded-3xl px-6 py-8 md:px-10 md:py-10">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_0%,color-mix(in_oklch,var(--color-highlight),transparent_82%),transparent_42%),radial-gradient(circle_at_100%_100%,color-mix(in_oklch,var(--color-primary),transparent_85%),transparent_46%)]" />
+          <div className="relative z-10 grid gap-8 lg:grid-cols-[1.3fr_0.9fr] lg:items-end">
+            <div className="space-y-6">
+              <div className="space-y-3">
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+                  {t("eyebrow")}
+                </p>
+                <h1 className="text-gradient-hero text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
                   {t("greeting")}
                 </h1>
-                <h2 className="text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
+                <p className="max-w-xl text-sm text-muted-foreground md:text-base">
                   {t("description")}
-                </h2>
+                </p>
               </div>
-              <Link
-                href="/project"
-                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#0c7ff2] text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] relative z-20 text-white"
-              >
-                <span className="truncate">{t("viewProjects")}</span>
-              </Link>
+
+              <div className="flex flex-wrap items-center gap-3">
+                <Link
+                  href="/project"
+                  className="inline-flex h-11 items-center justify-center rounded-xl bg-primary px-5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  {t("viewProjects")}
+                </Link>
+                <Link
+                  href="/about"
+                  className="inline-flex h-11 items-center justify-center rounded-xl border border-border bg-card/70 px-5 text-sm font-semibold text-foreground transition-colors hover:bg-card"
+                >
+                  {t("aboutCta")}
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-3 gap-2 text-center sm:max-w-md">
+                <div className="rounded-xl border border-border/70 bg-card/60 px-3 py-2">
+                  <p className="text-xl font-bold">{projectList.length}</p>
+                  <p className="text-xs text-muted-foreground">{t("stats.projects")}</p>
+                </div>
+                <div className="rounded-xl border border-border/70 bg-card/60 px-3 py-2">
+                  <p className="text-xl font-bold">{TechStack.length}+</p>
+                  <p className="text-xs text-muted-foreground">{t("stats.tech")}</p>
+                </div>
+                <div className="rounded-xl border border-border/70 bg-card/60 px-3 py-2">
+                  <p className="text-xl font-bold">2026</p>
+                  <p className="text-xs text-muted-foreground">{t("stats.currentFocus")}</p>
+                </div>
+              </div>
             </div>
+
+            {mainProject && (
+              <Link
+                href={`/project/${mainProject.slug}`}
+                className="group glass-panel relative block overflow-hidden rounded-2xl"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image
+                    src={mainProject.src}
+                    alt={mainProject.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 420px"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="space-y-2 p-4">
+                  <p className="text-xs font-medium text-muted-foreground">
+                    {t("featuredStory")}
+                  </p>
+                  <h2 className="text-xl font-semibold">{mainProject.title}</h2>
+                  <p className="line-clamp-2 text-sm text-muted-foreground">
+                    {mainProject.impact}
+                  </p>
+                </div>
+              </Link>
+            )}
           </div>
-        </div>
-        <h2 className="text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
-          {t("featuredProjects")}
-        </h2>
-        <div className="flex overflow-y-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden">
-          <div className="flex items-stretch p-4 gap-3">
-            {projectList
-              .toReversed()
-              .slice(0, 3)
-              .map((project) => (
+        </section>
+
+        <section className="space-y-4">
+          <div className="flex items-center justify-between px-1">
+            <h2 className="text-2xl font-bold">{t("featuredProjects")}</h2>
+            <Link
+              href="/project"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {t("viewAll")}
+            </Link>
+          </div>
+          <div className="flex overflow-y-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="flex items-stretch gap-3 py-1">
+              {featuredProjects.map((project) => (
                 <MainProjectItem
                   key={project.title}
                   title={project.title}
@@ -62,22 +111,51 @@ export function MainPage() {
                   href={project.href}
                 />
               ))}
+            </div>
           </div>
-        </div>
-        <h2 className="text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
-          {t("techStack")}
-        </h2>
-        <div className="flex gap-3 p-3 flex-wrap pr-4">
-          {TechStack.map((tech) => (
-            <button
-              key={tech.name}
-              className="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-secondary pl-4 pr-4 hover:bg-primary hover:text-background"
-            >
-              <p className="text-sm font-medium leading-normal">{tech.name}</p>
-            </button>
-          ))}
-        </div>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="px-1 text-2xl font-bold">{t("techStack")}</h2>
+          <div className="glass-panel grid grid-cols-2 gap-2 rounded-2xl p-4 sm:grid-cols-3 lg:grid-cols-4">
+            {spotlightTech.map((tech) => (
+              <button
+                key={tech.name}
+                className="flex h-10 items-center justify-center rounded-xl border border-border/70 bg-card/70 px-3 text-sm font-medium transition-colors hover:border-primary/40 hover:bg-secondary"
+              >
+                {tech.name}
+              </button>
+            ))}
+          </div>
+        </section>
+
+        <section className="grid gap-3 md:grid-cols-3">
+          <article className="glass-panel rounded-2xl p-5">
+            <h3 className="text-sm font-semibold text-muted-foreground">
+              {t("pillars.productThinking.title")}
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed">
+              {t("pillars.productThinking.description")}
+            </p>
+          </article>
+          <article className="glass-panel rounded-2xl p-5">
+            <h3 className="text-sm font-semibold text-muted-foreground">
+              {t("pillars.modernFrontend.title")}
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed">
+              {t("pillars.modernFrontend.description")}
+            </p>
+          </article>
+          <article className="glass-panel rounded-2xl p-5">
+            <h3 className="text-sm font-semibold text-muted-foreground">
+              {t("pillars.deliveryFocus.title")}
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed">
+              {t("pillars.deliveryFocus.description")}
+            </p>
+          </article>
+        </section>
       </div>
-    </div>
+    </main>
   );
 }

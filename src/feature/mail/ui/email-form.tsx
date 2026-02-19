@@ -3,8 +3,10 @@
 import { useEffect, useActionState } from "react";
 import { FormButton } from "@/shared/ui/form-button";
 import { sendEmail } from "../action/send-mail";
+import { useTranslations } from "next-intl";
 
 export function EmailForm() {
+  const t = useTranslations("ContactPage");
   const [sendState, formAction, isPending] = useActionState(sendEmail, null);
 
   useEffect(() => {
@@ -24,7 +26,7 @@ export function EmailForm() {
           type="text"
           name="userName"
           id="userName"
-          placeholder="이름"
+          placeholder={t("name")}
           required
           className="w-full px-4 py-2 bg-background border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
         />
@@ -36,7 +38,7 @@ export function EmailForm() {
         <textarea
           name="content"
           id="content"
-          placeholder="내용"
+          placeholder={t("message")}
           required
           rows={5}
           className="w-full px-4 py-2 bg-background border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
