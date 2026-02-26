@@ -1,5 +1,8 @@
+packages:
+  - .
+
 ignoredBuiltDependencies:
-  - '@swc/core'
+  - "@swc/core"
   - esbuild
   - sharp
   - unrs-resolver
