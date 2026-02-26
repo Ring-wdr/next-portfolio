@@ -41,6 +41,7 @@ export function ProjectItem({
 							src={src}
 							alt={title}
 							fill
+							sizes="(min-width: 1280px) 360px, (min-width: 768px) 50vw, 100vw"
 							className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
 						/>
 					</TransitionLink>

@@ -100,6 +100,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 								src={project.thumbnail}
 								alt={project.title}
 								fill
+								sizes="(min-width: 1024px) 1024px, 100vw"
 								className="object-cover"
 								priority
 							/>
