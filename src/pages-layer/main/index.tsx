@@ -78,6 +78,7 @@ export function MainPage() {
 										alt={mainProject.title}
 										fill
 										sizes="(max-width: 1024px) 100vw, 420px"
+										priority
 										className="object-cover transition-transform duration-500 group-hover:scale-105"
 									/>
 								</div>

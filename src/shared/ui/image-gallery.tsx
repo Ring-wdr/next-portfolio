@@ -20,27 +20,27 @@ export function ImageGallery({ images }: ImageGalleryProps) {
 	const t = useTranslations("Common");
 	const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  const openModal = useCallback((index: number) => {
-    setSelectedIndex(index);
-  }, []);
+	const openModal = useCallback((index: number) => {
+		setSelectedIndex(index);
+	}, []);
 
-  const closeModal = useCallback(() => {
-    setSelectedIndex(null);
-  }, []);
+	const closeModal = useCallback(() => {
+		setSelectedIndex(null);
+	}, []);
 
-  const goToPrevious = useCallback(() => {
-    setSelectedIndex((prev) => {
-      if (prev === null) return prev;
-      return (prev - 1 + images.length) % images.length;
-    });
-  }, [images.length]);
+	const goToPrevious = useCallback(() => {
+		setSelectedIndex((prev) => {
+			if (prev === null) return prev;
+			return (prev - 1 + images.length) % images.length;
+		});
+	}, [images.length]);
 
-  const goToNext = useCallback(() => {
-    setSelectedIndex((prev) => {
-      if (prev === null) return prev;
-      return (prev + 1) % images.length;
-    });
-  }, [images.length]);
+	const goToNext = useCallback(() => {
+		setSelectedIndex((prev) => {
+			if (prev === null) return prev;
+			return (prev + 1) % images.length;
+		});
+	}, [images.length]);
 
 	// Keyboard navigation
 	useEffect(() => {
@@ -58,7 +58,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
 
 		window.addEventListener("keydown", handleKeyDown);
 		return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [closeModal, goToNext, goToPrevious, selectedIndex]);
+	}, [closeModal, goToNext, goToPrevious, selectedIndex]);
 
 	// Prevent body scroll when modal is open
 	useEffect(() => {
@@ -152,7 +152,6 @@ export function ImageGallery({ images }: ImageGalleryProps) {
 								fill
 								sizes="100vw"
 								className="object-contain"
-								priority
 							/>
 						</div>
 

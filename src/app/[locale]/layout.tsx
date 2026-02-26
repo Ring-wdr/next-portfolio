@@ -10,7 +10,6 @@ import { env } from "@/env";
 import { routing } from "@/i18n/routing";
 import { Footer } from "@/shared/ui/footer";
 import { Header } from "@/shared/ui/header";
-import { RouteTransition } from "@/shared/ui/route-transition";
 import { classNames } from "@/shared/utils/classnames";
 
 const displayFont = Space_Grotesk({
@@ -132,14 +131,12 @@ export default async function LocaleLayout({
 						enableSystem
 						disableTransitionOnChange
 					>
-						<RouteTransition>
-							<div className="flex h-full grow flex-col">
-								<Header />
-								{children}
-								{modal}
-								<Footer />
-							</div>
-						</RouteTransition>
+						<div className="flex h-full grow flex-col">
+							<Header />
+							{children}
+							{modal}
+							<Footer />
+						</div>
 					</ThemeProvider>
 				</NextIntlClientProvider>
 			</body>
