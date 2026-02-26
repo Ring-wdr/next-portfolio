@@ -5,6 +5,7 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
 	reactStrictMode: true,
+	reactCompiler: true,
 	images: {
 		minimumCacheTTL: 86400,
 		qualities: [75, 90],
