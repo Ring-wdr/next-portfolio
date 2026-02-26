@@ -11,7 +11,10 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:e2e": "playwright test",
-    "test:e2e-log": "playwright test -c playwright.config.log.ts"
+    "test:e2e-log": "playwright test -c playwright.config.log.ts",
+    "test:perf:quick": "playwright test tests/benchmarks/quick-benchmark.ts",
+    "test:perf:full": "playwright test tests/benchmarks/route-benchmark.spec.ts -c playwright.perf.config.ts",
+    "test:perf": "playwright test tests/benchmarks -c playwright.perf.config.ts"
   },
   "dependencies": {
     "@next/third-parties": "16.1.6",

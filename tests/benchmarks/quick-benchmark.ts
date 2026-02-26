@@ -1,0 +1,221 @@
+/**
+ * Quick Performance Benchmark Script
+ *
+ * A simplified, practical benchmark for quick performance checks.
+ * Run with: pnpm test:perf:quick
+ */
+
+import { expect, type Page, test } from "@playwright/test";
+import {
+	PERFORMANCE_BUDGETS,
+	ROUTES,
+	THROTTLING_PRESETS,
+} from "./performance.config";
+
+// ==================== UTILITIES ====================
+
+async function setupPerfObserver(page: Page) {
+	await page.addInitScript(() => {
+		(window as any).__perfData = {
+			lcp: [],
+			cls: [],
+			inp: [],
+			longTasks: [],
+		};
+
+		// LCP Observer
+		new PerformanceObserver((list) => {
+			const entries = list.getEntries() as any[];
+			const lastEntry = entries[entries.length - 1];
+			(window as any).__perfData.lcp.push(lastEntry.startTime);
+		}).observe({ entryTypes: ["largest-contentful-paint"], buffered: true });
+
+		// CLS Observer
+		let clsValue = 0;
+		new PerformanceObserver((list) => {
+			for (const entry of list.getEntries() as any[]) {
+				if (!(entry as any).hadRecentInput) {
+					clsValue += (entry as any).value;
+				}
+			}
+			(window as any).__perfData.cls.push(clsValue);
+		}).observe({ entryTypes: ["layout-shift"], buffered: true });
+
+		// Long Task Observer
+		new PerformanceObserver((list) => {
+			for (const entry of list.getEntries() as any[]) {
+				(window as any).__perfData.longTasks.push(entry.duration);
+			}
+		}).observe({ entryTypes: ["longtask"], buffered: true });
+
+		// INP approximation - track click latency
+		const measureInp = (type: string) => {
+			const start = performance.now();
+			// Measure until next frame
+			requestAnimationFrame(() => {
+				requestAnimationFrame(() => {
+					(window as any).__perfData.inp.push(performance.now() - start);
+				});
+			});
+		};
+
+		document.addEventListener("click", () => measureInp("click"), {
+			passive: true,
+		});
+		document.addEventListener("keydown", () => measureInp("keydown"), {
+			passive: true,
+		});
+	});
+}
+
+async function collectMetrics(page: Page) {
+	const perfData = await page.evaluate(() => (window as any).__perfData);
+
+	// Navigation timing
+	const navTiming = await page.evaluate(() => {
+		const [nav] = performance.getEntriesByType("navigation") as any[];
+		const [fcp] = performance.getEntriesByType("paint");
+		return {
+			ttfb: nav?.responseStart - nav?.requestStart,
+			fcp: fcp?.startTime,
+			domInteractive: nav?.domInteractive,
+			loadComplete: nav?.loadEventEnd,
+		};
+	});
+
+	// Resource count
+	const resources = await page.evaluate(() => {
+		return performance.getEntriesByType("resource").length;
+	});
+
+	// Calculate metrics
+	const lcp =
+		perfData.lcp.length > 0
+			? Math.round(perfData.lcp[perfData.lcp.length - 1])
+			: null;
+	const cls =
+		perfData.cls.length > 0
+			? Math.round(Math.max(...perfData.cls) * 1000) / 1000
+			: 0;
+	const inp =
+		perfData.inp.length > 0 ? Math.round(Math.max(...perfData.inp)) : 0;
+	const longTasks = perfData.longTasks.length;
+
+	return { lcp, cls, inp, longTasks, navTiming, resources };
+}
+
+// ==================== TESTS ====================
+
+test.describe("Quick Performance Benchmark", () => {
+	test("all routes - core metrics", async ({ page }) => {
+		await setupPerfObserver(page);
+
+		const results: Record<string, any> = {};
+
+		for (const route of ROUTES) {
+			console.log(`\n📍 Testing: ${route.name} (${route.path})`);
+
+			// Navigate
+			const navStart = Date.now();
+			await page.goto(route.path, { waitUntil: "networkidle" });
+			const navTime = Date.now() - navStart;
+
+			// Wait for page stabilization
+			await page.waitForTimeout(1500);
+
+			const metrics = await collectMetrics(page);
+			results[route.path] = metrics;
+
+			// Log results
+			console.log(`   ⏱️  Navigation: ${navTime}ms`);
+			console.log(`   🔵 TTFB: ${metrics.navTiming.ttfb}ms`);
+			console.log(
+				`   📦 LCP: ${metrics.lcp}ms | CLS: ${metrics.cls} | INP: ${metrics.inp}ms`,
+			);
+			console.log(
+				`   📚 Resources: ${metrics.resources} | Long Tasks: ${metrics.longTasks}`,
+			);
+
+			// Quick assertions
+			expect(metrics.navTiming.ttfb).toBeLessThan(2000);
+			expect(metrics.lcp).toBeLessThan(5000);
+			expect(metrics.cls).toBeLessThan(0.3);
+		}
+
+		// Summary
+		console.log("\n" + "=".repeat(50));
+		console.log("📊 BENCHMARK SUMMARY");
+		console.log("=".repeat(50));
+
+		for (const [path, metrics] of Object.entries(results)) {
+			const r = metrics as any;
+			const lcpStatus =
+				r.lcp < PERFORMANCE_BUDGETS.lcp.warningThreshold
+					? "✅"
+					: r.lcp < PERFORMANCE_BUDGETS.lcp.criticalThreshold
+						? "⚠️"
+						: "❌";
+			const clsStatus =
+				r.cls < PERFORMANCE_BUDGETS.cls.warningThreshold
+					? "✅"
+					: r.cls < PERFORMANCE_BUDGETS.cls.criticalThreshold
+						? "⚠️"
+						: "❌";
+
+			console.log(
+				`${path}: LCP ${r.lcp}ms ${lcpStatus} | CLS ${r.cls} ${clsStatus}`,
+			);
+		}
+	});
+
+	test("low-end device simulation", async ({ browser }) => {
+		const context = await browser.newContext();
+		const client = await context.newCDPSession(null as any);
+
+		// Apply low-end mobile throttling
+		const preset = THROTTLING_PRESETS["low-end-mobile"];
+		await client.send("Emulation.setCPUThrottlingRate", {
+			rate: preset.cpuThrottlingRate,
+		});
+		await client.send("Network.emulateNetworkConditions", preset.network);
+
+		console.log(`\n📱 Testing with throttling: ${preset.name}`);
+		console.log(`   CPU: ${preset.cpuThrottlingRate}x throttling`);
+		console.log(
+			`   Network: ${preset.network.downloadThroughput / 1024}KB/s down, ${preset.network.latency}ms latency`,
+		);
+
+		const page = await context.newPage();
+		await setupPerfObserver(page);
+
+		// Test critical routes
+		const criticalRoutes = ["/en", "/en/about", "/en/project"];
+
+		for (const route of criticalRoutes) {
+			const start = Date.now();
+			await page.goto(route, { waitUntil: "domcontentloaded" });
+			const navTime = Date.now() - start;
+
+			await page.waitForTimeout(2000);
+
+			const metrics = await collectMetrics(page);
+
+			console.log(
+				`   ${route}: Nav ${navTime}ms | LCP ${metrics.lcp}ms | CLS ${metrics.cls}`,
+			);
+
+			// Lenient assertions for throttled
+			expect(metrics.lcp).toBeLessThan(15000);
+		}
+
+		// Cleanup
+		await client.send("Emulation.setCPUThrottlingRate", { rate: 1 });
+		await client.send("Network.emulateNetworkConditions", {
+			offline: false,
+			downloadThroughput: -1,
+			uploadThroughput: -1,
+			latency: 0,
+		});
+		await context.close();
+	});
+});
