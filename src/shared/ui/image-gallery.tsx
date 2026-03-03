@@ -4,7 +4,7 @@ import { ChevronLeftIcon, ChevronRightIcon, XIcon } from "lucide-react";
 import type { StaticImageData } from "next/image";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useEffectEvent, useState } from "react";
 
 type GalleryImage = {
 	src: string | StaticImageData;
@@ -20,27 +20,31 @@ export function ImageGallery({ images }: ImageGalleryProps) {
 	const t = useTranslations("Common");
 	const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-	const openModal = useCallback((index: number) => {
+	const openModal = (index: number) => {
 		setSelectedIndex(index);
-	}, []);
+	};
 
-	const closeModal = useCallback(() => {
+	const closeModal = () => {
 		setSelectedIndex(null);
-	}, []);
+	};
 
-	const goToPrevious = useCallback(() => {
+	const goToPrevious = () => {
 		setSelectedIndex((prev) => {
 			if (prev === null) return prev;
 			return (prev - 1 + images.length) % images.length;
 		});
-	}, [images.length]);
+	};
 
-	const goToNext = useCallback(() => {
+	const goToNext = () => {
 		setSelectedIndex((prev) => {
 			if (prev === null) return prev;
 			return (prev + 1) % images.length;
 		});
-	}, [images.length]);
+	};
+
+	const closeModalEvent = useEffectEvent(closeModal);
+	const goToPreviousEvent = useEffectEvent(goToPrevious);
+	const goToNextEvent = useEffectEvent(goToNext);
 
 	// Keyboard navigation
 	useEffect(() => {
@@ -48,27 +52,27 @@ export function ImageGallery({ images }: ImageGalleryProps) {
 
 		const handleKeyDown = (e: KeyboardEvent) => {
 			if (e.key === "Escape") {
-				closeModal();
+				closeModalEvent();
 			} else if (e.key === "ArrowLeft") {
-				goToPrevious();
+				goToPreviousEvent();
 			} else if (e.key === "ArrowRight") {
-				goToNext();
+				goToNextEvent();
 			}
 		};
 
 		window.addEventListener("keydown", handleKeyDown);
 		return () => window.removeEventListener("keydown", handleKeyDown);
-	}, [closeModal, goToNext, goToPrevious, selectedIndex]);
+	}, [selectedIndex]);
 
 	// Prevent body scroll when modal is open
 	useEffect(() => {
 		if (selectedIndex !== null) {
 			document.body.style.overflow = "hidden";
 		} else {
-			document.body.style.overflow = "unset";
+			document.body.style.removeProperty("overflow");
 		}
 		return () => {
-			document.body.style.overflow = "unset";
+			document.body.style.removeProperty("overflow");
 		};
 	}, [selectedIndex]);
 
@@ -100,10 +104,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
 			</div>
 
 			{selectedIndex !== null && (
-				<div
-					className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 p-4 backdrop-blur-sm"
-					onClick={closeModal}
-				>
+				<div className="fixed inset-0 z-50 flex items-center justify-center bg-background/90 p-4 backdrop-blur-sm">
 					{/* Close Button */}
 					<button
 						type="button"
@@ -141,10 +142,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
 						</>
 					)}
 
-					<div
-						className="relative w-full h-full max-w-6xl max-h-[90vh] flex items-center justify-center"
-						onClick={(e) => e.stopPropagation()}
-					>
+					<div className="relative w-full h-full max-w-6xl max-h-[90vh] flex items-center justify-center">
 						<div className="relative w-full h-full">
 							<Image
 								src={images[selectedIndex].src}
