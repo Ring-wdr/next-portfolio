@@ -1,4 +1,4 @@
-import { type BrowserContext, expect, test } from "@playwright/test";
+import { type BrowserContext, type Page, expect, test } from "@playwright/test";
 
 import {
 	PERFORMANCE_BUDGETS,
@@ -7,9 +7,35 @@ import {
 	type ThrottlingPreset,
 } from "./performance.config";
 
-async function setupPerformanceObserver(page: any): Promise<void> {
+type RoutePerfSnapshot = {
+	lcp: number[];
+	cls: number[];
+	inp: number[];
+	longTasks: Array<{ name: string; duration: number }>;
+};
+
+type RoutePerfWindow = Window &
+	typeof globalThis & {
+		__routePerf: RoutePerfSnapshot;
+	};
+
+type RouteMetrics = {
+	lcp: number | null;
+	cls: number;
+	inp: number;
+	navigation: {
+		ttfb: number;
+		domInteractive: number;
+		fcp: number;
+		loadComplete: number;
+	} | null;
+	longTaskCount: number;
+};
+
+async function setupPerformanceObserver(page: Page): Promise<void> {
 	await page.addInitScript(() => {
-		(window as any).__routePerf = {
+		const perfWindow = window as RoutePerfWindow;
+		perfWindow.__routePerf = {
 			lcp: [] as number[],
 			cls: [] as number[],
 			inp: [] as number[],
@@ -20,7 +46,7 @@ async function setupPerformanceObserver(page: any): Promise<void> {
 			const entries = list.getEntries();
 			const lastEntry = entries[entries.length - 1];
 			if (lastEntry) {
-				(window as any).__routePerf.lcp.push(lastEntry.startTime);
+				perfWindow.__routePerf.lcp.push(lastEntry.startTime);
 			}
 		}).observe({ entryTypes: ["largest-contentful-paint"], buffered: true });
 
@@ -32,7 +58,7 @@ async function setupPerformanceObserver(page: any): Promise<void> {
 			}>) {
 				if (!entry.hadRecentInput) {
 					clsValue += entry.value;
-					(window as any).__routePerf.cls.push(clsValue);
+					perfWindow.__routePerf.cls.push(clsValue);
 				}
 			}
 		}).observe({ entryTypes: ["layout-shift"], buffered: true });
@@ -42,7 +68,7 @@ async function setupPerformanceObserver(page: any): Promise<void> {
 				name: string;
 				duration: number;
 			}>) {
-				(window as any).__routePerf.longTasks.push(entry);
+				perfWindow.__routePerf.longTasks.push(entry);
 			}
 		}).observe({ entryTypes: ["longtask"], buffered: true });
 
@@ -50,7 +76,7 @@ async function setupPerformanceObserver(page: any): Promise<void> {
 			const start = performance.now();
 			requestAnimationFrame(() => {
 				requestAnimationFrame(() => {
-					(window as any).__routePerf.inp.push(performance.now() - start);
+					perfWindow.__routePerf.inp.push(performance.now() - start);
 				});
 			});
 		};
@@ -93,8 +119,10 @@ async function resetThrottling(context: BrowserContext): Promise<void> {
 	});
 }
 
-async function collectMetrics(page: any) {
-	const perfData = await page.evaluate(() => (window as any).__routePerf);
+async function collectMetrics(page: Page): Promise<RouteMetrics> {
+	const perfData = await page.evaluate(
+		() => (window as RoutePerfWindow).__routePerf,
+	);
 
 	const navigation = await page.evaluate(() => {
 		const [entry] = performance.getEntriesByType(

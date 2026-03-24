@@ -1,7 +1,9 @@
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 
-export default createMiddleware(routing);
+const handleI18nRouting = createMiddleware(routing);
+
+export const proxy = handleI18nRouting;
 
 export const config = {
   // Match all pathnames except for

@@ -19,7 +19,13 @@ export function MainProjectItem({
         href={href}
         className="w-full aspect-video rounded-lg relative overflow-hidden"
       >
-        <Image src={src} alt={title} fill className="object-cover" />
+        <Image
+          src={src}
+          alt={title}
+          fill
+          sizes="(min-width: 1024px) 320px, (min-width: 768px) 45vw, 80vw"
+          className="object-cover"
+        />
       </Link>
       <div>
         <p className="text-base font-medium leading-normal">{title}</p>

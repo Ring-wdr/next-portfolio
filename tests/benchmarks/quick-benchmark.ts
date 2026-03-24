@@ -14,9 +14,43 @@ import {
 
 // ==================== UTILITIES ====================
 
+type PerfSnapshot = {
+	lcp: number[];
+	cls: number[];
+	inp: number[];
+	longTasks: number[];
+};
+
+type PerfWindow = Window &
+	typeof globalThis & {
+		__perfData: PerfSnapshot;
+	};
+
+type LayoutShiftEntry = PerformanceEntry & {
+	hadRecentInput: boolean;
+	value: number;
+};
+
+type NavigationMetrics = {
+	ttfb: number | null;
+	fcp: number | null;
+	domInteractive: number | null;
+	loadComplete: number | null;
+};
+
+type CollectedMetrics = {
+	lcp: number | null;
+	cls: number;
+	inp: number;
+	longTasks: number;
+	navTiming: NavigationMetrics;
+	resources: number;
+};
+
 async function setupPerfObserver(page: Page) {
 	await page.addInitScript(() => {
-		(window as any).__perfData = {
+		const perfWindow = window as PerfWindow;
+		perfWindow.__perfData = {
 			lcp: [],
 			cls: [],
 			inp: [],
@@ -25,61 +59,67 @@ async function setupPerfObserver(page: Page) {
 
 		// LCP Observer
 		new PerformanceObserver((list) => {
-			const entries = list.getEntries() as any[];
+			const entries = list.getEntries();
 			const lastEntry = entries[entries.length - 1];
-			(window as any).__perfData.lcp.push(lastEntry.startTime);
+			if (lastEntry) {
+				perfWindow.__perfData.lcp.push(lastEntry.startTime);
+			}
 		}).observe({ entryTypes: ["largest-contentful-paint"], buffered: true });
 
 		// CLS Observer
 		let clsValue = 0;
 		new PerformanceObserver((list) => {
-			for (const entry of list.getEntries() as any[]) {
-				if (!(entry as any).hadRecentInput) {
-					clsValue += (entry as any).value;
+			for (const entry of list.getEntries() as LayoutShiftEntry[]) {
+				if (!entry.hadRecentInput) {
+					clsValue += entry.value;
 				}
 			}
-			(window as any).__perfData.cls.push(clsValue);
+			perfWindow.__perfData.cls.push(clsValue);
 		}).observe({ entryTypes: ["layout-shift"], buffered: true });
 
 		// Long Task Observer
 		new PerformanceObserver((list) => {
-			for (const entry of list.getEntries() as any[]) {
-				(window as any).__perfData.longTasks.push(entry.duration);
+			for (const entry of list.getEntries()) {
+				perfWindow.__perfData.longTasks.push(entry.duration);
 			}
 		}).observe({ entryTypes: ["longtask"], buffered: true });
 
 		// INP approximation - track click latency
-		const measureInp = (type: string) => {
+		const measureInp = () => {
 			const start = performance.now();
 			// Measure until next frame
 			requestAnimationFrame(() => {
 				requestAnimationFrame(() => {
-					(window as any).__perfData.inp.push(performance.now() - start);
+					perfWindow.__perfData.inp.push(performance.now() - start);
 				});
 			});
 		};
 
-		document.addEventListener("click", () => measureInp("click"), {
+		document.addEventListener("click", () => measureInp(), {
 			passive: true,
 		});
-		document.addEventListener("keydown", () => measureInp("keydown"), {
+		document.addEventListener("keydown", () => measureInp(), {
 			passive: true,
 		});
 	});
 }
 
-async function collectMetrics(page: Page) {
-	const perfData = await page.evaluate(() => (window as any).__perfData);
+async function collectMetrics(page: Page): Promise<CollectedMetrics> {
+	const perfData = await page.evaluate(() => (window as PerfWindow).__perfData);
 
 	// Navigation timing
-	const navTiming = await page.evaluate(() => {
-		const [nav] = performance.getEntriesByType("navigation") as any[];
-		const [fcp] = performance.getEntriesByType("paint");
+	const navTiming = await page.evaluate<NavigationMetrics>(() => {
+		const [nav] = performance.getEntriesByType(
+			"navigation",
+		) as PerformanceNavigationTiming[];
+		const fcp = performance
+			.getEntriesByType("paint")
+			.find((entry) => entry.name === "first-contentful-paint");
 		return {
-			ttfb: nav?.responseStart - nav?.requestStart,
-			fcp: fcp?.startTime,
-			domInteractive: nav?.domInteractive,
-			loadComplete: nav?.loadEventEnd,
+			ttfb: nav ? nav.responseStart - nav.requestStart : null,
+			fcp: fcp?.startTime ?? null,
+			domInteractive: nav?.domInteractive ?? null,
+			loadComplete: nav?.loadEventEnd ?? null,
 		};
 	});
 
@@ -110,7 +150,7 @@ test.describe("Quick Performance Benchmark", () => {
 	test("all routes - core metrics", async ({ page }) => {
 		await setupPerfObserver(page);
 
-		const results: Record<string, any> = {};
+		const results: Record<string, CollectedMetrics> = {};
 
 		for (const route of ROUTES) {
 			console.log(`\n📍 Testing: ${route.name} (${route.path})`);
@@ -148,11 +188,12 @@ test.describe("Quick Performance Benchmark", () => {
 		console.log("=".repeat(50));
 
 		for (const [path, metrics] of Object.entries(results)) {
-			const r = metrics as any;
+			const r = metrics as CollectedMetrics;
 			const lcpStatus =
-				r.lcp < PERFORMANCE_BUDGETS.lcp.warningThreshold
+				r.lcp !== null && r.lcp < PERFORMANCE_BUDGETS.lcp.warningThreshold
 					? "✅"
-					: r.lcp < PERFORMANCE_BUDGETS.lcp.criticalThreshold
+					: r.lcp !== null &&
+						  r.lcp < PERFORMANCE_BUDGETS.lcp.criticalThreshold
 						? "⚠️"
 						: "❌";
 			const clsStatus =
@@ -170,7 +211,8 @@ test.describe("Quick Performance Benchmark", () => {
 
 	test("low-end device simulation", async ({ browser }) => {
 		const context = await browser.newContext();
-		const client = await context.newCDPSession(null as any);
+		const page = await context.newPage();
+		const client = await context.newCDPSession(page);
 
 		// Apply low-end mobile throttling
 		const preset = THROTTLING_PRESETS["low-end-mobile"];
@@ -185,7 +227,6 @@ test.describe("Quick Performance Benchmark", () => {
 			`   Network: ${preset.network.downloadThroughput / 1024}KB/s down, ${preset.network.latency}ms latency`,
 		);
 
-		const page = await context.newPage();
 		await setupPerfObserver(page);
 
 		// Test critical routes

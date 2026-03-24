@@ -3,7 +3,7 @@
 > Next.js 16 + React 19 + TypeScript로 제작된 개인 포트폴리오 웹사이트
 
 [![Deployment](https://img.shields.io/badge/Vercel-Deployed-success)](https://next-portfolio-ringring.vercel.app/)
-[![Next.js](https://img.shields.io/badge/Next.js-16.1-black)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16.2.1-black)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19.2-blue)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)](https://www.typescriptlang.org/)
 
@@ -37,7 +37,7 @@
 
 ### Core
 
-- **Framework**: Next.js 16.1 (App Router)
+- **Framework**: Next.js 16.2.1 (App Router)
 - **Language**: TypeScript 5.9
 - **Runtime**: React 19.2
 - **Styling**: Tailwind CSS 4.1

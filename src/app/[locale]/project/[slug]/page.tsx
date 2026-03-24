@@ -3,17 +3,15 @@ import { projectDetailList } from "@/shared/constant/project-detail";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-type Props = {
-  params: Promise<{ slug: string; locale: string }>;
-};
-
 export async function generateStaticParams() {
   return projectDetailList.map((project) => ({
     slug: project.slug,
   }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps<"/[locale]/project/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const project = projectDetailList.find((p) => p.slug === slug);
 
@@ -37,7 +35,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page({
+  params,
+}: PageProps<"/[locale]/project/[slug]">) {
   const { slug } = await params;
   const project = projectDetailList.find((p) => p.slug === slug);
 
