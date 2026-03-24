@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { projectList } from "@/shared/constant/project";
+import { getFeaturedProjects, projectList } from "@/shared/constant/project";
 import { TechStack } from "@/shared/constant/tech-stack";
 import { MainProjectItem } from "./project/item";
 
 export function MainPage() {
 	const t = useTranslations("HomePage");
-	const featuredProjects = projectList.toReversed().slice(0, 3);
+	const featuredProjects = getFeaturedProjects(3);
 	const mainProject = featuredProjects[0];
 	const spotlightTech = TechStack.slice(0, 8);
 

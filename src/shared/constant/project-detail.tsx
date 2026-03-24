@@ -5,6 +5,7 @@ import POCAZThumbnail from "@/../public/thumbnail/project/pocaz.png";
 import ChooseMenuThumbnail from "@/../public/thumbnail/project/choose-menu.png";
 import AlltimeCarThumbnail from "@/../public/thumbnail/project/alltime-car.png";
 import FrontendJuniorStudyThumbnail from "@/../public/thumbnail/project/frontend-junior-study.png";
+import ReactDevtoolCliThumbnail from "@/../public/thumbnail/project/react-devtool-cli.png";
 
 export type ProjectDetail = {
   /** URL 경로용 */
@@ -548,6 +549,110 @@ export const projectDetailList: ProjectDetail[] = [
     metadata: {
       publishedAt: "2024-09-01T00:00:00Z",
       tags: ["TypeScript", "Learning", "Curriculum", "Frontend"],
+    },
+  },
+  {
+    slug: "react-devtool-cli",
+    title: "react-devtool-cli",
+    thumbnail: ReactDevtoolCliThumbnail,
+    summary:
+      "Playwright 기반 브라우저 세션 위에서 React 트리 스냅샷 조회, 노드 inspect, 상호작용 자동화, commit 중심 profiler 분석을 수행하는 agent-first CLI",
+    period: "2026.03 -",
+    team: "개인 프로젝트",
+    role:
+      "CLI 설계 및 구현, Playwright 세션 전송 계층 구성, snapshot-aware React inspection과 profiler 워크플로우 설계",
+
+    links: {
+      github: "https://github.com/Ring-wdr/react-devtool-cli",
+      etc: [
+        {
+          label: "npm",
+          url: "https://www.npmjs.com/package/react-devtool-cli",
+        },
+        {
+          label: "Release",
+          url: "https://github.com/Ring-wdr/react-devtool-cli/releases/tag/v0.1.34-public",
+        },
+      ],
+    },
+
+    overview: {
+      background:
+        "React DevTools UI만으로는 에이전트나 스크립트 기반 자동화 흐름에서 동일한 조사 과정을 재현하기 어렵습니다. React 트리 상태, source 힌트, profiler 신호를 명령형 인터페이스로 노출해 디버깅과 성능 분석을 자동화 가능한 형태로 만들 필요가 있었습니다.",
+      goal:
+        "session open/connect/attach부터 snapshot 기반 트리 조회, node inspect, 내장 interact 명령, commit 중심 profiler 분석까지 하나의 CLI 표면으로 제공해 로컬과 에이전트 환경 모두에서 재현 가능한 React 조사 흐름을 만드는 것이 목표였습니다.",
+      features: [
+        "Playwright Node API 기반 `session open`, Playwright protocol 기반 `session connect`, Chromium CDP 호환 기반 `session attach` 지원",
+        "`tree get`이 snapshot id를 반환해 이후 `node search`, `node inspect`, `node highlight`, `source reveal` 흐름을 snapshot 범위 안에서 일관되게 수행",
+        "`interact click`, `interact type`, `interact press`, `interact wait`를 같은 브라우저 세션 위에서 직접 실행",
+        "`session doctor`로 selected engine, capability 힌트, Playwright 해석 결과, profiler 준비 상태, helper 전략을 사전 점검",
+        "summary, commit drill-down, ranked hotspot, flamegraph, compare, export를 포함한 commit 중심 profiler 분석 명령 제공",
+        "Codex, Claude Code, Gemini CLI 등에서 바로 사용할 수 있도록 번들 스킬 디렉터리 제공",
+      ],
+    },
+
+    tech: {
+      stack: ["React", "Playwright", "Command Line", "JavaScript"],
+      challenges: [
+        {
+          title: "에이전트가 재사용할 수 있는 결정론적 CLI 응답 설계",
+          description:
+            "후속 자동화는 안정적인 식별자와 신뢰 경계가 응답에 명확히 드러날 때만 안전하게 동작합니다. snapshot id, observation level, limitations, runtime warnings 같은 구조화된 필드가 필요했습니다.",
+        },
+        {
+          title: "snapshot 범위 안에서 node identity 유지하기",
+          description:
+            "node id는 그것을 생성한 snapshot 안에서만 의미가 있습니다. search, inspect, highlight, source reveal이 모두 같은 snapshot 문맥을 유지해야 했고, 만료 시에는 명확한 오류로 다시 수집을 유도해야 했습니다.",
+        },
+        {
+          title: "Playwright와 React 런타임 차이를 안전하게 처리하기",
+          description:
+            "local/global Playwright 해석, custom/devtools 엔진 전환, React 19 이후의 제한적인 source 지원 여부를 함께 다뤄야 했고, 사용자가 분석 신뢰도를 오해하지 않도록 안내해야 했습니다.",
+        },
+      ],
+      solutions: [
+        {
+          title: "snapshot-aware 명령 표면 설계",
+          description:
+            "`tree get`이 반환한 snapshot id를 후속 node 명령이 직접 재사용하도록 설계했습니다. 런타임에서 snapshot이 제거되면 `snapshot-expired`를 반환해 안전하지 않은 추측 대신 새 트리를 다시 수집하도록 유도했습니다.",
+        },
+        {
+          title: "`session doctor` 기반 capability discovery",
+          description:
+            "engine preference, selected engine, recommended engine, source capability, helper import strategy를 한 번에 노출해 현재 환경에서 interact, source reveal, profiler 명령을 어디까지 신뢰할 수 있는지 판단할 수 있게 했습니다.",
+        },
+        {
+          title: "transport, interaction, profiling을 하나의 표면으로 통합",
+          description:
+            "세션 transport 명령, 내장 interaction helper, commit 중심 profiler 분석을 하나의 CLI 표면에 묶어 source reveal부터 성능 triage까지 별도 도구 전환 없이 이어질 수 있도록 했습니다.",
+        },
+      ],
+    },
+
+    achievements: {
+      metrics: [
+        { label: "npm 버전", value: "0.1.34" },
+        { label: "GitHub tag", value: "v0.1.34-public" },
+        { label: "저장소 이력", value: "35 commits" },
+      ],
+      improvements: [
+        "React 트리 조회와 node inspect를 DevTools UI 의존 없이 자동화 가능한 CLI 흐름으로 이동",
+        "snapshot id를 inspection 계약의 일부로 노출해 후속 분석 재현성을 확보",
+        "Playwright 기반 interaction, capability 점검, profiler compare/export를 하나의 성능 triage 경로로 통합",
+      ],
+    },
+
+    gallery: [
+      {
+        src: ReactDevtoolCliThumbnail,
+        alt: "react-devtool-cli 썸네일",
+        caption: "react-devtool-cli의 터미널 중심 워크플로우를 요약한 커버 이미지",
+      },
+    ],
+
+    metadata: {
+      publishedAt: "2026-03-18T23:32:21Z",
+      tags: ["React", "Playwright", "CLI", "Profiler", "Agent Tooling"],
     },
   },
 ];

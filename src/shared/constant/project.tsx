@@ -4,6 +4,7 @@ import AlltimeCarThumbnail from "@/../public/thumbnail/project/alltime-car.png";
 import ChooseMenuThumbnail from "@/../public/thumbnail/project/choose-menu.png";
 import FrontendJuniorStudyThumbnail from "@/../public/thumbnail/project/frontend-junior-study.png";
 import POCAZThumbnail from "@/../public/thumbnail/project/pocaz.png";
+import ReactDevtoolCliThumbnail from "@/../public/thumbnail/project/react-devtool-cli.png";
 import type { TechStackEnum } from "./tech-stack";
 
 export type ProjectProps = {
@@ -135,4 +136,34 @@ export const projectList: ProjectProps[] = [
 		result: "Completed 15-week curriculum with documented practical outcomes",
 		status: "Archived",
 	},
+	{
+		src: ReactDevtoolCliThumbnail,
+		title: "react-devtool-cli",
+		href: "https://github.com/Ring-wdr/react-devtool-cli",
+		slug: "react-devtool-cli",
+		description: (
+			<>
+				Playwright로 관리되는 브라우저 세션을 통해 React 트리 스냅샷 조회,
+				노드 inspect/source reveal, 상호작용 자동화, profiler 분석까지
+				명령형으로 수행할 수 있게 만든 agent-first CLI입니다. DevTools UI를
+				직접 열지 않아도 재현 가능한 디버깅 흐름을 구성하는 데 초점을 맞췄습니다.
+			</>
+		),
+		techStack: ["React", "Playwright", "Command Line", "JavaScript"],
+		featured: false,
+		category: "Product",
+		year: 2026,
+		role: "툴링 엔지니어",
+		impact: "에이전트와 개발자가 React inspection과 profiling을 재현 가능한 CLI 흐름으로 수행할 수 있게 했습니다",
+		result:
+			"세션 제어, 스냅샷 조회, 상호작용 자동화, profiler 분석을 포함한 공개 CLI를 릴리스했습니다",
+		status: "Live",
+	},
 ];
+
+export function getFeaturedProjects(limit = 3) {
+	return projectList
+		.filter((project) => project.featured)
+		.toReversed()
+		.slice(0, limit);
+}
