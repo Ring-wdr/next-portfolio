@@ -84,19 +84,23 @@ const reactBeforeCode = `function CheckoutButton({ items }) {
   return <button onClick={handleClick}>Buy</button>;
 }`;
 
-const reactAfterCode = `function CheckoutButton({ items, onSuccess }) {
-  const checkout = useMutation({
-    mutationFn: () => createCheckoutSession(items),
-    onSuccess,
-  });
+const reactAfterCode = `import { useActionState } from 'react';
+
+function CheckoutButton({ items, onSuccess }) {
+  const [, submitAction, isPending] = useActionState(
+    async () => {
+      await createCheckoutSession(items);
+      onSuccess?.();
+    },
+    undefined,
+  );
 
   return (
-    <button
-      disabled={checkout.isPending}
-      onClick={() => checkout.mutate()}
-    >
-      {checkout.isPending ? 'Processing…' : 'Buy now'}
-    </button>
+    <form action={submitAction}>
+      <button type="submit" disabled={isPending}>
+        {isPending ? 'Processing…' : 'Buy now'}
+      </button>
+    </form>
   );
 }`;
 
@@ -108,14 +112,16 @@ export default function TechStackPage() {
   return <TechStackExperience selected={selected} />;
 }`;
 
-const nextAfterCode = `export default async function Page() {
-  const stacks = await getTechStacks();
-  const showcase = stacks.filter((stack) => stack.demo);
+const nextAfterCode = `export default async function Page(
+  props: PageProps<'/tech-stack/[category]'>
+) {
+  const { category } = await props.params;
+  const stacks = await getTechStacks(category);
 
   return (
     <TechStackPage
       stacks={stacks}
-      showcase={<TechStackShowcase stacks={showcase} />}
+      showcase={<TechStackShowcase stacks={stacks} />}
     />
   );
 }`;
@@ -127,19 +133,28 @@ const typeScriptBeforeCode = `const tech = {
   afterCode: 'const [count] = useState(0)',
 };`;
 
-const typeScriptAfterCode = `type TechStackDemo = {
+const typeScriptAfterCode = `type CodeDemo = {
+  kind: 'code';
   lang: 'ts' | 'tsx';
-  summaryKey: string;
-  improvementKey: string;
   beforeCode: string;
   afterCode: string;
 };
 
-type TechStackItem = {
-  name: string;
-  category: TechCategory[];
-  demo?: TechStackDemo;
-};`;
+type NarrativeDemo = {
+  kind: 'narrative';
+  detail: string;
+};
+
+const react = {
+  name: 'React',
+  category: ['Frameworks & Libraries'],
+  demo: {
+    kind: 'code',
+    lang: 'tsx',
+    beforeCode: '…',
+    afterCode: '…',
+  },
+} satisfies TechItem;`;
 
 const playwrightBeforeCode = `test('tech stack page', async ({ page }) => {
   await page.goto('/en/tech-stack');
@@ -148,11 +163,18 @@ const playwrightBeforeCode = `test('tech stack page', async ({ page }) => {
 const playwrightAfterCode = `test('tech stack page', async ({ page }) => {
   await page.goto('/en/tech-stack');
 
-  await expect(page.getByTestId('tech-stack-showcase')).toBeVisible();
-  await expect(page.getByTestId('tech-stack-mode-after')).toHaveAttribute(
-    'aria-pressed',
-    'true'
-  );
+  await test.step('showcase renders', async () => {
+    await expect(
+      page.getByTestId('tech-stack-showcase')
+    ).toBeVisible();
+  });
+
+  await test.step('mode toggle works', async () => {
+    await page.getByTestId('tech-stack-mode-after').click();
+    await expect(
+      page.getByTestId('tech-stack-mode-after')
+    ).toHaveAttribute('aria-pressed', 'true');
+  });
 });`;
 
 export const TechStack: TechStackType[] = [

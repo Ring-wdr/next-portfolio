@@ -24,7 +24,7 @@ type ShowcaseNarrativeDemo = {
   detail: string;
 };
 
-type ShowcaseStack = {
+export type ShowcaseStack = {
   name: string;
   demo: ShowcaseCodeDemo | ShowcaseNarrativeDemo;
 };
@@ -41,9 +41,19 @@ type ShowcaseCopy = {
   loading: string;
 };
 
+type CategoryDemoCopy = Pick<
+  ShowcaseCopy,
+  "beforeLabel" | "afterLabel" | "whatChanged" | "narrativeLabel" | "loading"
+>;
+
 type TechStackShowcasePanelProps = {
   stacks: ShowcaseStack[];
   copy: ShowcaseCopy;
+};
+
+type TechCategoryDemoPanelProps = {
+  stacks: ShowcaseStack[];
+  copy: CategoryDemoCopy;
 };
 
 type Mode = "before" | "after";
@@ -235,6 +245,7 @@ export function TechStackShowcasePanel({
             ) : (
               <div className="overflow-x-auto p-2 md:p-3">
                 <ShikiMagicMove
+                  key={activeStack.name}
                   highlighter={highlighter}
                   lang={activeStack.demo.lang}
                   theme={shikiTheme}
@@ -266,6 +277,182 @@ export function TechStackShowcasePanel({
           </p>
         </div>
       </section>
+    </div>
+  );
+}
+
+export function TechCategoryDemoPanel({
+  stacks,
+  copy,
+}: TechCategoryDemoPanelProps) {
+  const [selectedStackName, setSelectedStackName] = useState(stacks[0]?.name ?? "");
+  const [mode, setMode] = useState<Mode>("before");
+  const prefersReducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    () => false
+  );
+  const [highlighter, setHighlighter] = useState<ShikiHighlighter | null>(null);
+  const { resolvedTheme } = useTheme();
+
+  const activeStack =
+    stacks.find((stack) => stack.name === selectedStackName) ?? stacks[0] ?? null;
+  const codeStacks = stacks.filter(
+    (stack): stack is ShowcaseStack & { demo: ShowcaseCodeDemo } => stack.demo.kind === "code"
+  );
+  const langs = Array.from(new Set(codeStacks.map((stack) => stack.demo.lang)));
+  const activeCode =
+    activeStack == null || activeStack.demo.kind !== "code"
+      ? ""
+      : mode === "before"
+        ? activeStack.demo.beforeCode
+        : activeStack.demo.afterCode;
+  const shikiTheme = resolvedTheme === "light" ? "github-light" : "github-dark";
+
+  useEffect(() => {
+    if (codeStacks.length === 0) {
+      return;
+    }
+
+    let disposed = false;
+
+    async function loadHighlighter() {
+      const instance = await createHighlighter({
+        themes: ["github-dark", "github-light"],
+        langs,
+      });
+
+      if (!disposed) {
+        setHighlighter(instance);
+      }
+    }
+
+    void loadHighlighter();
+
+    return () => {
+      disposed = true;
+    };
+  }, [codeStacks.length, langs]);
+
+  if (activeStack == null) {
+    return null;
+  }
+
+  return (
+    <div className="mt-4 rounded-3xl border border-border/70 bg-card/70 p-4 md:p-5">
+      {stacks.length > 1 && (
+        <div className="mb-4 flex flex-wrap gap-2">
+          {stacks.map((stack) => {
+            const isSelected = stack.name === activeStack.name;
+
+            return (
+              <Button
+                key={stack.name}
+                type="button"
+                variant={isSelected ? "default" : "outline"}
+                className="rounded-xl"
+                aria-pressed={isSelected}
+                onClick={() => {
+                  setSelectedStackName(stack.name);
+                  setMode("before");
+                }}
+              >
+                {stack.name}
+              </Button>
+            );
+          })}
+        </div>
+      )}
+
+      <div className="flex flex-col gap-4 border-b border-border/70 pb-4 md:flex-row md:items-start md:justify-between">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary/80">
+            {activeStack.name}
+          </p>
+          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+            {activeStack.demo.summary}
+          </p>
+        </div>
+
+        {activeStack.demo.kind === "code" && (
+          <div className="inline-flex rounded-2xl border border-border/70 bg-background/70 p-1">
+            <button
+              type="button"
+              className={classNames(
+                "rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                mode === "before"
+                  ? "bg-foreground text-background"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+              aria-pressed={mode === "before"}
+              onClick={() => setMode("before")}
+            >
+              {copy.beforeLabel}
+            </button>
+            <button
+              type="button"
+              className={classNames(
+                "rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                mode === "after"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+              aria-pressed={mode === "after"}
+              onClick={() => setMode("after")}
+            >
+              {copy.afterLabel}
+            </button>
+          </div>
+        )}
+      </div>
+
+      {activeStack.demo.kind === "code" ? (
+        <div className="mt-4 overflow-hidden rounded-2xl border border-border/70 bg-[color-mix(in_oklch,var(--color-surface-strong),transparent_18%)]">
+          {highlighter == null || prefersReducedMotion ? (
+            <div className="space-y-3 p-4">
+              {highlighter == null && (
+                <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                  {copy.loading}
+                </p>
+              )}
+              <pre className="overflow-x-auto text-sm leading-6 text-foreground">
+                <code>{activeCode}</code>
+              </pre>
+            </div>
+          ) : (
+            <div className="overflow-x-auto p-2 md:p-3">
+              <ShikiMagicMove
+                key={activeStack.name}
+                highlighter={highlighter}
+                lang={activeStack.demo.lang}
+                theme={shikiTheme}
+                code={activeCode}
+                options={magicMoveOptions}
+              />
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="mt-4 rounded-2xl border border-border/70 bg-[color-mix(in_oklch,var(--color-surface-strong),transparent_18%)] p-4">
+          <div className="rounded-2xl border border-border/70 bg-background/65 p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary/80">
+              {copy.narrativeLabel}
+            </p>
+            <p className="mt-3 text-sm leading-6 text-foreground/90">
+              {activeStack.demo.detail}
+            </p>
+          </div>
+        </div>
+      )}
+
+      <div className="mt-4 rounded-2xl border border-border/70 bg-background/55 p-4">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+          {copy.whatChanged}
+        </p>
+        <p className="mt-3 text-sm leading-6 text-foreground/90">
+          {activeStack.demo.improvement}
+        </p>
+      </div>
     </div>
   );
 }

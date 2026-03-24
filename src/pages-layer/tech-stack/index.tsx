@@ -8,7 +8,7 @@ import {
 } from "@/shared/constant/tech-stack";
 import { TechCategoryMeta } from "@/shared/constant/profile";
 
-import { TechStackShowcasePanel } from "./tech-stack-showcase";
+import { TechStackShowcasePanel, TechCategoryDemoPanel, ShowcaseStack } from "./tech-stack-showcase";
 
 export function TechStackPage() {
   const t = useTranslations("TechStackPage");
@@ -33,6 +33,13 @@ export function TechStackPage() {
     title: t("showcase.title"),
     description: t("showcase.description"),
     selectLabel: t("showcase.selectLabel"),
+    beforeLabel: t("showcase.before"),
+    afterLabel: t("showcase.after"),
+    whatChanged: t("showcase.whatChanged"),
+    narrativeLabel: t("showcase.narrativeLabel"),
+    loading: t("showcase.loading"),
+  };
+  const categoryDemoCopy = {
     beforeLabel: t("showcase.before"),
     afterLabel: t("showcase.after"),
     whatChanged: t("showcase.whatChanged"),
@@ -80,6 +87,9 @@ export function TechStackPage() {
           const stacks = TechStack.filter((tech) =>
             tech.category.some((_category) => _category === category)
           );
+          const categoryDemoStacks = showcaseStacks.filter((s) =>
+            TechStack.find((tech) => tech.name === s.name)?.category.includes(category)
+          ) as ShowcaseStack[];
 
           return (
             <Fragment key={category}>
@@ -106,6 +116,13 @@ export function TechStackPage() {
                     </article>
                   ))}
                 </div>
+
+                {categoryDemoStacks.length > 0 && (
+                  <TechCategoryDemoPanel
+                    stacks={categoryDemoStacks}
+                    copy={categoryDemoCopy}
+                  />
+                )}
               </section>
             </Fragment>
           );
