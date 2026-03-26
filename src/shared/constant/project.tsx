@@ -1,165 +1,121 @@
-import type { StaticImageData } from "next/image";
-import type { ReactNode } from "react";
-import AlltimeCarThumbnail from "@/../public/thumbnail/project/alltime-car.png";
-import ChooseMenuThumbnail from "@/../public/thumbnail/project/choose-menu.png";
-import FrontendJuniorStudyThumbnail from "@/../public/thumbnail/project/frontend-junior-study.png";
-import POCAZThumbnail from "@/../public/thumbnail/project/pocaz.png";
-import ReactDevtoolCliThumbnail from "@/../public/thumbnail/project/react-devtool-cli.png";
 import type { TechStackEnum } from "./tech-stack";
+import type { StaticImageData } from "next/image";
+import { projectDetailList, type ProjectDetail } from "./project-detail";
+
+type ProjectCategory = "Product" | "Client" | "Study";
+type ProjectStatus = "Live" | "Prototype" | "Archived";
 
 export type ProjectProps = {
 	src: string | StaticImageData;
 	title: string;
 	href: string;
 	slug: string; // 상세 페이지 경로
-	description?: ReactNode;
+	description?: string;
 	techStack: TechStackEnum[];
 	featured: boolean;
-	category: "Product" | "Client" | "Study";
+	category: ProjectCategory;
 	year: number;
 	role: string;
 	impact: string;
 	result: string;
-	status: "Live" | "Prototype" | "Archived";
+	status: ProjectStatus;
 };
 
-export const projectList: ProjectProps[] = [
-	{
-		src: POCAZThumbnail,
-		title: "POCAZ",
-		href: "https://github.com/TEAM-POCAZ/PocaZ",
-		slug: "pocaz",
-		description: (
-			<>
-				국내 외 아이돌 굿즈 시장이 8000억 규모 이상으로 확대되고 있는 걸 알고
-				계신가요? 특히, 아이돌 굿즈의 주식 시장이라고 불리는 아이돌 포토카드
-				리셀 거래에 관심이 높아지고 있습니다. 아이돌 포토카드 수집이 하나의
-				문화로 자리잡았고 현재 포토카드 리셀 거래가 트위터, 번개장터, 당근마켓
-				등에서 거래가 활발히 이루어지고 있는 추세입니다. 전문화되지 않은
-				장터들에서의 거래에 따른 사용자 불편을 확인하여, 아이돌 포토카드를
-				전문으로 다루는 거래 공간을 만들게 되었습니다.
-			</>
-		),
-		techStack: ["React", "JavaScript", "Tailwind CSS", "Express.js", "MySQL"],
-		featured: true,
+type ProjectCardMeta = {
+	category: ProjectCategory;
+	featured: boolean;
+	impact: string;
+	result: string;
+	status: ProjectStatus;
+};
+
+const projectCardMetaMap: Record<string, ProjectCardMeta> = {
+	pocaz: {
 		category: "Product",
-		year: 2023,
-		role: "Frontend Developer",
-		impact: "Focused marketplace UX for photocard resale workflows",
-		result:
-			"Shipped a specialized trading experience from discovery to listing",
-		status: "Archived",
-	},
-	{
-		src: "https://postfiles.pstatic.net/MjAyMzA0MThfODQg/MDAxNjgxNzk3MDYyNDc4.2uzOQ-Oiw-XsNK013YGZYSH7pvmBB63HXt-RpL8OFdUg.M3YvSedp13rgsbfXfxK-PVt-dF5TtnMm6ubigz8I-Gog.PNG.gsh113/%EB%8C%80%EB%8F%84_%ED%98%84%ED%8C%90.png?type=w773",
-		title: "법률사무소 대도",
-		href: "https://www.daedolaw.com/",
-		slug: "daedo-law",
-		description: (
-			<>
-				sveltekit + supabase로 진행한 법률사무소 대도 홈페이지입니다. 내부
-				라우터 설정, 프로젝트 내부에서 사용되는 공통 컴포넌트 작업, 소개 페이지
-				마크업, 데이터베이스 테이블 설계 및 관리자 페이지 마크업 및 프론트
-				작업을 진행하였습니다.
-			</>
-		),
-		techStack: ["SvelteKit", "Supabase", "Tailwind CSS", "TypeScript"],
 		featured: true,
+		impact: "분산된 포토카드 리셀 거래 과정을 하나의 전문 거래 흐름으로 재설계했습니다.",
+		result: "검색, 찜, 채팅, 거래 관리가 이어지는 리메이크 버전을 구현하고 공개했습니다.",
+		status: "Prototype",
+	},
+	"daedo-law": {
 		category: "Client",
-		year: 2023,
-		role: "Frontend Developer",
-		impact:
-			"Improved legal-office web presence with streamlined information flow",
-		result: "Delivered production website and admin-facing foundations",
-		status: "Live",
-	},
-	{
-		src: ChooseMenuThumbnail,
-		title: "메뉴 고르기 앱",
-		href: "https://choose-menu.vercel.app/",
-		slug: "choose-menu",
-		description: (
-			<>
-				카페 메뉴 크롤링, 사용자별 메뉴 선택 및 관리자 기능 등을 제공하는 메뉴
-				선택 애플리케이션입니다. Next.js와 MongoDB를 사용하여 프로토타입을
-				개발했으며, 점차적으로 기능을 고도화할 계획입니다.
-			</>
-		),
-		techStack: ["Next.js", "TypeScript", "MongoDB"],
 		featured: true,
-		category: "Product",
-		year: 2024,
-		role: "Product Engineer",
-		impact:
-			"Validated personalized menu recommendation and management concepts",
-		result: "Released working prototype with user and admin workflows",
+		impact: "법률사무소의 신뢰감을 해치지 않도록 정보 구조와 운영 흐름을 정리했습니다.",
+		result: "실서비스 웹사이트와 관리자 운영 기반을 함께 전달했습니다.",
 		status: "Live",
 	},
-	{
-		src: AlltimeCarThumbnail,
-		title: "역대카",
-		href: "https://alltime-car.com/",
-		slug: "alltime-car",
-		description: (
-			<>
-				렌트사를 비교하여 가장 저렴한 차량 렌트 비용을 추천하는 서비스입니다.
-				Next.js와 Supabase를 사용하여 프로토타입을 개발했습니다.
-			</>
-		),
-		techStack: ["Next.js", "Supabase", "Tailwind CSS", "TypeScript"],
+	"choose-menu": {
+		category: "Product",
 		featured: true,
-		category: "Product",
-		year: 2024,
-		role: "Frontend Developer",
-		impact: "Simplified price comparison across multiple rental providers",
-		result: "Built prototype that surfaces low-cost options quickly",
+		impact: "메뉴 선택 시간을 줄이는 추천 경험과 운영 도구를 함께 검증했습니다.",
+		result: "크롤링, 추천, 관리자 기능이 연결된 실사용 가능한 프로토타입을 배포했습니다.",
 		status: "Live",
 	},
-	{
-		src: FrontendJuniorStudyThumbnail,
-		title: "프론트엔드 주니어 스터디",
-		href: "https://github.com/Ring-wdr/frontend-junior-study",
-		slug: "frontend-junior-study",
-		description: (
-			<>
-				프론트엔드 개인 학습 커리큘럼에 맞게 업데이트 할 공부 기록
-				레포지토리입니다. 15주간의 체계적인 학습 과정으로 JavaScript 심화,
-				디자인 패턴, React/Next.js, 스타일링, 테스팅, 성능 최적화 등을 다룹니다.
-			</>
-		),
-		techStack: ["TypeScript", "Bun.js", "CSS"],
-		featured: false,
+	"alltime-car": {
+		category: "Product",
+		featured: true,
+		impact: "여러 렌트사 가격 비교를 빠르게 탐색할 수 있는 검색 경험을 만들었습니다.",
+		result: "최저가 비교와 필터링 중심의 예약 탐색 프로토타입을 운영했습니다.",
+		status: "Live",
+	},
+	"frontend-junior-study": {
 		category: "Study",
-		year: 2026,
-		role: "Study Lead",
-		impact: "Built repeatable learning cadence for junior frontend depth",
-		result: "Completed 15-week curriculum with documented practical outcomes",
+		featured: false,
+		impact: "프론트엔드 학습 범위를 15주 커리큘럼으로 구조화해 재사용 가능한 학습 흐름을 만들었습니다.",
+		result: "학습 주제, 예제, 기록을 연결한 공개 학습 저장소를 완성했습니다.",
 		status: "Archived",
 	},
-	{
-		src: ReactDevtoolCliThumbnail,
-		title: "react-devtool-cli",
-		href: "https://github.com/Ring-wdr/react-devtool-cli",
-		slug: "react-devtool-cli",
-		description: (
-			<>
-				Playwright로 관리되는 브라우저 세션을 통해 React 트리 스냅샷 조회,
-				노드 inspect/source reveal, 상호작용 자동화, profiler 분석까지
-				명령형으로 수행할 수 있게 만든 agent-first CLI입니다. DevTools UI를
-				직접 열지 않아도 재현 가능한 디버깅 흐름을 구성하는 데 초점을 맞췄습니다.
-			</>
-		),
-		techStack: ["React", "Playwright", "Command Line", "JavaScript"],
-		featured: false,
+	"react-devtool-cli": {
 		category: "Product",
-		year: 2026,
-		role: "툴링 엔지니어",
-		impact: "에이전트와 개발자가 React inspection과 profiling을 재현 가능한 CLI 흐름으로 수행할 수 있게 했습니다",
-		result:
-			"세션 제어, 스냅샷 조회, 상호작용 자동화, profiler 분석을 포함한 공개 CLI를 릴리스했습니다",
+		featured: false,
+		impact: "React inspection과 profiling을 에이전트/개발자가 재현 가능한 CLI 흐름으로 옮겼습니다.",
+		result: "npm 배포와 공개 릴리스를 포함한 agent-first debugging 도구를 출시했습니다.",
 		status: "Live",
 	},
-];
+};
+
+export function getProjectPrimaryHref(project: ProjectDetail) {
+	return (
+		project.links.demo ??
+		project.links.github ??
+		project.links.etc?.[0]?.url ??
+		`/project/${project.slug}`
+	);
+}
+
+export function getProjectYearFromPeriod(period: string) {
+	const matchedYear = period.match(/\d{4}/)?.[0];
+
+	if (matchedYear) {
+		return Number.parseInt(matchedYear, 10);
+	}
+
+	return Number.NaN;
+}
+
+export const projectList: ProjectProps[] = projectDetailList.map((project) => {
+	const meta = projectCardMetaMap[project.slug];
+
+	if (!meta) {
+		throw new Error(`Missing project card metadata for slug: ${project.slug}`);
+	}
+
+	return {
+		src: project.thumbnail,
+		title: project.title,
+		href: getProjectPrimaryHref(project),
+		slug: project.slug,
+		description: project.summary,
+		techStack: project.tech.stack,
+		featured: meta.featured,
+		category: meta.category,
+		year: getProjectYearFromPeriod(project.period),
+		role: project.role,
+		impact: meta.impact,
+		result: meta.result,
+		status: meta.status,
+	};
+});
 
 export function getFeaturedProjects(limit = 3) {
 	return projectList

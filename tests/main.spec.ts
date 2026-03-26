@@ -1,16 +1,16 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from "@playwright/test";
 
-test.describe('Main Page Navigation', () => {
-    test('should load the main page and have the correct title and heading', async ({ page }) => {
-    // Navigate to the homepage
-    await page.goto('/');
+test.describe("Main Page Navigation", () => {
+  test("should load the main page with current portfolio metadata", async ({ page }) => {
+    await page.goto("/");
 
-    // Check if the page title is correct
-        // Check if the page title is correct
-    await expect(page).toHaveTitle(/포트폴리오에 오신 것을 환영합니다/);
-
-    // Optional: Check if a main heading is visible
-        // Check if the main heading is visible
-    await expect(page.getByRole('heading', { name: /Hi, I'm Manjoong, a Front-End Developer/i, level: 1 })).toBeVisible();
+    await expect(page).toHaveTitle(/Manjoong Kim/);
+    await expect(
+      page.getByRole("heading", {
+        name: /김만중|Manjoong/i,
+        level: 1,
+      })
+    ).toBeVisible();
+    await expect(page.getByRole("link", { name: /프로젝트 보기|View Projects/i })).toBeVisible();
   });
 });

@@ -3,6 +3,7 @@ import path from "path";
 
 const PORT = process.env.PORT || 3000;
 const baseURL = `http://localhost:${PORT}`;
+const mobileTag = /@mobile/;
 
 export default defineConfig({
   timeout: 30 * 1000,
@@ -25,15 +26,23 @@ export default defineConfig({
   projects: [
     {
       name: "Desktop Chrome",
+      grepInvert: mobileTag,
       use: { ...devices["Desktop Chrome"] },
     },
     {
       name: "Desktop Firefox",
+      grepInvert: mobileTag,
       use: { ...devices["Desktop Firefox"] },
     },
     {
       name: "Desktop Safari",
+      grepInvert: mobileTag,
       use: { ...devices["Desktop Safari"] },
+    },
+    {
+      name: "Mobile Chrome",
+      grep: mobileTag,
+      use: { ...devices["Pixel 7"] },
     },
   ],
 });
