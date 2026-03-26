@@ -60,6 +60,18 @@ type Mode = "before" | "after";
 
 type ShikiHighlighter = Awaited<ReturnType<typeof createHighlighter>>;
 
+let highlighterPromise: Promise<ShikiHighlighter> | null = null;
+
+function getSharedHighlighter(): Promise<ShikiHighlighter> {
+  if (highlighterPromise == null) {
+    highlighterPromise = createHighlighter({
+      themes: ["github-dark", "github-light"],
+      langs: ["ts", "tsx"],
+    });
+  }
+  return highlighterPromise;
+}
+
 function subscribeReducedMotion(callback: () => void) {
   const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
   mq.addEventListener("change", callback);
@@ -100,7 +112,6 @@ export function TechStackShowcasePanel({
   const codeStacks = stacks.filter(
     (stack): stack is ShowcaseStack & { demo: ShowcaseCodeDemo } => stack.demo.kind === "code"
   );
-  const langs = Array.from(new Set(codeStacks.map((stack) => stack.demo.lang)));
   const activeCode =
     activeStack == null || activeStack.demo.kind !== "code"
       ? ""
@@ -116,23 +127,16 @@ export function TechStackShowcasePanel({
 
     let disposed = false;
 
-    async function loadHighlighter() {
-      const instance = await createHighlighter({
-        themes: ["github-dark", "github-light"],
-        langs,
-      });
-
+    getSharedHighlighter().then((instance) => {
       if (!disposed) {
         setHighlighter(instance);
       }
-    }
-
-    void loadHighlighter();
+    });
 
     return () => {
       disposed = true;
     };
-  }, [codeStacks.length, langs]);
+  }, [codeStacks.length]);
 
   if (activeStack == null) {
     return null;
@@ -186,22 +190,22 @@ export function TechStackShowcasePanel({
         className="rounded-3xl border border-border/70 bg-card/70 p-4 shadow-[0_24px_60px_-42px_color-mix(in_oklch,var(--color-primary),transparent_42%)] md:p-5"
       >
         <div className="flex flex-col gap-4 border-b border-border/70 pb-4 md:flex-row md:items-start md:justify-between">
-          <div>
+          <div className="min-w-0">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary/80">
               {activeStack.name}
             </p>
-            <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+            <p className="mt-2 text-sm text-muted-foreground">
               {activeStack.demo.summary}
             </p>
           </div>
 
           {activeStack.demo.kind === "code" && (
-            <div className="inline-flex rounded-2xl border border-border/70 bg-background/70 p-1">
+            <div className="inline-grid shrink-0 grid-cols-2 rounded-2xl border border-border/70 bg-background/70 p-1">
               <button
                 type="button"
                 data-testid="tech-stack-mode-before"
                 className={classNames(
-                  "rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                  "rounded-xl px-3 py-2 text-center text-sm font-medium whitespace-nowrap transition-colors",
                   mode === "before"
                     ? "bg-foreground text-background"
                     : "text-muted-foreground hover:text-foreground"
@@ -215,7 +219,7 @@ export function TechStackShowcasePanel({
                 type="button"
                 data-testid="tech-stack-mode-after"
                 className={classNames(
-                  "rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                  "rounded-xl px-3 py-2 text-center text-sm font-medium whitespace-nowrap transition-colors",
                   mode === "after"
                     ? "bg-primary text-primary-foreground"
                     : "text-muted-foreground hover:text-foreground"
@@ -230,7 +234,7 @@ export function TechStackShowcasePanel({
         </div>
 
         {activeStack.demo.kind === "code" ? (
-          <div className="mt-4 overflow-hidden rounded-2xl border border-border/70 bg-[color-mix(in_oklch,var(--color-surface-strong),transparent_18%)]">
+          <div className="mt-4 overflow-hidden rounded-2xl border border-border/70">
             {highlighter == null || prefersReducedMotion ? (
               <div className="space-y-3 p-4">
                 {highlighter == null && (
@@ -243,7 +247,7 @@ export function TechStackShowcasePanel({
                 </pre>
               </div>
             ) : (
-              <div className="overflow-x-auto p-2 md:p-3">
+              <div className="overflow-hidden p-2 md:p-3">
                 <ShikiMagicMove
                   key={activeStack.name}
                   highlighter={highlighter}
@@ -300,7 +304,6 @@ export function TechCategoryDemoPanel({
   const codeStacks = stacks.filter(
     (stack): stack is ShowcaseStack & { demo: ShowcaseCodeDemo } => stack.demo.kind === "code"
   );
-  const langs = Array.from(new Set(codeStacks.map((stack) => stack.demo.lang)));
   const activeCode =
     activeStack == null || activeStack.demo.kind !== "code"
       ? ""
@@ -316,23 +319,16 @@ export function TechCategoryDemoPanel({
 
     let disposed = false;
 
-    async function loadHighlighter() {
-      const instance = await createHighlighter({
-        themes: ["github-dark", "github-light"],
-        langs,
-      });
-
+    getSharedHighlighter().then((instance) => {
       if (!disposed) {
         setHighlighter(instance);
       }
-    }
-
-    void loadHighlighter();
+    });
 
     return () => {
       disposed = true;
     };
-  }, [codeStacks.length, langs]);
+  }, [codeStacks.length]);
 
   if (activeStack == null) {
     return null;
@@ -365,21 +361,21 @@ export function TechCategoryDemoPanel({
       )}
 
       <div className="flex flex-col gap-4 border-b border-border/70 pb-4 md:flex-row md:items-start md:justify-between">
-        <div>
+        <div className="min-w-0">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary/80">
             {activeStack.name}
           </p>
-          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+          <p className="mt-2 text-sm text-muted-foreground">
             {activeStack.demo.summary}
           </p>
         </div>
 
         {activeStack.demo.kind === "code" && (
-          <div className="inline-flex rounded-2xl border border-border/70 bg-background/70 p-1">
+          <div className="inline-grid shrink-0 grid-cols-2 rounded-2xl border border-border/70 bg-background/70 p-1">
             <button
               type="button"
               className={classNames(
-                "rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                "rounded-xl px-3 py-2 text-center text-sm font-medium whitespace-nowrap transition-colors",
                 mode === "before"
                   ? "bg-foreground text-background"
                   : "text-muted-foreground hover:text-foreground"
@@ -392,7 +388,7 @@ export function TechCategoryDemoPanel({
             <button
               type="button"
               className={classNames(
-                "rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                "rounded-xl px-3 py-2 text-center text-sm font-medium whitespace-nowrap transition-colors",
                 mode === "after"
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:text-foreground"
@@ -407,7 +403,7 @@ export function TechCategoryDemoPanel({
       </div>
 
       {activeStack.demo.kind === "code" ? (
-        <div className="mt-4 overflow-hidden rounded-2xl border border-border/70 bg-[color-mix(in_oklch,var(--color-surface-strong),transparent_18%)]">
+        <div className="mt-4 overflow-hidden rounded-2xl border border-border/70">
           {highlighter == null || prefersReducedMotion ? (
             <div className="space-y-3 p-4">
               {highlighter == null && (
@@ -420,7 +416,7 @@ export function TechCategoryDemoPanel({
               </pre>
             </div>
           ) : (
-            <div className="overflow-x-auto p-2 md:p-3">
+            <div className="overflow-hidden p-2 md:p-3">
               <ShikiMagicMove
                 key={activeStack.name}
                 highlighter={highlighter}
