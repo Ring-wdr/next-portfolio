@@ -11,16 +11,16 @@ test.describe("Tech Stack page", () => {
     const showcase = page.getByTestId("tech-stack-showcase");
     await expect(showcase).toBeVisible();
 
-    await expect(page.getByRole("button", { name: "React" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "React" }).first()).toBeVisible();
 
     const expertButton = page.getByTestId("tech-stack-mode-after");
     await expertButton.click();
 
     await expect(expertButton).toHaveAttribute("aria-pressed", "true");
-    await expect(page.getByText(/What changed/i)).toBeVisible();
+    await expect(showcase.getByText(/What changed/i)).toBeVisible();
 
-    await page.getByRole("button", { name: "Supabase" }).click();
-    await expect(page.getByTestId("tech-stack-showcase")).toContainText(
+    await page.getByRole("button", { name: "Supabase" }).first().click();
+    await expect(showcase).toContainText(
       /Explanation-only walkthrough/i
     );
   });

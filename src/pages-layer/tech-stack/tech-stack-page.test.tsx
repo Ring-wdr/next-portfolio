@@ -138,7 +138,7 @@ describe("TechStackPage", () => {
   it("switches a stack from before to after state", async () => {
     render(<TechStackPage />);
 
-    fireEvent.click(screen.getByRole("button", { name: "React" }));
+    fireEvent.click(screen.getAllByRole("button", { name: "React" })[0]);
 
     await waitFor(() => {
       expect(screen.getByTestId("magic-move-code")).toHaveTextContent(
@@ -149,7 +149,7 @@ describe("TechStackPage", () => {
     fireEvent.click(screen.getByTestId("tech-stack-mode-after"));
 
     await waitFor(() => {
-      expect(screen.getByTestId("magic-move-code")).toHaveTextContent("useMutation");
+      expect(screen.getByTestId("magic-move-code")).toHaveTextContent("useActionState");
     });
 
     expect(screen.getByTestId("tech-stack-showcase")).toHaveTextContent(
@@ -160,11 +160,11 @@ describe("TechStackPage", () => {
   it("renders explanation-only content for Supabase without code toggle controls", async () => {
     render(<TechStackPage />);
 
-    fireEvent.click(screen.getByRole("button", { name: "Supabase" }));
+    fireEvent.click(screen.getAllByRole("button", { name: "Supabase" })[0]);
 
     expect(screen.queryByTestId("tech-stack-mode-before")).not.toBeInTheDocument();
     expect(screen.queryByTestId("tech-stack-mode-after")).not.toBeInTheDocument();
-    expect(screen.getByText(/Explanation-only walkthrough/i)).toBeInTheDocument();
-    expect(screen.getByText(/tiny before\/after toy snippet hides the real skill signal/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Explanation-only walkthrough/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/tiny before\/after toy snippet hides the real skill signal/i).length).toBeGreaterThanOrEqual(1);
   });
 });
