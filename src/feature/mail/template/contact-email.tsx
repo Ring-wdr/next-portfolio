@@ -12,10 +12,19 @@ import {
 
 interface ContactEmailProps {
   userName: string;
+  userEmail: string;
+  company?: string;
+  purpose: string;
   content: string;
 }
 
-export const ContactEmail = ({ userName, content }: ContactEmailProps) => (
+export const ContactEmail = ({
+  userName,
+  userEmail,
+  company,
+  purpose,
+  content,
+}: ContactEmailProps) => (
   <Html>
     <Head />
     <Preview>New message from your portfolio site</Preview>
@@ -27,6 +36,19 @@ export const ContactEmail = ({ userName, content }: ContactEmailProps) => (
         </Text>
         <Hr style={hr} />
         <Section>
+          <Text style={label}>Name</Text>
+          <Text style={paragraph}>{userName}</Text>
+          <Text style={label}>Email</Text>
+          <Text style={paragraph}>{userEmail}</Text>
+          {company ? (
+            <>
+              <Text style={label}>Company</Text>
+              <Text style={paragraph}>{company}</Text>
+            </>
+          ) : null}
+          <Text style={label}>Purpose</Text>
+          <Text style={paragraph}>{purpose}</Text>
+          <Text style={label}>Message</Text>
           <Text style={paragraph}>{content}</Text>
         </Section>
         <Hr style={hr} />
@@ -63,6 +85,16 @@ const paragraph = {
   lineHeight: "24px",
   textAlign: "left" as const,
   padding: "0 20px",
+};
+
+const label = {
+  ...paragraph,
+  color: "#667085",
+  fontSize: "12px",
+  fontWeight: "bold",
+  letterSpacing: "0.08em",
+  lineHeight: "18px",
+  textTransform: "uppercase" as const,
 };
 
 const hr = {

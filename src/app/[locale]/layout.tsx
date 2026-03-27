@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
-import { Noto_Sans_KR, Space_Grotesk } from "next/font/google";
-import "../globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Noto_Sans_KR, Space_Grotesk } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { ThemeProvider } from "@/app/_provider/theme";
 import { env } from "@/env";
 import { routing } from "@/i18n/routing";
+import { buildPersonJsonLd, getBaseUrl, siteConfig, type AppLocale } from "@/shared/constant/site";
 import { Footer } from "@/shared/ui/footer";
 import { Header } from "@/shared/ui/header";
 import { classNames } from "@/shared/utils/classnames";
+import "../globals.css";
 
 const displayFont = Space_Grotesk({
 	subsets: ["latin"],
@@ -23,18 +24,13 @@ const bodyFont = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-	metadataBase: new URL(
-		process.env.VERCEL_URL
-			? `https://${process.env.VERCEL_URL}`
-			: "https://localhost:3000",
-	),
+	metadataBase: new URL(getBaseUrl()),
 	title: {
-		default: "Manjoong Kim | Frontend Portfolio",
+		default: siteConfig.title,
 		template: "%s | Manjoong Kim",
 	},
-	description:
-		"Frontend developer portfolio focused on product UX, modern web architecture, and performance-aware implementation.",
-	applicationName: "Manjoong Kim Portfolio",
+	description: siteConfig.description,
+	applicationName: siteConfig.name,
 	keywords: [
 		"Frontend Developer",
 		"Next.js",
@@ -46,27 +42,15 @@ export const metadata: Metadata = {
 	creator: "Manjoong Kim",
 	manifest: "/icon/manifest.json",
 	openGraph: {
-		title: "Manjoong Kim | Frontend Portfolio",
-		description:
-			"Portfolio showcasing frontend projects, interaction design, and engineering outcomes.",
-		url: "https://next-portfolio-ringring.vercel.app",
-		siteName: "Manjoong Kim Portfolio",
+		title: siteConfig.title,
+		description: siteConfig.defaultDescription,
+		siteName: siteConfig.name,
 		type: "website",
-		locale: "ko_KR",
-		images: [
-			{
-				url: "/icon/ms-icon-150x150.png",
-				width: 150,
-				height: 150,
-			},
-		],
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Manjoong Kim | Frontend Portfolio",
-		description:
-			"Modern frontend case studies and product-driven engineering work.",
-		images: ["/icon/ms-icon-150x150.png"],
+		title: siteConfig.title,
+		description: siteConfig.defaultDescription,
 	},
 	robots: {
 		index: true,
@@ -105,14 +89,12 @@ export default async function LocaleLayout({
 }) {
 	const { locale } = await params;
 
-	// Ensure that the incoming `locale` is valid
-	if (!routing.locales.includes(locale as "en" | "ko")) {
+	if (!routing.locales.includes(locale as AppLocale)) {
 		notFound();
 	}
 
-	// Providing all messages to the client
-	// side is the easiest way to get started
 	const messages = await getMessages();
+	const personJsonLd = buildPersonJsonLd(locale as AppLocale);
 
 	return (
 		<html lang={locale} suppressHydrationWarning>
@@ -124,6 +106,15 @@ export default async function LocaleLayout({
 				)}
 			>
 				<div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_15%_15%,color-mix(in_oklch,var(--color-highlight),transparent_84%),transparent_42%),radial-gradient(circle_at_85%_0%,color-mix(in_oklch,var(--color-surface-strong),transparent_86%),transparent_48%),linear-gradient(180deg,var(--background),color-mix(in_oklch,var(--background),black_5%))]" />
+				{personJsonLd.map((schema, index) => (
+					<script
+						key={`${locale}-structured-data-${index}`}
+						type="application/ld+json"
+						dangerouslySetInnerHTML={{
+							__html: JSON.stringify(schema),
+						}}
+					/>
+				))}
 				<NextIntlClientProvider messages={messages}>
 					<ThemeProvider
 						attribute="class"
@@ -139,8 +130,8 @@ export default async function LocaleLayout({
 						</div>
 					</ThemeProvider>
 				</NextIntlClientProvider>
+				<GoogleAnalytics gaId={env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
 			</body>
-			<GoogleAnalytics gaId={env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
 		</html>
 	);
 }

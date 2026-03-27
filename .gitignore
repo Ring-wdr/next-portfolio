@@ -43,3 +43,9 @@ certificates
 test-results
 playwright-report
 playwright-video
+
+# local agent tooling
+.agents/
+.claude/
+.omx/
+skills-lock.json

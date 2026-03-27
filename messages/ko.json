@@ -4,7 +4,9 @@
     "projects": "프로젝트",
     "techStack": "기술 스택",
     "about": "소개",
-    "contact": "연락하기"
+    "contact": "연락하기",
+    "menu": "메뉴 열기",
+    "closeMenu": "메뉴 닫기"
   },
   "Footer": {
     "allRightsReserved": "All rights reserved.",
@@ -178,7 +180,21 @@
     "send": "보내기",
     "sending": "전송 중...",
     "success": "메시지가 성공적으로 전송되었습니다!",
-    "error": "메시지 전송에 실패했습니다. 다시 시도해주세요."
+    "error": "메시지 전송에 실패했습니다. 다시 시도해주세요.",
+    "namePlaceholder": "성함을 알려주세요",
+    "emailPlaceholder": "reply@example.com",
+    "company": "회사 / 팀",
+    "companyPlaceholder": "소속이 있다면 알려주세요",
+    "purpose": "문의 목적",
+    "purposeOptions": {
+      "jobOpportunity": "채용 / 인터뷰 제안",
+      "projectInquiry": "프로젝트 문의",
+      "collaboration": "협업 제안",
+      "other": "기타"
+    },
+    "messagePlaceholder": "어떤 포지션인지, 어떤 프로젝트인지, 어떤 도움이 필요한지 알려주세요.",
+    "website": "웹사이트",
+    "privacyNote": "남겨주신 정보는 답변과 후속 연락을 위해서만 사용합니다."
   },
   "ProjectDetailPage": {
     "period": "기간",
@@ -198,7 +214,7 @@
     "achievements": "성과",
     "metrics": "주요 지표",
     "feedback": "사용자 피드백",
-    "improvements": "개선 사항",
+    "improvements": "배운 점 / 다음 단계",
     "screenshots": "스크린샷",
     "backToProjects": "프로젝트 목록으로 돌아가기"
   }

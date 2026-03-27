@@ -4,7 +4,9 @@
     "projects": "Projects",
     "techStack": "Tech Stack",
     "about": "About Me",
-    "contact": "Contact"
+    "contact": "Contact",
+    "menu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "Footer": {
     "allRightsReserved": "All rights reserved.",
@@ -178,7 +180,21 @@
     "send": "Send",
     "sending": "Sending...",
     "success": "Message sent successfully!",
-    "error": "Failed to send message. Please try again."
+    "error": "Failed to send message. Please try again.",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "you@company.com",
+    "company": "Company / Team",
+    "companyPlaceholder": "Company or team",
+    "purpose": "Purpose",
+    "purposeOptions": {
+      "jobOpportunity": "Job opportunity / interview",
+      "projectInquiry": "Project inquiry",
+      "collaboration": "Collaboration",
+      "other": "Other"
+    },
+    "messagePlaceholder": "Tell me about the role, project, or collaboration you're considering.",
+    "website": "Website",
+    "privacyNote": "I will only use this information to reply to your inquiry."
   },
   "ProjectDetailPage": {
     "period": "Period",
@@ -198,7 +214,7 @@
     "achievements": "Achievements",
     "metrics": "Key Metrics",
     "feedback": "User Feedback",
-    "improvements": "Improvements",
+    "improvements": "Learnings / Next Steps",
     "screenshots": "Screenshots",
     "backToProjects": "Back to Projects"
   }

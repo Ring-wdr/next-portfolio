@@ -10,7 +10,7 @@
 ## ✨ 주요 기능
 
 - 🏠 **Home**: 간략한 자기소개 및 보유 기술 스택
-- 📁 **Projects**: 진행한 프로젝트 포트폴리오 (5개 프로젝트)
+- 📁 **Projects**: 케이스 스터디 중심 프로젝트 포트폴리오
   - 프로젝트 상세 페이지 (URL 및 모달 뷰 지원)
   - 프로젝트별 기술 스택, 챌린지, 해결책, 성과 등 상세 정보
   - 이미지 갤러리 (라이트박스 기능 지원)
@@ -27,7 +27,7 @@
 - ✅ **M1**: 디자인 토큰 재정의, 홈/레이아웃 비주얼 시스템 개편
 - ✅ **M2**: About/Tech Stack 페이지를 데이터 중심 내러티브 구조로 확장
 - ✅ **M3**: Projects 목록/상세를 스토리 중심 정보 구조로 개선
-- ✅ **M4**: 접근성/SEO/성능 하드닝 + 린트 워크플로우 정비
+- 🟡 **M4**: 접근성/메타데이터/성능 하드닝과 자동화 검증 정비 진행 중
 
 ## 🌐 배포
 
@@ -61,6 +61,7 @@
 - **Pattern**: Feature-Sliced Design (FSD)
 - **Structure**: pages-layer, features, shared
 - **Type Safety**: @t3-oss/env-nextjs
+- **Architecture Note**: [`docs/architecture-tradeoffs.md`](docs/architecture-tradeoffs.md)
 
 ## 📁 프로젝트 구조
 
@@ -131,9 +132,11 @@ pnpm install
 
 ```env
 # Email Configuration
-EMAIL_USER=your-email@gmail.com
-EMAIL_PASSWORD=your-app-password
-EMAIL_TO=recipient@example.com
+NEXT_MAIL_ADDRESS=your-email@gmail.com
+NEXT_APP_PASSWORD=your-app-password
+
+# Analytics
+NEXT_PUBLIC_GOOGLE_ANALYTICS=G-XXXXXXXXXX
 ```
 
 ### 개발 서버 실행
@@ -180,14 +183,14 @@ pnpm test:e2e-log
 pnpm lint && pnpm test -- --run && pnpm build
 ```
 
-## 📌 포트폴리오 프로젝트
+## 📌 대표 프로젝트
 
-### 1. POCAZ
+### 1. POCAZ Remake
 
-- **설명**: 아이돌 포토카드 전문 거래 플랫폼
-- **역할**: 국내외 8000억 규모 아이돌 굿즈 시장을 겨냥한 포토카드 리셀 거래 플랫폼 개발
-- **기술**: React, JavaScript, Tailwind CSS, Express.js, MySQL
-- **링크**: [GitHub](https://github.com/TEAM-POCAZ/PocaZ)
+- **설명**: 아이돌 포토카드 리셀 거래를 전문 UX로 다시 설계한 리메이크 프로젝트
+- **역할**: 1인 풀스택 개발 (Next.js, 상태관리, API 연동)
+- **기술**: React, Next.js, StyleX, Elysia.js, PostgreSQL, Prisma, Supabase, Bun.js
+- **링크**: [GitHub](https://github.com/Ring-wdr/pocaz-remake) · [Demo](https://pocaz-remake.vercel.app/)
 
 ### 2. 법률사무소 대도
 
@@ -206,9 +209,23 @@ pnpm lint && pnpm test -- --run && pnpm build
 ### 4. 역대카
 
 - **설명**: 렌트카 가격 비교 서비스
-- **역할**: 렌트사 비교 및 최저가 추천 서비스 프로토타입 개발
-- **기술**: Next.js, Supabase, Tailwind CSS, TypeScript
+- **역할**: 개인 프로젝트 풀스택 개발 (Next.js, Supabase)
+- **기술**: Next.js, Supabase, Prisma, Tailwind CSS, TypeScript
 - **링크**: [웹사이트](https://alltime-car.com/)
+
+### 5. 프론트엔드 주니어 스터디
+
+- **설명**: 15주 학습 커리큘럼과 실습 기록을 구조화한 공개 학습 저장소
+- **역할**: 커리큘럼 설계 및 학습 자료 정리
+- **기술**: TypeScript, Bun.js, CSS
+- **링크**: [GitHub](https://github.com/Ring-wdr/frontend-junior-study) · [Demo](https://ring-wdr.github.io/frontend-junior-study/)
+
+### 6. react-devtool-cli
+
+- **설명**: Playwright 기반 브라우저 세션 위에서 React inspection과 profiler 분석을 자동화하는 agent-first CLI
+- **역할**: CLI 설계 및 구현, Playwright 전송 계층 구성, snapshot-aware inspection 워크플로우 설계
+- **기술**: React, Playwright, Command Line, JavaScript
+- **링크**: [GitHub](https://github.com/Ring-wdr/react-devtool-cli) · [npm](https://www.npmjs.com/package/react-devtool-cli)
 
 ## 💡 주요 특징
 

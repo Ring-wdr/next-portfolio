@@ -1,7 +1,8 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { ProjectDetailPage } from "@/pages-layer/project/[slug]";
 import { projectDetailList } from "@/shared/constant/project-detail";
-import { notFound } from "next/navigation";
-import type { Metadata } from "next";
+import { buildPageMetadata, buildProjectJsonLd, getProjectPath, type AppLocale } from "@/shared/constant/site";
 
 export async function generateStaticParams() {
   return projectDetailList.map((project) => ({
@@ -12,38 +13,44 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/project/[slug]">): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const project = projectDetailList.find((p) => p.slug === slug);
 
   if (!project) {
     return {
       title: "Project Not Found",
+      description: "The requested case study could not be found.",
     };
   }
 
-  return {
-    title: `${project.title} - Manjoong Portfolio`,
+  return buildPageMetadata({
+    locale: locale as AppLocale,
+    pathname: getProjectPath(project.slug),
+    title: `${project.title} | Manjoong Kim`,
     description: project.summary,
-    openGraph: {
-      title: `${project.title} - Manjoong Portfolio`,
-      description: project.summary,
-      images:
-        typeof project.thumbnail === "string"
-          ? [project.thumbnail]
-          : [project.thumbnail.src],
-    },
-  };
+    keywords: project.metadata.tags,
+  });
 }
 
 export default async function Page({
   params,
 }: PageProps<"/[locale]/project/[slug]">) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const project = projectDetailList.find((p) => p.slug === slug);
 
   if (!project) {
     notFound();
   }
 
-  return <ProjectDetailPage project={project} />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(buildProjectJsonLd(project, locale as AppLocale)),
+        }}
+      />
+      <ProjectDetailPage project={project} />
+    </>
+  );
 }
