@@ -37,15 +37,147 @@ export const TechStackCategory = [
   "Backend",
 ] as const;
 
+export type TechStackCodeDemo = {
+  kind: "code";
+  lang: "ts" | "tsx";
+  summaryKey: string;
+  improvementKey: string;
+  beforeCode: string;
+  afterCode: string;
+};
+
+export type TechStackNarrativeDemo = {
+  kind: "narrative";
+  summaryKey: string;
+  improvementKey: string;
+  detailKey: string;
+};
+
+export type TechStackDemo = TechStackCodeDemo | TechStackNarrativeDemo;
+
 export type TechStackType = {
   name: string;
   icon: React.ReactNode;
   category: (typeof TechStackCategory)[number][];
+  demo?: TechStackDemo;
 };
 
 export type TechStackEnum = (typeof TechStack)[number]["name"];
 
-export const TechStack = [
+export type TechStackShowcaseEntry = {
+  name: string;
+  demo: TechStackDemo;
+};
+
+const reactBeforeCode = `function CheckoutButton({ items }) {
+  const [loading, setLoading] = useState(false);
+
+  async function handleClick() {
+    setLoading(true);
+    await fetch('/api/checkout', {
+      method: 'POST',
+      body: JSON.stringify(items),
+    });
+    setLoading(false);
+  }
+
+  return <button onClick={handleClick}>Buy</button>;
+}`;
+
+const reactAfterCode = `import { useActionState } from 'react';
+
+function CheckoutButton({ items, onSuccess }) {
+  const [, submitAction, isPending] = useActionState(
+    async () => {
+      await createCheckoutSession(items);
+      onSuccess?.();
+    },
+    undefined,
+  );
+
+  return (
+    <form action={submitAction}>
+      <button type="submit" disabled={isPending}>
+        {isPending ? 'Processing…' : 'Buy now'}
+      </button>
+    </form>
+  );
+}`;
+
+const nextBeforeCode = `"use client";
+
+export default function TechStackPage() {
+  const [selected, setSelected] = useState('React');
+
+  return <TechStackExperience selected={selected} />;
+}`;
+
+const nextAfterCode = `export default async function Page(
+  props: PageProps<'/tech-stack/[category]'>
+) {
+  const { category } = await props.params;
+  const stacks = await getTechStacks(category);
+
+  return (
+    <TechStackPage
+      stacks={stacks}
+      showcase={<TechStackShowcase stacks={stacks} />}
+    />
+  );
+}`;
+
+const typeScriptBeforeCode = `const tech = {
+  name: 'React',
+  category: ['Frameworks & Libraries'],
+  beforeCode: 'const count = 0',
+  afterCode: 'const [count] = useState(0)',
+};`;
+
+const typeScriptAfterCode = `type CodeDemo = {
+  kind: 'code';
+  lang: 'ts' | 'tsx';
+  beforeCode: string;
+  afterCode: string;
+};
+
+type NarrativeDemo = {
+  kind: 'narrative';
+  detail: string;
+};
+
+const react = {
+  name: 'React',
+  category: ['Frameworks & Libraries'],
+  demo: {
+    kind: 'code',
+    lang: 'tsx',
+    beforeCode: '…',
+    afterCode: '…',
+  },
+} satisfies TechItem;`;
+
+const playwrightBeforeCode = `test('tech stack page', async ({ page }) => {
+  await page.goto('/en/tech-stack');
+});`;
+
+const playwrightAfterCode = `test('tech stack page', async ({ page }) => {
+  await page.goto('/en/tech-stack');
+
+  await test.step('showcase renders', async () => {
+    await expect(
+      page.getByTestId('tech-stack-showcase')
+    ).toBeVisible();
+  });
+
+  await test.step('mode toggle works', async () => {
+    await page.getByTestId('tech-stack-mode-after').click();
+    await expect(
+      page.getByTestId('tech-stack-mode-after')
+    ).toHaveAttribute('aria-pressed', 'true');
+  });
+});`;
+
+export const TechStack: TechStackType[] = [
   {
     name: "JavaScript",
     icon: <JavascriptIcon />,
@@ -55,6 +187,14 @@ export const TechStack = [
     name: "TypeScript",
     icon: <TypescriptIcon />,
     category: ["Languages"],
+    demo: {
+      kind: "code",
+      lang: "ts",
+      summaryKey: "showcase.items.typescript.summary",
+      improvementKey: "showcase.items.typescript.improvement",
+      beforeCode: typeScriptBeforeCode,
+      afterCode: typeScriptAfterCode,
+    },
   },
   {
     name: "HTML",
@@ -75,11 +215,27 @@ export const TechStack = [
     name: "React",
     icon: <ReactIcon />,
     category: ["Frameworks & Libraries"],
+    demo: {
+      kind: "code",
+      lang: "tsx",
+      summaryKey: "showcase.items.react.summary",
+      improvementKey: "showcase.items.react.improvement",
+      beforeCode: reactBeforeCode,
+      afterCode: reactAfterCode,
+    },
   },
   {
     name: "Next.js",
     icon: <NextjsIcon />,
     category: ["Frameworks & Libraries", "Backend"],
+    demo: {
+      kind: "code",
+      lang: "tsx",
+      summaryKey: "showcase.items.nextjs.summary",
+      improvementKey: "showcase.items.nextjs.improvement",
+      beforeCode: nextBeforeCode,
+      afterCode: nextAfterCode,
+    },
   },
   {
     name: "SvelteKit",
@@ -150,6 +306,14 @@ export const TechStack = [
     name: "Playwright",
     icon: <PlaywrightIcon />,
     category: ["Tools", "Testing"],
+    demo: {
+      kind: "code",
+      lang: "ts",
+      summaryKey: "showcase.items.playwright.summary",
+      improvementKey: "showcase.items.playwright.improvement",
+      beforeCode: playwrightBeforeCode,
+      afterCode: playwrightAfterCode,
+    },
   },
   {
     name: "MySQL",
@@ -165,6 +329,12 @@ export const TechStack = [
     name: "Supabase",
     icon: <SupabaseIcon width={18} height={18} />,
     category: ["Database", "Backend"],
+    demo: {
+      kind: "narrative",
+      summaryKey: "showcase.items.supabase.summary",
+      improvementKey: "showcase.items.supabase.improvement",
+      detailKey: "showcase.items.supabase.detail",
+    },
   },
   {
     name: "Prisma",
@@ -176,4 +346,13 @@ export const TechStack = [
     icon: <PostgreSQLIcon width={18} height={18} />,
     category: ["Database", "Backend"],
   },
-] as const satisfies TechStackType[];
+];
+
+export function getTechStackShowcaseEntries(): TechStackShowcaseEntry[] {
+  return TechStack.filter(
+    (tech): tech is TechStackType & { demo: TechStackDemo } => tech.demo !== undefined
+  ).map((tech) => ({
+    name: tech.name,
+    demo: tech.demo,
+  }));
+}

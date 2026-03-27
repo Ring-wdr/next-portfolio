@@ -1,10 +1,51 @@
-import { TechStack, TechStackCategory } from "@/shared/constant/tech-stack";
 import { Fragment } from "react";
 import { useTranslations } from "next-intl";
+
+import {
+  getTechStackShowcaseEntries,
+  TechStack,
+  TechStackCategory,
+} from "@/shared/constant/tech-stack";
 import { TechCategoryMeta } from "@/shared/constant/profile";
+
+import { TechStackShowcasePanel, TechCategoryDemoPanel, ShowcaseStack } from "./tech-stack-showcase";
 
 export function TechStackPage() {
   const t = useTranslations("TechStackPage");
+  const showcaseStacks = getTechStackShowcaseEntries().map((stack) => ({
+    name: stack.name,
+    demo:
+      stack.demo.kind === "code"
+        ? {
+            ...stack.demo,
+            summary: t(stack.demo.summaryKey),
+            improvement: t(stack.demo.improvementKey),
+          }
+        : {
+            ...stack.demo,
+            summary: t(stack.demo.summaryKey),
+            improvement: t(stack.demo.improvementKey),
+            detail: t(stack.demo.detailKey),
+          },
+  }));
+  const showcaseCopy = {
+    eyebrow: t("showcase.eyebrow"),
+    title: t("showcase.title"),
+    description: t("showcase.description"),
+    selectLabel: t("showcase.selectLabel"),
+    beforeLabel: t("showcase.before"),
+    afterLabel: t("showcase.after"),
+    whatChanged: t("showcase.whatChanged"),
+    narrativeLabel: t("showcase.narrativeLabel"),
+    loading: t("showcase.loading"),
+  };
+  const categoryDemoCopy = {
+    beforeLabel: t("showcase.before"),
+    afterLabel: t("showcase.after"),
+    whatChanged: t("showcase.whatChanged"),
+    narrativeLabel: t("showcase.narrativeLabel"),
+    loading: t("showcase.loading"),
+  };
 
   return (
     <main className="flex flex-1 justify-center py-6 md:py-10">
@@ -35,6 +76,10 @@ export function TechStackPage() {
           </div>
         </section>
 
+        <section className="glass-panel rounded-3xl p-6 md:p-8">
+          <TechStackShowcasePanel stacks={showcaseStacks} copy={showcaseCopy} />
+        </section>
+
         {TechStackCategory.map((category) => {
           const categoryDescription = TechCategoryMeta.find(
             (item) => item.category === category
@@ -42,6 +87,9 @@ export function TechStackPage() {
           const stacks = TechStack.filter((tech) =>
             tech.category.some((_category) => _category === category)
           );
+          const categoryDemoStacks = showcaseStacks.filter((s) =>
+            TechStack.find((tech) => tech.name === s.name)?.category.includes(category)
+          ) as ShowcaseStack[];
 
           return (
             <Fragment key={category}>
@@ -68,6 +116,13 @@ export function TechStackPage() {
                     </article>
                   ))}
                 </div>
+
+                {categoryDemoStacks.length > 0 && (
+                  <TechCategoryDemoPanel
+                    stacks={categoryDemoStacks}
+                    copy={categoryDemoCopy}
+                  />
+                )}
               </section>
             </Fragment>
           );

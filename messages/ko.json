@@ -115,7 +115,41 @@
     "Styling": "스타일링",
     "Testing": "테스팅",
     "Tools": "도구",
-    "Backend": "백엔드"
+    "Backend": "백엔드",
+    "showcase": {
+      "eyebrow": "성장 증거",
+      "title": "초보 코드에서 전문가 시스템으로",
+      "description": "단순히 동작하는 수준에서 확장 가능한 구현으로 기준이 올라갈 때, 제가 어떤 식으로 코드를 바꾸는지 보여주는 스택만 골랐습니다.",
+      "selectLabel": "스택 선택",
+      "before": "이전 · 초보",
+      "after": "이후 · 전문가",
+      "whatChanged": "무엇이 달라졌는가",
+      "loading": "코드 워크스루 준비 중…",
+      "items": {
+        "react": {
+          "summary": "수동 loading 상태를 React 19의 내장 액션 모델로 교체합니다.",
+          "improvement": "임시 useState 플래그에서 useActionState로 넘어갑니다. form의 action prop이 비동기 흐름을 담당하고, isPending이 수동 토글을 대체하며, 성공 콜백이 깔끔하게 합성됩니다."
+        },
+        "nextjs": {
+          "summary": "PageProps와 async params로 완전한 타입 안전성을 갖춘 서버 우선 라우트를 만듭니다.",
+          "improvement": "클라이언트 중심 페이지 셸에서 PageProps<'/route'>로 타입이 지정된 async 서버 컴포넌트로 전환합니다. next typegen이 생성하는 글로벌 헬퍼로 수동 타입 선언 없이 params를 Promise로 안전하게 다룰 수 있습니다."
+        },
+        "typescript": {
+          "summary": "판별 유니온과 satisfies로 도메인 규칙을 타입 레이어에 담습니다.",
+          "improvement": "느슨한 객체 리터럴에서 satisfies로 검증된 판별 유니온(kind: 'code' | 'narrative')으로 바뀝니다. 누락된 필드를 호출부가 아닌 정의 시점에서 TypeScript가 잡아냅니다."
+        },
+        "playwright": {
+          "summary": "테스트를 단조로운 await 나열이 아닌, 읽기 좋은 step 구조로 작성합니다.",
+          "improvement": "단순 페이지 이동에서 이름 있는 test.step 블록으로 전환합니다. 각 assertion이 범위를 가지고, 실패 시 어느 step이 깨졌는지 바로 파악되며, 테스트 리포트가 제품 스펙처럼 읽힙니다."
+        },
+        "supabase": {
+          "summary": "BaaS 속도와 Postgres 깊이를 함께 — 인증, 실시간, RLS를 하나의 플랫폼에서.",
+          "improvement": "인가 로직을 애플리케이션 코드에서 꺼내 DB 레이어의 Row Level Security 정책으로 옮깁니다. 버그 발생 여지가 줄고, 접근 규칙이 스키마와 함께 버전 관리됩니다.",
+          "detail": "Supabase는 BaaS 속도로 빠르게 구축하면서도 Postgres의 완전한 제어권을 포기하지 않아도 될 때 선택합니다. Row Level Security는 인가 규칙을 DB 안에 직접 담아 API 라우트를 얇게 유지하고, 접근 정책을 스키마와 함께 버전 관리할 수 있게 합니다. 실시간 레이어는 폴링 없이 WebSocket push 방식으로 데이터를 전달해 협업·라이브 업데이트 UI에 자연스럽게 맞아떨어집니다. Supabase의 자동 생성 REST API와 타입드 클라이언트 덕분에 스키마 자체가 계약이 되고, 브레이킹 체인지는 운영 환경이 아닌 빌드 타임에 드러납니다."
+        }
+      },
+      "narrativeLabel": "설명 중심 워크스루"
+    }
   },
   "AboutPage": {
     "title": "소개",
