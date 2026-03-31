@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { getFeaturedProjects, projectList } from "@/shared/constant/project";
 import { TechStack } from "@/shared/constant/tech-stack";
-import { PretextStatement } from "./pretext-statement";
+import { PretextStatement } from "@/shared/ui/pretext-statement";
 
 export function MainPage() {
 	const locale = useLocale();

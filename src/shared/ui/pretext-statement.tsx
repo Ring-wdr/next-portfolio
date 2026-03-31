@@ -10,6 +10,7 @@ import { startTransition, useEffect, useRef, useState } from "react";
 import { classNames } from "@/shared/utils/classnames";
 
 type PretextStatementProps = {
+	as?: "h1" | "h2" | "p";
 	className?: string;
 	locale: string;
 	text: string;
@@ -19,6 +20,10 @@ type StatementLayout = {
 	lines: string[];
 	width: number;
 };
+
+function normalizeText(value: string) {
+	return value.replace(/\s+/g, " ").trim();
+}
 
 function parseLineHeight(value: string, fontSize: number) {
 	if (value === "normal") {
@@ -40,7 +45,12 @@ function measureLineCount(text: string, font: string, width: number) {
 	return { lineCount, prepared };
 }
 
-function scoreLayout(width: number, maxWidth: number, lineWidths: number[], targetLines: number) {
+function scoreLayout(
+	width: number,
+	maxWidth: number,
+	lineWidths: number[],
+	targetLines: number,
+) {
 	const widestLine = Math.max(...lineWidths);
 	const shortestLine = Math.min(...lineWidths);
 	const balancePenalty = lineWidths.reduce((total, lineWidth) => {
@@ -60,13 +70,15 @@ function scoreLayout(width: number, maxWidth: number, lineWidths: number[], targ
 }
 
 export function PretextStatement({
+	as = "p",
 	className,
 	locale,
 	text,
 }: PretextStatementProps) {
 	const containerRef = useRef<HTMLDivElement>(null);
-	const ref = useRef<HTMLParagraphElement>(null);
+	const ref = useRef<HTMLHeadingElement | HTMLParagraphElement>(null);
 	const [layout, setLayout] = useState<StatementLayout | null>(null);
+	const Component = as;
 
 	useEffect(() => {
 		let frame = 0;
@@ -113,7 +125,8 @@ export function PretextStatement({
 			let low = minimumWidth;
 			let high = maxWidth;
 			let tightWidth = maxWidth;
-			let cachedPrepared = null as ReturnType<typeof measureLineCount>["prepared"] | null;
+			let cachedPrepared =
+				null as ReturnType<typeof measureLineCount>["prepared"] | null;
 
 			while (low <= high) {
 				const mid = Math.floor((low + high) / 2);
@@ -143,7 +156,12 @@ export function PretextStatement({
 				}
 
 				const lineWidths = result.lines.map((line) => line.width);
-				const score = scoreLayout(candidateWidth, maxWidth, lineWidths, targetLines);
+				const score = scoreLayout(
+					candidateWidth,
+					maxWidth,
+					lineWidths,
+					targetLines,
+				);
 
 				if (score < bestScore) {
 					bestScore = score;
@@ -152,6 +170,13 @@ export function PretextStatement({
 						width: Math.ceil(Math.max(...lineWidths)),
 					};
 				}
+			}
+
+			if (
+				bestLayout &&
+				normalizeText(bestLayout.lines.join("")) !== normalizeText(text)
+			) {
+				bestLayout = null;
 			}
 
 			startTransition(() => {
@@ -182,7 +207,7 @@ export function PretextStatement({
 
 	return (
 		<div ref={containerRef} className="max-w-full">
-			<p
+			<Component
 				ref={ref}
 				className={classNames(
 					"max-w-full text-[clamp(1.85rem,4.7vw,4.5rem)] font-semibold leading-[0.98] tracking-[-0.05em] text-balance text-foreground",
@@ -199,7 +224,7 @@ export function PretextStatement({
 				) : (
 					text
 				)}
-			</p>
+			</Component>
 		</div>
 	);
 }

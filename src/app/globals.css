@@ -161,6 +161,18 @@
 		animation: home-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 	}
 
+	.editorial-section-shell {
+		@apply py-12 md:py-16;
+	}
+
+	.editorial-kicker {
+		@apply text-[0.68rem] font-semibold uppercase tracking-[0.18em];
+	}
+
+	.editorial-section-reveal {
+		animation: home-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+	}
+
 	.home-cta-shell {
 		background:
 			linear-gradient(
