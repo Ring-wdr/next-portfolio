@@ -17,6 +17,7 @@
     "test:perf": "playwright test tests/benchmarks -c playwright.perf.config.ts"
   },
   "dependencies": {
+    "@chenglou/pretext": "^0.0.3",
     "@next/third-parties": "16.2.1",
     "@radix-ui/react-slot": "^1.2.3",
     "@react-email/components": "^0.3.3",
