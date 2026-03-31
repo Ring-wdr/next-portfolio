@@ -139,7 +139,7 @@
 	}
 
 	.section-shell {
-		@apply w-full max-w-6xl px-4 md:px-8;
+		@apply mx-auto w-full max-w-6xl px-4 md:px-8;
 	}
 
 	.text-gradient-hero {
@@ -148,7 +148,55 @@
 		background-clip: text;
 		color: transparent;
 	}
-}
+
+	.home-section-shell {
+		@apply py-12 md:py-16;
+	}
+
+	.home-kicker {
+		@apply text-[0.68rem] font-semibold uppercase tracking-[0.18em];
+	}
+
+	.home-section-reveal {
+		animation: home-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+	}
+
+	.home-cta-shell {
+		background:
+			linear-gradient(
+				145deg,
+				color-mix(in oklch, var(--color-surface), transparent 2%) 0%,
+				color-mix(in oklch, var(--color-surface), var(--color-highlight) 8%) 100%
+			);
+		box-shadow:
+			0 34px 90px -72px color-mix(in oklch, var(--color-primary), transparent 32%),
+			0 1px 0 0 color-mix(in oklch, var(--color-border), transparent 12%) inset;
+	}
+
+	.home-hero-copy > * {
+		animation: home-rise 0.88s cubic-bezier(0.16, 1, 0.3, 1) both;
+	}
+
+	.home-hero-copy > *:nth-child(1) {
+		animation-delay: 0.04s;
+	}
+
+	.home-hero-copy > *:nth-child(2) {
+		animation-delay: 0.12s;
+	}
+
+	.home-hero-copy > *:nth-child(3) {
+		animation-delay: 0.2s;
+	}
+
+	.home-hero-copy > *:nth-child(4) {
+		animation-delay: 0.28s;
+	}
+
+	.home-hero-copy > *:nth-child(5) {
+		animation-delay: 0.36s;
+	}
+ }
 
 /* View Transition API Support */
 @view-transition {
@@ -265,6 +313,17 @@
 		transform: translateY(8px) scale(0.98);
 	}
 	to {
+		transform: translateY(0) scale(1);
+	}
+}
+
+@keyframes home-rise {
+	from {
+		opacity: 0;
+		transform: translateY(22px) scale(0.99);
+	}
+	to {
+		opacity: 1;
 		transform: translateY(0) scale(1);
 	}
 }

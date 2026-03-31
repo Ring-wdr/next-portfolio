@@ -24,31 +24,43 @@
   },
   "HomePage": {
     "eyebrow": "프론트엔드 엔지니어 포트폴리오",
-    "greeting": "안녕하세요, 저는 김만중입니다. 프론트엔드 개발자입니다",
-    "description": "최신 기술을 사용하여 아름답고 기능적인 웹 경험을 구축합니다. 포트폴리오를 탐색하여 제 작업을 확인하고 기술에 대해 자세히 알아보세요.",
+    "greeting": "명확하고 빠르며, 움직임까지 설계된 프로덕트 인터페이스를 만듭니다.",
+    "description": "Next.js, React, TypeScript를 바탕으로 읽기 쉬운 화면과 운영까지 이어지는 프론트엔드 구조를 함께 설계합니다.",
     "viewProjects": "프로젝트 보기",
     "aboutCta": "소개",
-    "featuredProjects": "주요 프로젝트",
+    "featuredProjects": "선별한 작업",
+    "selectedWorkEyebrow": "최근 케이스 스터디",
+    "selectedWorkDescription": "UX 결정, 인터랙션 완성도, 구현 선명도를 기준으로 추린 프로젝트입니다.",
     "techStack": "기술 스택",
-    "featuredStory": "추천 스토리",
+    "featuredLabel": "메인 케이스",
     "viewAll": "전체 보기",
     "stats": {
-      "projects": "프로젝트",
-      "tech": "기술",
-      "currentFocus": "현재 집중 분야"
+      "projects": "출시한 프로젝트",
+      "tech": "핵심 도구",
+      "currentFocus": "현재 집중",
+      "currentFocusValue": "Next.js 16 / React 19"
     },
+    "craftEyebrow": "일하는 방식",
+    "craftTitle": "디자인, 코드, 전달력이 하나의 시스템처럼 읽혀야 한다고 믿습니다.",
+    "craftDescription": "먼저 제품의 형태를 정리하고, 화면은 차분하게 만들며, 모션은 위계를 선명하게 할 때만 사용합니다.",
+    "craftStatement": "한눈에 읽히고, 움직임은 정확하며, 운영까지 이어지는 프론트엔드.",
+    "stackLabel": "현재 툴킷",
+    "finalEyebrow": "대화를 시작할 준비",
+    "finalTitle": "표면과 시스템을 함께 다루는 프론트엔드 엔지니어가 필요하다면",
+    "finalDescription": "케이스 스터디를 먼저 보고, 제품 작업·협업·채용 관련 이야기로 이어가세요.",
+    "contactCta": "연락하기",
     "pillars": {
       "productThinking": {
-        "title": "프로덕트 사고",
-        "description": "사용자 흐름을 먼저 설계하고, 실제 성과를 위한 엔지니어링 디테일을 최적화합니다."
+        "title": "프로덕트 우선 판단",
+        "description": "사용자 흐름과 의사결정 가치를 먼저 보고, 거기에 맞는 기술 깊이를 선택합니다."
       },
       "modernFrontend": {
-        "title": "모던 프론트엔드",
-        "description": "React 19와 App Router 패턴, 전환 중심 인터페이스를 실용적으로 적용합니다."
+        "title": "모던 프론트엔드 시스템",
+        "description": "React 19와 App Router, 전환을 고려한 UI를 쓰되 화면 자체가 데모처럼 보이지 않게 다룹니다."
       },
       "deliveryFocus": {
-        "title": "실행 중심",
-        "description": "프로토타입부터 운영까지 품질, 성능, 유지보수성을 균형 있게 가져갑니다."
+        "title": "노이즈 없는 전달",
+        "description": "코드베이스는 예측 가능하게, 화면은 절제되게, 프로토타입에서 운영까지의 거리는 짧게 유지합니다."
       }
     }
   },
