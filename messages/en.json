@@ -168,9 +168,15 @@
     "greeting": "Hi, I'm Manjoong",
     "role": "Front-End Developer",
     "intro": "I'm a passionate front-end developer with a focus on creating intuitive and engaging user experiences. My goal is to build products that are not only visually appealing but also highly functional and accessible.",
+    "heroEyebrow": "About the builder",
+    "heroStatement": "Calm product interfaces, clear frontend systems, and motion that earns its place.",
+    "portraitAlt": "Portrait of Manjoong Kim",
+    "portraitCaption": "I work best where product judgment, visual restraint, and implementation quality need to hold together under real delivery pressure.",
     "aboutMeTitle": "About Me",
     "aboutMeDescription": "I'm a front-end developer with 3+ years of experience in building web applications using modern technologies like React. I have a strong understanding of HTML, CSS, and JavaScript, and I'm always eager to learn new frameworks and libraries. My development philosophy centers around clean, maintainable code and a user-first approach. I believe that great design is not just about aesthetics but also about usability and accessibility. I strive to create products that are both beautiful and easy to use for everyone.",
     "strengthsTitle": "My Strengths",
+    "narrativeEyebrow": "Narrative",
+    "focusTitle": "Current focus",
     "cleanCode": "Clean Code",
     "uiuxDesign": "UI/UX Design",
     "accessibility": "Accessibility",
@@ -181,6 +187,7 @@
       "years": "Years of practice"
     },
     "timelineTitle": "Career Timeline",
+    "timelineEyebrow": "Recent path",
     "timeline": {
       "2026": {
         "title": "Portfolio rebuild and narrative-driven architecture",
@@ -196,6 +203,7 @@
       }
     },
     "principlesTitle": "Working Principles",
+    "principlesEyebrow": "Working style",
     "principles": {
       "product": {
         "title": "Solve product problems first",

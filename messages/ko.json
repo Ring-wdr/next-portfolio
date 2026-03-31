@@ -168,9 +168,15 @@
     "greeting": "안녕하세요, 저는 김만중입니다",
     "role": "프론트엔드 개발자",
     "intro": "직관적이고 매력적인 사용자 경험을 만드는 데 집중하는 열정적인 프론트엔드 개발자입니다. 시각적으로 매력적일 뿐만 아니라 기능적이고 접근 가능한 제품을 만드는 것이 제 목표입니다.",
+    "heroEyebrow": "만드는 사람에 대해",
+    "heroStatement": "차분한 제품 인터페이스, 명확한 프론트엔드 시스템, 그리고 꼭 필요한 움직임을 만듭니다.",
+    "portraitAlt": "김만중 프로필 사진",
+    "portraitCaption": "제품 판단, 시각적 절제, 구현 완성도가 실제 전달 환경 안에서 함께 버텨야 하는 작업에 강합니다.",
     "aboutMeTitle": "소개",
     "aboutMeDescription": "React와 같은 최신 기술을 사용하여 웹 애플리케이션을 구축한 3년 이상의 경험을 가진 프론트엔드 개발자입니다. HTML, CSS, JavaScript에 대한 깊은 이해를 가지고 있으며 항상 새로운 프레임워크와 라이브러리를 배우고자 합니다. 제 개발 철학은 깔끔하고 유지보수 가능한 코드와 사용자 우선 접근 방식을 중심으로 합니다. 훌륭한 디자인은 미학뿐만 아니라 사용성과 접근성에 관한 것이라고 믿습니다. 모두가 사용하기 쉬운 아름다운 제품을 만들기 위해 노력합니다.",
     "strengthsTitle": "저의 강점",
+    "narrativeEyebrow": "작업 방식",
+    "focusTitle": "현재 집중 영역",
     "cleanCode": "깔끔한 코드",
     "uiuxDesign": "UI/UX 디자인",
     "accessibility": "접근성",
@@ -181,21 +187,23 @@
       "years": "실무/학습 연차"
     },
     "timelineTitle": "커리어 타임라인",
+    "timelineEyebrow": "최근 흐름",
     "timeline": {
-      "2026": {
-        "title": "포트폴리오 리빌드와 스토리 중심 구조화",
-        "description": "스토리 중심 섹션, 토큰 기반 테마, 다국어 UX 일관성을 강화해 포트폴리오를 재설계했습니다."
+      "2024": {
+        "title": "현대적 React 생태계 기반 구축",
+        "description": "React, Next.js, TypeScript 역량을 확장하며 접근성과 성능 중심 개발 습관을 정립했습니다."
       },
       "2025": {
         "title": "프로덕트 중심 프론트엔드 전달력 강화",
         "description": "필터링, 모달 플로우, 컴포넌트 경계를 개선하며 여러 제품 인터페이스를 구현·배포했습니다."
       },
-      "2024": {
-        "title": "현대적 React 생태계 기반 구축",
-        "description": "React, Next.js, TypeScript 역량을 확장하며 접근성과 성능 중심 개발 습관을 정립했습니다."
+      "2026": {
+        "title": "포트폴리오 리빌드와 스토리 중심 구조화",
+        "description": "스토리 중심 섹션, 토큰 기반 테마, 다국어 UX 일관성을 강화해 포트폴리오를 재설계했습니다."
       }
     },
     "principlesTitle": "일하는 원칙",
+    "principlesEyebrow": "협업 태도",
     "principles": {
       "product": {
         "title": "먼저 제품 문제를 해결합니다",
