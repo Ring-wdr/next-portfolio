@@ -21,6 +21,8 @@ type StatementLayout = {
 	width: number;
 };
 
+type PreparedSegments = ReturnType<typeof prepareWithSegments>;
+
 function normalizeText(value: string) {
 	return value.replace(/\s+/g, " ").trim();
 }
@@ -34,15 +36,14 @@ function parseLineHeight(value: string, fontSize: number) {
 	return Number.isFinite(parsed) ? parsed : Math.round(fontSize * 1.08);
 }
 
-function measureLineCount(text: string, font: string, width: number) {
-	const prepared = prepareWithSegments(text, font);
+function measureLineCount(prepared: PreparedSegments, width: number) {
 	let lineCount = 0;
 
 	walkLineRanges(prepared, width, () => {
 		lineCount += 1;
 	});
 
-	return { lineCount, prepared };
+	return lineCount;
 }
 
 function scoreLayout(
@@ -81,6 +82,10 @@ export function PretextStatement({
 	const Component = as;
 
 	useEffect(() => {
+		setLocale(locale);
+	}, [locale]);
+
+	useEffect(() => {
 		let frame = 0;
 		let cancelled = false;
 		let observer: ResizeObserver | null = null;
@@ -110,8 +115,7 @@ export function PretextStatement({
 			const font = computed.font;
 			const lineHeight = parseLineHeight(computed.lineHeight, fontSize);
 			const targetLines = maxWidth < 560 ? 4 : 3;
-
-			setLocale(locale);
+			const prepared = prepareWithSegments(text, font);
 
 			const minimumWidth = Math.max(Math.round(maxWidth * 0.54), 220);
 			const widths = new Set<number>([
@@ -125,13 +129,10 @@ export function PretextStatement({
 			let low = minimumWidth;
 			let high = maxWidth;
 			let tightWidth = maxWidth;
-			let cachedPrepared =
-				null as ReturnType<typeof measureLineCount>["prepared"] | null;
 
 			while (low <= high) {
 				const mid = Math.floor((low + high) / 2);
-				const { lineCount, prepared } = measureLineCount(text, font, mid);
-				cachedPrepared = prepared;
+				const lineCount = measureLineCount(prepared, mid);
 
 				if (lineCount > targetLines) {
 					low = mid + 1;
@@ -148,7 +149,6 @@ export function PretextStatement({
 			let bestScore = Number.POSITIVE_INFINITY;
 
 			for (const candidateWidth of widths) {
-				const prepared = cachedPrepared ?? prepareWithSegments(text, font);
 				const result = layoutWithLines(prepared, candidateWidth, lineHeight);
 
 				if (result.lineCount < 2 || result.lineCount > 5) {
