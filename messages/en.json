@@ -24,31 +24,43 @@
   },
   "HomePage": {
     "eyebrow": "Frontend Engineer Portfolio",
-    "greeting": "Hi, I'm Manjoong, a Front-End Developer",
-    "description": "I build beautiful and functional web experiences using modern technologies. Explore my portfolio to see my work and learn more about my skills.",
+    "greeting": "Building product interfaces with clarity, speed, and a strong eye for motion.",
+    "description": "I design and ship readable product surfaces in Next.js, React, and TypeScript, with enough structure to survive production.",
     "viewProjects": "View Projects",
     "aboutCta": "About",
-    "featuredProjects": "Featured Projects",
+    "featuredProjects": "Selected Work",
+    "selectedWorkEyebrow": "Recent case studies",
+    "selectedWorkDescription": "A tighter set of product work focused on UX decisions, interaction quality, and engineering clarity.",
     "techStack": "Tech Stack",
-    "featuredStory": "Featured Story",
+    "featuredLabel": "Featured case",
     "viewAll": "View all",
     "stats": {
-      "projects": "Projects",
-      "tech": "Tech",
-      "currentFocus": "Current Focus"
+      "projects": "Projects shipped",
+      "tech": "Core tools",
+      "currentFocus": "Current focus",
+      "currentFocusValue": "Next.js 16 / React 19"
     },
+    "craftEyebrow": "How I work",
+    "craftTitle": "Design, code, and delivery should read as one system.",
+    "craftDescription": "I start with product shape, keep interfaces calm, and use motion only when it sharpens hierarchy.",
+    "craftStatement": "Readable at a glance. Precise in motion. Ready for production.",
+    "stackLabel": "Current toolkit",
+    "finalEyebrow": "Start a conversation",
+    "finalTitle": "Need a frontend engineer who can shape both the surface and the system?",
+    "finalDescription": "See the case studies, then reach out for product work, collaboration, or hiring conversations.",
+    "contactCta": "Contact",
     "pillars": {
       "productThinking": {
-        "title": "Product Thinking",
-        "description": "Build clear user flows first, then optimize engineering details for real outcomes."
+        "title": "Product-first thinking",
+        "description": "Start from user flow and decision value, then choose the engineering depth that supports it."
       },
       "modernFrontend": {
-        "title": "Modern Frontend",
-        "description": "Practical use of React 19, App Router patterns, and transition-rich interfaces."
+        "title": "Modern frontend systems",
+        "description": "Use React 19, App Router patterns, and transition-aware UI without turning the surface into a demo."
       },
       "deliveryFocus": {
-        "title": "Delivery Focus",
-        "description": "Balance quality, performance, and maintainability from prototype to production."
+        "title": "Delivery without noise",
+        "description": "Keep the codebase predictable, the UI restrained, and the path from prototype to production short."
       }
     }
   },
@@ -156,9 +168,15 @@
     "greeting": "Hi, I'm Manjoong",
     "role": "Front-End Developer",
     "intro": "I'm a passionate front-end developer with a focus on creating intuitive and engaging user experiences. My goal is to build products that are not only visually appealing but also highly functional and accessible.",
+    "heroEyebrow": "About the builder",
+    "heroStatement": "Calm product interfaces, clear frontend systems, and motion that earns its place.",
+    "portraitAlt": "Portrait of Manjoong Kim",
+    "portraitCaption": "I work best where product judgment, visual restraint, and implementation quality need to hold together under real delivery pressure.",
     "aboutMeTitle": "About Me",
     "aboutMeDescription": "I'm a front-end developer with 3+ years of experience in building web applications using modern technologies like React. I have a strong understanding of HTML, CSS, and JavaScript, and I'm always eager to learn new frameworks and libraries. My development philosophy centers around clean, maintainable code and a user-first approach. I believe that great design is not just about aesthetics but also about usability and accessibility. I strive to create products that are both beautiful and easy to use for everyone.",
     "strengthsTitle": "My Strengths",
+    "narrativeEyebrow": "Narrative",
+    "focusTitle": "Current focus",
     "cleanCode": "Clean Code",
     "uiuxDesign": "UI/UX Design",
     "accessibility": "Accessibility",
@@ -169,6 +187,7 @@
       "years": "Years of practice"
     },
     "timelineTitle": "Career Timeline",
+    "timelineEyebrow": "Recent path",
     "timeline": {
       "2026": {
         "title": "Portfolio rebuild and narrative-driven architecture",
@@ -184,6 +203,7 @@
       }
     },
     "principlesTitle": "Working Principles",
+    "principlesEyebrow": "Working style",
     "principles": {
       "product": {
         "title": "Solve product problems first",

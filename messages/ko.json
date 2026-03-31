@@ -24,31 +24,43 @@
   },
   "HomePage": {
     "eyebrow": "프론트엔드 엔지니어 포트폴리오",
-    "greeting": "안녕하세요, 저는 김만중입니다. 프론트엔드 개발자입니다",
-    "description": "최신 기술을 사용하여 아름답고 기능적인 웹 경험을 구축합니다. 포트폴리오를 탐색하여 제 작업을 확인하고 기술에 대해 자세히 알아보세요.",
+    "greeting": "명확하고 빠르며, 움직임까지 설계된 프로덕트 인터페이스를 만듭니다.",
+    "description": "Next.js, React, TypeScript를 바탕으로 읽기 쉬운 화면과 운영까지 이어지는 프론트엔드 구조를 함께 설계합니다.",
     "viewProjects": "프로젝트 보기",
     "aboutCta": "소개",
-    "featuredProjects": "주요 프로젝트",
+    "featuredProjects": "선별한 작업",
+    "selectedWorkEyebrow": "최근 케이스 스터디",
+    "selectedWorkDescription": "UX 결정, 인터랙션 완성도, 구현 선명도를 기준으로 추린 프로젝트입니다.",
     "techStack": "기술 스택",
-    "featuredStory": "추천 스토리",
+    "featuredLabel": "메인 케이스",
     "viewAll": "전체 보기",
     "stats": {
-      "projects": "프로젝트",
-      "tech": "기술",
-      "currentFocus": "현재 집중 분야"
+      "projects": "출시한 프로젝트",
+      "tech": "핵심 도구",
+      "currentFocus": "현재 집중",
+      "currentFocusValue": "Next.js 16 / React 19"
     },
+    "craftEyebrow": "일하는 방식",
+    "craftTitle": "디자인, 코드, 전달력이 하나의 시스템처럼 읽혀야 한다고 믿습니다.",
+    "craftDescription": "먼저 제품의 형태를 정리하고, 화면은 차분하게 만들며, 모션은 위계를 선명하게 할 때만 사용합니다.",
+    "craftStatement": "한눈에 읽히고, 움직임은 정확하며, 운영까지 이어지는 프론트엔드.",
+    "stackLabel": "현재 툴킷",
+    "finalEyebrow": "대화를 시작할 준비",
+    "finalTitle": "표면과 시스템을 함께 다루는 프론트엔드 엔지니어가 필요하다면",
+    "finalDescription": "케이스 스터디를 먼저 보고, 제품 작업·협업·채용 관련 이야기로 이어가세요.",
+    "contactCta": "연락하기",
     "pillars": {
       "productThinking": {
-        "title": "프로덕트 사고",
-        "description": "사용자 흐름을 먼저 설계하고, 실제 성과를 위한 엔지니어링 디테일을 최적화합니다."
+        "title": "프로덕트 우선 판단",
+        "description": "사용자 흐름과 의사결정 가치를 먼저 보고, 거기에 맞는 기술 깊이를 선택합니다."
       },
       "modernFrontend": {
-        "title": "모던 프론트엔드",
-        "description": "React 19와 App Router 패턴, 전환 중심 인터페이스를 실용적으로 적용합니다."
+        "title": "모던 프론트엔드 시스템",
+        "description": "React 19와 App Router, 전환을 고려한 UI를 쓰되 화면 자체가 데모처럼 보이지 않게 다룹니다."
       },
       "deliveryFocus": {
-        "title": "실행 중심",
-        "description": "프로토타입부터 운영까지 품질, 성능, 유지보수성을 균형 있게 가져갑니다."
+        "title": "노이즈 없는 전달",
+        "description": "코드베이스는 예측 가능하게, 화면은 절제되게, 프로토타입에서 운영까지의 거리는 짧게 유지합니다."
       }
     }
   },
@@ -156,9 +168,15 @@
     "greeting": "안녕하세요, 저는 김만중입니다",
     "role": "프론트엔드 개발자",
     "intro": "직관적이고 매력적인 사용자 경험을 만드는 데 집중하는 열정적인 프론트엔드 개발자입니다. 시각적으로 매력적일 뿐만 아니라 기능적이고 접근 가능한 제품을 만드는 것이 제 목표입니다.",
+    "heroEyebrow": "만드는 사람에 대해",
+    "heroStatement": "차분한 제품 인터페이스, 명확한 프론트엔드 시스템, 그리고 꼭 필요한 움직임을 만듭니다.",
+    "portraitAlt": "김만중 프로필 사진",
+    "portraitCaption": "제품 판단, 시각적 절제, 구현 완성도가 실제 전달 환경 안에서 함께 버텨야 하는 작업에 강합니다.",
     "aboutMeTitle": "소개",
     "aboutMeDescription": "React와 같은 최신 기술을 사용하여 웹 애플리케이션을 구축한 3년 이상의 경험을 가진 프론트엔드 개발자입니다. HTML, CSS, JavaScript에 대한 깊은 이해를 가지고 있으며 항상 새로운 프레임워크와 라이브러리를 배우고자 합니다. 제 개발 철학은 깔끔하고 유지보수 가능한 코드와 사용자 우선 접근 방식을 중심으로 합니다. 훌륭한 디자인은 미학뿐만 아니라 사용성과 접근성에 관한 것이라고 믿습니다. 모두가 사용하기 쉬운 아름다운 제품을 만들기 위해 노력합니다.",
     "strengthsTitle": "저의 강점",
+    "narrativeEyebrow": "작업 방식",
+    "focusTitle": "현재 집중 영역",
     "cleanCode": "깔끔한 코드",
     "uiuxDesign": "UI/UX 디자인",
     "accessibility": "접근성",
@@ -169,21 +187,23 @@
       "years": "실무/학습 연차"
     },
     "timelineTitle": "커리어 타임라인",
+    "timelineEyebrow": "최근 흐름",
     "timeline": {
-      "2026": {
-        "title": "포트폴리오 리빌드와 스토리 중심 구조화",
-        "description": "스토리 중심 섹션, 토큰 기반 테마, 다국어 UX 일관성을 강화해 포트폴리오를 재설계했습니다."
+      "2024": {
+        "title": "현대적 React 생태계 기반 구축",
+        "description": "React, Next.js, TypeScript 역량을 확장하며 접근성과 성능 중심 개발 습관을 정립했습니다."
       },
       "2025": {
         "title": "프로덕트 중심 프론트엔드 전달력 강화",
         "description": "필터링, 모달 플로우, 컴포넌트 경계를 개선하며 여러 제품 인터페이스를 구현·배포했습니다."
       },
-      "2024": {
-        "title": "현대적 React 생태계 기반 구축",
-        "description": "React, Next.js, TypeScript 역량을 확장하며 접근성과 성능 중심 개발 습관을 정립했습니다."
+      "2026": {
+        "title": "포트폴리오 리빌드와 스토리 중심 구조화",
+        "description": "스토리 중심 섹션, 토큰 기반 테마, 다국어 UX 일관성을 강화해 포트폴리오를 재설계했습니다."
       }
     },
     "principlesTitle": "일하는 원칙",
+    "principlesEyebrow": "협업 태도",
     "principles": {
       "product": {
         "title": "먼저 제품 문제를 해결합니다",
