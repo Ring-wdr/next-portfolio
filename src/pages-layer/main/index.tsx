@@ -4,15 +4,14 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { getFeaturedProjects, projectList } from "@/shared/constant/project";
 import { TechStack } from "@/shared/constant/tech-stack";
+import { HeroCanvas } from "./hero-canvas";
 import { PretextStatement } from "./pretext-statement";
 
 export function MainPage() {
 	const locale = useLocale();
 	const t = useTranslations("HomePage");
 	const categoryT = useTranslations("ProjectsPage.categories");
-	const featuredProjects = getFeaturedProjects(4);
-	const mainProject = featuredProjects[0];
-	const supportingProjects = featuredProjects.slice(1);
+	const supportingProjects = getFeaturedProjects(4).slice(1);
 	const spotlightTech = TechStack.slice(0, 8).map((tech) => tech.name);
 	const proofItems = [
 		{
@@ -46,26 +45,14 @@ export function MainPage() {
 		},
 	] as const;
 
-	if (!mainProject) {
-		return null;
-	}
-
 	return (
 		<main className="flex flex-1 flex-col">
 			<section
 				className="relative isolate min-h-[calc(100svh-4.5rem)] overflow-hidden"
 				data-testid="home-hero"
 			>
-				<Image
-					src={mainProject.src}
-					alt={mainProject.title}
-					fill
-					priority
-					sizes="100vw"
-					className="scale-[1.02] object-cover"
-				/>
-				<div className="absolute inset-0 bg-[linear-gradient(112deg,rgba(8,10,14,0.88)_10%,rgba(8,10,14,0.52)_45%,rgba(8,10,14,0.22)_70%,rgba(8,10,14,0.72)_100%)]" />
-				<div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(116,222,206,0.26),transparent_30%),radial-gradient(circle_at_85%_10%,rgba(96,117,255,0.18),transparent_25%)]" />
+				<HeroCanvas className="absolute inset-0 -z-10" />
+				<div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(8,10,14,0.78)_0%,rgba(8,10,14,0.18)_50%,rgba(8,10,14,0.48)_100%)]" />
 				<div className="section-shell relative z-10 flex min-h-[calc(100svh-4.5rem)] items-end pt-24 pb-14 md:pt-32 md:pb-16 lg:pt-36 lg:pb-20">
 					<div className="home-hero-copy flex max-w-[42rem] flex-col gap-7 text-white md:gap-8">
 						<p className="home-kicker text-white/72">{t("eyebrow")}</p>
@@ -104,14 +91,6 @@ export function MainPage() {
 								</div>
 							))}
 						</dl>
-						<div className="flex flex-wrap items-center gap-3 border-t border-white/18 pt-5 text-[0.72rem] font-medium uppercase tracking-[0.16em] text-white/68">
-							<span>{t("featuredLabel")}</span>
-							<span className="hidden h-px min-w-12 flex-1 bg-white/15 sm:block" />
-							<span className="text-white/84">{mainProject.title}</span>
-							<span className="text-white/52">
-								{mainProject.techStack.slice(0, 3).join(" · ")}
-							</span>
-						</div>
 					</div>
 				</div>
 			</section>
