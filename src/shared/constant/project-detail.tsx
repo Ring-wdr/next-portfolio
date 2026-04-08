@@ -86,7 +86,8 @@ export const projectDetailList: ProjectDetail[] = [
     slug: "pocaz",
     title: "POCAZ Remake",
     thumbnail: POCAZThumbnail,
-    summary: "분산된 포토카드 리셀 거래를 검색·찜·채팅 중심 단일 경험으로 재구성한 리메이크 프로젝트",
+    summary:
+      "분산된 포토카드 리셀 거래를 검색·찜·채팅 중심 단일 경험으로 재구성한 리메이크 프로젝트",
     period: "2025.12 -",
     team: "1인 프로젝트",
     role: "풀스택 개발 (Next.js, 상태관리, API 연동)",
@@ -287,7 +288,8 @@ export const projectDetailList: ProjectDetail[] = [
     slug: "choose-menu",
     title: "메뉴 고르기 앱",
     thumbnail: ChooseMenuThumbnail,
-    summary: "메뉴 선택 시간을 줄이기 위해 크롤링·추천·운영 도구를 하나로 묶은 카페 메뉴 추천 서비스",
+    summary:
+      "메뉴 선택 시간을 줄이기 위해 크롤링·추천·운영 도구를 하나로 묶은 카페 메뉴 추천 서비스",
     period: "2024.01 - 2024.03",
     team: "개인 프로젝트",
     role: "풀스택 개발 (Next.js, MongoDB, 크롤링)",
@@ -475,7 +477,7 @@ export const projectDetailList: ProjectDetail[] = [
 
     links: {
       github: "https://github.com/Ring-wdr/frontend-junior-study",
-      demo: "https://ring-wdr.github.io/frontend-junior-study/",  
+      demo: "https://ring-wdr.github.io/frontend-junior-study/",
     },
 
     overview: {
@@ -560,11 +562,10 @@ export const projectDetailList: ProjectDetail[] = [
     title: "react-devtool-cli",
     thumbnail: ReactDevtoolCliThumbnail,
     summary:
-      "React inspection과 profiler 분석을 에이전트/개발자가 재현 가능한 CLI 흐름으로 옮긴 agent-first 디버깅 도구",
+      "React inspection과 profiler 분석을 에이전트/개발자가 재현 가능한 결정론적 CLI 계약으로 옮긴 agent-first 디버깅 도구",
     period: "2026.03 -",
     team: "개인 프로젝트",
-    role:
-      "CLI 설계 및 구현, Playwright 세션 전송 계층 구성, snapshot-aware React inspection과 profiler 워크플로우 설계",
+    role: "CLI 설계 및 구현, Playwright 세션 전송 계층 구성, snapshot-aware React inspection과 profiler 워크플로우 설계, Codex/Claude Code 친화적 실행 표면 정리",
 
     links: {
       github: "https://github.com/Ring-wdr/react-devtool-cli",
@@ -583,8 +584,7 @@ export const projectDetailList: ProjectDetail[] = [
     overview: {
       background:
         "React DevTools UI만으로는 에이전트나 스크립트 기반 자동화 흐름에서 동일한 조사 과정을 재현하기 어렵습니다. React 트리 상태, source 힌트, profiler 신호를 명령형 인터페이스로 노출해 디버깅과 성능 분석을 자동화 가능한 형태로 만들 필요가 있었습니다.",
-      goal:
-        "session open/connect/attach부터 snapshot 기반 트리 조회, node inspect, 내장 interact 명령, commit 중심 profiler 분석까지 하나의 CLI 표면으로 제공해 로컬과 에이전트 환경 모두에서 재현 가능한 React 조사 흐름을 만드는 것이 목표였습니다.",
+      goal: "session open/connect/attach부터 snapshot 기반 트리 조회, node inspect, 내장 interact 명령, commit 중심 profiler 분석까지 하나의 CLI 표면으로 제공해 로컬과 에이전트 환경 모두에서 재현 가능한 React 조사 흐름을 만드는 것이 목표였습니다.",
       features: [
         "Playwright Node API 기반 `session open`, Playwright protocol 기반 `session connect`, Chromium CDP 호환 기반 `session attach` 지원",
         "`tree get`이 snapshot id를 반환해 이후 `node search`, `node inspect`, `node highlight`, `source reveal` 흐름을 snapshot 범위 안에서 일관되게 수행",
@@ -642,6 +642,7 @@ export const projectDetailList: ProjectDetail[] = [
       improvements: [
         "디버깅 도구도 에이전트 친화적인 계약과 실패 모드를 먼저 설계해야 후속 자동화가 안전하다는 점을 배웠습니다.",
         "snapshot id 같은 컨텍스트 정보를 명시적으로 노출해야 분석 재현성과 사용자 신뢰를 동시에 얻을 수 있다는 기준을 세웠습니다.",
+        "동일한 도구라도 Codex와 Claude Code처럼 실행 표면이 다른 에이전트에 맞춰 brief, capability 설명, 검증 절차를 함께 제공해야 실제 팀 생산성이 올라간다는 점을 확인했습니다.",
         "다음 단계에서는 더 많은 프레임워크/런타임 환경에서 capability 차이를 자동 감지해 설정 부담을 줄일 계획입니다.",
       ],
     },
@@ -650,13 +651,22 @@ export const projectDetailList: ProjectDetail[] = [
       {
         src: ReactDevtoolCliThumbnail,
         alt: "react-devtool-cli 썸네일",
-        caption: "react-devtool-cli의 터미널 중심 워크플로우를 요약한 커버 이미지",
+        caption:
+          "react-devtool-cli의 터미널 중심 워크플로우를 요약한 커버 이미지",
       },
     ],
 
     metadata: {
       publishedAt: "2026-03-18T23:32:21Z",
-      tags: ["React", "Playwright", "CLI", "Profiler", "Agent Tooling"],
+      tags: [
+        "React",
+        "Playwright",
+        "CLI",
+        "Profiler",
+        "Agent Tooling",
+        "Codex",
+        "Claude Code",
+      ],
     },
   },
 ];

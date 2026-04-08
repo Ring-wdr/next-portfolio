@@ -1,0 +1,45 @@
+import { describe, expect, it } from "vitest";
+import {
+  AgentHarnessSteps,
+  AgentSkillEntries,
+  agentEngineeringDocUrl,
+} from "./agent-engineering";
+import { projectDetailList } from "./project-detail";
+
+describe("agent engineering constants", () => {
+  it("keeps every public claim attached to at least one proof artifact", () => {
+    for (const entry of AgentSkillEntries) {
+      expect(entry.artifacts.length).toBeGreaterThan(0);
+      expect(entry.claimKey).toBeTruthy();
+      expect(entry.workflowKey).toBeTruthy();
+      expect(entry.contractKey).toBeTruthy();
+      expect(entry.verificationKey).toBeTruthy();
+    }
+  });
+
+  it("keeps linked project slugs aligned with published case studies", () => {
+    const knownSlugs = new Set(
+      projectDetailList.map((project) => project.slug),
+    );
+
+    for (const entry of AgentSkillEntries) {
+      if (entry.projectSlug) {
+        expect(knownSlugs.has(entry.projectSlug)).toBe(true);
+      }
+    }
+  });
+
+  it("points the markdown proof artifact at the repo doc", () => {
+    expect(agentEngineeringDocUrl).toContain("docs/agent-engineering.md");
+  });
+
+  it("defines the four-step harness expected by the proof section", () => {
+    expect(AgentHarnessSteps).toHaveLength(4);
+    expect(AgentHarnessSteps.map((step) => step.id)).toEqual([
+      "brief",
+      "surface",
+      "verification",
+      "proof",
+    ]);
+  });
+});

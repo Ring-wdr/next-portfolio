@@ -63,6 +63,14 @@
 - **Type Safety**: @t3-oss/env-nextjs
 - **Architecture Note**: [`docs/architecture-tradeoffs.md`](docs/architecture-tradeoffs.md)
 
+## 🤖 AI Agent Engineering Proof
+
+- `/tech-stack`에서 `Codex`, `Claude Code`를 포함한 AI 에이전트 엔지니어링 섹션을 통해 작업 분해, 실행 표면, 검증 루프를 공개적으로 보여줍니다.
+- 대표 증거 프로젝트는 `react-devtool-cli`이며, 에이전트/개발자 모두가 재현 가능한 CLI 계약을 어떻게 설계했는지 케이스 스터디로 연결됩니다.
+- 저장소 차원의 작업 방식과 검증 기준은 [`docs/agent-engineering.md`](docs/agent-engineering.md)에 정리했습니다.
+- 에이전트 하니스와 검증 문서의 패키지 매니저 표준은 `pnpm`입니다.
+- 공개 주장과 증거 링크, 하니스 단계는 `src/shared/constant/agent-engineering.ts`에서 관리하며, 테스트로 회귀를 막습니다.
+
 ## 📁 프로젝트 구조
 
 ```

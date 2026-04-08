@@ -2,13 +2,22 @@ import { Fragment } from "react";
 import { useTranslations } from "next-intl";
 
 import {
+  AgentHarnessSteps,
+  getAgentSkillEntries,
+} from "@/shared/constant/agent-engineering";
+import {
   getTechStackShowcaseEntries,
   TechStack,
   TechStackCategory,
 } from "@/shared/constant/tech-stack";
 import { TechCategoryMeta } from "@/shared/constant/profile";
 
-import { TechStackShowcasePanel, TechCategoryDemoPanel, ShowcaseStack } from "./tech-stack-showcase";
+import { AgentEngineeringPanel } from "./agent-engineering-panel";
+import {
+  TechStackShowcasePanel,
+  TechCategoryDemoPanel,
+  ShowcaseStack,
+} from "./tech-stack-showcase";
 
 export function TechStackPage() {
   const t = useTranslations("TechStackPage");
@@ -46,6 +55,41 @@ export function TechStackPage() {
     narrativeLabel: t("showcase.narrativeLabel"),
     loading: t("showcase.loading"),
   };
+  const agentEngineeringEntries = getAgentSkillEntries().map((entry) => ({
+    name: t(entry.nameKey),
+    tools: entry.tools,
+    claim: t(entry.claimKey),
+    workflow: t(entry.workflowKey),
+    codexRole: t(entry.codexRoleKey),
+    claudeRole: t(entry.claudeRoleKey),
+    contract: t(entry.contractKey),
+    verification: t(entry.verificationKey),
+    artifacts: entry.artifacts.map((artifact) => ({
+      ...artifact,
+      label: t(artifact.labelKey),
+    })),
+  }));
+  const agentHarnessSteps = AgentHarnessSteps.map((step) => ({
+    title: t(step.titleKey),
+    description: t(step.descriptionKey),
+    command: step.command,
+  }));
+  const agentEngineeringCopy = {
+    eyebrow: t("agentEngineering.eyebrow"),
+    title: t("agentEngineering.title"),
+    description: t("agentEngineering.description"),
+    claimLabel: t("agentEngineering.labels.claim"),
+    workflowLabel: t("agentEngineering.labels.workflow"),
+    codexLabel: t("agentEngineering.labels.codex"),
+    claudeLabel: t("agentEngineering.labels.claude"),
+    contractLabel: t("agentEngineering.labels.contract"),
+    verificationLabel: t("agentEngineering.labels.verification"),
+    proofLabel: t("agentEngineering.labels.proof"),
+    harnessEyebrow: t("agentEngineering.harness.eyebrow"),
+    harnessTitle: t("agentEngineering.harness.title"),
+    harnessDescription: t("agentEngineering.harness.description"),
+    commandLabel: t("agentEngineering.harness.commandLabel"),
+  };
 
   return (
     <main className="flex flex-1 justify-center py-6 md:py-10">
@@ -63,15 +107,23 @@ export function TechStackPage() {
           <div className="mt-6 grid gap-2 sm:grid-cols-3">
             <div className="rounded-xl border border-border/70 bg-card/70 px-4 py-3">
               <p className="text-lg font-semibold">{TechStack.length}</p>
-              <p className="text-xs text-muted-foreground">{t("stats.totalTech")}</p>
+              <p className="text-xs text-muted-foreground">
+                {t("stats.totalTech")}
+              </p>
             </div>
             <div className="rounded-xl border border-border/70 bg-card/70 px-4 py-3">
-              <p className="text-lg font-semibold">{TechStackCategory.length}</p>
-              <p className="text-xs text-muted-foreground">{t("stats.categories")}</p>
+              <p className="text-lg font-semibold">
+                {TechStackCategory.length}
+              </p>
+              <p className="text-xs text-muted-foreground">
+                {t("stats.categories")}
+              </p>
             </div>
             <div className="rounded-xl border border-border/70 bg-card/70 px-4 py-3">
               <p className="text-lg font-semibold">Frontend</p>
-              <p className="text-xs text-muted-foreground">{t("stats.primaryTrack")}</p>
+              <p className="text-xs text-muted-foreground">
+                {t("stats.primaryTrack")}
+              </p>
             </div>
           </div>
         </section>
@@ -80,15 +132,23 @@ export function TechStackPage() {
           <TechStackShowcasePanel stacks={showcaseStacks} copy={showcaseCopy} />
         </section>
 
+        <AgentEngineeringPanel
+          entries={agentEngineeringEntries}
+          harnessSteps={agentHarnessSteps}
+          copy={agentEngineeringCopy}
+        />
+
         {TechStackCategory.map((category) => {
           const categoryDescription = TechCategoryMeta.find(
-            (item) => item.category === category
+            (item) => item.category === category,
           );
           const stacks = TechStack.filter((tech) =>
-            tech.category.some((_category) => _category === category)
+            tech.category.some((_category) => _category === category),
           );
           const categoryDemoStacks = showcaseStacks.filter((s) =>
-            TechStack.find((tech) => tech.name === s.name)?.category.includes(category)
+            TechStack.find((tech) => tech.name === s.name)?.category.includes(
+              category,
+            ),
           ) as ShowcaseStack[];
 
           return (
@@ -130,7 +190,9 @@ export function TechStackPage() {
 
         <section className="glass-panel rounded-2xl p-5">
           <h2 className="text-lg font-semibold">{t("methodTitle")}</h2>
-          <p className="mt-2 text-sm text-muted-foreground">{t("methodDescription")}</p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            {t("methodDescription")}
+          </p>
           <div className="mt-4 flex flex-wrap gap-2">
             <span className="rounded-full border border-border/70 bg-card/60 px-3 py-1 text-xs font-medium">
               {t("methodTags.architecture")}

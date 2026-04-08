@@ -8,10 +8,11 @@ export const siteConfig = {
   name: "Manjoong Kim Portfolio",
   title: "Manjoong Kim | Frontend Portfolio",
   description:
-    "Frontend developer portfolio focused on product UX, modern web architecture, and performance-aware implementation.",
+    "Frontend developer portfolio focused on product UX, modern web architecture, AI-agent-ready workflows, and performance-aware implementation.",
   defaultDescription:
     "Portfolio showcasing frontend case studies, interaction design, and engineering outcomes.",
   siteUrl: "https://next-portfolio-ringring.vercel.app",
+  repositoryUrl: "https://github.com/Ring-wdr/next-portfolio",
   social: {
     github: "https://github.com/Ring-wdr",
     linkedin: "https://www.linkedin.com/in/dust-shooter-408560340/",
@@ -39,7 +40,12 @@ export function getBaseUrl() {
 }
 
 export function localizePath(locale: AppLocale, pathname = "/") {
-  const normalizedPath = pathname === "/" ? "" : pathname.startsWith("/") ? pathname : `/${pathname}`;
+  const normalizedPath =
+    pathname === "/"
+      ? ""
+      : pathname.startsWith("/")
+        ? pathname
+        : `/${pathname}`;
 
   if (locale === routing.defaultLocale) {
     return normalizedPath || "/";
@@ -129,6 +135,8 @@ export function buildPersonJsonLd(locale: AppLocale) {
         "TypeScript",
         "Frontend Architecture",
         "Performance Optimization",
+        "AI Agent Tooling",
+        "Verification Harness Design",
       ],
     },
   ];

@@ -283,6 +283,30 @@ export const TechStack: TechStackType[] = [
     category: ["Tools"],
   },
   {
+    name: "Codex",
+    icon: (
+      <span
+        aria-hidden
+        className="text-[0.55rem] font-black uppercase tracking-[0.12em]"
+      >
+        CX
+      </span>
+    ),
+    category: ["Tools"],
+  },
+  {
+    name: "Claude Code",
+    icon: (
+      <span
+        aria-hidden
+        className="text-[0.5rem] font-black uppercase tracking-[0.08em]"
+      >
+        CC
+      </span>
+    ),
+    category: ["Tools"],
+  },
+  {
     name: "Github",
     icon: <GithubIcon />,
     category: ["Tools"],
@@ -350,7 +374,8 @@ export const TechStack: TechStackType[] = [
 
 export function getTechStackShowcaseEntries(): TechStackShowcaseEntry[] {
   return TechStack.filter(
-    (tech): tech is TechStackType & { demo: TechStackDemo } => tech.demo !== undefined
+    (tech): tech is TechStackType & { demo: TechStackDemo } =>
+      tech.demo !== undefined,
   ).map((tech) => ({
     name: tech.name,
     demo: tech.demo,

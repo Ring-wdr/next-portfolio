@@ -58,8 +58,8 @@ export const FocusAreas = [
     labelKey: "focus.performance",
   },
   {
-    id: "focus-testing",
-    labelKey: "focus.testing",
+    id: "focus-agent-orchestration",
+    labelKey: "focus.agentOrchestration",
   },
 ] as const;
 

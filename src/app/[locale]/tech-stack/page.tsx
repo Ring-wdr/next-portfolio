@@ -12,8 +12,16 @@ export async function generateMetadata({
     pathname: "/tech-stack",
     title: "Tech Stack | Manjoong Kim",
     description:
-      "Technologies, frameworks, and quality practices used across Manjoong Kim's frontend work.",
-    keywords: ["next.js", "react", "typescript", "frontend tech stack"],
+      "Technologies, AI-agent tooling, and verification practices used across Manjoong Kim's frontend and agent-engineering work.",
+    keywords: [
+      "next.js",
+      "react",
+      "typescript",
+      "codex",
+      "claude code",
+      "agent engineering",
+      "frontend tech stack",
+    ],
   });
 }
 

@@ -12,8 +12,14 @@ export async function generateMetadata({
     pathname: "/project",
     title: "Projects | Manjoong Kim",
     description:
-      "Browse frontend case studies covering product UX, interaction design, and delivery outcomes.",
-    keywords: ["frontend case studies", "portfolio projects", "product engineering"],
+      "Browse frontend case studies covering product UX, agent tooling, interaction design, and delivery outcomes.",
+    keywords: [
+      "frontend case studies",
+      "portfolio projects",
+      "product engineering",
+      "agent tooling",
+      "cli workflows",
+    ],
   });
 }
 

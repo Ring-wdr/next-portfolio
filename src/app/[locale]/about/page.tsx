@@ -12,8 +12,14 @@ export async function generateMetadata({
     pathname: "/about",
     title: "About | Manjoong Kim",
     description:
-      "Career timeline, working principles, and frontend strengths behind Manjoong Kim's portfolio work.",
-    keywords: ["about frontend engineer", "career timeline", "working principles"],
+      "Career timeline, working principles, and agent-ready frontend engineering strengths behind Manjoong Kim's portfolio work.",
+    keywords: [
+      "about frontend engineer",
+      "career timeline",
+      "working principles",
+      "agent workflows",
+      "engineering systems",
+    ],
   });
 }
 
