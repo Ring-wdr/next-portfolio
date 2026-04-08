@@ -1,11 +1,43 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { beforeAll, describe, expect, it, vi } from "vitest";
+import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   agentEngineeringDocUrl,
   agentEngineeringProjectHref,
 } from "@/shared/constant/agent-engineering";
 
 import { TechStackPage } from "./index";
+
+const {
+  getMockResolvedTheme,
+  setMockResolvedTheme,
+  shouldResolveHighlighterImmediately,
+  setShouldResolveHighlighterImmediately,
+  getShikiMagicMoveMountCount,
+  resetShikiMagicMoveMountCount,
+  incrementShikiMagicMoveMountCount,
+} = vi.hoisted(() => {
+  let resolvedTheme = "dark";
+  let resolveHighlighterImmediately = false;
+  let shikiMagicMoveMountCount = 0;
+
+  return {
+    getMockResolvedTheme: () => resolvedTheme,
+    setMockResolvedTheme: (theme: "dark" | "light") => {
+      resolvedTheme = theme;
+    },
+    shouldResolveHighlighterImmediately: () => resolveHighlighterImmediately,
+    setShouldResolveHighlighterImmediately: (value: boolean) => {
+      resolveHighlighterImmediately = value;
+    },
+    getShikiMagicMoveMountCount: () => shikiMagicMoveMountCount,
+    resetShikiMagicMoveMountCount: () => {
+      shikiMagicMoveMountCount = 0;
+    },
+    incrementShikiMagicMoveMountCount: () => {
+      shikiMagicMoveMountCount += 1;
+    },
+  };
+});
 
 const translations = {
   title: "Tech Stack",
@@ -213,18 +245,40 @@ vi.mock("@/i18n/routing", () => ({
 }));
 
 vi.mock("next-themes", () => ({
-  useTheme: () => ({ resolvedTheme: "dark" }),
+  useTheme: () => ({ resolvedTheme: getMockResolvedTheme() }),
 }));
 
 vi.mock("shiki", () => ({
-  createHighlighter: vi.fn(() => new Promise(() => {})),
-}));
-
-vi.mock("shiki-magic-move/react", () => ({
-  ShikiMagicMove: ({ code }: { code: string }) => (
-    <pre data-testid="magic-move-code">{code}</pre>
+  createHighlighter: vi.fn(() =>
+    shouldResolveHighlighterImmediately()
+      ? Promise.resolve({ mock: true })
+      : new Promise(() => {}),
   ),
 }));
+
+vi.mock("shiki-magic-move/react", async () => {
+  const React = await vi.importActual<typeof import("react")>("react");
+
+  return {
+    ShikiMagicMove: ({
+      code,
+      theme,
+    }: {
+      code: string;
+      theme: string;
+    }) => {
+      React.useEffect(() => {
+        incrementShikiMagicMoveMountCount();
+      }, []);
+
+      return (
+        <pre data-testid="magic-move-code" data-theme={theme}>
+          {code}
+        </pre>
+      );
+    },
+  };
+});
 
 beforeAll(() => {
   Object.defineProperty(window, "matchMedia", {
@@ -235,6 +289,12 @@ beforeAll(() => {
       removeEventListener: vi.fn(),
     })),
   });
+});
+
+beforeEach(() => {
+  setMockResolvedTheme("dark");
+  setShouldResolveHighlighterImmediately(false);
+  resetShikiMagicMoveMountCount();
 });
 
 describe("TechStackPage", () => {
@@ -281,6 +341,59 @@ describe("TechStackPage", () => {
     );
   });
 
+  it("remounts the magic move block when the theme changes", async () => {
+    setShouldResolveHighlighterImmediately(true);
+    vi.resetModules();
+    const { TechStackShowcasePanel } = await import("./tech-stack-showcase");
+
+    const stacks = [
+      {
+        name: "React",
+        demo: {
+          kind: "code" as const,
+          lang: "tsx" as const,
+          summary: "summary",
+          improvement: "improvement",
+          beforeCode: "const beforeCode = true;",
+          afterCode: "const afterCode = true;",
+        },
+      },
+    ];
+    const copy = {
+      eyebrow: "eyebrow",
+      title: "title",
+      description: "description",
+      selectLabel: "select",
+      beforeLabel: "before",
+      afterLabel: "after",
+      whatChanged: "what changed",
+      narrativeLabel: "narrative",
+      loading: "loading",
+    };
+    const { rerender } = render(
+      <TechStackShowcasePanel stacks={stacks} copy={copy} />,
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId("magic-move-code")).toHaveAttribute(
+        "data-theme",
+        "github-dark",
+      );
+      expect(getShikiMagicMoveMountCount()).toBe(1);
+    });
+
+    setMockResolvedTheme("light");
+    rerender(<TechStackShowcasePanel stacks={stacks} copy={copy} />);
+
+    await waitFor(() => {
+      expect(screen.getByTestId("magic-move-code")).toHaveAttribute(
+        "data-theme",
+        "github-light",
+      );
+      expect(getShikiMagicMoveMountCount()).toBe(2);
+    });
+  });
+
   it("renders the AI agent engineering proof section with evidence links", () => {
     render(<TechStackPage />);
 
@@ -310,6 +423,10 @@ describe("TechStackPage", () => {
       /The workflow I expect an agent task to survive/i,
     );
     expect(harness).toHaveTextContent(/Brief and constraints/i);
+    expect(harness).toHaveTextContent(/Agent execution surface/i);
+    expect(harness).toHaveTextContent(/Verification loop/i);
+    expect(harness).toHaveTextContent(/Proof artifacts/i);
+    expect(harness).toHaveTextContent(/Example surface/i);
     expect(harness).toHaveTextContent(
       /pnpm lint && pnpm test -- --run && pnpm build/i,
     );

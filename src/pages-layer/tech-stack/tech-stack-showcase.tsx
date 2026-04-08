@@ -93,6 +93,10 @@ const magicMoveOptions = {
   enhanceMatching: true,
 };
 
+function getMagicMoveKey(stackName: string, theme: string) {
+  return `${stackName}:${theme}`;
+}
+
 export function TechStackShowcasePanel({
   stacks,
   copy,
@@ -249,7 +253,7 @@ export function TechStackShowcasePanel({
             ) : (
               <div className="overflow-hidden p-2 md:p-3">
                 <ShikiMagicMove
-                  key={activeStack.name}
+                  key={getMagicMoveKey(activeStack.name, shikiTheme)}
                   highlighter={highlighter}
                   lang={activeStack.demo.lang}
                   theme={shikiTheme}
@@ -418,7 +422,7 @@ export function TechCategoryDemoPanel({
           ) : (
             <div className="overflow-hidden p-2 md:p-3">
               <ShikiMagicMove
-                key={activeStack.name}
+                key={getMagicMoveKey(activeStack.name, shikiTheme)}
                 highlighter={highlighter}
                 lang={activeStack.demo.lang}
                 theme={shikiTheme}

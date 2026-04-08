@@ -181,49 +181,83 @@ export function AgentEngineeringPanel({
       </div>
 
       <div
-        className="mt-8 rounded-[2rem] border border-border/70 bg-background/55 p-5 md:p-6"
+        className="relative mt-8 overflow-hidden rounded-[2.15rem] border border-border/70 bg-[linear-gradient(155deg,color-mix(in_oklch,var(--color-surface),transparent_4%)_0%,color-mix(in_oklch,var(--color-surface),var(--color-primary)_7%)_100%)] p-5 shadow-[0_28px_80px_-68px_color-mix(in_oklch,var(--color-primary),transparent_8%)] md:p-6"
         data-testid="agent-engineering-harness"
       >
-        <div className="max-w-2xl space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/80">
-            {copy.harnessEyebrow}
-          </p>
-          <h3 className="text-xl font-semibold tracking-[-0.03em] md:text-2xl">
-            {copy.harnessTitle}
-          </h3>
-          <p className="text-sm leading-6 text-muted-foreground md:text-base">
-            {copy.harnessDescription}
-          </p>
-        </div>
+        <div className="absolute inset-x-0 top-0 h-32 bg-[radial-gradient(circle_at_top,color-mix(in_oklch,var(--color-highlight),transparent_80%),transparent_64%)]" />
+        <div className="relative grid gap-8 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] lg:items-start">
+          <div className="max-w-[34rem] space-y-3 lg:pt-2">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/80">
+              {copy.harnessEyebrow}
+            </p>
+            <h3 className="max-w-[12ch] text-xl font-semibold tracking-[-0.03em] md:text-2xl">
+              {copy.harnessTitle}
+            </h3>
+            <p className="text-sm leading-6 text-foreground/72 md:text-base">
+              {copy.harnessDescription}
+            </p>
+          </div>
 
-        <ol className="mt-6 grid gap-3 lg:grid-cols-4">
-          {harnessSteps.map((step, index) => (
-            <li
-              key={step.title}
-              className="rounded-2xl border border-border/70 bg-card/70 p-4"
-            >
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                {`0${index + 1}`}
-              </p>
-              <h4 className="mt-3 text-base font-semibold tracking-[-0.02em]">
-                {step.title}
-              </h4>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                {step.description}
-              </p>
-              {step.command && (
-                <div className="mt-4 space-y-2">
-                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                    {copy.commandLabel}
-                  </p>
-                  <code className="block overflow-x-auto rounded-2xl border border-border/70 bg-background/80 px-3 py-2 text-[0.72rem] leading-5 text-foreground/88">
-                    {step.command}
-                  </code>
-                </div>
-              )}
-            </li>
-          ))}
-        </ol>
+          <ol className="relative space-y-0">
+            {harnessSteps.map((step, index) => {
+              const isVerificationStep = index === 2;
+              const stepNumber = `${index + 1}`.padStart(2, "0");
+
+              return (
+                <li
+                  key={step.title}
+                  className="relative grid gap-4 border-t border-border/60 py-5 first:border-t-0 first:pt-0 last:pb-0 md:grid-cols-[auto_minmax(0,1fr)] md:gap-5"
+                >
+                  <div className="relative flex items-start gap-4 md:min-h-[9.5rem] md:flex-col md:gap-3">
+                    <span
+                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border/70 bg-background/88 text-[0.7rem] font-semibold tracking-[0.24em] text-muted-foreground"
+                      aria-hidden="true"
+                    >
+                      {stepNumber}
+                    </span>
+                    {index < harnessSteps.length - 1 && (
+                      <span
+                        aria-hidden="true"
+                        className="absolute left-[1.35rem] top-11 h-[calc(100%+1.6rem)] w-px bg-[linear-gradient(180deg,color-mix(in_oklch,var(--color-primary),transparent_58%)_0%,color-mix(in_oklch,var(--color-border),transparent_10%)_100%)] md:left-[1.35rem] md:top-[2.9rem]"
+                      />
+                    )}
+                  </div>
+
+                  <div
+                    className={[
+                      "space-y-3",
+                      isVerificationStep
+                        ? "rounded-[1.5rem] border border-border/70 bg-background/62 px-4 py-4 shadow-[0_18px_50px_-42px_color-mix(in_oklch,var(--color-primary),transparent_16%)]"
+                        : "",
+                    ]
+                      .filter(Boolean)
+                      .join(" ")}
+                  >
+                    <div className="space-y-2">
+                      <h4 className="text-base font-semibold tracking-[-0.02em] text-foreground md:text-[1.05rem]">
+                        {step.title}
+                      </h4>
+                      <p className="max-w-2xl text-sm leading-6 text-foreground/74">
+                        {step.description}
+                      </p>
+                    </div>
+
+                    {step.command && (
+                      <div className="space-y-2">
+                        <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                          {copy.commandLabel}
+                        </p>
+                        <code className="block overflow-x-auto rounded-full border border-border/70 bg-background/88 px-4 py-3 text-[0.74rem] leading-6 text-foreground/86">
+                          {step.command}
+                        </code>
+                      </div>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
       </div>
     </section>
   );
