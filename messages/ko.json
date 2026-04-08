@@ -164,7 +164,7 @@
     },
     "agentEngineering": {
       "eyebrow": "AI 에이전트 엔지니어링",
-      "title": "에이전트를 마법 지름길이 아니라 작업 표면으로 다룹니다.",
+      "title": "에이전트를 만능 해법이 아니라 실제 작업 수단으로 다룹니다.",
       "description": "중요한 신호는 Codex나 Claude Code를 쓸 줄 안다는 사실 자체가 아닙니다. 사람과 에이전트 모두가 실행 가능한 범위, 입력 계약, 검증 루프, 증거 산출물을 설계할 수 있다는 점입니다.",
       "labels": {
         "claim": "핵심 주장",
@@ -183,10 +183,10 @@
         "taskDecomposition": {
           "title": "작업 분해와 스펙 작성",
           "claim": "모호한 요청을 범위, 제약, 성공 기준이 선명한 구현 단위로 바꿉니다.",
-          "workflow": "먼저 저장소의 실제 구조와 제약을 확인한 뒤, handoff가 가능한 작업 단위와 인터페이스, acceptance check로 분해합니다.",
+          "workflow": "먼저 저장소의 실제 구조와 제약을 확인한 뒤, 인계 가능한 작업 단위와 인터페이스, 완료 기준으로 분해합니다.",
           "codexRole": "Codex는 실제 저장소 편집, 테스트 실행, 반복 검증이 필요한 구현 작업에서 주 실행 표면으로 사용합니다.",
           "claudeRole": "Claude Code는 코딩 전후로 스펙 구조, 프롬프트 선명도, 작업 분해가 맞는지 다른 시각으로 점검할 때 유용합니다.",
-          "contract": "모든 작업에는 목표, hard constraint, 변경 범위, 기대 산출물, 완료를 증명할 체크를 함께 넣습니다.",
+          "contract": "모든 작업에는 목표, 핵심 제약, 변경 범위, 기대 산출물, 완료를 증명할 체크를 함께 넣습니다.",
           "verification": "에이전트가 답을 냈다는 사실로 끝내지 않습니다. 결과가 소스, 문서, 테스트와 함께 맞물려야 합니다."
         },
         "toolFluency": {
@@ -201,9 +201,9 @@
         "verificationHarness": {
           "title": "검증과 하니스 설계",
           "claim": "에이전트 출력이 그럴듯한 문장이 아니라 증거 기반 엔지니어링이 되도록 검증을 워크플로우에 내장합니다.",
-          "workflow": "저장소 기본 체크, 페이지 단위 assertion, 그리고 무엇이 증거인지 설명하는 markdown 기록으로 루프를 닫습니다.",
-          "codexRole": "Codex는 소스 수정, 라우트 메타데이터, 실행 가능한 체크를 하나의 working harness로 묶는 데 사용합니다.",
-          "claudeRole": "Claude Code는 brief, 프롬프트 표면, 관찰 결과가 계속 일치하는지 대조 리뷰어처럼 활용합니다.",
+          "workflow": "저장소 기본 체크, 페이지 단위 assertion, 그리고 무엇이 증거인지 설명하는 Markdown 기록으로 루프를 닫습니다.",
+          "codexRole": "Codex는 소스 수정, 라우트 메타데이터, 실행 가능한 체크를 하나의 작동하는 하니스로 묶는 데 사용합니다.",
+          "claudeRole": "Claude Code는 작업 브리프, 프롬프트 표면, 관찰 결과가 계속 일치하는지 대조 리뷰어처럼 활용합니다.",
           "contract": "계약은 서술형 요약으로 끝나지 않습니다. 실행 가능한 체크와 이름 붙은 증거 산출물까지 포함해야 합니다.",
           "verification": "이 포트폴리오에서는 UI, 소스 데이터, 테스트, markdown 문서가 서로 같은 이야기를 할 때만 증명이 성립합니다."
         }
@@ -211,12 +211,12 @@
       "harness": {
         "eyebrow": "엔지니어블 하니스",
         "title": "제가 에이전트 작업에 요구하는 생존 조건",
-        "description": "handoff, rerun, verification pass를 견디지 못하는 워크플로우는 프로덕션 수준 엔지니어링이라고 보지 않습니다.",
+        "description": "인계, 재실행, 검증 단계를 견디지 못하는 워크플로우는 프로덕션 수준 엔지니어링이라고 보지 않습니다.",
         "commandLabel": "예시 표면",
         "steps": {
           "brief": {
             "title": "브리프와 제약",
-            "description": "실제 목표, hard boundary, 변경 범위, 중요한 acceptance criteria부터 고정합니다."
+            "description": "실제 목표, 강한 경계, 변경 범위, 중요한 완료 기준부터 고정합니다."
           },
           "surface": {
             "title": "에이전트 실행 표면",

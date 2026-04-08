@@ -93,42 +93,74 @@ export function TechStackPage() {
 
   return (
     <main className="flex flex-1 justify-center py-6 md:py-10">
-      <div className="section-shell flex w-full flex-col gap-6">
-        <section className="glass-panel rounded-3xl p-6 md:p-8">
-          <div className="space-y-3">
-            <h1 className="text-3xl font-bold leading-tight md:text-4xl">
-              {t("title")}
-            </h1>
-            <p className="max-w-3xl text-sm text-muted-foreground md:text-base">
-              {t("description")}
-            </p>
-          </div>
+      <div className="section-shell flex w-full flex-col gap-10">
+        <section className="relative overflow-hidden rounded-[2rem] border border-border/70 bg-[linear-gradient(145deg,color-mix(in_oklch,var(--color-surface),transparent_4%)_0%,color-mix(in_oklch,var(--color-surface),var(--color-highlight)_8%)_100%)] px-6 py-8 shadow-[0_34px_90px_-72px_color-mix(in_oklch,var(--color-primary),transparent_24%)] md:px-8 md:py-10">
+          <div className="absolute inset-y-0 right-0 hidden w-[38%] bg-[radial-gradient(circle_at_top,color-mix(in_oklch,var(--color-highlight),transparent_82%),transparent_58%)] lg:block" />
+          <div className="relative grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_17rem] lg:items-end">
+            <div className="space-y-5">
+              <p className="editorial-kicker text-primary/80">
+                {showcaseCopy.eyebrow}
+              </p>
+              <h1 className="max-w-[10ch] text-[clamp(3rem,7vw,5.8rem)] font-bold leading-[0.92] tracking-[-0.06em]">
+                {t("title")}
+              </h1>
+              <p className="max-w-2xl text-base leading-7 text-foreground/84 md:text-lg">
+                {t("description")}
+              </p>
+              <div className="grid gap-6 border-t border-border/70 pt-6 sm:grid-cols-3">
+                <div className="space-y-1 border-t border-border/60 pt-3 sm:border-t-0 sm:pt-0">
+                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                    {t("stats.totalTech")}
+                  </p>
+                  <p className="text-2xl font-semibold tracking-[-0.04em]">
+                    {TechStack.length}
+                  </p>
+                </div>
+                <div className="space-y-1 border-t border-border/60 pt-3 sm:border-t-0 sm:pt-0">
+                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                    {t("stats.categories")}
+                  </p>
+                  <p className="text-2xl font-semibold tracking-[-0.04em]">
+                    {TechStackCategory.length}
+                  </p>
+                </div>
+                <div className="space-y-1 border-t border-border/60 pt-3 sm:border-t-0 sm:pt-0">
+                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                    {t("stats.primaryTrack")}
+                  </p>
+                  <p className="text-2xl font-semibold tracking-[-0.04em]">
+                    Frontend
+                  </p>
+                </div>
+              </div>
+            </div>
 
-          <div className="mt-6 grid gap-2 sm:grid-cols-3">
-            <div className="rounded-xl border border-border/70 bg-card/70 px-4 py-3">
-              <p className="text-lg font-semibold">{TechStack.length}</p>
-              <p className="text-xs text-muted-foreground">
-                {t("stats.totalTech")}
+            <aside className="space-y-4 border-t border-border/70 pt-6 lg:border-t-0 lg:border-l lg:pl-6 lg:pt-0">
+              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                {t("methodTitle")}
               </p>
-            </div>
-            <div className="rounded-xl border border-border/70 bg-card/70 px-4 py-3">
-              <p className="text-lg font-semibold">
-                {TechStackCategory.length}
+              <p className="text-sm leading-6 text-muted-foreground md:text-base">
+                {t("methodDescription")}
               </p>
-              <p className="text-xs text-muted-foreground">
-                {t("stats.categories")}
-              </p>
-            </div>
-            <div className="rounded-xl border border-border/70 bg-card/70 px-4 py-3">
-              <p className="text-lg font-semibold">Frontend</p>
-              <p className="text-xs text-muted-foreground">
-                {t("stats.primaryTrack")}
-              </p>
-            </div>
+              <div className="flex flex-wrap gap-2">
+                <span className="rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[0.72rem] font-medium">
+                  {t("methodTags.architecture")}
+                </span>
+                <span className="rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[0.72rem] font-medium">
+                  {t("methodTags.designSystem")}
+                </span>
+                <span className="rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[0.72rem] font-medium">
+                  {t("methodTags.performance")}
+                </span>
+                <span className="rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[0.72rem] font-medium">
+                  {t("methodTags.collaboration")}
+                </span>
+              </div>
+            </aside>
           </div>
         </section>
 
-        <section className="glass-panel rounded-3xl p-6 md:p-8">
+        <section className="glass-panel rounded-[2rem] px-5 py-6 md:px-7 md:py-8">
           <TechStackShowcasePanel stacks={showcaseStacks} copy={showcaseCopy} />
         </section>
 
@@ -153,61 +185,66 @@ export function TechStackPage() {
 
           return (
             <Fragment key={category}>
-              <section className="glass-panel rounded-2xl p-5">
-                <div className="mb-4 flex flex-col gap-1">
-                  <h2 className="text-xl font-semibold">{t(category)}</h2>
+              <section className="grid gap-6 border-t border-border/70 pt-8 lg:grid-cols-[13rem_minmax(0,1fr)]">
+                <div className="space-y-3 lg:pr-4">
+                  <h2 className="text-xl font-semibold md:text-2xl">
+                    {t(category)}
+                  </h2>
                   {categoryDescription && (
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm leading-6 text-muted-foreground">
                       {t(categoryDescription.descriptionKey)}
                     </p>
                   )}
                 </div>
 
-                <div className="grid grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-3">
-                  {stacks.map((tech) => (
-                    <article
-                      key={tech.name}
-                      className="rounded-xl border border-border/70 bg-card/70 p-3"
-                    >
-                      <div className="mb-2 flex h-7 w-7 items-center justify-center text-foreground">
-                        {tech.icon}
-                      </div>
-                      <h3 className="text-sm font-semibold">{tech.name}</h3>
-                    </article>
-                  ))}
-                </div>
+                <div className="space-y-5">
+                  <div className="grid gap-6 md:grid-cols-2">
+                    {stacks.slice(0, 2).map((tech) => (
+                      <article
+                        key={tech.name}
+                        className="border-t border-border/70 pt-4"
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border/70 bg-background/75 text-foreground">
+                            {tech.icon}
+                          </div>
+                          <div className="min-w-0">
+                            <h3 className="text-lg font-semibold tracking-[-0.03em]">
+                              {tech.name}
+                            </h3>
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
 
-                {categoryDemoStacks.length > 0 && (
-                  <TechCategoryDemoPanel
-                    stacks={categoryDemoStacks}
-                    copy={categoryDemoCopy}
-                  />
-                )}
+                  {stacks.length > 2 && (
+                    <div className="flex flex-wrap gap-2">
+                      {stacks.slice(2).map((tech) => (
+                        <span
+                          key={tech.name}
+                          className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/60 px-3 py-2 text-sm font-medium"
+                        >
+                          <span className="flex h-5 w-5 items-center justify-center text-foreground">
+                            {tech.icon}
+                          </span>
+                          <span>{tech.name}</span>
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  {categoryDemoStacks.length > 0 && (
+                    <TechCategoryDemoPanel
+                      stacks={categoryDemoStacks}
+                      copy={categoryDemoCopy}
+                    />
+                  )}
+                </div>
               </section>
             </Fragment>
           );
         })}
-
-        <section className="glass-panel rounded-2xl p-5">
-          <h2 className="text-lg font-semibold">{t("methodTitle")}</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            {t("methodDescription")}
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <span className="rounded-full border border-border/70 bg-card/60 px-3 py-1 text-xs font-medium">
-              {t("methodTags.architecture")}
-            </span>
-            <span className="rounded-full border border-border/70 bg-card/60 px-3 py-1 text-xs font-medium">
-              {t("methodTags.designSystem")}
-            </span>
-            <span className="rounded-full border border-border/70 bg-card/60 px-3 py-1 text-xs font-medium">
-              {t("methodTags.performance")}
-            </span>
-            <span className="rounded-full border border-border/70 bg-card/60 px-3 py-1 text-xs font-medium">
-              {t("methodTags.collaboration")}
-            </span>
-          </div>
-        </section>
       </div>
     </main>
   );
