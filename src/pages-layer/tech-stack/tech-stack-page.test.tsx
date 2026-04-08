@@ -1,5 +1,9 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeAll, describe, expect, it, vi } from "vitest";
+import {
+  agentEngineeringDocUrl,
+  agentEngineeringProjectHref,
+} from "@/shared/constant/agent-engineering";
 
 import { TechStackPage } from "./index";
 
@@ -291,8 +295,15 @@ describe("TechStackPage", () => {
 
     const proofLinks = screen.getAllByTestId("agent-proof-link");
     expect(proofLinks.length).toBeGreaterThanOrEqual(2);
-    expect(screen.getAllByText(/Agent engineering doc/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/react-devtool-cli case study/i).length).toBeGreaterThan(0);
+    expect(
+      screen.getAllByText(/Agent engineering doc/i).length,
+    ).toBeGreaterThan(0);
+    expect(
+      screen.getAllByText(/react-devtool-cli case study/i).length,
+    ).toBeGreaterThan(0);
+    const renderedHrefs = proofLinks.map((link) => link.getAttribute("href"));
+    expect(renderedHrefs).toContain(agentEngineeringDocUrl);
+    expect(renderedHrefs).toContain(agentEngineeringProjectHref);
 
     const harness = screen.getByTestId("agent-engineering-harness");
     expect(harness).toHaveTextContent(

@@ -43,6 +43,15 @@ test.describe("Tech Stack page", () => {
     await expect(
       proofLinks.filter({ hasText: /react-devtool-cli case study/i }).first(),
     ).toBeVisible();
+    await expect(
+      proofLinks.filter({ hasText: /Agent engineering doc/i }).first(),
+    ).toHaveAttribute(
+      "href",
+      "https://github.com/Ring-wdr/next-portfolio/blob/main/docs/agent-engineering.md",
+    );
+    await expect(
+      proofLinks.filter({ hasText: /react-devtool-cli case study/i }).first(),
+    ).toHaveAttribute("href", "/en/project/react-devtool-cli");
 
     const harness = page.getByTestId("agent-engineering-harness");
     await expect(harness).toContainText(

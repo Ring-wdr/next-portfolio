@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { routing } from "@/i18n/routing";
 import type { ProjectDetail } from "./project-detail";
+import { repositoryConfig } from "./repository";
 
 export type AppLocale = (typeof routing.locales)[number];
 
@@ -12,7 +13,7 @@ export const siteConfig = {
   defaultDescription:
     "Portfolio showcasing frontend case studies, interaction design, and engineering outcomes.",
   siteUrl: "https://next-portfolio-ringring.vercel.app",
-  repositoryUrl: "https://github.com/Ring-wdr/next-portfolio",
+  repositoryUrl: repositoryConfig.url,
   social: {
     github: "https://github.com/Ring-wdr",
     linkedin: "https://www.linkedin.com/in/dust-shooter-408560340/",

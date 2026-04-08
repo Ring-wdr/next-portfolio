@@ -1,3 +1,5 @@
+import { buildRepositoryBlobUrl } from "./repository";
+
 export type AgentProofArtifact = {
   kind: "doc" | "project" | "repo";
   labelKey: string;
@@ -26,8 +28,13 @@ export type AgentSkillEntry = {
   projectSlug?: string;
 };
 
-export const agentEngineeringDocUrl =
-  "https://github.com/Ring-wdr/next-portfolio/blob/main/docs/agent-engineering.md";
+const reactDevtoolCliProjectSlug = "react-devtool-cli" as const;
+
+export const agentEngineeringDocPath = "docs/agent-engineering.md";
+export const agentEngineeringDocUrl = buildRepositoryBlobUrl(
+  agentEngineeringDocPath,
+);
+export const agentEngineeringProjectHref = `/project/${reactDevtoolCliProjectSlug}`;
 
 const proofArtifacts = {
   doc: {
@@ -39,7 +46,7 @@ const proofArtifacts = {
   project: {
     kind: "project",
     labelKey: "agentEngineering.artifacts.project",
-    href: "/project/react-devtool-cli",
+    href: agentEngineeringProjectHref,
   },
 } satisfies Record<string, AgentProofArtifact>;
 
@@ -55,7 +62,7 @@ export const AgentSkillEntries: AgentSkillEntry[] = [
     contractKey: "agentEngineering.items.taskDecomposition.contract",
     verificationKey: "agentEngineering.items.taskDecomposition.verification",
     artifacts: [proofArtifacts.project, proofArtifacts.doc],
-    projectSlug: "react-devtool-cli",
+    projectSlug: reactDevtoolCliProjectSlug,
   },
   {
     id: "toolFluency",
@@ -68,7 +75,7 @@ export const AgentSkillEntries: AgentSkillEntry[] = [
     contractKey: "agentEngineering.items.toolFluency.contract",
     verificationKey: "agentEngineering.items.toolFluency.verification",
     artifacts: [proofArtifacts.project, proofArtifacts.doc],
-    projectSlug: "react-devtool-cli",
+    projectSlug: reactDevtoolCliProjectSlug,
   },
   {
     id: "verificationHarness",
@@ -81,7 +88,7 @@ export const AgentSkillEntries: AgentSkillEntry[] = [
     contractKey: "agentEngineering.items.verificationHarness.contract",
     verificationKey: "agentEngineering.items.verificationHarness.verification",
     artifacts: [proofArtifacts.project, proofArtifacts.doc],
-    projectSlug: "react-devtool-cli",
+    projectSlug: reactDevtoolCliProjectSlug,
   },
 ];
 
