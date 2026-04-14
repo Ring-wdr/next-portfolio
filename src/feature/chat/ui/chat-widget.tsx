@@ -5,6 +5,7 @@ import { MessageCircle, X } from "lucide-react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { useTranslations } from "next-intl";
+import { specDataPartSchema } from "../lib/spec";
 import { ChatPanel } from "./chat-panel";
 
 export function ChatWidget() {
@@ -20,7 +21,10 @@ export function ChatWidget() {
     [],
   );
 
-  const { messages, sendMessage, status } = useChat({ transport });
+  const { messages, sendMessage, status } = useChat({
+    transport,
+    dataPartSchemas: { spec: specDataPartSchema },
+  });
 
   async function handleSubmit() {
     const trimmed = input.trim();
