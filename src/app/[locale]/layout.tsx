@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/app/_provider/theme";
 import { env } from "@/env";
 import { routing } from "@/i18n/routing";
 import { buildPersonJsonLd, getBaseUrl, siteConfig, type AppLocale } from "@/shared/constant/site";
+import { ChatWidget } from "@/feature/chat/ui/chat-widget";
 import { Footer } from "@/shared/ui/footer";
 import { Header } from "@/shared/ui/header";
 import { classNames } from "@/shared/utils/classnames";
@@ -127,6 +128,7 @@ export default async function LocaleLayout({
 							{children}
 							{modal}
 							<Footer />
+							<ChatWidget />
 						</div>
 					</ThemeProvider>
 				</NextIntlClientProvider>

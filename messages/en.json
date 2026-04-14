@@ -321,6 +321,17 @@
     "website": "Website",
     "privacyNote": "I will only use this information to reply to your inquiry."
   },
+  "Chat": {
+    "title": "AI Assistant",
+    "description": "Ask about career & tech stack",
+    "placeholder": "Ask about career or tech...",
+    "send": "Send",
+    "sending": "Sending...",
+    "close": "Close",
+    "openChat": "Open chat",
+    "emptyTitle": "Ask me anything",
+    "emptyDescription": "Ask about Manjoong's career, projects, or tech stack."
+  },
   "ProjectDetailPage": {
     "period": "Period",
     "team": "Team",

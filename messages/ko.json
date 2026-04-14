@@ -321,6 +321,17 @@
     "website": "웹사이트",
     "privacyNote": "남겨주신 정보는 답변과 후속 연락을 위해서만 사용합니다."
   },
+  "Chat": {
+    "title": "AI 어시스턴트",
+    "description": "커리어와 기술 스택에 대해 물어보세요",
+    "placeholder": "커리어나 기술에 대해 질문하세요...",
+    "send": "전송",
+    "sending": "전송 중...",
+    "close": "닫기",
+    "openChat": "채팅 열기",
+    "emptyTitle": "무엇이든 물어보세요",
+    "emptyDescription": "Kim Manjoong의 커리어, 프로젝트, 기술 스택에 대해 질문해보세요."
+  },
   "ProjectDetailPage": {
     "period": "기간",
     "team": "팀",

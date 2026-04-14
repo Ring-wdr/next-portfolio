@@ -17,11 +17,13 @@
     "test:perf": "playwright test tests/benchmarks -c playwright.perf.config.ts"
   },
   "dependencies": {
+    "@ai-sdk/react": "^3.0.161",
     "@chenglou/pretext": "^0.0.3",
     "@next/third-parties": "16.2.1",
     "@radix-ui/react-slot": "^1.2.3",
     "@react-email/components": "^0.3.3",
     "@t3-oss/env-nextjs": "^0.13.8",
+    "ai": "^6.0.159",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.513.0",
