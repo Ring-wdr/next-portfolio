@@ -327,6 +327,7 @@
     "placeholder": "Ask about career or tech...",
     "send": "Send",
     "sending": "Sending...",
+    "error": "Failed to send message. Please try again.",
     "close": "Close",
     "openChat": "Open chat",
     "emptyTitle": "Ask me anything",

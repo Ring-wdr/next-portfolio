@@ -21,16 +21,34 @@ export function ChatWidget() {
     [],
   );
 
-  const { messages, sendMessage, status } = useChat({
+  const { messages, sendMessage, status, error, clearError } = useChat({
     transport,
     dataPartSchemas: { spec: specDataPartSchema },
   });
 
+  function handleInputChange(value: string) {
+    if (status === "error") {
+      clearError();
+    }
+
+    setInput(value);
+  }
+
   async function handleSubmit() {
     const trimmed = input.trim();
     if (!trimmed || status === "submitted" || status === "streaming") return;
+
+    if (status === "error") {
+      clearError();
+    }
+
     setInput("");
-    await sendMessage({ text: trimmed });
+
+    try {
+      await sendMessage({ text: trimmed });
+    } catch {
+      // useChat surfaces request failures through `error` and `status`
+    }
   }
 
   return (
@@ -40,7 +58,8 @@ export function ChatWidget() {
           messages={messages}
           input={input}
           status={status}
-          onInputChange={setInput}
+          errorMessage={status === "error" ? (error?.message ?? t("error")) : null}
+          onInputChange={handleInputChange}
           onSubmit={handleSubmit}
           onClose={() => setIsOpen(false)}
         />

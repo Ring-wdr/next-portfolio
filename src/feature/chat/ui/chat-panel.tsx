@@ -11,6 +11,7 @@ type ChatPanelProps = {
   messages: UIMessage[];
   input: string;
   status: "submitted" | "streaming" | "ready" | "error";
+  errorMessage: string | null;
   onInputChange: (value: string) => void;
   onSubmit: () => void;
   onClose: () => void;
@@ -20,6 +21,7 @@ export function ChatPanel({
   messages,
   input,
   status,
+  errorMessage,
   onInputChange,
   onSubmit,
   onClose,
@@ -55,6 +57,14 @@ export function ChatPanel({
 
       {/* Messages */}
       <div className="flex flex-1 flex-col gap-3 overflow-y-auto px-4 py-4">
+        {errorMessage ? (
+          <div
+            role="alert"
+            className="rounded-xl border border-destructive/30 bg-destructive/10 px-3 py-2 text-xs text-destructive"
+          >
+            {errorMessage}
+          </div>
+        ) : null}
         {messages.length === 0 ? (
           <div className="flex h-full flex-col items-center justify-center gap-2 text-center">
             <p className="text-sm font-medium">{t("emptyTitle")}</p>
