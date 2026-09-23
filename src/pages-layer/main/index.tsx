@@ -6,7 +6,7 @@ import { getFeaturedProjects, projectList } from "@/shared/constant/project";
 import { TechStack } from "@/shared/constant/tech-stack";
 import { HeroAsk } from "./hero-ask";
 import { HeroCanvas } from "./hero-canvas";
-import { PretextStatement } from "./pretext-statement";
+import { PretextStatement } from "@/shared/ui/pretext-statement";
 
 export function MainPage() {
 	const locale = useLocale();

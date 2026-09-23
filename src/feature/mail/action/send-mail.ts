@@ -7,7 +7,7 @@ import {
   type Transporter,
 } from "nodemailer";
 import { z } from "zod";
-import { render } from "@react-email/components";
+import { render } from "react-email";
 import { env } from "@/env";
 import nodemailer from "nodemailer";
 import { ContactEmail } from "../template/contact-email";
@@ -162,7 +162,7 @@ export const sendEmail = async (
       console.log("✨ Preview URL: %s", getTestMessageUrl(result));
     }
 
-    if (result.accepted.length > 0) {
+    if ((result.accepted?.length ?? 0) > 0) {
       return { type: true, message: messages.success };
     }
     return {

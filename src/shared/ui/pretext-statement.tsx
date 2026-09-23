@@ -34,15 +34,9 @@ function parseLineHeight(value: string, fontSize: number) {
 	return Number.isFinite(parsed) ? parsed : Math.round(fontSize * 1.08);
 }
 
-function measureLineCount(text: string, font: string, width: number) {
-	const prepared = prepareWithSegments(text, font);
-	let lineCount = 0;
-
-	walkLineRanges(prepared, width, () => {
-		lineCount += 1;
-	});
-
-	return { lineCount, prepared };
+function parseLetterSpacing(value: string) {
+	const parsed = Number.parseFloat(value);
+	return Number.isFinite(parsed) ? parsed : 0;
 }
 
 function scoreLayout(
@@ -113,6 +107,13 @@ export function PretextStatement({
 
 			setLocale(locale);
 
+			// Mirror the CSS (`break-keep`, tracking) so measured lines match the DOM
+			// and Hangul words are not split mid-word.
+			const prepared = prepareWithSegments(text, font, {
+				letterSpacing: parseLetterSpacing(computed.letterSpacing),
+				wordBreak: "keep-all",
+			});
+
 			const minimumWidth = Math.max(Math.round(maxWidth * 0.54), 220);
 			const widths = new Set<number>([
 				maxWidth,
@@ -125,13 +126,10 @@ export function PretextStatement({
 			let low = minimumWidth;
 			let high = maxWidth;
 			let tightWidth = maxWidth;
-			let cachedPrepared =
-				null as ReturnType<typeof measureLineCount>["prepared"] | null;
 
 			while (low <= high) {
 				const mid = Math.floor((low + high) / 2);
-				const { lineCount, prepared } = measureLineCount(text, font, mid);
-				cachedPrepared = prepared;
+				const lineCount = walkLineRanges(prepared, mid, () => {});
 
 				if (lineCount > targetLines) {
 					low = mid + 1;
@@ -148,7 +146,6 @@ export function PretextStatement({
 			let bestScore = Number.POSITIVE_INFINITY;
 
 			for (const candidateWidth of widths) {
-				const prepared = cachedPrepared ?? prepareWithSegments(text, font);
 				const result = layoutWithLines(prepared, candidateWidth, lineHeight);
 
 				if (result.lineCount < 2 || result.lineCount > 5) {
@@ -167,7 +164,7 @@ export function PretextStatement({
 					bestScore = score;
 					bestLayout = {
 						lines: result.lines.map((line) => line.text),
-						width: Math.ceil(Math.max(...lineWidths)),
+						width: Math.ceil(Math.max(...lineWidths)) + 1,
 					};
 				}
 			}
@@ -210,7 +207,7 @@ export function PretextStatement({
 			<Component
 				ref={ref}
 				className={classNames(
-					"max-w-full text-[clamp(1.85rem,4.7vw,4.5rem)] font-semibold leading-[0.98] tracking-[-0.05em] text-balance text-foreground",
+					"max-w-full text-[clamp(1.85rem,4.7vw,4.5rem)] font-semibold leading-[0.98] tracking-[-0.05em] text-balance break-keep text-foreground",
 					className,
 				)}
 				style={layout ? { maxWidth: `${layout.width}px` } : undefined}

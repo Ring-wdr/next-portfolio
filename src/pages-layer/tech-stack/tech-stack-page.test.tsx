@@ -256,7 +256,7 @@ vi.mock("shiki", () => ({
   ),
 }));
 
-vi.mock("shiki-magic-move/react", async () => {
+vi.mock("@shikijs/magic-move/react", async () => {
   const React = await vi.importActual<typeof import("react")>("react");
 
   return {

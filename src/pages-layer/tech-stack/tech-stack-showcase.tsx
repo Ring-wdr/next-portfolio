@@ -3,7 +3,7 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
 import { createHighlighter } from "shiki";
-import { ShikiMagicMove } from "shiki-magic-move/react";
+import { ShikiMagicMove } from "@shikijs/magic-move/react";
 
 import { Button } from "@/shared/ui/button";
 import { classNames } from "@/shared/utils/classnames";
