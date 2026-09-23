@@ -2,6 +2,9 @@
   "name": "next-portfolio",
   "version": "0.1.01",
   "private": true,
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "next dev",
     "dev:test": "E2E_TESTING=true next dev",
@@ -20,6 +23,7 @@
     "@ai-sdk/react": "^3.0.161",
     "@chenglou/pretext": "^0.0.3",
     "@next/third-parties": "16.2.3",
+    "@openrouter/ai-sdk-provider": "^2.10.0",
     "@radix-ui/react-slot": "^1.2.3",
     "@react-email/components": "^0.3.3",
     "@t3-oss/env-nextjs": "^0.13.8",

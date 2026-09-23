@@ -5,16 +5,18 @@ export const env = createEnv({
   server: {
     NEXT_MAIL_ADDRESS: z.email(),
     NEXT_APP_PASSWORD: z.string().min(1),
+    OPENROUTER_API_KEY: z.string().min(1).optional(),
+    OPENROUTER_FREE_MODELS: z.string().optional(),
   },
   runtimeEnv: {
     NEXT_MAIL_ADDRESS: process.env.NEXT_MAIL_ADDRESS,
     NEXT_APP_PASSWORD: process.env.NEXT_APP_PASSWORD,
     NEXT_PUBLIC_GOOGLE_ANALYTICS: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS,
-    NEXT_PUBLIC_CHATBOT_API_URL: process.env.NEXT_PUBLIC_CHATBOT_API_URL,
+    OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY,
+    OPENROUTER_FREE_MODELS: process.env.OPENROUTER_FREE_MODELS,
   },
   client: {
     NEXT_PUBLIC_GOOGLE_ANALYTICS: z.templateLiteral(["G-", z.string().min(1)]),
-    NEXT_PUBLIC_CHATBOT_API_URL: z.url(),
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

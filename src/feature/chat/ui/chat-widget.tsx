@@ -16,7 +16,7 @@ export function ChatWidget() {
   const transport = useMemo(
     () =>
       new DefaultChatTransport({
-        api: `${process.env.NEXT_PUBLIC_CHATBOT_API_URL}/api/chat`,
+        api: "/api/chat",
       }),
     [],
   );
