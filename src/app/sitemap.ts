@@ -3,7 +3,7 @@ import { routing } from "@/i18n/routing";
 import { absoluteUrl, getLanguageAlternates, getProjectPath, localizePath } from "@/shared/constant/site";
 import { projectDetailList } from "@/shared/constant/project-detail";
 
-const staticRoutes = ["/", "/about", "/project", "/contact", "/tech-stack"] as const;
+const staticRoutes = ["/", "/about", "/project", "/fit", "/contact", "/tech-stack"] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticEntries: MetadataRoute.Sitemap = routing.locales.flatMap((locale) =>

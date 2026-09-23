@@ -12,6 +12,8 @@ type ChatPanelProps = {
   input: string;
   status: "submitted" | "streaming" | "ready" | "error";
   errorMessage: string | null;
+  suggestions?: string[];
+  onSuggestion?: (question: string) => void;
   onInputChange: (value: string) => void;
   onSubmit: () => void;
   onClose: () => void;
@@ -22,6 +24,8 @@ export function ChatPanel({
   input,
   status,
   errorMessage,
+  suggestions = [],
+  onSuggestion,
   onInputChange,
   onSubmit,
   onClose,
@@ -38,7 +42,11 @@ export function ChatPanel({
   }, [messages, status]);
 
   return (
-    <div className="flex h-[480px] w-80 flex-col overflow-hidden rounded-2xl border border-border/70 bg-background shadow-2xl">
+    <div
+      role="dialog"
+      aria-label={t("title")}
+      className="flex h-[min(560px,calc(100svh-7rem))] w-[min(24rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-border/70 bg-background shadow-2xl"
+    >
       {/* Header */}
       <div className="flex items-center justify-between border-b border-border/60 px-4 py-3">
         <div>
@@ -69,6 +77,21 @@ export function ChatPanel({
           <div className="flex h-full flex-col items-center justify-center gap-2 text-center">
             <p className="text-sm font-medium">{t("emptyTitle")}</p>
             <p className="text-xs text-muted-foreground">{t("emptyDescription")}</p>
+            {suggestions.length > 0 && onSuggestion ? (
+              <ul className="mt-3 flex w-full flex-col gap-2">
+                {suggestions.map((question) => (
+                  <li key={question}>
+                    <button
+                      type="button"
+                      onClick={() => onSuggestion(question)}
+                      className="w-full rounded-xl border border-border/60 bg-card/70 px-3 py-2 text-left text-xs transition-colors hover:border-primary/40 hover:bg-secondary"
+                    >
+                      {question}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </div>
         ) : (
           messages.map((message) => (

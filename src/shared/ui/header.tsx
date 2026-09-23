@@ -16,6 +16,7 @@ export function Header() {
 
 	const navigationItems = [
 		{ href: "/project", label: t("projects") },
+		{ href: "/fit", label: t("fit") },
 		{ href: "/tech-stack", label: t("techStack") },
 		{ href: "/about", label: t("about") },
 		{ href: "/contact", label: t("contact") },

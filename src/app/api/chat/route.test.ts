@@ -77,4 +77,26 @@ describe("POST /api/chat", () => {
       expect.objectContaining({ delta: "안녕하세요" }),
     ]);
   });
+
+  it("passes persona and project context into the system prompt", async () => {
+    envMock.OPENROUTER_API_KEY = "test-key";
+    streamTextMock.mockReturnValue({
+      fullStream: (async function* () {
+        yield { type: "text-delta", text: "ok" };
+      })(),
+    });
+
+    await readChunks(
+      await POST(
+        createRequest({
+          ...userMessage,
+          context: { locale: "ko", persona: "recruiter", projectSlug: "alltime-car" },
+        }),
+      ),
+    );
+
+    const { system } = streamTextMock.mock.calls[0][0];
+    expect(system).toContain("채용 담당자");
+    expect(system).toContain('"역대카" 케이스 스터디');
+  });
 });

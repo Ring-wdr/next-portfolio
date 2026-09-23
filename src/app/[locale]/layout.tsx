@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/app/_provider/theme";
 import { env } from "@/env";
 import { routing } from "@/i18n/routing";
 import { buildPersonJsonLd, getBaseUrl, siteConfig, type AppLocale } from "@/shared/constant/site";
+import { ChatProvider } from "@/feature/chat/ui/chat-provider";
 import { ChatWidget } from "@/feature/chat/ui/chat-widget";
 import { Footer } from "@/shared/ui/footer";
 import { Header } from "@/shared/ui/header";
@@ -123,13 +124,15 @@ export default async function LocaleLayout({
 						enableSystem
 						disableTransitionOnChange
 					>
-						<div className="flex h-full grow flex-col">
-							<Header />
-							{children}
-							{modal}
-							<Footer />
-							<ChatWidget />
-						</div>
+						<ChatProvider>
+							<div className="flex h-full grow flex-col">
+								<Header />
+								{children}
+								{modal}
+								<Footer />
+								<ChatWidget />
+							</div>
+						</ChatProvider>
 					</ThemeProvider>
 				</NextIntlClientProvider>
 				<GoogleAnalytics gaId={env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />

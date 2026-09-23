@@ -37,76 +37,12 @@ export const WIKI = `
 - 프레임워크: Next.js (App Router)
 - 스타일링: Tailwind CSS
 - 배포: Vercel
-- 주요 특징: 스토리 중심 섹션 구성, 토큰 기반 테마 시스템, 다국어 UX 지원, AI 챗봇 통합 (Cloudflare Worker + OpenRouter)
-- 챗봇: 현재 대화 중인 AI 어시스턴트는 Cloudflare Worker 위에서 OpenRouter API를 통해 동작하며, 환각 방지를 위해 사전 정의된 지식 베이스(wiki)만 사용
+- 주요 특징: 스토리 중심 섹션 구성, 토큰 기반 테마 시스템, 다국어 UX 지원, 대화형 AI 어시스턴트, 채용공고(JD) 적합도 분석(/fit), 에이전트가 읽을 수 있는 /llms.txt
+- 챗봇: 현재 대화 중인 AI 어시스턴트는 Next.js Route Handler(/api/chat)에서 OpenRouter의 무료 모델을 순서대로 시도하는 폴백 체인으로 동작합니다. 모든 모델이 한도에 걸리면 에러 대신 정적 안내와 링크로 응답합니다. 환각 방지를 위해 사전 정의된 지식 베이스(wiki)만 사용하고, 답변에 언급된 프로젝트는 서버가 케이스 스터디 링크로 연결합니다.
+- 이전 구조: 초기에는 챗봇이 별도 Cloudflare Worker에서 동작했지만, Vercel Fluid Compute로 실행 시간 제약이 사라지면서 지식 베이스를 사이트와 함께 배포하도록 Next.js 내부로 통합했습니다.
 
-## 주요 프로젝트 (총 6개)
-
-### POCAZ Remake (2025.12 -)
-- 분류: 1인 프로젝트
-- 역할: 풀스택 개발 (Next.js, 상태관리, API 연동)
-- 개요: 분산된 포토카드 리셀 거래를 검색·찜·채팅 중심 단일 경험으로 재구성한 리메이크 프로젝트
-- 배경: 포토카드 리셀 수요는 커졌지만 실제 거래는 트위터, 번개장터, 당근마켓처럼 맥락이 분산된 플랫폼에 흩어져 있었습니다. 구매자는 원하는 카드의 상태와 가격을 비교하기 어렵고, 판매자는 거래 진행 상황을 한눈에 관리하기 어려운 문제가 있었습니다.
-- 주요 기능: 포토카드 등록·상태 표기·거래 진행 상태를 한 화면에서 관리하는 판매 흐름, 아이돌/앨범/멤버 기준 검색 및 필터링, 실시간 채팅, 사용자 프로필·거래 히스토리·찜 목록, 알림 및 신고 흐름
-- 기술 스택: React, Next.js, StyleX, Elysia.js, PostgreSQL, Prisma, Supabase, Bun.js
-- 성과: 개발 상태 진행 중, 팀 규모 1명, 등록된 카드 100+
-- 링크: GitHub(https://github.com/Ring-wdr/pocaz-remake), Demo(https://pocaz-remake.vercel.app/)
-- 상태: Prototype (진행 중)
-
-### 법률사무소 대도 (2023.03 - 2023.05)
-- 분류: 2인 팀 프로젝트
-- 역할: 프론트엔드 개발 (SvelteKit, 라우팅, 관리자 페이지)
-- 개요: 법률사무소 공식 웹사이트 및 관리자 시스템
-- 배경: 법률사무소 대도의 온라인 존재감 강화와 고객 상담 프로세스 개선을 위한 공식 웹사이트 및 관리자 시스템 구축 프로젝트였습니다.
-- 주요 기능: 사무소 소개 및 변호사 프로필 페이지, 전문 분야별 법률 서비스 안내, 상담 예약 시스템, 법률 칼럼 및 소식 게시판, 관리자 페이지 (콘텐츠 관리), 반응형 디자인
-- 기술 스택: SvelteKit, Supabase, Tailwind CSS, TypeScript
-- 성과: 개발 기간 2개월, 팀 규모 2명, 페이지 수 15+, 콘텐츠 업데이트 시간 80% 단축, 상담 효율성 50% 향상
-- 링크: Demo(https://www.daedolaw.com/)
-- 상태: Live
-
-### 메뉴 고르기 앱 (2024.01 - 2024.03)
-- 분류: 개인 프로젝트
-- 역할: 풀스택 개발 (Next.js, MongoDB, 크롤링)
-- 개요: 메뉴 선택 시간을 줄이기 위해 크롤링·추천·운영 도구를 하나로 묶은 카페 메뉴 추천 서비스
-- 배경: 브랜드별 메뉴가 빠르게 바뀌는 카페 환경에서는 사용자가 메뉴판 앞에서 오래 고민하거나, 자주 마시는 메뉴를 다시 찾는 데 불필요한 시간이 들었습니다.
-- 주요 기능: 브랜드별 메뉴 정보를 수집해 저장하는 크롤링 파이프라인, 사용자 선호 메뉴를 저장하고 다시 불러오는 개인화 기능, 선택 이력 기반 메뉴 추천 로직, 운영자용 관리자 화면, 브랜드/카테고리 기준 검색과 필터링
-- 기술 스택: Next.js, TypeScript, MongoDB, Puppeteer
-- 성과: 개발 기간 2개월, 크롤링 메뉴 200+, 지원 카페 5개 브랜드
-- 링크: Demo(https://choose-menu.vercel.app/)
-- 상태: Live
-
-### 역대카 (2024.06 - 2024.08)
-- 분류: 개인 프로젝트
-- 역할: 풀스택 개발 (Next.js, Supabase)
-- 개요: 렌트카 가격 비교 및 추천 서비스
-- 배경: 렌트카 업체마다 가격 정책이 다르고 비교하기 어려워, 사용자들이 합리적인 선택을 하기 힘든 문제를 해결하고자 시작했습니다.
-- 주요 기능: 렌트카 업체별 가격 비교, 차량 종류별 필터링, 날짜 및 지역별 검색, 가격 추이 그래프, 최저가 알림 기능, 사용자 리뷰 및 평점
-- 기술 스택: Next.js, Supabase, Prisma, Tailwind CSS, TypeScript
-- 성과: 개발 기간 2개월, 지원 업체 10+, 등록 차량 150+, 렌트카 비교 시간 90% 단축, 평균 렌트 비용 15% 절감, 사용자 만족도 4.5/5.0
-- 링크: Demo(https://alltime-car.com/)
-- 상태: Live
-
-### 프론트엔드 주니어 스터디 (2025.11 - 2026.01)
-- 분류: 개인 프로젝트
-- 역할: 커리큘럼 설계 및 학습 자료 정리
-- 개요: 15주간의 체계적인 프론트엔드 학습 커리큘럼 레포지토리
-- 배경: 프론트엔드 개발자로서 체계적인 학습의 필요성을 느끼고, 개인 학습 커리큘럼을 정리하기 위해 시작한 프로젝트입니다.
-- 주요 기능: 1-5주 JavaScript 심화/디자인 패턴/React·Next.js 심화, 6-10주 스타일링/폼 관리/테스팅/애니메이션, 11-15주 성능 최적화/보안/PWA/접근성/개발 도구, 주차별 핵심 개념 요약 및 실습 예제 코드
-- 기술 스택: TypeScript, Bun.js, CSS
-- 성과: 학습 기간 15주, 주요 토픽 15개, 기술 스택 6개
-- 링크: GitHub(https://github.com/Ring-wdr/frontend-junior-study), Demo(https://ring-wdr.github.io/frontend-junior-study/)
-- 상태: Archived
-
-### react-devtool-cli (2026.03 -)
-- 분류: 개인 프로젝트
-- 역할: CLI 설계 및 구현, Playwright 세션 전송 계층 구성, snapshot-aware React inspection과 profiler 워크플로우 설계, Codex/Claude Code 친화적 실행 표면 정리
-- 개요: React inspection과 profiler 분석을 에이전트/개발자가 재현 가능한 결정론적 CLI 계약으로 옮긴 agent-first 디버깅 도구
-- 배경: React DevTools UI만으로는 에이전트나 스크립트 기반 자동화 흐름에서 동일한 조사 과정을 재현하기 어렵습니다. React 트리 상태, source 힌트, profiler 신호를 명령형 인터페이스로 노출해 디버깅과 성능 분석을 자동화 가능한 형태로 만들 필요가 있었습니다.
-- 주요 기능: session open/connect/attach 지원, snapshot id 기반 tree get·node search·node inspect·node highlight·source reveal 흐름, interact click/type/press/wait 명령, session doctor 사전 점검, commit 중심 profiler 분석 (summary/drill-down/ranked hotspot/flamegraph/compare/export), Codex·Claude Code·Gemini CLI용 번들 스킬 디렉터리 제공
-- 기술 스택: React, Playwright, Command Line, JavaScript
-- 성과: npm 버전 0.1.34, GitHub tag v0.1.34-public, 저장소 이력 35 commits
-- 링크: GitHub(https://github.com/Ring-wdr/react-devtool-cli), npm(https://www.npmjs.com/package/react-devtool-cli)
-- 상태: Live (진행 중)
+## 주요 프로젝트
+- 프로젝트별 상세 내용은 아래 [프로젝트 케이스 스터디] 섹션에 있으며, 사이트의 케이스 스터디 데이터에서 자동 생성됩니다.
 
 ## React 환경에서 선호하는 라이브러리
 

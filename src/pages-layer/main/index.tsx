@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { getFeaturedProjects, projectList } from "@/shared/constant/project";
 import { TechStack } from "@/shared/constant/tech-stack";
+import { HeroAsk } from "./hero-ask";
 import { HeroCanvas } from "./hero-canvas";
 import { PretextStatement } from "./pretext-statement";
 
@@ -53,28 +54,37 @@ export function MainPage() {
 			>
 				<HeroCanvas className="absolute inset-0 -z-10" />
 				<div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(8,10,14,0.78)_0%,rgba(8,10,14,0.18)_50%,rgba(8,10,14,0.48)_100%)]" />
-				<div className="section-shell relative z-10 flex min-h-[calc(100svh-4.5rem)] items-end pt-24 pb-14 md:pt-32 md:pb-16 lg:pt-36 lg:pb-20">
-					<div className="home-hero-copy flex max-w-[42rem] flex-col gap-7 text-white md:gap-8">
+				<div className="section-shell relative z-10 flex min-h-[calc(100svh-4.5rem)] items-end pt-16 pb-12 md:pt-20 md:pb-14 lg:pt-24 lg:pb-16">
+					<div className="home-hero-copy flex max-w-[44rem] flex-col gap-6 text-white md:gap-7">
 						<p className="home-kicker text-white/72">{t("eyebrow")}</p>
-						<h1 className="max-w-[12ch] text-[clamp(3.7rem,9vw,7.2rem)] font-bold leading-[0.9] tracking-[-0.06em] text-white">
+						<h1 className="max-w-[12ch] text-[clamp(3.2rem,7vw,5.6rem)] font-bold leading-[0.9] tracking-[-0.06em] text-white">
 							<span className="block">Manjoong Kim</span>
-							<span className="mt-4 block max-w-[12ch] text-[clamp(1.3rem,3vw,2rem)] font-medium leading-tight tracking-[-0.03em] text-white/88">
+							<span className="mt-4 block max-w-[20ch] break-keep text-[clamp(1.25rem,2.6vw,1.75rem)] font-medium leading-tight tracking-[-0.03em] text-white/88">
 								{t("greeting")}
 							</span>
 						</h1>
 						<p className="max-w-2xl text-sm leading-6 text-white/78 md:text-base md:leading-7">
 							{t("description")}
 						</p>
-						<div className="flex flex-wrap items-center gap-3">
+						<HeroAsk />
+						<div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-semibold">
 							<Link
 								href="/project"
-								className="inline-flex h-11 items-center justify-center rounded-full bg-white px-6 text-sm font-semibold text-slate-950 transition-transform duration-300 hover:-translate-y-0.5"
+								className="inline-flex items-center gap-1.5 text-white transition-opacity hover:opacity-80"
 							>
 								{t("viewProjects")}
+								<ArrowRight size={15} />
+							</Link>
+							<Link
+								href="/fit"
+								className="inline-flex items-center gap-1.5 text-white/80 transition-colors hover:text-white"
+							>
+								{t("fitCta")}
+								<ArrowRight size={15} />
 							</Link>
 							<Link
 								href="/about"
-								className="inline-flex h-11 items-center justify-center rounded-full border border-white/24 bg-white/8 px-6 text-sm font-semibold text-white transition-colors hover:bg-white/14"
+								className="inline-flex items-center gap-1.5 text-white/80 transition-colors hover:text-white"
 							>
 								{t("aboutCta")}
 							</Link>

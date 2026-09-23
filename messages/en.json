@@ -6,7 +6,8 @@
     "about": "About Me",
     "contact": "Contact",
     "menu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "fit": "Role Fit"
   },
   "Footer": {
     "allRightsReserved": "All rights reserved.",
@@ -61,6 +62,36 @@
       "deliveryFocus": {
         "title": "Delivery without noise",
         "description": "Keep the codebase predictable, the UI restrained, and the path from prototype to production short."
+      }
+    },
+    "fitCta": "Check fit against a job post",
+    "ask": {
+      "label": "Ask about this portfolio",
+      "placeholder": "What would you like to know?",
+      "submit": "Send question",
+      "personaLabel": "Which lens are you reading with?",
+      "startersLabel": "Suggested questions",
+      "personas": {
+        "recruiter": "Recruiter",
+        "engineer": "Engineer",
+        "collaborator": "Collaborator"
+      },
+      "starters": {
+        "recruiter": [
+          "Which projects show clear ownership and impact?",
+          "How do you collaborate within a team?",
+          "What are you focusing on right now?"
+        ],
+        "engineer": [
+          "How did you solve image performance in POCAZ?",
+          "How do you design state and component boundaries?",
+          "How do you verify agent-generated work?"
+        ],
+        "collaborator": [
+          "What principles guide how you work?",
+          "How do you handle design and code together?",
+          "How do you approach docs and communication?"
+        ]
       }
     }
   },
@@ -323,7 +354,7 @@
   },
   "Chat": {
     "title": "AI Assistant",
-    "description": "Ask about career & tech stack",
+    "description": "Ask about career, projects, and tech",
     "placeholder": "Ask about career or tech...",
     "send": "Send",
     "sending": "Sending...",
@@ -331,7 +362,12 @@
     "close": "Close",
     "openChat": "Open chat",
     "emptyTitle": "Ask me anything",
-    "emptyDescription": "Ask about Manjoong's career, projects, or tech stack."
+    "emptyDescription": "Ask about Manjoong's career, projects, or tech stack.",
+    "suggestions": [
+      "Walk me through the project you're proudest of",
+      "What problems have you solved with React and Next.js?",
+      "How do you use AI agents in engineering work?"
+    ]
   },
   "ProjectDetailPage": {
     "period": "Period",
@@ -353,6 +389,52 @@
     "feedback": "User Feedback",
     "improvements": "Learnings / Next Steps",
     "screenshots": "Screenshots",
-    "backToProjects": "Back to Projects"
+    "backToProjects": "Back to Projects",
+    "ask": {
+      "title": "Ask about this project",
+      "description": "The AI assistant answers from this case study.",
+      "questions": {
+        "challenge": "What was the hardest technical problem in {title}, and how was it solved?",
+        "stack": "Why was this tech stack chosen for {title}?",
+        "role": "Summarize the role and outcomes in {title}"
+      }
+    }
+  },
+  "FitPage": {
+    "eyebrow": "Role Fit",
+    "title": "Check fit against a job description",
+    "description": "Paste a job description to get a fit report that links each requirement to evidence from the case studies.",
+    "honesty": "Requirements without evidence are marked as gaps, not inflated. Nothing is stored.",
+    "jdLabel": "Job description",
+    "jdPlaceholder": "Paste the responsibilities, requirements, and nice-to-haves.",
+    "useSample": "Use a sample job post",
+    "lengthHint": "{count} chars · min {min}, max {max}",
+    "submit": "Analyze fit",
+    "analyzing": "Analyzing…",
+    "loading": "Analyzing with a free AI model. Depending on load this takes 30 seconds to 2 minutes. ({seconds}s elapsed)",
+    "sampleJd": "[Frontend Engineer]\nResponsibilities\n- Build and maintain features in a React/Next.js web product\n- Design and operate design-system components\n- Improve and monitor web performance (Core Web Vitals)\n\nRequirements\n- 3+ years of professional TypeScript and React\n- Understanding of SSR/SSG with the Next.js App Router\n- Experience writing tests (Vitest, Playwright, etc.)\n\nNice to have\n- Accessible (a11y) UI development\n- Improving productivity with AI tools or agents\n- Backend experience (Node.js, databases)",
+    "errors": {
+      "invalid_input": "The job description is too short or too long. Please check its length.",
+      "unavailable": "The free AI model quota is used up or temporarily unavailable. Try again shortly, or browse the projects directly.",
+      "invalid_output": "The AI couldn't produce a well-formed report. Please try again.",
+      "network": "A network error occurred during the request.",
+      "retry": "Try again",
+      "browseProjects": "Browse projects"
+    },
+    "report": {
+      "coverageLabel": "Requirement coverage",
+      "coverageHint": "Computed over {total} requirements as strong = 1, partial = 0.5, gap = 0.",
+      "levels": {
+        "strong": "Strong",
+        "partial": "Partial",
+        "gap": "Gap"
+      },
+      "requirementsTitle": "Evidence by requirement",
+      "evidenceLabel": "Evidence projects",
+      "gapsTitle": "Areas to strengthen",
+      "questionsTitle": "Questions worth asking in an interview",
+      "contactCta": "Get in touch about this role",
+      "disclaimer": "Reference analysis generated by AI from portfolio content only."
+    }
   }
 }

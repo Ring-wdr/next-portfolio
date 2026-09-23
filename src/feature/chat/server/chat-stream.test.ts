@@ -2,12 +2,11 @@
 import { APICallError } from "ai";
 import { describe, expect, it } from "vitest";
 import {
-  DEFAULT_FREE_MODELS,
   NO_TEXT_CONTENT_ERROR,
   isProviderUnavailable,
-  resolveFreeModels,
   streamResultToUiChunks,
   toCoreMessages,
+  type StreamOptions,
 } from "./chat-stream";
 
 type MockPart = { type: string; [key: string]: unknown };
@@ -21,12 +20,32 @@ function createResult(parts: MockPart[], thrown?: unknown) {
   };
 }
 
-async function collect(result: ReturnType<typeof createResult>, question = "hi") {
+async function collect(
+  result: ReturnType<typeof createResult>,
+  options: Partial<StreamOptions> = {},
+) {
   const chunks = [];
-  for await (const chunk of streamResultToUiChunks(result, "text-1", question)) {
+  for await (const chunk of streamResultToUiChunks(result, {
+    textId: "text-1",
+    question: "hi",
+    locale: "ko",
+    ...options,
+  })) {
     chunks.push(chunk);
   }
   return chunks;
+}
+
+function specUrls(chunks: unknown[]) {
+  const spec = chunks.find(
+    (c): c is { type: "data-spec"; data: { spec: { elements: Record<string, { props: { url?: string } }> } } } =>
+      (c as { type: string }).type === "data-spec",
+  );
+  return spec
+    ? Object.values(spec.data.spec.elements)
+        .map((element) => element.props.url)
+        .filter(Boolean)
+    : [];
 }
 
 function apiError(statusCode: number, message = "Rate limit exceeded") {
@@ -67,20 +86,6 @@ describe("toCoreMessages", () => {
   });
 });
 
-describe("resolveFreeModels", () => {
-  it("falls back to defaults when unset or blank", () => {
-    expect(resolveFreeModels(undefined)).toEqual([...DEFAULT_FREE_MODELS]);
-    expect(resolveFreeModels(" , ")).toEqual([...DEFAULT_FREE_MODELS]);
-  });
-
-  it("parses a comma-separated override in order", () => {
-    expect(resolveFreeModels("a/b:free, c/d:free")).toEqual([
-      "a/b:free",
-      "c/d:free",
-    ]);
-  });
-});
-
 describe("isProviderUnavailable", () => {
   it("detects rate limits and provider-side failures", () => {
     expect(isProviderUnavailable(rateLimitError())).toBe(true);
@@ -98,10 +103,10 @@ describe("isProviderUnavailable", () => {
 });
 
 describe("streamResultToUiChunks", () => {
-  it("streams text and appends project links found in the answer", async () => {
+  it("streams text and links the mentioned project's case study first", async () => {
     const chunks = await collect(
       createResult([
-        { type: "text-delta", text: "POCAZ는 " },
+        { type: "text-delta", text: "POCAZ Remake는 " },
         { type: "text-delta", text: "리메이크 프로젝트입니다." },
         { type: "finish", finishReason: "stop" },
       ]),
@@ -116,7 +121,25 @@ describe("streamResultToUiChunks", () => {
       "data-spec",
       "finish",
     ]);
+    expect(specUrls(chunks)).toEqual([
+      "/project/pocaz",
+      "https://github.com/Ring-wdr/pocaz-remake",
+      "https://pocaz-remake.vercel.app/",
+    ]);
     expect(chunks.at(-1)).toEqual({ type: "finish", finishReason: "stop" });
+  });
+
+  it("links every mentioned project's case study, localized", async () => {
+    const chunks = await collect(
+      createResult([
+        { type: "text-delta", text: "Both 역대카 and POCAZ use Next.js." },
+      ]),
+      { locale: "en" },
+    );
+    expect(specUrls(chunks)).toEqual([
+      "/en/project/alltime-car",
+      "/en/project/pocaz",
+    ]);
   });
 
   it("emits an error when the model produces no visible text", async () => {
@@ -137,7 +160,7 @@ describe("streamResultToUiChunks", () => {
   it("answers with a static fallback when the free quota is exhausted", async () => {
     const chunks = await collect(
       createResult([{ type: "error", error: rateLimitError() }]),
-      "포카즈 프로젝트 알려줘",
+      { question: "포카즈 프로젝트 알려줘" },
     );
 
     expect(chunks.map((c) => c.type)).toEqual([
@@ -150,17 +173,14 @@ describe("streamResultToUiChunks", () => {
     ]);
     const delta = chunks.find((c) => c.type === "text-delta");
     expect(delta && "delta" in delta && delta.delta).toContain("한도");
-    const spec = chunks.find((c) => c.type === "data-spec");
-    expect(JSON.stringify(spec)).toContain("pocaz-remake");
+    expect(specUrls(chunks)).toContain("/project/pocaz");
   });
 
-  it("falls back to page links in English for unmatched English questions", async () => {
-    const chunks = await collect(
-      createResult([], rateLimitError()),
-      "What do you work on?",
-    );
-    const spec = JSON.stringify(chunks.find((c) => c.type === "data-spec"));
-    expect(spec).toContain("/en/project");
-    expect(spec).toContain("/en/about");
+  it("falls back to page links in the requested locale for unmatched questions", async () => {
+    const chunks = await collect(createResult([], rateLimitError()), {
+      question: "What do you work on?",
+      locale: "en",
+    });
+    expect(specUrls(chunks)).toEqual(["/en/project", "/en/about"]);
   });
 });

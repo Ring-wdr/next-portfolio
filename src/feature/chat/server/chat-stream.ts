@@ -5,44 +5,17 @@ import {
   type UIMessageChunk,
 } from "ai";
 import { localizePath, type AppLocale } from "@/shared/constant/site";
-import { buildLinkSpec, extractProjectLinks } from "./project-links";
-import { WIKI } from "./wiki";
-
-export const SYSTEM_PROMPT = `당신은 Kim Manjoong 포트폴리오의 AI 어시스턴트입니다.
-반드시 아래 [지식 베이스]에 있는 정보만 바탕으로 답변하세요.
-지식 베이스에 없는 내용은 추측하거나 만들어내지 말고, "해당 정보는 확인하기 어렵습니다"라고 솔직하게 답하세요.
-
-[지식 베이스]
-${WIKI}
-
-[규칙]
-- 커리어·기술·포트폴리오 사이트 외 주제(코드 작성 요청, 시사, 다른 사람에 대한 질문 등)는 "이 챗봇은 Kim Manjoong의 커리어와 기술 스택에 관한 질문만 답변할 수 있습니다"로 거절
-- "이 페이지는 어떻게 만들어졌어?", "이 사이트 어떻게 만든 거야?" 같은 포트폴리오 사이트 제작 방식 질문은 [지식 베이스]의 "포트폴리오 웹사이트" 섹션을 바탕으로 친절하게 답변
-- CSS 프레임워크 선호를 설명할 때는 한 프로젝트에서 여러 CSS 프레임워크를 조합한다고 권장하거나 암시하지 말고, 프로젝트 성격에 맞는 하나의 주 스타일링 체계를 선택하는 선호로 답변
-- 질문이 한국어면 한국어로, 영어면 영어로 답변
-- **bold**, *italic*, # 제목, \`코드\` 등 마크다운 문법 사용 금지. 일반 텍스트로만 작성.`;
-
-// Free model IDs churn on OpenRouter; override with OPENROUTER_FREE_MODELS
-// (comma-separated, first = primary). OpenRouter tries them in order.
-export const DEFAULT_FREE_MODELS = [
-  "nvidia/nemotron-3-super-120b-a12b:free",
-  "nvidia/nemotron-3-ultra-550b-a55b:free",
-  "google/gemma-4-31b-it:free",
-] as const;
+import {
+  buildLinkSpec,
+  buildSourceLinks,
+  findMentionedProjects,
+} from "./knowledge";
 
 const MAX_HISTORY_MESSAGES = 12;
 const MAX_MESSAGE_LENGTH = 2000;
 
 export const NO_TEXT_CONTENT_ERROR = "No text content generated.";
 const STREAM_FAILED_ERROR = "Failed to stream response.";
-
-export function resolveFreeModels(raw: string | undefined): string[] {
-  const models = (raw ?? "")
-    .split(",")
-    .map((m) => m.trim())
-    .filter((m) => m.length > 0);
-  return models.length > 0 ? models : [...DEFAULT_FREE_MODELS];
-}
 
 type UIMessagePartLike = { type: string; text?: string };
 export type UIMessageLike = {
@@ -109,17 +82,23 @@ const FALLBACK_PAGE_LABELS: Record<AppLocale, { project: string; about: string }
   en: { project: "Projects", about: "About" },
 };
 
+export type StreamOptions = {
+  textId: string;
+  question: string;
+  locale: AppLocale;
+};
+
 /** Static answer used when no model can respond, so the chat never dead-ends. */
-export function* fallbackChunks(
-  question: string,
-  textId: string,
-): Generator<UIMessageChunk> {
-  const locale = detectLocale(question);
-  const projectLinks = extractProjectLinks(question);
+export function* fallbackChunks({
+  question,
+  textId,
+  locale,
+}: StreamOptions): Generator<UIMessageChunk> {
+  const projects = findMentionedProjects(question);
   const labels = FALLBACK_PAGE_LABELS[locale];
   const links =
-    projectLinks.length > 0
-      ? projectLinks
+    projects.length > 0
+      ? buildSourceLinks(projects, locale)
       : [
           { label: labels.project, url: localizePath(locale, "/project") },
           { label: labels.about, url: localizePath(locale, "/about") },
@@ -153,9 +132,9 @@ function toErrorText(error: unknown): string {
 
 export async function* streamResultToUiChunks(
   result: StreamTextResultLike,
-  textId: string,
-  question: string,
+  options: StreamOptions,
 ): AsyncGenerator<UIMessageChunk> {
+  const { textId, locale } = options;
   let hasVisibleText = false;
   let textPartOpen = false;
   let fullText = "";
@@ -206,11 +185,14 @@ export async function* streamResultToUiChunks(
 
     yield { type: "text-end", id: textId };
 
-    const links = extractProjectLinks(fullText);
-    if (links.length > 0) {
+    const projects = findMentionedProjects(fullText);
+    if (projects.length > 0) {
       yield {
         type: "data-spec",
-        data: { type: "flat", spec: buildLinkSpec(links) },
+        data: {
+          type: "flat",
+          spec: buildLinkSpec(buildSourceLinks(projects, locale)),
+        },
       };
     }
 
@@ -220,7 +202,7 @@ export async function* streamResultToUiChunks(
   } catch (error) {
     if (!hasVisibleText && isProviderUnavailable(error)) {
       console.error("[chat] provider unavailable, serving fallback:", error);
-      yield* fallbackChunks(question, textId);
+      yield* fallbackChunks(options);
       return;
     }
 

@@ -1,9 +1,22 @@
 "use client";
 
 import { useRouter } from "@/i18n/routing";
-import { ComponentRef, startTransition, useLayoutEffect, useRef } from "react";
+import {
+  ComponentRef,
+  createContext,
+  startTransition,
+  useLayoutEffect,
+  useRef,
+} from "react";
 import { ViewTransition } from "react";
 import { useTranslations } from "next-intl";
+
+/**
+ * Dismisses the enclosing modal. `showModal()` makes everything outside the
+ * dialog inert, so UI that must reach page-level surfaces (e.g. the chat
+ * panel) closes the modal first.
+ */
+export const ModalDismissContext = createContext<(() => void) | null>(null);
 
 type ModalProps = {
   children: React.ReactNode;
@@ -73,7 +86,9 @@ export function Modal({ children }: ModalProps) {
             </button>
 
             <div className="relative w-full max-w-[1200px] bg-background rounded-lg shadow-xl mx-4">
-              {children}
+              <ModalDismissContext.Provider value={onDismiss}>
+                {children}
+              </ModalDismissContext.Provider>
             </div>
           </div>
         </ViewTransition>

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { ViewTransition } from "react";
+import { ProjectAsk } from "@/feature/chat/ui/project-ask";
 import { Link } from "@/i18n/routing";
 import type { ProjectDetail } from "@/shared/constant/project-detail";
 import { ImageGallery } from "@/shared/ui/image-gallery";
@@ -85,6 +86,8 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 						))}
 					</div>
 				</section>
+
+				<ProjectAsk slug={project.slug} title={project.title} />
 
 				<section className="glass-panel rounded-2xl p-4 md:p-5">
 					<ViewTransition

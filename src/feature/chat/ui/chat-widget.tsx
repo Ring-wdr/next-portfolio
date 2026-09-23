@@ -1,77 +1,59 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { MessageCircle, X } from "lucide-react";
-import { useChat } from "@ai-sdk/react";
-import { DefaultChatTransport } from "ai";
 import { useTranslations } from "next-intl";
-import { specDataPartSchema } from "../lib/spec";
 import { ChatPanel } from "./chat-panel";
+import { usePortfolioChat } from "./chat-provider";
 
 export function ChatWidget() {
   const t = useTranslations("Chat");
-  const [isOpen, setIsOpen] = useState(false);
+  const chat = usePortfolioChat();
   const [input, setInput] = useState("");
-
-  const transport = useMemo(
-    () =>
-      new DefaultChatTransport({
-        api: "/api/chat",
-      }),
-    [],
-  );
-
-  const { messages, sendMessage, status, error, clearError } = useChat({
-    transport,
-    dataPartSchemas: { spec: specDataPartSchema },
-  });
+  const suggestions = t.raw("suggestions") as string[];
 
   function handleInputChange(value: string) {
-    if (status === "error") {
-      clearError();
+    if (chat.status === "error") {
+      chat.clearError();
     }
-
     setInput(value);
   }
 
-  async function handleSubmit() {
+  function handleSubmit() {
     const trimmed = input.trim();
-    if (!trimmed || status === "submitted" || status === "streaming") return;
-
-    if (status === "error") {
-      clearError();
+    if (!trimmed || chat.status === "submitted" || chat.status === "streaming") {
+      return;
     }
-
     setInput("");
-
-    try {
-      await sendMessage({ text: trimmed });
-    } catch {
-      // useChat surfaces request failures through `error` and `status`
-    }
+    chat.ask(trimmed);
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
-      {isOpen && (
+    <div className="fixed right-4 bottom-4 z-50 flex flex-col items-end gap-3 md:right-6 md:bottom-6">
+      {chat.isOpen && (
         <ChatPanel
-          messages={messages}
+          messages={chat.messages}
           input={input}
-          status={status}
-          errorMessage={status === "error" ? (error?.message ?? t("error")) : null}
+          status={chat.status}
+          errorMessage={
+            chat.status === "error" ? (chat.error?.message ?? t("error")) : null
+          }
+          suggestions={suggestions}
+          onSuggestion={(question) => chat.ask(question)}
           onInputChange={handleInputChange}
           onSubmit={handleSubmit}
-          onClose={() => setIsOpen(false)}
+          onClose={chat.close}
         />
       )}
 
       <button
         type="button"
-        onClick={() => setIsOpen((prev) => !prev)}
-        aria-label={isOpen ? t("close") : t("openChat")}
+        onClick={chat.toggle}
+        aria-label={chat.isOpen ? t("close") : t("openChat")}
+        aria-expanded={chat.isOpen}
         className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-all hover:scale-105 hover:shadow-xl"
       >
-        {isOpen ? <X size={20} /> : <MessageCircle size={20} />}
+        {chat.isOpen ? <X size={20} /> : <MessageCircle size={20} />}
       </button>
     </div>
   );

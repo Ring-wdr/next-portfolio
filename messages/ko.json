@@ -6,7 +6,8 @@
     "about": "소개",
     "contact": "연락하기",
     "menu": "메뉴 열기",
-    "closeMenu": "메뉴 닫기"
+    "closeMenu": "메뉴 닫기",
+    "fit": "JD 매칭"
   },
   "Footer": {
     "allRightsReserved": "All rights reserved.",
@@ -61,6 +62,36 @@
       "deliveryFocus": {
         "title": "노이즈 없는 전달",
         "description": "코드베이스는 예측 가능하게, 화면은 절제되게, 프로토타입에서 운영까지의 거리는 짧게 유지합니다."
+      }
+    },
+    "fitCta": "채용공고로 적합도 보기",
+    "ask": {
+      "label": "포트폴리오에 대해 질문하기",
+      "placeholder": "무엇이 궁금하세요?",
+      "submit": "질문 보내기",
+      "personaLabel": "어떤 관점에서 보고 계신가요?",
+      "startersLabel": "추천 질문",
+      "personas": {
+        "recruiter": "채용 담당자",
+        "engineer": "엔지니어",
+        "collaborator": "협업 파트너"
+      },
+      "starters": {
+        "recruiter": [
+          "어떤 역할과 임팩트를 보여준 프로젝트가 있나요?",
+          "팀에서 어떻게 협업하나요?",
+          "가장 최근에 집중하는 분야는?"
+        ],
+        "engineer": [
+          "POCAZ에서 이미지 성능 문제를 어떻게 풀었어?",
+          "상태 관리와 컴포넌트 경계는 어떻게 설계해?",
+          "에이전트 작업을 어떻게 검증해?"
+        ],
+        "collaborator": [
+          "일할 때 가장 중요하게 생각하는 원칙은?",
+          "디자인과 코드를 어떻게 함께 다뤄?",
+          "문서화와 커뮤니케이션은 어떻게 해?"
+        ]
       }
     }
   },
@@ -323,7 +354,7 @@
   },
   "Chat": {
     "title": "AI 어시스턴트",
-    "description": "커리어와 기술 스택에 대해 물어보세요",
+    "description": "커리어·프로젝트·기술에 대해 물어보세요",
     "placeholder": "커리어나 기술에 대해 질문하세요...",
     "send": "전송",
     "sending": "전송 중...",
@@ -331,7 +362,12 @@
     "close": "닫기",
     "openChat": "채팅 열기",
     "emptyTitle": "무엇이든 물어보세요",
-    "emptyDescription": "Kim Manjoong의 커리어, 프로젝트, 기술 스택에 대해 질문해보세요."
+    "emptyDescription": "Kim Manjoong의 커리어, 프로젝트, 기술 스택에 대해 질문해보세요.",
+    "suggestions": [
+      "가장 자신 있는 프로젝트 하나를 소개해줘",
+      "React와 Next.js로 어떤 문제를 해결해봤어?",
+      "AI 에이전트를 개발에 어떻게 활용해?"
+    ]
   },
   "ProjectDetailPage": {
     "period": "기간",
@@ -353,6 +389,52 @@
     "feedback": "사용자 피드백",
     "improvements": "배운 점 / 다음 단계",
     "screenshots": "스크린샷",
-    "backToProjects": "프로젝트 목록으로 돌아가기"
+    "backToProjects": "프로젝트 목록으로 돌아가기",
+    "ask": {
+      "title": "이 프로젝트에 대해 묻기",
+      "description": "케이스 스터디를 바탕으로 AI 어시스턴트가 답변합니다.",
+      "questions": {
+        "challenge": "{title}에서 가장 어려웠던 기술적 문제와 해결 방법은?",
+        "stack": "{title}의 기술 스택은 왜 그렇게 선택했어?",
+        "role": "{title}에서 맡은 역할과 성과를 요약해줘"
+      }
+    }
+  },
+  "FitPage": {
+    "eyebrow": "Role Fit",
+    "title": "채용공고로 적합도 확인하기",
+    "description": "채용공고(JD)를 붙여넣으면 요구사항마다 포트폴리오의 근거 프로젝트를 연결한 적합도 리포트를 만듭니다.",
+    "honesty": "근거가 없는 요구사항은 부풀리지 않고 '공백'으로 표시합니다. 결과는 저장되지 않습니다.",
+    "jdLabel": "채용공고",
+    "jdPlaceholder": "채용공고의 주요 업무, 자격 요건, 우대 사항을 붙여넣어 주세요.",
+    "useSample": "예시 채용공고 넣기",
+    "lengthHint": "{count}자 · 최소 {min}자, 최대 {max}자",
+    "submit": "적합도 분석하기",
+    "analyzing": "분석 중…",
+    "loading": "무료 AI 모델로 분석하고 있어요. 혼잡도에 따라 30초~2분 정도 걸립니다. ({seconds}초 경과)",
+    "sampleJd": "[프론트엔드 엔지니어]\n주요 업무\n- React/Next.js 기반 웹 서비스의 신규 기능 개발 및 유지보수\n- 디자인 시스템 컴포넌트 설계와 운영\n- 웹 성능(Core Web Vitals) 개선과 모니터링\n\n자격 요건\n- TypeScript, React 실무 경험 3년 이상\n- Next.js App Router 기반 SSR/SSG 이해\n- 테스트 코드 작성 경험 (Vitest, Playwright 등)\n\n우대 사항\n- 접근성(a11y)을 고려한 UI 개발 경험\n- AI 도구/에이전트를 활용한 개발 생산성 개선 경험\n- 백엔드(Node.js, DB) 경험",
+    "errors": {
+      "invalid_input": "채용공고가 너무 짧거나 깁니다. 길이를 확인해 주세요.",
+      "unavailable": "지금은 무료 AI 모델의 한도에 도달했거나 일시적으로 사용할 수 없어요. 잠시 후 다시 시도하거나 프로젝트를 직접 둘러봐 주세요.",
+      "invalid_output": "AI가 형식에 맞는 리포트를 만들지 못했어요. 다시 시도해 주세요.",
+      "network": "요청 중 네트워크 오류가 발생했어요.",
+      "retry": "다시 시도",
+      "browseProjects": "프로젝트 둘러보기"
+    },
+    "report": {
+      "coverageLabel": "요구사항 충족도",
+      "coverageHint": "요구사항 {total}개에 대해 강함=1, 부분=0.5, 공백=0으로 계산한 값입니다.",
+      "levels": {
+        "strong": "강함",
+        "partial": "부분",
+        "gap": "공백"
+      },
+      "requirementsTitle": "요구사항별 근거",
+      "evidenceLabel": "근거 프로젝트",
+      "gapsTitle": "보완이 필요한 부분",
+      "questionsTitle": "면접에서 확인해 볼 질문",
+      "contactCta": "이 포지션으로 연락하기",
+      "disclaimer": "AI가 포트폴리오 내용만으로 생성한 참고용 분석입니다."
+    }
   }
 }
