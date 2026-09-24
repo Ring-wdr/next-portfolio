@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 import { ProjectDetailPage } from "@/pages-layer/project/[slug]";
-import { projectDetailList } from "@/shared/constant/project-detail";
 import { buildPageMetadata, buildProjectJsonLd, getProjectPath, type AppLocale } from "@/shared/constant/site";
+import { getProjectBySlug, getProjects } from "@/shared/content/project-source";
 
+// Slugs published after the build render on first visit, then get cached.
 export async function generateStaticParams() {
-  return projectDetailList.map((project) => ({
+  const projects = await getProjects();
+
+  return projects.map((project) => ({
     slug: project.slug,
   }));
 }
@@ -14,7 +18,7 @@ export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/project/[slug]">): Promise<Metadata> {
   const { locale, slug } = await params;
-  const project = projectDetailList.find((p) => p.slug === slug);
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     return {
@@ -36,7 +40,8 @@ export default async function Page({
   params,
 }: PageProps<"/[locale]/project/[slug]">) {
   const { locale, slug } = await params;
-  const project = projectDetailList.find((p) => p.slug === slug);
+  setRequestLocale(locale);
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     notFound();

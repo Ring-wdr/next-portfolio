@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { ProjectPage } from "@/pages-layer/project";
 import { buildPageMetadata, type AppLocale } from "@/shared/constant/site";
+import { toProjectCard } from "@/shared/content/project";
+import { getProjects } from "@/shared/content/project-source";
 
 export async function generateMetadata({
   params,
@@ -23,4 +26,9 @@ export async function generateMetadata({
   });
 }
 
-export default ProjectPage;
+export default async function Page({ params }: PageProps<"/[locale]/project">) {
+  setRequestLocale((await params).locale);
+  const projects = await getProjects();
+
+  return <ProjectPage projects={projects.map(toProjectCard)} />;
+}

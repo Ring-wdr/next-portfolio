@@ -5,11 +5,11 @@ import { useTranslations } from "next-intl";
 import { ViewTransition } from "react";
 import { ProjectAsk } from "@/feature/chat/ui/project-ask";
 import { Link } from "@/i18n/routing";
-import type { ProjectDetail } from "@/shared/constant/project-detail";
+import type { Project } from "@/shared/content/project";
 import { ImageGallery } from "@/shared/ui/image-gallery";
 
 type ProjectDetailPageProps = {
-	project: ProjectDetail;
+	project: Project;
 };
 
 export function ProjectDetailPage({ project }: ProjectDetailPageProps) {

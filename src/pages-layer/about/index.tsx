@@ -6,17 +6,16 @@ import {
 	FocusAreas,
 	WorkingPrinciples,
 } from "@/shared/constant/profile";
-import { projectList } from "@/shared/constant/project";
 import { TechStack } from "@/shared/constant/tech-stack";
 import { PretextStatement } from "@/shared/ui/pretext-statement";
 
-export function AboutPage() {
+export function AboutPage({ projectCount }: { projectCount: number }) {
 	const locale = useLocale();
 	const t = useTranslations("AboutPage");
 	const stats = [
 		{
 			label: t("stats.projects"),
-			value: `${projectList.length}+`,
+			value: `${projectCount}+`,
 		},
 		{
 			label: t("stats.technologies"),

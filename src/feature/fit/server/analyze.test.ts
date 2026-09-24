@@ -1,7 +1,10 @@
 // @vitest-environment node
 import { describe, expect, it } from "vitest";
 import { summarizeCoverage } from "../lib/report";
+import { getLocalProjects } from "@/shared/content/local-projects";
 import { buildFitSystemPrompt, extractJsonObject, parseFitReport } from "./analyze";
+
+const projects = getLocalProjects();
 
 const validReport = {
   summary: "React 중심 역할에 잘 맞습니다.",
@@ -29,19 +32,20 @@ describe("extractJsonObject", () => {
 
 describe("parseFitReport", () => {
   it("drops unknown and duplicate project slugs and fills defaults", () => {
-    const report = parseFitReport(JSON.stringify(validReport));
+    const report = parseFitReport(JSON.stringify(validReport), projects);
     expect(report?.requirements[0].projectSlugs).toEqual(["pocaz"]);
     expect(report?.requirements[2]).toMatchObject({ evidence: "", projectSlugs: [] });
   });
 
   it("rejects output that doesn't match the schema", () => {
-    expect(parseFitReport(JSON.stringify({ summary: "x", requirements: [] }))).toBeNull();
+    expect(parseFitReport(JSON.stringify({ summary: "x", requirements: [] }), projects)).toBeNull();
     expect(
       parseFitReport(
         JSON.stringify({
           ...validReport,
           requirements: [{ requirement: "x", match: "excellent" }],
         }),
+        projects,
       ),
     ).toBeNull();
   });
@@ -49,7 +53,7 @@ describe("parseFitReport", () => {
 
 describe("summarizeCoverage", () => {
   it("scores strong=1, partial=0.5, gap=0", () => {
-    const report = parseFitReport(JSON.stringify(validReport))!;
+    const report = parseFitReport(JSON.stringify(validReport), projects)!;
     expect(summarizeCoverage(report.requirements)).toEqual({
       strong: 1,
       partial: 1,
@@ -62,7 +66,7 @@ describe("summarizeCoverage", () => {
 
 describe("buildFitSystemPrompt", () => {
   it("lists real project slugs and pins the output language", () => {
-    const prompt = buildFitSystemPrompt("en");
+    const prompt = buildFitSystemPrompt("en", projects);
     expect(prompt).toContain("- pocaz: POCAZ Remake");
     expect(prompt).toContain("English");
   });

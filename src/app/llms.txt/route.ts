@@ -1,9 +1,9 @@
-import { projectDetailList } from "@/shared/constant/project-detail";
+import { getProjects } from "@/shared/content/project-source";
 import { absoluteUrl, getProjectPath, siteConfig } from "@/shared/constant/site";
 
 // Static, agent-readable index of the portfolio (https://llmstxt.org).
-export function GET() {
-  const projects = projectDetailList
+export async function GET() {
+  const projects = (await getProjects())
     .map((project) => {
       const links = [
         `[Case study](${absoluteUrl(getProjectPath(project.slug))})`,

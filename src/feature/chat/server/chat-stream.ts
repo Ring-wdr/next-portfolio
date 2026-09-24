@@ -9,6 +9,7 @@ import {
   buildLinkSpec,
   buildSourceLinks,
   findMentionedProjects,
+  type ProjectIndexEntry,
 } from "./knowledge";
 
 const MAX_HISTORY_MESSAGES = 12;
@@ -86,6 +87,7 @@ export type StreamOptions = {
   textId: string;
   question: string;
   locale: AppLocale;
+  projectIndex: ProjectIndexEntry[];
 };
 
 /** Static answer used when no model can respond, so the chat never dead-ends. */
@@ -93,8 +95,9 @@ export function* fallbackChunks({
   question,
   textId,
   locale,
+  projectIndex,
 }: StreamOptions): Generator<UIMessageChunk> {
-  const projects = findMentionedProjects(question);
+  const projects = findMentionedProjects(projectIndex, question);
   const labels = FALLBACK_PAGE_LABELS[locale];
   const links =
     projects.length > 0
@@ -134,7 +137,7 @@ export async function* streamResultToUiChunks(
   result: StreamTextResultLike,
   options: StreamOptions,
 ): AsyncGenerator<UIMessageChunk> {
-  const { textId, locale } = options;
+  const { textId, locale, projectIndex } = options;
   let hasVisibleText = false;
   let textPartOpen = false;
   let fullText = "";
@@ -185,7 +188,7 @@ export async function* streamResultToUiChunks(
 
     yield { type: "text-end", id: textId };
 
-    const projects = findMentionedProjects(fullText);
+    const projects = findMentionedProjects(projectIndex, fullText);
     if (projects.length > 0) {
       yield {
         type: "data-spec",

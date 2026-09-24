@@ -8,6 +8,10 @@ import {
   toCoreMessages,
   type StreamOptions,
 } from "./chat-stream";
+import { getLocalProjects } from "@/shared/content/local-projects";
+import { buildProjectIndex } from "./knowledge";
+
+const projectIndex = buildProjectIndex(getLocalProjects());
 
 type MockPart = { type: string; [key: string]: unknown };
 
@@ -29,6 +33,7 @@ async function collect(
     textId: "text-1",
     question: "hi",
     locale: "ko",
+    projectIndex,
     ...options,
   })) {
     chunks.push(chunk);

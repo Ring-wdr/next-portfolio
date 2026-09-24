@@ -6,6 +6,10 @@ const envMock = vi.hoisted(() => ({
   OPENROUTER_FREE_MODELS: undefined as string | undefined,
 }));
 vi.mock("@/env", () => ({ env: envMock }));
+vi.mock("@/shared/content/project-source", async () => {
+  const { getLocalProjects } = await import("@/shared/content/local-projects");
+  return { getProjects: async () => getLocalProjects() };
+});
 
 const streamTextMock = vi.hoisted(() => vi.fn());
 vi.mock("ai", async (importOriginal) => ({

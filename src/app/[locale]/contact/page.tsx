@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { ContactPage } from "@/pages-layer/contact";
 import { buildPageMetadata, type AppLocale } from "@/shared/constant/site";
 
@@ -17,4 +18,8 @@ export async function generateMetadata({
   });
 }
 
-export default ContactPage;
+export default async function Page({ params }: PageProps<"/[locale]/contact">) {
+  setRequestLocale((await params).locale);
+
+  return <ContactPage />;
+}

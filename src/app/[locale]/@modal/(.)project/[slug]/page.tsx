@@ -1,13 +1,15 @@
 import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 import { ProjectDetailPage } from "@/pages-layer/project/[slug]";
-import { projectDetailList } from "@/shared/constant/project-detail";
+import { getProjectBySlug } from "@/shared/content/project-source";
 import { Modal } from "@/shared/ui/modal";
 
 export default async function ProjectModal({
 	params,
 }: PageProps<"/[locale]/project/[slug]">) {
-	const { slug } = await params;
-	const project = projectDetailList.find((p) => p.slug === slug);
+	const { locale, slug } = await params;
+	setRequestLocale(locale);
+	const project = await getProjectBySlug(slug);
 
 	if (!project) {
 		notFound();
