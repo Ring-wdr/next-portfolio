@@ -5,7 +5,11 @@ test.describe("Recruiter mobile smoke @mobile", () => {
     await page.goto("/");
 
     await page.getByRole("button", { name: /메뉴 열기|Open menu/i }).click();
-    await page.getByRole("link", { name: /연락하기|Contact/i }).click();
+    // The home page also has a "Contact" CTA, so stay inside the drawer.
+    await page
+      .getByRole("navigation", { name: /메뉴 열기|Open menu/i })
+      .getByRole("link", { name: /연락하기|Contact/i })
+      .click();
 
     await expect(
       page.getByRole("heading", { name: /연락하기|Contact/i, level: 1 })
