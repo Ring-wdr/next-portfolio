@@ -40,6 +40,9 @@ jobs:
 
       - name: Build
         run: pnpm build
+        env:
+          # Mail and analytics secrets aren't available in CI.
+          SKIP_ENV_VALIDATION: "true"
 
       - name: E2E smoke
         run: pnpm exec playwright test tests/main.spec.ts tests/contact.mobile.spec.ts --project="Desktop Chrome" --project="Mobile Chrome"
