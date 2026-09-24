@@ -6,10 +6,7 @@ const envMock = vi.hoisted(() => ({
 }));
 vi.mock("@/env", () => ({ env: envMock }));
 
-const cacheMock = vi.hoisted(() => ({
-  revalidatePath: vi.fn(),
-  revalidateTag: vi.fn(),
-}));
+const cacheMock = vi.hoisted(() => ({ revalidateTag: vi.fn() }));
 vi.mock("next/cache", () => cacheMock);
 
 import { POST } from "./route";
@@ -24,7 +21,6 @@ function request(authorization?: string) {
 describe("POST /api/revalidate", () => {
   beforeEach(() => {
     envMock.CONTENT_REVALIDATE_SECRET = "test-secret-1234567890";
-    cacheMock.revalidatePath.mockClear();
     cacheMock.revalidateTag.mockClear();
   });
 
@@ -40,10 +36,9 @@ describe("POST /api/revalidate", () => {
     expect(response.status).toBe(503);
   });
 
-  it("expires the projects tag and the sitemap", async () => {
+  it("expires the projects cache tag", async () => {
     const response = await POST(request("Bearer test-secret-1234567890"));
     expect(response.status).toBe(200);
     expect(cacheMock.revalidateTag).toHaveBeenCalledWith("projects", { expire: 0 });
-    expect(cacheMock.revalidatePath).toHaveBeenCalledWith("/sitemap.xml");
   });
 });

@@ -1,4 +1,4 @@
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { env } from "@/env";
 import { PROJECTS_CACHE_TAG } from "@/shared/content/project-schema";
 
@@ -17,10 +17,6 @@ export async function POST(request: Request) {
 	// Expire immediately so the next visit renders the new manifest instead of
 	// serving the previous one while revalidating.
 	revalidateTag(PROJECTS_CACHE_TAG, { expire: 0 });
-	// On Vercel the prerendered sitemap isn't purged by the tag above (it is
-	// under `next start`), so new or removed slugs would wait for its 1-day
-	// revalidation. Purge it by path as well.
-	revalidatePath("/sitemap.xml");
 
 	return Response.json({ ok: true, tag: PROJECTS_CACHE_TAG });
 }
