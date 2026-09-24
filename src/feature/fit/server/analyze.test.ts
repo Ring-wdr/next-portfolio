@@ -1,10 +1,10 @@
 // @vitest-environment node
 import { describe, expect, it } from "vitest";
 import { summarizeCoverage } from "../lib/report";
-import { getLocalProjects } from "@/shared/content/local-projects";
+import { getFixtureProjects } from "@/shared/content/fixture-projects";
 import { buildFitSystemPrompt, extractJsonObject, parseFitReport } from "./analyze";
 
-const projects = getLocalProjects();
+const projects = getFixtureProjects();
 
 const validReport = {
   summary: "React 중심 역할에 잘 맞습니다.",

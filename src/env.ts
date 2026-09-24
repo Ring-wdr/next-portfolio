@@ -10,7 +10,7 @@ export const env = createEnv({
     /** Blob store holding published content: OIDC store id or a read-write token. */
     BLOB_STORE_ID: z.string().min(1).optional(),
     BLOB_READ_WRITE_TOKEN: z.string().min(1).optional(),
-    /** Shared secret for POST /api/revalidate (scripts/content/publish.mts). */
+    /** Shared secret for POST /api/revalidate (Ring-wdr/portfolio-content). */
     CONTENT_REVALIDATE_SECRET: z.string().min(16).optional(),
   },
   runtimeEnv: {

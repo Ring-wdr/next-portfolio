@@ -6,7 +6,7 @@ import {
   agentEngineeringDocUrl,
   agentEngineeringProjectHref,
 } from "./agent-engineering";
-import { getLocalProjects } from "../content/local-projects";
+import { getFixtureProjects } from "../content/fixture-projects";
 import { buildRepositoryBlobUrl, repositoryConfig } from "./repository";
 
 describe("agent engineering constants", () => {
@@ -22,7 +22,7 @@ describe("agent engineering constants", () => {
 
   it("keeps linked project slugs aligned with published case studies", () => {
     const knownSlugs = new Set(
-      getLocalProjects().map((project) => project.slug),
+      getFixtureProjects().map((project) => project.slug),
     );
 
     for (const entry of AgentSkillEntries) {

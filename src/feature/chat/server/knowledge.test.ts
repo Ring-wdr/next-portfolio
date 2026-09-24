@@ -1,6 +1,6 @@
 // @vitest-environment node
 import { describe, expect, it } from "vitest";
-import { getLocalProjects } from "@/shared/content/local-projects";
+import { getFixtureProjects } from "@/shared/content/fixture-projects";
 import {
   buildProjectIndex,
   buildProjectKnowledge,
@@ -8,7 +8,7 @@ import {
   findMentionedProjects,
 } from "./knowledge";
 
-const projects = getLocalProjects();
+const projects = getFixtureProjects();
 const projectIndex = buildProjectIndex(projects);
 
 describe("buildProjectIndex", () => {

@@ -7,8 +7,8 @@ const envMock = vi.hoisted(() => ({
 }));
 vi.mock("@/env", () => ({ env: envMock }));
 vi.mock("@/shared/content/project-source", async () => {
-  const { getLocalProjects } = await import("@/shared/content/local-projects");
-  return { getProjects: async () => getLocalProjects() };
+  const { getFixtureProjects } = await import("@/shared/content/fixture-projects");
+  return { getProjects: async () => getFixtureProjects() };
 });
 
 const streamTextMock = vi.hoisted(() => vi.fn());

@@ -8,10 +8,10 @@ import {
   toCoreMessages,
   type StreamOptions,
 } from "./chat-stream";
-import { getLocalProjects } from "@/shared/content/local-projects";
+import { getFixtureProjects } from "@/shared/content/fixture-projects";
 import { buildProjectIndex } from "./knowledge";
 
-const projectIndex = buildProjectIndex(getLocalProjects());
+const projectIndex = buildProjectIndex(getFixtureProjects());
 
 type MockPart = { type: string; [key: string]: unknown };
 

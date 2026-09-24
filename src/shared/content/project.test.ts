@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import localManifest from "@/../content/projects.json";
-import { getLocalProjects, LOCAL_CONTENT_ROUTE } from "./local-projects";
+import fixture from "./fixture/projects.json";
+import { getFixtureProjects } from "./fixture-projects";
 import {
 	getFeaturedProjects,
 	getProjectPrimaryHref,
@@ -9,26 +9,18 @@ import {
 } from "./project";
 import { projectManifestSchema } from "./project-schema";
 
-const projects = getLocalProjects();
+const projects = getFixtureProjects();
 const cards = projects.map(toProjectCard);
 
 describe("project content", () => {
-	it("local content satisfies the manifest schema", () => {
-		expect(projectManifestSchema.safeParse(localManifest).success).toBe(true);
+	it("fixture satisfies the manifest schema", () => {
+		expect(projectManifestSchema.safeParse(fixture).success).toBe(true);
 	});
 
 	it("rejects duplicate slugs", () => {
-		const [first] = localManifest.projects;
+		const [first] = fixture.projects;
 		const result = projectManifestSchema.safeParse({ projects: [first, first] });
 		expect(result.success).toBe(false);
-	});
-
-	it("resolves relative images to the local content route", () => {
-		for (const project of projects) {
-			for (const src of [project.thumbnail, ...project.gallery.map((g) => g.src)]) {
-				expect(src.startsWith("https://") || src.startsWith(`${LOCAL_CONTENT_ROUTE}/images/`)).toBe(true);
-			}
-		}
 	});
 
 	it("featured project helper only returns featured entries", () => {

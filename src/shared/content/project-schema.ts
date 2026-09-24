@@ -1,14 +1,13 @@
-// Contract between the content source (content/projects.json → Vercel Blob)
-// and the site. Shared with scripts/content/publish.mts, so keep this file free
-// of path aliases and non-zod imports.
+// Contract for the project manifest published to Vercel Blob by the
+// Ring-wdr/portfolio-content repository. Its scripts/schema.ts mirrors this
+// file, so change both together.
 import { z } from "zod";
 
 const text = z.string().trim().min(1);
 
 /**
- * An image reference: an absolute URL, or a path relative to the content
- * directory (e.g. `images/pocaz.png`). The publish script uploads relative
- * images and rewrites them to Blob URLs.
+ * An image URL or site path. In the content repo this may be a relative
+ * `images/…` path; the publish script uploads it and rewrites it to a Blob URL.
  */
 const imageRef = text;
 
