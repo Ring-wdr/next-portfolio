@@ -1,10 +1,10 @@
 // @vitest-environment node
 import { describe, expect, it } from "vitest";
 import { parseChatContext } from "../lib/context";
-import { getLocalProjects } from "@/shared/content/local-projects";
+import { getFixtureProjects } from "@/shared/content/fixture-projects";
 import { buildBasePrompt, buildSystemPrompt } from "./prompt";
 
-const projects = getLocalProjects();
+const projects = getFixtureProjects();
 const SYSTEM_PROMPT = buildBasePrompt(projects);
 
 describe("buildSystemPrompt", () => {
