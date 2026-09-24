@@ -8,9 +8,11 @@ import {
   toCoreMessages,
   type UIMessageLike,
 } from "@/feature/chat/server/chat-stream";
+import { buildProjectIndex } from "@/feature/chat/server/knowledge";
 import { createFreeModel } from "@/feature/chat/server/model";
 import { buildSystemPrompt } from "@/feature/chat/server/prompt";
 import { toReadableStream } from "@/feature/chat/server/ui-stream";
+import { getProjects } from "@/shared/content/project-source";
 
 // Hobby + Fluid Compute allows up to 300s; free models normally finish well within it.
 export const maxDuration = 300;
@@ -32,10 +34,12 @@ export async function POST(request: Request) {
 
   const context = parseChatContext(body.context);
   const question = messages.findLast((m) => m.role === "user")?.content ?? "";
+  const projects = await getProjects();
   const options = {
     textId: crypto.randomUUID(),
     question,
     locale: context.locale ?? detectLocale(question),
+    projectIndex: buildProjectIndex(projects),
   };
 
   if (!env.OPENROUTER_API_KEY) {
@@ -46,7 +50,7 @@ export async function POST(request: Request) {
 
   const result = streamText({
     model: createFreeModel(env.OPENROUTER_API_KEY, env.OPENROUTER_FREE_MODELS),
-    system: buildSystemPrompt(context),
+    system: buildSystemPrompt(context, projects),
     messages,
     maxRetries: 1,
     abortSignal: request.signal,

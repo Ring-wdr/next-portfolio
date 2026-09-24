@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { ViewTransition } from "react";
-import type { ProjectProps } from "@/shared/constant/project";
+import type { ProjectCard } from "@/shared/content/project";
 import { TransitionLink } from "@/shared/ui/transition-link";
 
 export function ProjectItem({
@@ -19,7 +19,7 @@ export function ProjectItem({
 	impact,
 	result,
 	status,
-}: ProjectProps) {
+}: ProjectCard) {
 	const t = useTranslations("ProjectsPage");
 	const tDetail = useTranslations("ProjectDetailPage");
 

@@ -7,6 +7,11 @@ export const env = createEnv({
     NEXT_APP_PASSWORD: z.string().min(1),
     OPENROUTER_API_KEY: z.string().min(1).optional(),
     OPENROUTER_FREE_MODELS: z.string().optional(),
+    /** Blob store holding published content: OIDC store id or a read-write token. */
+    BLOB_STORE_ID: z.string().min(1).optional(),
+    BLOB_READ_WRITE_TOKEN: z.string().min(1).optional(),
+    /** Shared secret for POST /api/revalidate (scripts/content/publish.mts). */
+    CONTENT_REVALIDATE_SECRET: z.string().min(16).optional(),
   },
   runtimeEnv: {
     NEXT_MAIL_ADDRESS: process.env.NEXT_MAIL_ADDRESS,
@@ -14,6 +19,9 @@ export const env = createEnv({
     NEXT_PUBLIC_GOOGLE_ANALYTICS: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS,
     OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY,
     OPENROUTER_FREE_MODELS: process.env.OPENROUTER_FREE_MODELS,
+    BLOB_STORE_ID: process.env.BLOB_STORE_ID,
+    BLOB_READ_WRITE_TOKEN: process.env.BLOB_READ_WRITE_TOKEN,
+    CONTENT_REVALIDATE_SECRET: process.env.CONTENT_REVALIDATE_SECRET,
   },
   client: {
     NEXT_PUBLIC_GOOGLE_ANALYTICS: z.templateLiteral(["G-", z.string().min(1)]),

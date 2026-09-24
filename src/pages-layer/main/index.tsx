@@ -2,22 +2,22 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { getFeaturedProjects, projectList } from "@/shared/constant/project";
 import { TechStack } from "@/shared/constant/tech-stack";
+import { getFeaturedProjects, type ProjectCard } from "@/shared/content/project";
 import { HeroAsk } from "./hero-ask";
 import { HeroCanvas } from "./hero-canvas";
 import { PretextStatement } from "@/shared/ui/pretext-statement";
 
-export function MainPage() {
+export function MainPage({ projects }: { projects: ProjectCard[] }) {
 	const locale = useLocale();
 	const t = useTranslations("HomePage");
 	const categoryT = useTranslations("ProjectsPage.categories");
-	const supportingProjects = getFeaturedProjects(4).slice(1);
+	const supportingProjects = getFeaturedProjects(projects, 4).slice(1);
 	const spotlightTech = TechStack.slice(0, 8).map((tech) => tech.name);
 	const proofItems = [
 		{
 			label: t("stats.projects"),
-			value: `${projectList.length}+`,
+			value: `${projects.length}+`,
 		},
 		{
 			label: t("stats.tech"),

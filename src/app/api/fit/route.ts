@@ -13,6 +13,7 @@ import {
   buildFitUserPrompt,
   parseFitReport,
 } from "@/feature/fit/server/analyze";
+import { getProjects } from "@/shared/content/project-source";
 
 export const maxDuration = 300;
 
@@ -45,6 +46,7 @@ export async function POST(request: Request) {
     return json({ ok: false, error: "unavailable" }, 503);
   }
 
+  const projects = await getProjects();
   const model = createFreeModel(
     env.OPENROUTER_API_KEY,
     env.OPENROUTER_FREE_MODELS,
@@ -54,13 +56,13 @@ export async function POST(request: Request) {
     try {
       const { text } = await generateText({
         model,
-        system: buildFitSystemPrompt(input.data.locale),
+        system: buildFitSystemPrompt(input.data.locale, projects),
         prompt: buildFitUserPrompt(input.data.jd),
         maxRetries: 1,
         abortSignal: request.signal,
       });
 
-      const report = parseFitReport(text);
+      const report = parseFitReport(text, projects);
       if (report) {
         return json({ ok: true, report }, 200);
       }

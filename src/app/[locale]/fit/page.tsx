@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { FitPage } from "@/pages-layer/fit";
 import { buildPageMetadata, type AppLocale } from "@/shared/constant/site";
+import { getProjects } from "@/shared/content/project-source";
 
 export async function generateMetadata({
   params,
@@ -17,4 +19,12 @@ export async function generateMetadata({
   });
 }
 
-export default FitPage;
+export default async function Page({ params }: PageProps<"/[locale]/fit">) {
+  setRequestLocale((await params).locale);
+  const projects = await getProjects();
+  const projectTitles = Object.fromEntries(
+    projects.map((project) => [project.slug, project.title]),
+  );
+
+  return <FitPage projectTitles={projectTitles} />;
+}

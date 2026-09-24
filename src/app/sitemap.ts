@@ -1,11 +1,13 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { absoluteUrl, getLanguageAlternates, getProjectPath, localizePath } from "@/shared/constant/site";
-import { projectDetailList } from "@/shared/constant/project-detail";
+import { getProjects } from "@/shared/content/project-source";
 
 const staticRoutes = ["/", "/about", "/project", "/fit", "/contact", "/tech-stack"] as const;
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const projects = await getProjects();
+
   const staticEntries: MetadataRoute.Sitemap = routing.locales.flatMap((locale) =>
     staticRoutes.map((route) => {
       const changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] =
@@ -24,7 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   const projectEntries: MetadataRoute.Sitemap = routing.locales.flatMap((locale) =>
-    projectDetailList.map((project) => ({
+    projects.map((project) => ({
       url: absoluteUrl(localizePath(locale, getProjectPath(project.slug))),
       lastModified: new Date(project.metadata.updatedAt ?? project.metadata.publishedAt),
       changeFrequency: "monthly",

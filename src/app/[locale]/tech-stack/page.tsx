@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { TechStackPage } from "@/pages-layer/tech-stack";
 import { buildPageMetadata, type AppLocale } from "@/shared/constant/site";
 
@@ -25,4 +26,8 @@ export async function generateMetadata({
   });
 }
 
-export default TechStackPage;
+export default async function Page({ params }: PageProps<"/[locale]/tech-stack">) {
+  setRequestLocale((await params).locale);
+
+  return <TechStackPage />;
+}

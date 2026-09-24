@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { routing } from "@/i18n/routing";
-import type { ProjectDetail } from "./project-detail";
+import type { Project } from "../content/project";
 import { repositoryConfig } from "./repository";
 
 export type AppLocale = (typeof routing.locales)[number];
@@ -143,7 +143,7 @@ export function buildPersonJsonLd(locale: AppLocale) {
   ];
 }
 
-export function buildProjectJsonLd(project: ProjectDetail, locale: AppLocale) {
+export function buildProjectJsonLd(project: Project, locale: AppLocale) {
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareSourceCode",

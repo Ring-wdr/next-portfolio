@@ -1,8 +1,14 @@
 import type { ChatContext, ChatPersona } from "../lib/context";
-import { PROJECT_KNOWLEDGE, findProjectBySlug } from "./knowledge";
+import type { Project } from "@/shared/content/project";
+import {
+  buildProjectIndex,
+  buildProjectKnowledge,
+  findProjectBySlug,
+} from "./knowledge";
 import { WIKI } from "./wiki";
 
-export const SYSTEM_PROMPT = `당신은 Kim Manjoong 포트폴리오의 AI 어시스턴트입니다.
+export function buildBasePrompt(projects: Project[]): string {
+  return `당신은 Kim Manjoong 포트폴리오의 AI 어시스턴트입니다.
 반드시 아래 [지식 베이스]와 [프로젝트 케이스 스터디]에 있는 정보만 바탕으로 답변하세요.
 지식 베이스에 없는 내용은 추측하거나 만들어내지 말고, "해당 정보는 확인하기 어렵습니다"라고 솔직하게 답하세요.
 
@@ -10,7 +16,7 @@ export const SYSTEM_PROMPT = `당신은 Kim Manjoong 포트폴리오의 AI 어�
 ${WIKI}
 
 [프로젝트 케이스 스터디]
-${PROJECT_KNOWLEDGE}
+${buildProjectKnowledge(projects)}
 
 [규칙]
 - 커리어·기술·포트폴리오 사이트 외 주제(코드 작성 요청, 시사, 다른 사람에 대한 질문 등)는 "이 챗봇은 Kim Manjoong의 커리어와 기술 스택에 관한 질문만 답변할 수 있습니다"로 거절
@@ -19,6 +25,7 @@ ${PROJECT_KNOWLEDGE}
 - 질문이 한국어면 한국어로, 영어면 영어로 답변
 - 프로젝트는 케이스 스터디에 적힌 이름 그대로 언급하세요. URL, 링크, 출처 안내 문장은 답변에 쓰지 마세요.
 - 짧은 문단과 목록(-), 굵게(**)만 사용하고 제목(#)과 표는 사용하지 않음. 답변은 8문장 이내로 간결하게.`;
+}
 
 const PERSONA_GUIDANCE: Record<ChatPersona, string> = {
   recruiter:
@@ -29,14 +36,20 @@ const PERSONA_GUIDANCE: Record<ChatPersona, string> = {
     "방문자는 함께 일할 사람을 찾는 협업자입니다. 일하는 방식, 커뮤니케이션 원칙, 강점이 드러난 프로젝트 경험을 중심으로 설명하세요.",
 };
 
-export function buildSystemPrompt(context: ChatContext): string {
-  const sections = [SYSTEM_PROMPT];
+export function buildSystemPrompt(
+  context: ChatContext,
+  projects: Project[],
+): string {
+  const sections = [buildBasePrompt(projects)];
 
   if (context.persona) {
     sections.push(`[방문자]\n${PERSONA_GUIDANCE[context.persona]}`);
   }
 
-  const project = findProjectBySlug(context.projectSlug);
+  const project = findProjectBySlug(
+    buildProjectIndex(projects),
+    context.projectSlug,
+  );
   if (project) {
     sections.push(
       `[현재 페이지]\n방문자는 지금 "${project.title}" 케이스 스터디를 보고 있습니다. "이 프로젝트"처럼 대상이 불분명한 질문은 이 프로젝트에 대한 질문으로 해석하세요.`,

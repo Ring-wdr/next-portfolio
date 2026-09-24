@@ -3,7 +3,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { Noto_Sans_KR, Space_Grotesk } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import { ThemeProvider } from "@/app/_provider/theme";
 import { env } from "@/env";
 import { routing } from "@/i18n/routing";
@@ -94,6 +94,10 @@ export default async function LocaleLayout({
 	if (!routing.locales.includes(locale as AppLocale)) {
 		notFound();
 	}
+
+	// Lets next-intl read the locale from params instead of request headers,
+	// so [locale] routes can be statically rendered and revalidated (ISR).
+	setRequestLocale(locale);
 
 	const messages = await getMessages();
 	const personJsonLd = buildPersonJsonLd(locale as AppLocale);

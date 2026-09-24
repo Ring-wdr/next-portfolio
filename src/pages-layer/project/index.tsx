@@ -2,36 +2,35 @@
 
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { type ProjectProps, projectList } from "@/shared/constant/project";
-import type { TechStackEnum } from "@/shared/constant/tech-stack";
+import type { ProjectCard } from "@/shared/content/project";
 import { classNames } from "@/shared/utils/classnames";
 import { ProjectItem } from "./item";
 
 type ProjectViewMode = "All" | "Featured";
-type ProjectCategoryFilter = "All" | ProjectProps["category"];
+type ProjectCategoryFilter = "All" | ProjectCard["category"];
 
 const viewModes: ProjectViewMode[] = ["Featured", "All"];
 
-export function ProjectPage() {
+export function ProjectPage({ projects }: { projects: ProjectCard[] }) {
 	const t = useTranslations("ProjectsPage");
 	const [viewMode, setViewMode] = useState<ProjectViewMode>("Featured");
 	const [selectedCategory, setSelectedCategory] =
 		useState<ProjectCategoryFilter>("All");
-	const [selectedTech, setSelectedTech] = useState<TechStackEnum | "All">(
+	const [selectedTech, setSelectedTech] = useState<string>(
 		"All",
 	);
 
 	const categoryFilters: ProjectCategoryFilter[] = [
 		"All",
-		...new Set(projectList.map((project) => project.category)),
+		...new Set(projects.map((project) => project.category)),
 	];
 
-	const techFilters: Array<TechStackEnum | "All"> = [
+	const techFilters: string[] = [
 		"All",
-		...new Set(projectList.flatMap((project) => project.techStack)),
+		...new Set(projects.flatMap((project) => project.techStack)),
 	];
 
-	const filteredProjects = projectList.filter((project) => {
+	const filteredProjects = projects.filter((project) => {
 		if (viewMode === "Featured" && !project.featured) return false;
 		if (selectedCategory !== "All" && project.category !== selectedCategory) {
 			return false;
@@ -42,7 +41,7 @@ export function ProjectPage() {
 		return true;
 	});
 
-	const featuredCount = projectList.filter(
+	const featuredCount = projects.filter(
 		(project) => project.featured,
 	).length;
 
@@ -61,7 +60,7 @@ export function ProjectPage() {
 
 					<div className="mt-6 grid gap-2 sm:grid-cols-3">
 						<div className="rounded-xl border border-border/70 bg-card/70 px-4 py-3">
-							<p className="text-lg font-semibold">{projectList.length}</p>
+							<p className="text-lg font-semibold">{projects.length}</p>
 							<p className="text-xs text-muted-foreground">
 								{t("stats.total")}
 							</p>

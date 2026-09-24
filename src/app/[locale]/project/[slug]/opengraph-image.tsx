@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { projectDetailList } from "@/shared/constant/project-detail";
+import { getProjectBySlug } from "@/shared/content/project-source";
 
 export const size = {
   width: 1200,
@@ -14,7 +14,7 @@ export default async function OpenGraphImage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const project = projectDetailList.find((item) => item.slug === slug);
+  const project = await getProjectBySlug(slug);
 
   return new ImageResponse(
     (

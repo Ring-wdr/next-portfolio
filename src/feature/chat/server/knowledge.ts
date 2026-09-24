@@ -1,5 +1,4 @@
-import { projectList } from "@/shared/constant/project";
-import { projectDetailList } from "@/shared/constant/project-detail";
+import type { Project } from "@/shared/content/project";
 import {
   getProjectPath,
   localizePath,
@@ -16,18 +15,8 @@ export type ProjectIndexEntry = {
   externalLinks: ProjectLink[];
 };
 
-// Names visitors (and models) use that differ from the canonical title/slug.
-const PROJECT_ALIASES: Record<string, string[]> = {
-  pocaz: ["포카즈", "pocaz"],
-  "daedo-law": ["법률사무소", "대도", "daedo"],
-  "choose-menu": ["메뉴 고르기", "카페 메뉴", "choose menu"],
-  "alltime-car": ["역대카", "렌트카", "alltime"],
-  "frontend-junior-study": ["주니어 스터디", "junior study"],
-  "react-devtool-cli": ["react devtool", "devtool cli", "devtool-cli"],
-};
-
-export const projectIndex: ProjectIndexEntry[] = projectDetailList.map(
-  (project) => {
+export function buildProjectIndex(projects: Project[]): ProjectIndexEntry[] {
+  return projects.map((project) => {
     const externalLinks: ProjectLink[] = [];
     if (project.links.github) {
       externalLinks.push({ label: "GitHub", url: project.links.github });
@@ -42,15 +31,15 @@ export const projectIndex: ProjectIndexEntry[] = projectDetailList.map(
     return {
       slug: project.slug,
       title: project.title,
-      keywords: [
-        project.slug,
-        project.title,
-        ...(PROJECT_ALIASES[project.slug] ?? []),
-      ].map((kw) => kw.toLowerCase()),
+      // Aliases cover names visitors (and models) use that differ from the
+      // canonical title/slug.
+      keywords: [project.slug, project.title, ...project.aliases].map((kw) =>
+        kw.toLowerCase(),
+      ),
       externalLinks,
     };
-  },
-);
+  });
+}
 
 const list = (items: string[] | undefined) =>
   items && items.length > 0 ? items.join(", ") : undefined;
@@ -59,46 +48,51 @@ const list = (items: string[] | undefined) =>
  * Case-study knowledge rendered from the same data the project pages use, so
  * the assistant can't drift from what visitors read on the site.
  */
-export const PROJECT_KNOWLEDGE = projectDetailList
-  .map((project) => {
-    const card = projectList.find((item) => item.slug === project.slug);
-    const lines = [
-      `### ${project.title} (${project.period})`,
-      `- 분류: ${project.team}`,
-      `- 역할: ${project.role}`,
-      `- 개요: ${project.summary}`,
-      `- 배경: ${project.overview.background}`,
-      `- 목표: ${project.overview.goal}`,
-      `- 주요 기능: ${list(project.overview.features)}`,
-      `- 기술 스택: ${list(project.tech.stack)}`,
-      ...project.tech.challenges.map(
-        (item) => `- 챌린지 — ${item.title}: ${item.description}`,
-      ),
-      ...project.tech.solutions.map(
-        (item) => `- 해결 — ${item.title}: ${item.description}`,
-      ),
-      card?.impact && `- 임팩트: ${card.impact}`,
-      card?.result && `- 결과: ${card.result}`,
-      project.achievements.metrics &&
-        `- 지표: ${project.achievements.metrics
-          .map((metric) => `${metric.label} ${metric.value}`)
-          .join(", ")}`,
-      project.achievements.improvements &&
-        `- 개선: ${list(project.achievements.improvements)}`,
-      project.achievements.feedback &&
-        `- 피드백: ${list(project.achievements.feedback)}`,
-      card?.status && `- 상태: ${card.status}`,
-    ];
-    return lines.filter(Boolean).join("\n");
-  })
-  .join("\n\n");
+export function buildProjectKnowledge(projects: Project[]) {
+  return projects
+    .map((project) => {
+      const lines = [
+        `### ${project.title} (${project.period})`,
+        `- 분류: ${project.team}`,
+        `- 역할: ${project.role}`,
+        `- 개요: ${project.summary}`,
+        `- 배경: ${project.overview.background}`,
+        `- 목표: ${project.overview.goal}`,
+        `- 주요 기능: ${list(project.overview.features)}`,
+        `- 기술 스택: ${list(project.tech.stack)}`,
+        ...project.tech.challenges.map(
+          (item) => `- 챌린지 — ${item.title}: ${item.description}`,
+        ),
+        ...project.tech.solutions.map(
+          (item) => `- 해결 — ${item.title}: ${item.description}`,
+        ),
+        `- 임팩트: ${project.card.impact}`,
+        `- 결과: ${project.card.result}`,
+        project.achievements.metrics &&
+          `- 지표: ${project.achievements.metrics
+            .map((metric) => `${metric.label} ${metric.value}`)
+            .join(", ")}`,
+        project.achievements.improvements &&
+          `- 개선: ${list(project.achievements.improvements)}`,
+        project.achievements.feedback &&
+          `- 피드백: ${list(project.achievements.feedback)}`,
+        `- 상태: ${project.card.status}`,
+      ];
+      return lines.filter(Boolean).join("\n");
+    })
+    .join("\n\n");
+}
 
-export function findProjectBySlug(slug: string | undefined) {
+export function findProjectBySlug(
+  projectIndex: ProjectIndexEntry[],
+  slug: string | undefined,
+) {
   return slug ? projectIndex.find((p) => p.slug === slug) : undefined;
 }
 
 /** Projects mentioned in `text`, ordered by first mention. */
 export function findMentionedProjects(
+  projectIndex: ProjectIndexEntry[],
   text: string,
   limit = 3,
 ): ProjectIndexEntry[] {

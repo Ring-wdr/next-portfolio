@@ -1,21 +1,28 @@
 // @vitest-environment node
 import { describe, expect, it } from "vitest";
 import { parseChatContext } from "../lib/context";
-import { SYSTEM_PROMPT, buildSystemPrompt } from "./prompt";
+import { getLocalProjects } from "@/shared/content/local-projects";
+import { buildBasePrompt, buildSystemPrompt } from "./prompt";
+
+const projects = getLocalProjects();
+const SYSTEM_PROMPT = buildBasePrompt(projects);
 
 describe("buildSystemPrompt", () => {
   it("returns the base prompt without context", () => {
-    expect(buildSystemPrompt({})).toBe(SYSTEM_PROMPT);
+    expect(buildSystemPrompt({}, projects)).toBe(SYSTEM_PROMPT);
   });
 
   it("adds persona guidance and the current case study", () => {
-    const prompt = buildSystemPrompt({ persona: "engineer", projectSlug: "pocaz" });
+    const prompt = buildSystemPrompt(
+      { persona: "engineer", projectSlug: "pocaz" },
+      projects,
+    );
     expect(prompt).toContain("방문자는 엔지니어입니다");
     expect(prompt).toContain('"POCAZ Remake" 케이스 스터디');
   });
 
   it("ignores unknown project slugs", () => {
-    expect(buildSystemPrompt({ projectSlug: "nope" })).toBe(SYSTEM_PROMPT);
+    expect(buildSystemPrompt({ projectSlug: "nope" }, projects)).toBe(SYSTEM_PROMPT);
   });
 });
 

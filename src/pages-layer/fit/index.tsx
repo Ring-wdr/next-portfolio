@@ -12,7 +12,6 @@ import {
 	type FitReport,
 } from "@/feature/fit/lib/report";
 import { Link } from "@/i18n/routing";
-import { projectList } from "@/shared/constant/project";
 import { classNames } from "@/shared/utils/classnames";
 
 type FitError = Extract<FitApiResponse, { ok: false }>["error"] | "network";
@@ -23,10 +22,6 @@ type FitState =
 	| { phase: "error"; error: FitError }
 	| { phase: "done"; report: FitReport };
 
-const projectTitles = new Map(
-	projectList.map((project) => [project.slug, project.title]),
-);
-
 // Strong → gap reads left to right, matching the ordinal ramp in globals.css.
 const MATCH_ORDER: FitMatchLevel[] = ["strong", "partial", "gap"];
 
@@ -36,7 +31,11 @@ const MATCH_SWATCH: Record<FitMatchLevel, string> = {
 	gap: "bg-fit-gap",
 };
 
-export function FitPage() {
+export function FitPage({
+	projectTitles,
+}: {
+	projectTitles: Record<string, string>;
+}) {
 	const t = useTranslations("FitPage");
 	const locale = useLocale();
 	const [jd, setJd] = useState("");
@@ -173,7 +172,9 @@ export function FitPage() {
 					{state.phase === "error" ? (
 						<ErrorNotice error={state.error} onRetry={() => void analyze()} />
 					) : null}
-					{state.phase === "done" ? <FitReportView report={state.report} /> : null}
+					{state.phase === "done" ? (
+						<FitReportView report={state.report} projectTitles={projectTitles} />
+					) : null}
 				</div>
 			</section>
 		</main>
@@ -277,7 +278,13 @@ function CoverageMeter({ report }: { report: FitReport }) {
 	);
 }
 
-function FitReportView({ report }: { report: FitReport }) {
+function FitReportView({
+	report,
+	projectTitles,
+}: {
+	report: FitReport;
+	projectTitles: Record<string, string>;
+}) {
 	const t = useTranslations("FitPage.report");
 
 	return (
@@ -320,7 +327,7 @@ function FitReportView({ report }: { report: FitReport }) {
 												href={`/project/${slug}`}
 												className="inline-flex items-center gap-1 rounded-lg border border-border/70 bg-card/70 px-2.5 py-1 text-xs font-medium transition-colors hover:border-primary/40 hover:bg-secondary"
 											>
-												{projectTitles.get(slug) ?? slug}
+												{projectTitles[slug] ?? slug}
 												<ArrowRight size={12} />
 											</Link>
 										</li>

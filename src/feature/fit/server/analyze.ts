@@ -1,6 +1,7 @@
 import { WIKI } from "@/feature/chat/server/wiki";
-import { PROJECT_KNOWLEDGE, projectIndex } from "@/feature/chat/server/knowledge";
+import { buildProjectKnowledge } from "@/feature/chat/server/knowledge";
 import type { AppLocale } from "@/shared/constant/site";
+import type { Project } from "@/shared/content/project";
 import { fitReportSchema, type FitReport } from "../lib/report";
 
 const LANGUAGE: Record<AppLocale, string> = {
@@ -8,8 +9,11 @@ const LANGUAGE: Record<AppLocale, string> = {
   en: "English",
 };
 
-export function buildFitSystemPrompt(locale: AppLocale): string {
-  const projects = projectIndex
+export function buildFitSystemPrompt(
+  locale: AppLocale,
+  projects: Project[],
+): string {
+  const slugList = projects
     .map((project) => `- ${project.slug}: ${project.title}`)
     .join("\n");
 
@@ -21,10 +25,10 @@ export function buildFitSystemPrompt(locale: AppLocale): string {
 ${WIKI}
 
 [프로젝트 케이스 스터디]
-${PROJECT_KNOWLEDGE}
+${buildProjectKnowledge(projects)}
 
 [프로젝트 slug 목록]
-${projects}
+${slugList}
 
 [출력 형식]
 아래 JSON 객체 하나만 출력하세요. 코드 블록, 설명 문장 없이 JSON만 출력합니다.
@@ -69,11 +73,14 @@ export function extractJsonObject(text: string): unknown {
  * Validates the model output and drops any project slug that doesn't exist,
  * so every evidence link in the UI points at a real case study.
  */
-export function parseFitReport(text: string): FitReport | null {
+export function parseFitReport(
+  text: string,
+  projects: Pick<Project, "slug">[],
+): FitReport | null {
   const parsed = fitReportSchema.safeParse(extractJsonObject(text));
   if (!parsed.success) return null;
 
-  const knownSlugs = new Set(projectIndex.map((project) => project.slug));
+  const knownSlugs = new Set(projects.map((project) => project.slug));
   return {
     ...parsed.data,
     requirements: parsed.data.requirements.map((requirement) => ({
