@@ -252,47 +252,61 @@ pnpm lint && pnpm exec vitest run && SKIP_ENV_VALIDATION=true pnpm build
 
 > 실제 콘텐츠의 원본은 [`Ring-wdr/portfolio-content`](https://github.com/Ring-wdr/portfolio-content)입니다.
 
-### 1. POCAZ Remake
+### 1. Travel Records
+
+- **설명**: 다녀온 여행을 스크롤하며 따라가는 인터랙티브 여행 기록. 스크롤리텔링 지도와 사진 GPS로 복원한 실제 이동 경로, 매거진형 일기
+- **역할**: 1인 기획·디자인·개발 (콘텐츠 스키마, 사진/GPS 파이프라인, 개발 전용 관리자, Cloudflare 배포), Claude Code와 협업
+- **기술**: Astro, TypeScript, MapLibre GL, PhotoSwipe, sharp, Zod, Cloudflare Workers, Cloudflare R2
+- **링크**: [GitHub](https://github.com/Ring-wdr/tour-record) · [Demo](https://tour-record.page)
+
+### 2. POCAZ Remake
 
 - **설명**: 아이돌 포토카드 리셀 거래를 전문 UX로 다시 설계한 리메이크 프로젝트
 - **역할**: 1인 풀스택 개발 (Next.js, 상태관리, API 연동)
 - **기술**: React, Next.js, StyleX, Elysia.js, PostgreSQL, Prisma, Supabase, Bun.js
 - **링크**: [GitHub](https://github.com/Ring-wdr/pocaz-remake) · [Demo](https://pocaz-remake.vercel.app/)
 
-### 2. 법률사무소 대도
+### 3. 법률사무소 대도
 
 - **설명**: 법률사무소 홈페이지 (관리자 페이지 포함)
 - **역할**: 내부 라우터 설정, 공통 컴포넌트 작업, 소개 페이지 마크업, 데이터베이스 테이블 설계 및 관리자 페이지 개발
 - **기술**: SvelteKit, Supabase, Tailwind CSS, TypeScript
 - **링크**: [웹사이트](https://www.daedolaw.com/)
 
-### 3. 메뉴 고르기 앱
+### 4. 메뉴 고르기 앱
 
 - **설명**: 카페 메뉴 크롤링 및 선택 애플리케이션
 - **역할**: 카페 메뉴 크롤링, 사용자별 메뉴 선택 및 관리자 기능 개발
 - **기술**: Next.js, TypeScript, MongoDB
 - **링크**: [웹사이트](https://choose-menu.vercel.app/)
 
-### 4. 역대카
+### 5. 역대카
 
 - **설명**: 렌트카 가격 비교 서비스
 - **역할**: 개인 프로젝트 풀스택 개발 (Next.js, Supabase)
 - **기술**: Next.js, Supabase, Prisma, Tailwind CSS, TypeScript
 - **링크**: [웹사이트](https://alltime-car.com/)
 
-### 5. 프론트엔드 주니어 스터디
+### 6. 프론트엔드 주니어 스터디
 
 - **설명**: 15주 학습 커리큘럼과 실습 기록을 구조화한 공개 학습 저장소
 - **역할**: 커리큘럼 설계 및 학습 자료 정리
 - **기술**: TypeScript, Bun.js, CSS
 - **링크**: [GitHub](https://github.com/Ring-wdr/frontend-junior-study) · [Demo](https://ring-wdr.github.io/frontend-junior-study/)
 
-### 6. react-devtool-cli
+### 7. react-devtool-cli
 
 - **설명**: Playwright 기반 브라우저 세션 위에서 React inspection과 profiler 분석을 자동화하는 agent-first CLI
 - **역할**: CLI 설계 및 구현, Playwright 전송 계층 구성, snapshot-aware inspection 워크플로우 설계
 - **기술**: React, Playwright, Command Line, JavaScript
 - **링크**: [GitHub](https://github.com/Ring-wdr/react-devtool-cli) · [npm](https://www.npmjs.com/package/react-devtool-cli)
+
+### 8. 티키타카 TICKET
+
+- **설명**: 대규모 선착순 예매 시스템의 대기열·좌석 선점·MQ 구조를 브라우저 안의 가상 서버로 재현한 티켓팅 연습 게임
+- **역할**: 시뮬레이션 코어 설계 및 구현, Web Worker 가상 서버와 Preact SPA 구성, GitHub Actions CI와 Pages 배포
+- **기술**: TypeScript, Preact, Vanilla Extract, Vite, Vitest, Web Worker
+- **링크**: [GitHub](https://github.com/Ring-wdr/ticket-sim) · [Demo](https://ring-wdr.github.io/ticket-sim/)
 
 ## 💡 주요 특징
 

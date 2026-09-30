@@ -27,6 +27,15 @@ describe("project content", () => {
 		expect(getFeaturedProjects(cards, 10).every((project) => project.featured)).toBe(true);
 	});
 
+	it("featured project helper keeps manifest order", () => {
+		const featuredSlugs = cards
+			.filter((project) => project.featured)
+			.map((project) => project.slug);
+		expect(getFeaturedProjects(cards, 3).map((project) => project.slug)).toEqual(
+			featuredSlugs.slice(0, 3),
+		);
+	});
+
 	it("recruiter-facing card facts stay aligned with detail data", () => {
 		for (const project of projects) {
 			expect(toProjectCard(project)).toMatchObject({
