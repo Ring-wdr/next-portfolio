@@ -1,26 +1,38 @@
 # 포트폴리오 페이지
 
-> Next.js 16 + React 19 + TypeScript로 제작된 개인 포트폴리오 웹사이트
+> Next.js 16 + React 19 + TypeScript로 제작된 개인 포트폴리오 웹사이트.
+> 포트폴리오에 근거해 답하는 AI 어시스턴트와 채용공고(JD) 적합도 분석을 제공하며, 프로젝트 콘텐츠는 별도 저장소에서 Vercel Blob으로 배포됩니다.
 
 [![Deployment](https://img.shields.io/badge/Vercel-Deployed-success)](https://next-portfolio-ringring.vercel.app/)
-[![Next.js](https://img.shields.io/badge/Next.js-16.2.1-black)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-19.2-blue)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)](https://www.typescriptlang.org/)
+[![CI](https://github.com/Ring-wdr/next-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/Ring-wdr/next-portfolio/actions/workflows/ci.yml)
+[![Next.js](https://img.shields.io/badge/Next.js-16.3.6-black)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19.3-blue)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.0-blue)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.3-38bdf8)](https://tailwindcss.com/)
+[![AI SDK](https://img.shields.io/badge/AI_SDK-7.0-black)](https://ai-sdk.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-24.x-339933)](https://nodejs.org/)
 
 ## ✨ 주요 기능
 
-- 🏠 **Home**: 간략한 자기소개 및 보유 기술 스택
+- 🏠 **Home**: 에디토리얼 레이아웃의 자기소개, `pretext` 기반 애니메이션 ASCII 히어로 캔버스, 히어로 영역에서 바로 질문하는 AI 어시스턴트 입력창
+- 🤖 **AI Assistant**: 포트폴리오 지식 베이스와 프로젝트 케이스 스터디에 근거해 답하는 전역 채팅 위젯
+  - OpenRouter 무료 모델 + Vercel AI SDK 스트리밍 (`/api/chat`)
+  - 마크다운 렌더링, 프로젝트/페이지 링크 자동 연결, 프로젝트 상세 페이지의 "이 프로젝트에 대해 질문하기"
+  - API 키가 없으면 프로젝트 링크 중심의 폴백 응답 제공
+- 🎯 **Role Fit** (`/fit`): 채용공고를 붙여 넣으면 요구사항별 적합도(strong/partial/gap), 근거 프로젝트, 보완점, 면접 질문을 담은 리포트 생성 (`/api/fit`)
 - 📁 **Projects**: 케이스 스터디 중심 프로젝트 포트폴리오
   - 프로젝트 상세 페이지 (URL 및 모달 뷰 지원)
   - 프로젝트별 기술 스택, 챌린지, 해결책, 성과 등 상세 정보
   - 이미지 갤러리 (라이트박스 기능 지원)
-- 🛠️ **Tech Stack**: 카테고리별 기술 스택 시각화
+- 🛠️ **Tech Stack**: 카테고리별 기술 스택과 데모 패널(Shiki Magic Move 코드 전환), AI 에이전트 엔지니어링 증거 섹션
 - 👤 **About**: 커리어 타임라인/작업 원칙/집중 분야 중심 내러티브 섹션
-- 📧 **Contact**: 이메일 문의 폼 (nodemailer 연동)
+- 📧 **Contact**: 이메일 문의 폼 (Nodemailer + React Email, 요청 빈도 제한)
 - 🌓 **Dark Mode**: 다크/라이트 테마 지원
 - 📱 **Responsive**: 모바일 친화적 반응형 디자인
 - 🌍 **i18n**: 한국어/영어 전환 (`next-intl`)
-- 🎭 **View Transitions**: React 19의 View Transition API를 활용한 부드러운 화면 전환
+- 🎭 **View Transitions**: React의 `ViewTransition`을 활용한 라우트/모달 전환
+- 🗂️ **Content from Blob**: 프로젝트 콘텐츠는 [`Ring-wdr/portfolio-content`](https://github.com/Ring-wdr/portfolio-content)에서 관리하고 Vercel Blob 매니페스트로 배포, 재빌드 없이 ISR로 반영
+- 🔎 **SEO / Agent-readable**: 라우트별 메타데이터, 동적 OG/Twitter 이미지, 요청 시 렌더링되는 `sitemap.xml`, `robots.txt`, [`/llms.txt`](https://next-portfolio-ringring.vercel.app/llms.txt)
 
 ## 🧭 2026 리빌드 진행 상태
 
@@ -37,29 +49,38 @@
 
 ### Core
 
-- **Framework**: Next.js 16.2.1 (App Router)
-- **Language**: TypeScript 5.9
-- **Runtime**: React 19.2
-- **Styling**: Tailwind CSS 4.1
+- **Framework**: Next.js 16.3.6 (App Router, React Compiler)
+- **Language**: TypeScript 6.0
+- **UI Library**: React 19.3
+- **Styling**: Tailwind CSS 4.3
+- **Runtime**: Node.js 24.x
 
 ### Features
 
+- **AI**: Vercel AI SDK 7 (`ai`, `@ai-sdk/react`) + OpenRouter (`@openrouter/ai-sdk-provider`)
+- **Content**: Vercel Blob (`@vercel/blob`) + `unstable_cache` 태그 기반 ISR
+- **Markdown**: react-markdown + remark-gfm + rehype-sanitize
+- **Code Highlight**: Shiki + Shiki Magic Move
+- **Text Layout**: `@chenglou/pretext` (히어로 캔버스, 문장 레이아웃)
+- **i18n**: next-intl 4
 - **Email**: Nodemailer + React Email
 - **Theme**: next-themes (다크 모드)
-- **UI Components**: Radix UI + Lucide Icons
-- **Validation**: Zod 4.1
+- **UI Components**: Radix UI Slot + class-variance-authority + Lucide Icons
+- **Validation**: Zod 4.6
+- **Analytics**: Google Analytics (`@next/third-parties`)
 - **Animation**: tw-animate-css
 
 ### Testing
 
-- **Unit Testing**: Vitest + Testing Library
-- **E2E Testing**: Playwright
-- **Coverage**: 단위 테스트 및 통합 테스트
+- **Unit Testing**: Vitest 5 + Testing Library (jsdom)
+- **E2E Testing**: Playwright 1.63
+- **Performance**: Playwright 기반 라우트 벤치마크 (`tests/benchmarks`)
+- **CI**: GitHub Actions (lint → unit test → build → E2E smoke)
 
 ### Architecture
 
 - **Pattern**: Feature-Sliced Design (FSD)
-- **Structure**: pages-layer, features, shared
+- **Structure**: app, pages-layer, feature, shared
 - **Type Safety**: @t3-oss/env-nextjs
 - **Architecture Note**: [`docs/architecture-tradeoffs.md`](docs/architecture-tradeoffs.md)
 
@@ -78,56 +99,59 @@ src/
 ├── app/                                    # Next.js App Router
 │   ├── _provider/                         # 전역 Provider (Theme)
 │   ├── layout.tsx                         # 루트 레이아웃
-│   ├── [locale]/                          # 다국어 지원 라우팅
+│   ├── page.tsx                           # 루트 리다이렉트
+│   ├── [locale]/                          # 다국어 라우팅 (ko 기본, en)
+│   │   ├── layout.tsx                     # 로케일 레이아웃 (헤더/푸터/채팅 위젯/GA)
 │   │   ├── page.tsx                       # 메인 페이지
 │   │   ├── about/                         # 소개 페이지
-│   │   ├── project/                       # 프로젝트 목록
-│   │   │   ├── page.tsx                   # 프로젝트 목록 페이지
-│   │   │   └── [slug]/                    # 프로젝트 상세
-│   │   │       └── page.tsx               # 상세 페이지 (URL)
-│   │   ├── @modal/                        # 병렬 라우트 (모달)
-│   │   │   └── (.)project/[slug]/         # 인터셉팅 라우트
-│   │   │       └── page.tsx               # 상세 페이지 (모달)
+│   │   ├── project/                       # 프로젝트 목록 / [slug] 상세
+│   │   ├── @modal/(.)project/[slug]/      # 병렬 + 인터셉팅 라우트 (모달 상세)
+│   │   ├── fit/                           # 채용공고 적합도 분석
 │   │   ├── tech-stack/                    # 기술 스택 페이지
-│   │   └── contact/                       # 연락 페이지
-│   └── page.tsx                           # 루트 리다이렉트
+│   │   ├── contact/                       # 연락 페이지
+│   │   └── opengraph-image.tsx 등          # 동적 OG/Twitter 이미지
+│   ├── api/
+│   │   ├── chat/route.ts                  # AI 어시스턴트 스트리밍
+│   │   ├── fit/route.ts                   # JD 적합도 리포트 생성
+│   │   └── revalidate/route.ts            # 콘텐츠 퍼블리시 후 캐시 무효화
+│   ├── llms.txt/route.ts                  # 에이전트용 포트폴리오 인덱스
+│   ├── robots.ts
+│   └── sitemap.ts
+├── proxy.ts                               # next-intl 라우팅 (Next 16 proxy)
+├── env.ts                                 # @t3-oss/env-nextjs 환경 변수 스키마
+├── i18n/                                  # next-intl 설정
 ├── pages-layer/                           # 페이지별 컴포넌트
-│   ├── main/                              # 메인 페이지
-│   ├── about/                             # 소개 페이지
-│   ├── project/                           # 프로젝트 페이지
-│   │   ├── index.tsx                      # 프로젝트 목록
-│   │   ├── [slug]/index.tsx               # 프로젝트 상세 페이지
-│   │   └── item/                          # 프로젝트 카드 컴포넌트
-│   ├── tech-stack/                        # 기술 스택 페이지
-│   └── contact/                           # 연락 페이지
+│   ├── main/                              # 메인 (히어로 캔버스, 히어로 질문창)
+│   ├── about/
+│   ├── project/                           # 목록, [slug] 상세, 카드
+│   ├── fit/                               # 적합도 분석 UI
+│   ├── tech-stack/                        # 쇼케이스, 에이전트 엔지니어링 패널
+│   └── contact/
 ├── feature/                               # 기능별 모듈
-│   └── mail/                              # 이메일 기능
-│       ├── action/                        # Server Actions
-│       ├── ui/                            # UI 컴포넌트
-│       └── template/                      # Email 템플릿
+│   ├── chat/                              # AI 어시스턴트 (lib / server / ui)
+│   ├── fit/                               # 적합도 리포트 스키마 및 분석
+│   └── mail/                              # 이메일 (action / ui / template)
 └── shared/                                # 공유 리소스
-    ├── ui/                                # 공통 UI 컴포넌트
-    │   ├── modal.tsx                      # 모달 컴포넌트
-    │   └── image-gallery.tsx              # 이미지 갤러리 (라이트박스)
-    ├── constant/                          # 상수
-    │   ├── project-detail.tsx             # 프로젝트 상세 데이터
-    │   ├── tech-stack.tsx                 # 기술스택 데이터
-    │   └── profile.ts                     # About/Tech narrative 데이터
-    └── utils/                             # 유틸리티 함수
+    ├── content/                           # 프로젝트 콘텐츠 스키마, Blob 로더, 로컬 fixture
+    ├── constant/                          # 사이트/프로필/기술 스택/에이전트 엔지니어링 데이터
+    ├── ui/                                # 공통 UI (모달, 이미지 갤러리, 전환 링크, 토글 등)
+    └── utils/
+messages/                                  # ko.json / en.json 번역
+tests/                                     # Playwright E2E 및 성능 벤치마크
 ```
 
 ## 🚀 시작하기
 
 ### 사전 요구사항
 
-- Node.js 20.x 이상
-- pnpm
+- Node.js 24.x
+- pnpm 10
 
 ### 설치
 
 ```bash
 # 저장소 클론
-git clone https://github.com/[your-username]/next-portfolio.git
+git clone https://github.com/Ring-wdr/next-portfolio.git
 cd next-portfolio
 
 # 의존성 설치
@@ -145,7 +169,23 @@ NEXT_APP_PASSWORD=your-app-password
 
 # Analytics
 NEXT_PUBLIC_GOOGLE_ANALYTICS=G-XXXXXXXXXX
+
+# AI Assistant / Role Fit (선택)
+OPENROUTER_API_KEY=sk-or-...
+# 쉼표로 구분한 OpenRouter 모델 ID, 첫 번째가 기본 모델 (선택)
+OPENROUTER_FREE_MODELS=
+
+# 프로젝트 콘텐츠 Blob 스토어 (선택, 둘 중 하나)
+BLOB_STORE_ID=
+BLOB_READ_WRITE_TOKEN=
+
+# POST /api/revalidate 인증용 공유 시크릿, 16자 이상 (선택)
+CONTENT_REVALIDATE_SECRET=
 ```
+
+- `OPENROUTER_API_KEY`가 없으면 채팅은 폴백 응답을, `/api/fit`은 `503 unavailable`을 반환합니다.
+- Blob 스토어가 설정되지 않으면 `src/shared/content/fixture/projects.json`의 fixture 데이터로 동작합니다.
+- `SKIP_ENV_VALIDATION=true` 또는 `E2E_TESTING=true`로 환경 변수 검증을 건너뛸 수 있습니다 (CI 빌드에서 사용).
 
 ### 개발 서버 실행
 
@@ -175,7 +215,7 @@ pnpm start
 # 린트
 pnpm lint
 
-# 단위 테스트
+# 단위 테스트 (watch)
 pnpm test
 
 # 단위 테스트 UI
@@ -187,11 +227,30 @@ pnpm test:e2e
 # E2E 테스트 (로그 포함)
 pnpm test:e2e-log
 
-# 배포 전 권장 검증
-pnpm lint && pnpm test -- --run && pnpm build
+# 성능 벤치마크
+pnpm test:perf:quick
+pnpm test:perf
+
+# 배포 전 권장 검증 (CI와 동일)
+pnpm lint && pnpm exec vitest run && SKIP_ENV_VALIDATION=true pnpm build
 ```
 
+성능 측정 방법은 [`PERFORMANCE_TESTING.md`](PERFORMANCE_TESTING.md)를 참고하세요.
+
+## 🗂️ 콘텐츠 파이프라인
+
+프로젝트 케이스 스터디는 이 저장소가 아닌 [`Ring-wdr/portfolio-content`](https://github.com/Ring-wdr/portfolio-content)에서 관리합니다.
+
+1. `portfolio-content`의 퍼블리시 워크플로우가 이미지를 업로드하고, 타임스탬프 이름의 불변 매니페스트를 Vercel Blob에 올립니다.
+2. 이어서 `POST /api/revalidate`(`Authorization: Bearer $CONTENT_REVALIDATE_SECRET`)를 호출해 `projects` 캐시 태그를 즉시 만료시킵니다.
+3. 사이트는 최신 매니페스트를 읽어 Zod 스키마(`src/shared/content/project-schema.ts`)로 검증한 뒤 렌더링합니다. 읽기에 실패하면 ISR이 마지막 정상 페이지를 계속 제공하며, 재검증 누락에 대비해 24시간 주기로도 갱신됩니다.
+4. 페이지, AI 어시스턴트, 적합도 분석, `sitemap.xml`, `llms.txt`가 모두 같은 콘텐츠 소스를 사용해 서로 어긋나지 않습니다.
+
+> 스키마를 변경할 때는 `portfolio-content`의 `scripts/schema.ts`도 함께 수정해야 합니다.
+
 ## 📌 대표 프로젝트
+
+> 실제 콘텐츠의 원본은 [`Ring-wdr/portfolio-content`](https://github.com/Ring-wdr/portfolio-content)입니다.
 
 ### 1. POCAZ Remake
 
@@ -240,20 +299,26 @@ pnpm lint && pnpm test -- --run && pnpm build
 ### Feature-Sliced Design (FSD)
 
 - 모듈화된 아키텍처로 유지보수성 향상
-- 계층별 명확한 책임 분리 (app, pages-layer, features, shared)
+- 계층별 명확한 책임 분리 (app, pages-layer, feature, shared)
 
 ### 고급 라우팅 패턴
 
 - **병렬 라우트 (Parallel Routes)**: `@modal` 슬롯을 활용한 모달 UI
 - **인터셉팅 라우트 (Intercepting Routes)**: `(.)project/[slug]`로 모달/페이지 이중 지원
 - **동적 라우트 (Dynamic Routes)**: `[slug]` 기반 프로젝트 상세 페이지
-- **generateStaticParams**: 빌드 타임에 모든 프로젝트 페이지 정적 생성
+- **Proxy**: Next.js 16의 `proxy.ts`로 next-intl 로케일 라우팅 (`localePrefix: "as-needed"`)
 
 ### React 19 기능 활용
 
-- **View Transition API**: 페이지 전환 시 자연스러운 애니메이션
-- **Server Components**: 기본 서버 컴포넌트로 성능 최적화
-- **새로운 Hooks**: useLayoutEffect, startTransition 등 활용
+- **ViewTransition**: 라우트 및 모달 전환 애니메이션
+- **Server Components / Server Actions**: 기본 서버 컴포넌트, 이메일 전송은 Server Action
+- **React Compiler**: `reactCompiler: true`로 자동 메모이제이션
+
+### Grounded AI
+
+- 채팅과 적합도 분석 모두 위키 + 프로젝트 콘텐츠에서 생성한 지식 베이스만 근거로 사용하도록 프롬프트 구성
+- 적합도 리포트는 Zod 스키마로 검증하고, 존재하지 않는 프로젝트 slug는 제거해 모든 근거 링크가 실제 케이스 스터디를 가리키도록 보장
+- OpenRouter 무료 모델을 순서대로 폴백하며, 모델 목록은 환경 변수로 교체 가능
 
 ### 이미지 갤러리 시스템
 
@@ -267,12 +332,13 @@ pnpm lint && pnpm test -- --run && pnpm build
 - TypeScript strict mode
 - Zod를 활용한 런타임 검증
 - @t3-oss/env-nextjs로 환경 변수 타입 안전성 보장
+- 외부 콘텐츠 매니페스트도 Zod 스키마로 검증
 
 ### Testing Strategy
 
-- 단위 테스트: Vitest + Testing Library
-- E2E 테스트: Playwright (크로스 브라우저 지원)
-- 테스트 커버리지 추적
+- 단위 테스트: Vitest + Testing Library (API 라우트, 콘텐츠 스키마, 페이지 컴포넌트)
+- E2E 테스트: Playwright (Desktop/Mobile Chrome 스모크는 CI에서 실행)
+- 성능 회귀: `performance-regression` 워크플로우와 라우트 벤치마크
 
 ### Performance
 
@@ -280,7 +346,7 @@ pnpm lint && pnpm test -- --run && pnpm build
 - 이미지 최적화 (next/image)
 - Code splitting 자동 적용
 - Server Actions를 통한 최적화된 데이터 처리
-- ISR (Incremental Static Regeneration) 지원
+- 태그 기반 ISR로 콘텐츠 변경 시 재빌드 없이 반영
 
 ## 🌐 배포 정보
 
@@ -288,8 +354,9 @@ pnpm lint && pnpm test -- --run && pnpm build
 
 - **URL**: [https://next-portfolio-ringring.vercel.app/](https://next-portfolio-ringring.vercel.app/)
 - **자동 배포**: main 브랜치 푸시 시
+- **Functions**: Fluid Compute (`/api/chat`, `/api/fit` 최대 300초)
 - **환경 변수**: Vercel 대시보드에서 설정
-- **성능 모니터링**: Vercel Analytics
+- **분석**: Google Analytics (`@next/third-parties`)
 
 ## 📧 연락처
 
