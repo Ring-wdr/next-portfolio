@@ -58,6 +58,7 @@ export type TechStackDemo = TechStackCodeDemo | TechStackNarrativeDemo;
 export type TechStackType = {
   name: string;
   icon: React.ReactNode;
+  /** The first entry is the primary category — the only section that renders this stack's demo. */
   category: (typeof TechStackCategory)[number][];
   demo?: TechStackDemo;
 };
@@ -329,7 +330,7 @@ export const TechStack: TechStackType[] = [
   {
     name: "Playwright",
     icon: <PlaywrightIcon />,
-    category: ["Tools", "Testing"],
+    category: ["Testing", "Tools"],
     demo: {
       kind: "code",
       lang: "ts",
