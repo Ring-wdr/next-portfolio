@@ -177,10 +177,10 @@ export function TechStackPage() {
           const stacks = TechStack.filter((tech) =>
             tech.category.some((_category) => _category === category),
           );
-          const categoryDemoStacks = showcaseStacks.filter((s) =>
-            TechStack.find((tech) => tech.name === s.name)?.category.includes(
+          const categoryDemoStacks = showcaseStacks.filter(
+            (s) =>
+              TechStack.find((tech) => tech.name === s.name)?.category[0] ===
               category,
-            ),
           ) as ShowcaseStack[];
 
           return (

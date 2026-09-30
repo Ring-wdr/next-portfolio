@@ -1,4 +1,10 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react";
 import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   agentEngineeringDocUrl,
@@ -315,6 +321,23 @@ describe("TechStackPage", () => {
     await waitFor(() => {
       expect(screen.getByTestId("magic-move-code")).toBeInTheDocument();
     });
+  });
+
+  it("renders each category demo only in the stack's primary category", () => {
+    render(<TechStackPage />);
+
+    const sectionFor = (name: string) =>
+      screen.getByRole("heading", { level: 2, name }).closest("section")!;
+
+    expect(
+      within(sectionFor("Testing")).getAllByText("Playwright").length,
+    ).toBeGreaterThan(1);
+    expect(within(sectionFor("Tools")).getAllByText("Playwright")).toHaveLength(
+      1,
+    );
+    expect(
+      within(sectionFor("Backend")).queryByRole("button", { pressed: true }),
+    ).not.toBeInTheDocument();
   });
 
   it("switches a stack from before to after state", async () => {
