@@ -59,9 +59,7 @@ export function toProjectCard(project: Project): ProjectCard {
 	};
 }
 
+/** Featured projects in manifest order, so the content repo decides what leads. */
 export function getFeaturedProjects(projects: ProjectCard[], limit = 3) {
-	return projects
-		.filter((project) => project.featured)
-		.toReversed()
-		.slice(0, limit);
+	return projects.filter((project) => project.featured).slice(0, limit);
 }

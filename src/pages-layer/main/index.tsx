@@ -12,7 +12,7 @@ export function MainPage({ projects }: { projects: ProjectCard[] }) {
 	const locale = useLocale();
 	const t = useTranslations("HomePage");
 	const categoryT = useTranslations("ProjectsPage.categories");
-	const supportingProjects = getFeaturedProjects(projects, 4).slice(1);
+	const supportingProjects = getFeaturedProjects(projects, 3);
 	const spotlightTech = TechStack.slice(0, 8).map((tech) => tech.name);
 	const proofItems = [
 		{
