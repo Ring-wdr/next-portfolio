@@ -109,12 +109,9 @@
     "results": "{count} projects",
     "emptyTitle": "No projects found",
     "emptyDescription": "Try a different category or tech filter.",
-    "storyLabel": "Project Story",
     "openDetail": "Read full case",
     "roleLabel": "Role",
-    "impactLabel": "Impact",
     "stackLabel": "Stack",
-    "resultLabel": "Outcome",
     "categories": {
       "Work": "Work",
       "Product": "Product",
@@ -125,7 +122,8 @@
       "Live": "Live",
       "Prototype": "Prototype",
       "Archived": "Archived"
-    }
+    },
+    "filterByTech": "Filter by technology"
   },
   "TechStackPage": {
     "title": "Tech Stack",
@@ -160,74 +158,20 @@
     "Tools": "Tools",
     "Backend": "Backend",
     "agentEngineering": {
-      "eyebrow": "AI agent engineering",
-      "title": "I use agents like working surfaces, not magic shortcuts.",
-      "description": "The strongest signal is not that I can prompt Codex or Claude Code. It is that I can shape bounded tasks, explicit contracts, verification loops, and proof artifacts so the work is engineerable by both humans and agents.",
-      "labels": {
-        "claim": "Claim",
-        "workflow": "Workflow",
-        "codex": "Codex",
-        "claude": "Claude Code",
-        "contract": "Input contract",
-        "verification": "Verification",
-        "proof": "Proof links"
+      "eyebrow": "AI agents",
+      "title": "How I work with AI coding agents",
+      "intro": "I have switched my monthly subscription to whichever model did the work best at the time. I used Claude Code at work from its early versions, moved to Codex after GPT-5.3, and now mainly use Opus 5.5 with Claude Code. Each time I switched tools I reviewed the existing skills and settings and deleted rules that were no longer needed.",
+      "results": {
+        "travelRecords": "I built Travel Records with Claude Code and keep its working rules and context in CLAUDE.md, so adding a new trip is a repeatable flow.",
+        "devtoolCli": "react-devtool-cli is a CLI that lets agents inspect React apps without the browser DevTools, and it ships skills for Codex, Claude Code, and Gemini CLI.",
+        "verification": "This portfolio and POCAZ keep agent rules in AGENTS.md, and a change counts as done only after lint, tests, and the build pass."
       },
+      "verificationLabel": "Verification command",
+      "verificationDescription": "Code an agent changed has to pass this command too.",
+      "proofLabel": "Related",
       "artifacts": {
-        "doc": "Agent engineering doc",
+        "doc": "Agent workflow doc",
         "project": "react-devtool-cli case study"
-      },
-      "items": {
-        "taskDecomposition": {
-          "title": "Task decomposition & spec writing",
-          "claim": "I turn vague requests into implementation-ready work packets with clear scope, constraints, and success criteria.",
-          "workflow": "I start from repository truth, then break the job into bounded tasks, interfaces, and acceptance checks that can survive handoff.",
-          "codexRole": "Codex is my primary implementation surface when the repo needs grounded edits, test runs, and iterative verification.",
-          "claudeRole": "Claude Code is useful when I want a second execution lens on spec shape, prompt clarity, or task framing before or alongside coding.",
-          "contract": "Every task gets a brief with the goal, hard constraints, changed surfaces, expected artifact, and the exact proof needed to call it done.",
-          "verification": "I do not stop at 'the agent answered.' The output must line up with source, docs, and tests."
-        },
-        "toolFluency": {
-          "title": "Tool / orchestration fluency",
-          "claim": "I know how to route work across CLI tools, repo instructions, prompts, and browser automation without losing the thread.",
-          "workflow": "I keep the execution surface explicit: AGENTS.md, task-specific prompts, repo paths, and the command surface the agent is allowed to use.",
-          "codexRole": "Codex handles repo-native implementation, shell-driven inspection, and test-backed iteration inside the actual project context.",
-          "claudeRole": "Claude Code complements that with alternate reasoning on prompt shape, decomposition, and high-context review loops when I want contrast.",
-          "contract": "The agent does not get a vibe-based ask. It gets the exact file or subsystem scope, allowed tools, and the expected output format.",
-          "verification": "The orchestration is only good if another engineer can rerun it, inspect the same artifacts, and reach the same conclusion."
-        },
-        "verificationHarness": {
-          "title": "Verification & harness design",
-          "claim": "I build verification into the workflow so agent output becomes evidence-backed engineering instead of plausible text.",
-          "workflow": "I close the loop with repo-native checks, page-level assertions, and markdown decision records that explain what the system proves.",
-          "codexRole": "Codex is where I wire the source edits, route metadata, and executable checks into a single working harness.",
-          "claudeRole": "Claude Code is useful as a contrasting reviewer for whether the brief, prompt surface, and observed result still line up.",
-          "contract": "The contract ends with runnable checks and named proof artifacts, not with a narrative summary alone.",
-          "verification": "For this portfolio, the proof is the combination of UI, source data, tests, and markdown documentation all agreeing."
-        }
-      },
-      "harness": {
-        "eyebrow": "Engineerable harness",
-        "title": "The workflow I expect an agent task to survive",
-        "description": "If a workflow cannot survive a handoff, a rerun, and a verification pass, I do not consider it production-ready engineering.",
-        "commandLabel": "Example surface",
-        "steps": {
-          "brief": {
-            "title": "Brief and constraints",
-            "description": "Start with the actual goal, hard boundaries, changed surfaces, and the acceptance criteria that matter."
-          },
-          "surface": {
-            "title": "Agent execution surface",
-            "description": "Give the agent the repo contract, task prompt, and relevant paths so it can operate inside a bounded system."
-          },
-          "verification": {
-            "title": "Verification loop",
-            "description": "Run the repo-native checks that prove the output works, not just that the patch exists."
-          },
-          "proof": {
-            "title": "Proof artifacts",
-            "description": "Leave behind docs, source, and test evidence that another engineer can inspect without re-discovering intent."
-          }
-        }
       }
     }
   },
@@ -383,7 +327,15 @@
       }
     },
     "organization": "Company",
-    "diagram": "Architecture"
+    "diagram": "Architecture",
+    "plainLabel": "In short",
+    "brief": {
+      "title": "Summary",
+      "audience": "Who it is for",
+      "problem": "The problem",
+      "contribution": "What I did",
+      "outcome": "Outcome"
+    }
   },
   "FitPage": {
     "eyebrow": "Role Fit",

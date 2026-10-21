@@ -109,12 +109,9 @@
     "results": "총 {count}개 프로젝트",
     "emptyTitle": "조건에 맞는 프로젝트가 없습니다",
     "emptyDescription": "카테고리 또는 기술 필터를 변경해보세요.",
-    "storyLabel": "프로젝트 스토리",
     "openDetail": "전체 케이스 보기",
     "roleLabel": "역할",
-    "impactLabel": "임팩트",
     "stackLabel": "기술 스택",
-    "resultLabel": "결과",
     "categories": {
       "Work": "실무",
       "Product": "프로덕트",
@@ -125,7 +122,8 @@
       "Live": "운영 중",
       "Prototype": "프로토타입",
       "Archived": "보관"
-    }
+    },
+    "filterByTech": "기술로 필터"
   },
   "TechStackPage": {
     "title": "기술 스택",
@@ -160,74 +158,20 @@
     "Tools": "도구",
     "Backend": "백엔드",
     "agentEngineering": {
-      "eyebrow": "AI 에이전트 엔지니어링",
-      "title": "에이전트를 만능 해법이 아니라 실제 작업 수단으로 다룹니다.",
-      "description": "중요한 신호는 Codex나 Claude Code를 쓸 줄 안다는 사실 자체가 아닙니다. 사람과 에이전트 모두가 실행 가능한 범위, 입력 계약, 검증 루프, 증거 산출물을 설계할 수 있다는 점입니다.",
-      "labels": {
-        "claim": "핵심 주장",
-        "workflow": "워크플로우",
-        "codex": "Codex",
-        "claude": "Claude Code",
-        "contract": "입력 계약",
-        "verification": "검증",
-        "proof": "증거 링크"
+      "eyebrow": "AI 에이전트",
+      "title": "AI 코딩 에이전트로 일하는 방식",
+      "intro": "시기마다 가장 일을 잘하는 모델로 월 구독을 바꿔 가며 써 왔습니다. Claude Code 초기 버전부터 실무에 썼고, GPT-5.3 이후에는 Codex를, 지금은 Opus 5.5와 Claude Code를 주로 씁니다. 도구를 바꿀 때마다 기존 skill과 설정을 점검해서 필요 없어진 규칙은 지웠습니다.",
+      "results": {
+        "travelRecords": "Travel Records는 Claude Code와 함께 만들었고, 작업 규칙과 맥락을 CLAUDE.md로 관리해 새 여행 추가를 반복 가능한 흐름으로 정리했습니다.",
+        "devtoolCli": "react-devtool-cli는 에이전트가 브라우저 개발자 도구 없이 React 앱을 조사할 수 있게 만든 CLI이고, Codex, Claude Code, Gemini CLI용 스킬을 함께 배포합니다.",
+        "verification": "이 포트폴리오와 POCAZ는 에이전트 작업 규칙을 AGENTS.md에 두고, lint, 테스트, 빌드를 통과해야 작업을 끝난 것으로 봅니다."
       },
+      "verificationLabel": "검증 명령",
+      "verificationDescription": "에이전트가 바꾼 코드도 이 명령을 통과해야 합니다.",
+      "proofLabel": "관련 자료",
       "artifacts": {
-        "doc": "에이전트 엔지니어링 문서",
+        "doc": "에이전트 작업 문서",
         "project": "react-devtool-cli 케이스 스터디"
-      },
-      "items": {
-        "taskDecomposition": {
-          "title": "작업 분해와 스펙 작성",
-          "claim": "모호한 요청을 범위, 제약, 성공 기준이 선명한 구현 단위로 바꿉니다.",
-          "workflow": "먼저 저장소의 실제 구조와 제약을 확인한 뒤, 인계 가능한 작업 단위와 인터페이스, 완료 기준으로 분해합니다.",
-          "codexRole": "Codex는 실제 저장소 편집, 테스트 실행, 반복 검증이 필요한 구현 작업에서 주 실행 표면으로 사용합니다.",
-          "claudeRole": "Claude Code는 코딩 전후로 스펙 구조, 프롬프트 선명도, 작업 분해가 맞는지 다른 시각으로 점검할 때 유용합니다.",
-          "contract": "모든 작업에는 목표, 핵심 제약, 변경 범위, 기대 산출물, 완료를 증명할 체크를 함께 넣습니다.",
-          "verification": "에이전트가 답을 냈다는 사실로 끝내지 않습니다. 결과가 소스, 문서, 테스트와 함께 맞물려야 합니다."
-        },
-        "toolFluency": {
-          "title": "도구 / 오케스트레이션 숙련도",
-          "claim": "CLI 도구, 저장소 지침, 프롬프트, 브라우저 자동화를 한 흐름으로 엮어도 맥락을 잃지 않게 설계합니다.",
-          "workflow": "AGENTS.md, 작업별 프롬프트, 관련 경로, 허용된 명령 표면을 명시해 에이전트가 경계 안에서 움직이게 합니다.",
-          "codexRole": "Codex는 실제 프로젝트 문맥 안에서 저장소 중심 구현, 셸 기반 탐색, 테스트 중심 반복 작업을 담당합니다.",
-          "claudeRole": "Claude Code는 프롬프트 구조와 작업 분해, 고맥락 리뷰 루프를 다른 관점에서 보완할 때 함께 사용합니다.",
-          "contract": "에이전트에게 느낌만 전달하지 않습니다. 정확한 파일/서브시스템 범위, 사용 가능한 도구, 기대 출력 형식을 같이 줍니다.",
-          "verification": "오케스트레이션의 품질은 다른 엔지니어가 같은 산출물을 다시 보고 같은 결론에 도달할 수 있는지로 판단합니다."
-        },
-        "verificationHarness": {
-          "title": "검증과 하니스 설계",
-          "claim": "에이전트 출력이 그럴듯한 문장이 아니라 증거 기반 엔지니어링이 되도록 검증을 워크플로우에 내장합니다.",
-          "workflow": "저장소 기본 체크, 페이지 단위 assertion, 그리고 무엇이 증거인지 설명하는 Markdown 기록으로 루프를 닫습니다.",
-          "codexRole": "Codex는 소스 수정, 라우트 메타데이터, 실행 가능한 체크를 하나의 작동하는 하니스로 묶는 데 사용합니다.",
-          "claudeRole": "Claude Code는 작업 브리프, 프롬프트 표면, 관찰 결과가 계속 일치하는지 대조 리뷰어처럼 활용합니다.",
-          "contract": "계약은 서술형 요약으로 끝나지 않습니다. 실행 가능한 체크와 이름 붙은 증거 산출물까지 포함해야 합니다.",
-          "verification": "이 포트폴리오에서는 UI, 소스 데이터, 테스트, markdown 문서가 서로 같은 이야기를 할 때만 증명이 성립합니다."
-        }
-      },
-      "harness": {
-        "eyebrow": "엔지니어블 하니스",
-        "title": "제가 에이전트 작업에 요구하는 생존 조건",
-        "description": "인계, 재실행, 검증 단계를 견디지 못하는 워크플로우는 프로덕션 수준 엔지니어링이라고 보지 않습니다.",
-        "commandLabel": "예시 표면",
-        "steps": {
-          "brief": {
-            "title": "브리프와 제약",
-            "description": "실제 목표, 강한 경계, 변경 범위, 중요한 완료 기준부터 고정합니다."
-          },
-          "surface": {
-            "title": "에이전트 실행 표면",
-            "description": "저장소 계약, 작업 프롬프트, 관련 경로를 함께 줘서 에이전트가 경계 안에서 작업하게 합니다."
-          },
-          "verification": {
-            "title": "검증 루프",
-            "description": "패치가 존재한다는 사실이 아니라 출력이 실제로 동작한다는 점을 증명하는 저장소 기본 체크를 돌립니다."
-          },
-          "proof": {
-            "title": "증거 산출물",
-            "description": "다른 엔지니어가 의도를 다시 추측하지 않아도 되도록 문서, 소스, 테스트 증거를 남깁니다."
-          }
-        }
       }
     }
   },
@@ -383,7 +327,15 @@
       }
     },
     "organization": "회사",
-    "diagram": "구조"
+    "diagram": "구조",
+    "plainLabel": "한 줄 요약",
+    "brief": {
+      "title": "요약",
+      "audience": "누구를 위한 것인가",
+      "problem": "어떤 문제였나",
+      "contribution": "내가 한 일",
+      "outcome": "결과"
+    }
   },
   "FitPage": {
     "eyebrow": "Role Fit",

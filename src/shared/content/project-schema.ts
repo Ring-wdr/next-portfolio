@@ -13,6 +13,9 @@ const imageRef = text;
 
 const titledItem = z.object({ title: text, description: text });
 
+/** A challenge, with an optional one-line summary for non-developers. */
+const challengeItem = titledItem.extend({ plain: text.optional() });
+
 const figure = z.object({ src: imageRef, alt: text, caption: text.optional() });
 
 export const projectSchema = z.object({
@@ -40,6 +43,16 @@ export const projectSchema = z.object({
     result: text,
   }),
 
+  /** Summary box at the top of the detail page; unconfirmed rows stay empty. */
+  brief: z
+    .object({
+      audience: text.optional(),
+      problem: text.optional(),
+      contribution: text.optional(),
+      outcome: text.optional(),
+    })
+    .optional(),
+
   /** Extra names visitors (and models) use for this project in chat */
   aliases: z.array(text).default([]),
 
@@ -63,7 +76,7 @@ export const projectSchema = z.object({
 
   tech: z.object({
     stack: z.array(text),
-    challenges: z.array(titledItem),
+    challenges: z.array(challengeItem),
     solutions: z.array(titledItem),
   }),
 

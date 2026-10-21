@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import type { ProjectCard } from "@/shared/content/project";
@@ -19,6 +20,7 @@ export function ProjectPage({ projects }: { projects: ProjectCard[] }) {
 	const [selectedTech, setSelectedTech] = useState<string>(
 		"All",
 	);
+	const [isTechFilterOpen, setIsTechFilterOpen] = useState(false);
 
 	const categoryFilters: ProjectCategoryFilter[] = [
 		"All",
@@ -58,7 +60,7 @@ export function ProjectPage({ projects }: { projects: ProjectCard[] }) {
 						</p>
 					</div>
 
-					<div className="mt-6 grid gap-2 sm:grid-cols-3">
+					<div className="mt-6 hidden gap-2 sm:grid sm:grid-cols-3">
 						<div className="rounded-xl border border-border/70 bg-card/70 px-4 py-3">
 							<p className="text-lg font-semibold">{projects.length}</p>
 							<p className="text-xs text-muted-foreground">
@@ -119,23 +121,48 @@ export function ProjectPage({ projects }: { projects: ProjectCard[] }) {
 							</button>
 						))}
 					</div>
-					<div className="mt-3 flex flex-wrap gap-2">
-						{techFilters.map((tech) => (
-							<button
-								key={tech}
-								type="button"
-								className={classNames(
-									"rounded-full border px-3 py-1 text-xs font-medium transition-colors",
-									selectedTech === tech
-										? "border-primary text-primary"
-										: "border-border text-muted-foreground hover:border-primary",
-								)}
-								onClick={() => setSelectedTech(tech)}
-							>
-								{tech === "All" ? t("allTech") : tech}
-							</button>
-						))}
-					</div>
+					<button
+						type="button"
+						className="mt-3 inline-flex min-h-11 items-center gap-1.5 rounded-lg px-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+						aria-expanded={isTechFilterOpen}
+						aria-controls="project-tech-filter"
+						onClick={() => setIsTechFilterOpen((open) => !open)}
+					>
+						{t("filterByTech")}
+						{selectedTech !== "All" && (
+							<span className="rounded-full border border-primary px-2 text-xs text-primary">
+								{selectedTech}
+							</span>
+						)}
+						<ChevronDown
+							size={16}
+							aria-hidden
+							className={classNames(
+								"transition-transform",
+								isTechFilterOpen && "rotate-180",
+							)}
+						/>
+					</button>
+					{isTechFilterOpen && (
+						<div id="project-tech-filter" className="mt-2 flex flex-wrap gap-2">
+							{techFilters.map((tech) => (
+								<button
+									key={tech}
+									type="button"
+									aria-pressed={selectedTech === tech}
+									className={classNames(
+										"min-h-9 rounded-full border px-3 py-1 text-xs font-medium transition-colors",
+										selectedTech === tech
+											? "border-primary text-primary"
+											: "border-border text-muted-foreground hover:border-primary",
+									)}
+									onClick={() => setSelectedTech(tech)}
+								>
+									{tech === "All" ? t("allTech") : tech}
+								</button>
+							))}
+						</div>
+					)}
 					<p className="mt-3 text-sm text-muted-foreground">
 						{t("results", { count: filteredProjects.length })}
 					</p>

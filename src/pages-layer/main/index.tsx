@@ -147,17 +147,17 @@ export function MainPage({ projects }: { projects: ProjectCard[] }) {
 										</span>
 									</div>
 									<p className="max-w-2xl text-sm leading-6 text-muted-foreground md:text-base">
-										{project.techStack.slice(0, 4).join(" · ")}
+										{project.description}
 									</p>
 								</div>
-								<div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-secondary/40">
+								<div className="relative aspect-16/10 overflow-hidden rounded-[1.75rem] bg-secondary/40">
 									<Image
 										src={project.src}
 										unoptimized={isSvgSource(project.src)}
 										alt={project.title}
 										fill
 										sizes="(max-width: 768px) 100vw, 272px"
-										className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+										className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
 									/>
 									<div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,14,18,0)_30%,rgba(12,14,18,0.24)_100%)]" />
 								</div>

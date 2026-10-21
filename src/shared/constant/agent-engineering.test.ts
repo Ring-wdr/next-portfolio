@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
+import en from "../../../messages/en.json";
+import ko from "../../../messages/ko.json";
 import {
-  AgentHarnessSteps,
-  AgentSkillEntries,
+  AgentProofArtifacts,
+  AgentResultKeys,
   agentEngineeringDocPath,
   agentEngineeringDocUrl,
   agentEngineeringProjectHref,
@@ -9,31 +11,35 @@ import {
 import { getFixtureProjects } from "../content/fixture-projects";
 import { buildRepositoryBlobUrl, repositoryConfig } from "./repository";
 
+function lookup(messages: unknown, path: string) {
+  return path
+    .split(".")
+    .reduce<unknown>(
+      (acc, key) =>
+        acc && typeof acc === "object" ? (acc as Record<string, unknown>)[key] : undefined,
+      messages,
+    );
+}
+
 describe("agent engineering constants", () => {
-  it("keeps every public claim attached to at least one proof artifact", () => {
-    for (const entry of AgentSkillEntries) {
-      expect(entry.artifacts.length).toBeGreaterThan(0);
-      expect(entry.claimKey).toBeTruthy();
-      expect(entry.workflowKey).toBeTruthy();
-      expect(entry.contractKey).toBeTruthy();
-      expect(entry.verificationKey).toBeTruthy();
+  it("keeps every result line translated in both locales", () => {
+    for (const key of AgentResultKeys) {
+      expect(lookup(ko.TechStackPage, key)).toEqual(expect.any(String));
+      expect(lookup(en.TechStackPage, key)).toEqual(expect.any(String));
     }
   });
 
-  it("keeps linked project slugs aligned with published case studies", () => {
+  it("keeps the case study link aligned with a published project", () => {
     const knownSlugs = new Set(
-      getFixtureProjects().map((project) => project.slug),
+      getFixtureProjects().map((project) => `/project/${project.slug}`),
+    );
+    const projectLinks = AgentProofArtifacts.filter(
+      (artifact) => artifact.kind === "project",
     );
 
-    for (const entry of AgentSkillEntries) {
-      if (entry.projectSlug) {
-        expect(knownSlugs.has(entry.projectSlug)).toBe(true);
-        const projectArtifact = entry.artifacts.find(
-          (artifact) => artifact.kind === "project",
-        );
-
-        expect(projectArtifact?.href).toBe(`/project/${entry.projectSlug}`);
-      }
+    expect(projectLinks.length).toBeGreaterThan(0);
+    for (const artifact of projectLinks) {
+      expect(knownSlugs.has(artifact.href)).toBe(true);
     }
   });
 
@@ -45,15 +51,5 @@ describe("agent engineering constants", () => {
       `${repositoryConfig.url}/blob/${repositoryConfig.defaultBranch}/${agentEngineeringDocPath}`,
     );
     expect(agentEngineeringProjectHref).toBe("/project/react-devtool-cli");
-  });
-
-  it("defines the four-step harness expected by the proof section", () => {
-    expect(AgentHarnessSteps).toHaveLength(4);
-    expect(AgentHarnessSteps.map((step) => step.id)).toEqual([
-      "brief",
-      "surface",
-      "verification",
-      "proof",
-    ]);
   });
 });

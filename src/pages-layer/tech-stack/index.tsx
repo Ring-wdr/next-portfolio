@@ -2,8 +2,9 @@ import { Fragment } from "react";
 import { useTranslations } from "next-intl";
 
 import {
-  AgentHarnessSteps,
-  getAgentSkillEntries,
+  AgentProofArtifacts,
+  AgentResultKeys,
+  agentVerificationCommand,
 } from "@/shared/constant/agent-engineering";
 import { TechStack, TechStackCategory } from "@/shared/constant/tech-stack";
 import { TechCategoryMeta } from "@/shared/constant/profile";
@@ -12,40 +13,13 @@ import { AgentEngineeringPanel } from "./agent-engineering-panel";
 
 export function TechStackPage() {
   const t = useTranslations("TechStackPage");
-  const agentEngineeringEntries = getAgentSkillEntries().map((entry) => ({
-    name: t(entry.nameKey),
-    tools: entry.tools,
-    claim: t(entry.claimKey),
-    workflow: t(entry.workflowKey),
-    codexRole: t(entry.codexRoleKey),
-    claudeRole: t(entry.claudeRoleKey),
-    contract: t(entry.contractKey),
-    verification: t(entry.verificationKey),
-    artifacts: entry.artifacts.map((artifact) => ({
-      ...artifact,
-      label: t(artifact.labelKey),
-    })),
-  }));
-  const agentHarnessSteps = AgentHarnessSteps.map((step) => ({
-    title: t(step.titleKey),
-    description: t(step.descriptionKey),
-    command: step.command,
-  }));
   const agentEngineeringCopy = {
     eyebrow: t("agentEngineering.eyebrow"),
     title: t("agentEngineering.title"),
-    description: t("agentEngineering.description"),
-    claimLabel: t("agentEngineering.labels.claim"),
-    workflowLabel: t("agentEngineering.labels.workflow"),
-    codexLabel: t("agentEngineering.labels.codex"),
-    claudeLabel: t("agentEngineering.labels.claude"),
-    contractLabel: t("agentEngineering.labels.contract"),
-    verificationLabel: t("agentEngineering.labels.verification"),
-    proofLabel: t("agentEngineering.labels.proof"),
-    harnessEyebrow: t("agentEngineering.harness.eyebrow"),
-    harnessTitle: t("agentEngineering.harness.title"),
-    harnessDescription: t("agentEngineering.harness.description"),
-    commandLabel: t("agentEngineering.harness.commandLabel"),
+    intro: t("agentEngineering.intro"),
+    verificationLabel: t("agentEngineering.verificationLabel"),
+    verificationDescription: t("agentEngineering.verificationDescription"),
+    proofLabel: t("agentEngineering.proofLabel"),
   };
 
   return (
@@ -115,8 +89,12 @@ export function TechStackPage() {
         </section>
 
         <AgentEngineeringPanel
-          entries={agentEngineeringEntries}
-          harnessSteps={agentHarnessSteps}
+          results={AgentResultKeys.map((key) => t(key))}
+          command={agentVerificationCommand}
+          artifacts={AgentProofArtifacts.map((artifact) => ({
+            ...artifact,
+            label: t(artifact.labelKey),
+          }))}
           copy={agentEngineeringCopy}
         />
 

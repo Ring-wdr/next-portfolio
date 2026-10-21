@@ -86,7 +86,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
 						type="button"
 						key={`${image.alt}-${index}`}
 						onClick={() => openModal(index)}
-						className="relative aspect-video rounded-lg overflow-hidden border border-border hover:border-primary transition-colors cursor-pointer group"
+						className="relative aspect-16/10 rounded-lg overflow-hidden border border-border hover:border-primary transition-colors cursor-pointer group"
 					>
 						<Image
 							src={image.src}
@@ -94,7 +94,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
 							alt={image.alt}
 							fill
 							sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-							className="object-cover group-hover:scale-105 transition-transform duration-300"
+							className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
 						/>
 						{image.caption && (
 							<div className="absolute bottom-0 left-0 right-0 bg-background/80 p-2 text-sm text-foreground opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">

@@ -30,6 +30,12 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 	const heroDiagram =
 		project.diagram?.src === project.thumbnail ? project.diagram : undefined;
 	const thumbnailIsSvg = isSvgSource(project.thumbnail);
+	const briefRows = (
+		["audience", "problem", "contribution", "outcome"] as const
+	).flatMap((key) => {
+		const value = project.brief?.[key];
+		return value ? [{ key, label: t(`brief.${key}`), value }] : [];
+	});
 
 	return (
 		<main className="flex flex-1 justify-center py-6 md:py-10">
@@ -100,6 +106,26 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 					</div>
 				</section>
 
+				{briefRows.length > 0 && (
+					<section
+						className="glass-panel rounded-2xl p-5 md:p-6"
+						aria-labelledby="project-brief-title"
+						data-testid="project-brief"
+					>
+						<h2 id="project-brief-title" className="sr-only">
+							{t("brief.title")}
+						</h2>
+						<dl className="grid gap-5 md:grid-cols-2">
+							{briefRows.map((row) => (
+								<div key={row.key} className="space-y-1.5">
+									<dt className="text-sm font-semibold text-primary">{row.label}</dt>
+									<dd className="text-base leading-relaxed">{row.value}</dd>
+								</div>
+							))}
+						</dl>
+					</section>
+				)}
+
 				<ProjectAsk
 					slug={project.slug}
 					title={project.shortTitle ?? project.title}
@@ -114,13 +140,13 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 						share="vt-project-image"
 						update="vt-project-image"
 					>
-						<div className="relative aspect-video w-full overflow-hidden rounded-xl">
+						<div className="relative aspect-16/10 w-full overflow-hidden rounded-xl">
 							<Image
 								src={project.thumbnail}
 								alt={heroDiagram?.alt ?? project.title}
 								fill
 								sizes="(min-width: 1024px) 1024px, 100vw"
-								className={thumbnailIsSvg ? "bg-white object-contain" : "object-cover"}
+								className={thumbnailIsSvg ? "bg-white object-contain" : "object-cover object-top"}
 								unoptimized={thumbnailIsSvg}
 								priority
 							/>
@@ -202,20 +228,6 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 					</section>
 				))}
 
-				<section className="glass-panel rounded-2xl p-5 md:p-6">
-					<h2 className="mb-5 text-2xl font-bold">{t("techStack")}</h2>
-					<div className="flex flex-wrap gap-3">
-						{project.tech.stack.map((tech) => (
-							<span
-								key={tech}
-								className="rounded-lg border border-border bg-secondary px-4 py-2 text-sm font-medium"
-							>
-								{tech}
-							</span>
-						))}
-					</div>
-				</section>
-
 				{project.tech.challenges.length > 0 && (
 				<section className="glass-panel rounded-2xl p-5 md:p-6">
 					<h2 className="mb-6 text-2xl font-bold">
@@ -234,6 +246,12 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 										</span>
 										<h3 className="text-lg font-semibold">{challenge.title}</h3>
 									</div>
+									{challenge.plain && (
+										<p className="text-base font-medium leading-relaxed">
+											<span className="sr-only">{t("plainLabel")}: </span>
+											{challenge.plain}
+										</p>
+									)}
 									<p className="text-base leading-relaxed text-muted-foreground">
 										{challenge.description}
 									</p>
@@ -330,6 +348,22 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 					<section className="glass-panel rounded-2xl p-5 md:p-6">
 						<h2 className="mb-6 text-2xl font-bold">{t("screenshots")}</h2>
 						<ImageGallery images={visibleGallery} />
+					</section>
+				)}
+
+				{project.tech.stack.length > 0 && (
+					<section className="glass-panel rounded-2xl p-5 md:p-6">
+						<h2 className="mb-4 text-lg font-semibold">{t("techStack")}</h2>
+						<ul className="flex flex-wrap gap-2">
+							{project.tech.stack.map((tech) => (
+								<li
+									key={tech}
+									className="rounded-md border border-border bg-secondary px-2.5 py-1 text-xs font-medium"
+								>
+									{tech}
+								</li>
+							))}
+						</ul>
 					</section>
 				)}
 

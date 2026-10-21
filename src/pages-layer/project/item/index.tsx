@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { ViewTransition } from "react";
 import type { ProjectCard } from "@/shared/content/project";
@@ -17,7 +18,6 @@ export function ProjectItem({
 	category,
 	year,
 	role,
-	impact,
 	result,
 	status,
 }: ProjectCard) {
@@ -36,33 +36,24 @@ export function ProjectItem({
 				>
 					<TransitionLink
 						href={`/project/${slug}`}
-						className="group relative aspect-16/10 w-full overflow-hidden @xl:w-[360px] @xl:min-w-[360px] @xl:aspect-auto"
+						className="group relative aspect-16/10 w-full shrink-0 self-start overflow-hidden @xl:w-[360px]"
+						tabIndex={-1}
+						aria-hidden
 					>
 						<Image
 							src={src}
-							unoptimized={isSvgSource(src)}
-							alt={title}
+							alt=""
 							fill
 							sizes="(min-width: 1280px) 360px, (min-width: 768px) 50vw, 100vw"
-							className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+							className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+							unoptimized={isSvgSource(src)}
 						/>
 					</TransitionLink>
 				</ViewTransition>
-				<div className="flex w-full min-w-72 grow flex-col items-stretch justify-center gap-4 p-5 @xl:px-6">
-					<div className="flex flex-wrap items-center gap-2">
-						<span className="rounded-full border border-primary/40 bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
-							{t("storyLabel")}
-						</span>
-						<span className="rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-foreground">
-							{t(`categories.${category}`)}
-						</span>
-						<span className="rounded-full border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground">
-							{year}
-						</span>
-						<span className="rounded-full border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground">
-							{t(`status.${status}`)}
-						</span>
-					</div>
+				<div className="flex w-full min-w-0 grow flex-col items-stretch justify-center gap-3 p-5 @xl:px-6">
+					<p className="text-xs font-medium text-muted-foreground">
+						{[t(`categories.${category}`), year, t(`status.${status}`)].join(" · ")}
+					</p>
 					<TransitionLink href={`/project/${slug}`}>
 						<ViewTransition
 							name={`project-card-title-${slug}`}
@@ -72,56 +63,45 @@ export function ProjectItem({
 							share="vt-project-title"
 							update="vt-project-title"
 						>
-							<p className="text-lg font-bold leading-tight tracking-[-0.015em] hover:text-primary transition-colors">
+							<h2 className="text-lg font-bold leading-tight tracking-[-0.015em] transition-colors hover:text-primary">
 								{title}
-							</p>
+							</h2>
 						</ViewTransition>
 					</TransitionLink>
+					<p className="text-sm leading-relaxed text-foreground/88">{description}</p>
+					<p className="text-sm leading-relaxed text-muted-foreground">{result}</p>
 					{role && (
-						<p className="text-sm font-medium text-muted-foreground">
+						<p className="text-xs text-muted-foreground">
 							{t("roleLabel")}: {role}
 						</p>
 					)}
-					<div className="flex flex-col gap-2">
-						<div className="line-clamp-3 text-sm leading-normal text-muted-foreground">
-							{description}
-						</div>
-						<p className="text-sm leading-normal text-muted-foreground">
-							<span className="font-semibold text-foreground">
-								{t("impactLabel")}:{" "}
-							</span>
-							{impact}
-						</p>
-						<p className="text-sm leading-normal text-muted-foreground">
-							<span className="font-semibold text-foreground">
-								{t("resultLabel")}:{" "}
-							</span>
-							{result}
-						</p>
-						<p className="text-sm leading-normal text-muted-foreground">
-							<span className="font-semibold text-foreground">
-								{t("stackLabel")}:{" "}
-							</span>
-							{techStack.join(" • ")}
-						</p>
-					</div>
+					<ul className="flex flex-wrap gap-1.5" aria-label={t("stackLabel")}>
+						{techStack.map((tech) => (
+							<li
+								key={tech}
+								className="rounded-md bg-secondary px-2 py-0.5 text-[0.75rem] text-muted-foreground"
+							>
+								{tech}
+							</li>
+						))}
+					</ul>
 
-					<div className="mt-2 flex flex-wrap items-center gap-3">
+					<div className="mt-1 flex flex-wrap items-center gap-3">
 						<TransitionLink
 							href={`/project/${slug}`}
-							className="inline-flex items-center gap-2 rounded-lg border border-border bg-card/60 px-3 py-1.5 text-sm font-medium transition-colors hover:bg-secondary"
+							className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-border bg-card/60 px-4 text-sm font-medium transition-colors hover:bg-secondary"
 						>
 							{t("openDetail")}
 						</TransitionLink>
-						{href && (
+						{href && !href.startsWith("/") && (
 							<a
 								href={href}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="inline-flex items-center gap-2 text-sm text-primary hover:underline"
+								className="inline-flex min-h-11 items-center gap-1 px-1 text-sm text-primary hover:underline"
 							>
 								<span>{tDetail("externalLink")}</span>
-								<span>↗</span>
+								<ArrowUpRight size={14} aria-hidden />
 							</a>
 						)}
 					</div>

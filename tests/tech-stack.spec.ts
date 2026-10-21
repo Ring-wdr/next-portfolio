@@ -7,44 +7,26 @@ test.describe("Tech Stack page", () => {
     await expect(
       page.getByRole("heading", { name: /Tech Stack/i, level: 1 }),
     ).toBeVisible();
-
     await expect(page.getByTestId("tech-stack-showcase")).toHaveCount(0);
 
     const agentEngineering = page.getByTestId("agent-engineering-section");
     await expect(agentEngineering).toBeVisible();
-    await expect(agentEngineering).toContainText(
-      /I use agents like working surfaces, not magic shortcuts/i,
-    );
-    await expect(agentEngineering).toContainText(
-      /Task decomposition & spec writing/i,
-    );
-    await expect(agentEngineering).toContainText(/Codex/i);
-    await expect(agentEngineering).toContainText(/Claude Code/i);
+    await expect(agentEngineering).toContainText(/Opus 5\.5 with Claude Code/);
 
     const proofLinks = agentEngineering.getByTestId("agent-proof-link");
-    await expect(proofLinks).toHaveCount(6);
+    await expect(proofLinks).toHaveCount(2);
     await expect(
-      proofLinks.filter({ hasText: /Agent engineering doc/i }).first(),
-    ).toBeVisible();
-    await expect(
-      proofLinks.filter({ hasText: /react-devtool-cli case study/i }).first(),
-    ).toBeVisible();
-    await expect(
-      proofLinks.filter({ hasText: /Agent engineering doc/i }).first(),
+      proofLinks.filter({ hasText: /Agent workflow doc/i }),
     ).toHaveAttribute(
       "href",
       "https://github.com/Ring-wdr/next-portfolio/blob/main/docs/agent-engineering.md",
     );
     await expect(
-      proofLinks.filter({ hasText: /react-devtool-cli case study/i }).first(),
+      proofLinks.filter({ hasText: /react-devtool-cli case study/i }),
     ).toHaveAttribute("href", "/en/project/react-devtool-cli");
 
-    const harness = page.getByTestId("agent-engineering-harness");
-    await expect(harness).toContainText(
-      /The workflow I expect an agent task to survive/i,
-    );
-    await expect(harness).toContainText(
-      /pnpm lint && pnpm test -- --run && pnpm build/i,
+    await expect(page.getByTestId("agent-engineering-harness")).toContainText(
+      "pnpm lint && pnpm test -- --run && pnpm build",
     );
   });
 });
