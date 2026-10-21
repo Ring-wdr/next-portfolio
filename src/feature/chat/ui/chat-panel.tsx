@@ -56,7 +56,7 @@ export function ChatPanel({
         <button
           type="button"
           onClick={onClose}
-          className="flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground"
+          className="flex h-11 w-11 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground"
           aria-label={t("close")}
         >
           <X size={16} />
@@ -84,7 +84,7 @@ export function ChatPanel({
                     <button
                       type="button"
                       onClick={() => onSuggestion(question)}
-                      className="w-full rounded-xl border border-border/60 bg-card/70 px-3 py-2 text-left text-xs transition-colors hover:border-primary/40 hover:bg-secondary"
+                      className="min-h-11 w-full rounded-xl border border-border/60 bg-card/70 px-3 py-2 text-left text-sm transition-colors hover:border-primary/40 hover:bg-secondary"
                     >
                       {question}
                     </button>

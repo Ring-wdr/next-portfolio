@@ -8,7 +8,10 @@
     "menu": "Open menu",
     "closeMenu": "Close menu",
     "fit": "Role Fit",
-    "resume": "Resume"
+    "resume": "Resume",
+    "menuTitle": "Menu",
+    "mainNavigation": "Main navigation",
+    "skipToContent": "Skip to content"
   },
   "Footer": {
     "allRightsReserved": "All rights reserved.",
@@ -180,7 +183,7 @@
     "role": "Frontend developer · 4 years of experience",
     "intro": "I'm a frontend developer with four years of professional experience. At ScatterX I spent three years building the frontend of a B2B data analysis and visualization SaaS, and on the move of a jQuery analytics platform to Next.js I handled the initial setup, the UI core, and the architecture. Before that I built the frontend of an accounting service for hospitals at 슈가브릭스 and worked on ERP development at 시스웨어. I build and run my personal projects on my own, from planning through the server and deployment.",
     "heroEyebrow": "About",
-    "portraitAlt": "Portrait of Manjoong Kim",
+    "portraitAlt": "Ring-wdr GitHub profile image",
     "strengthsTitle": "Strengths",
     "focusTitle": "Current focus",
     "cleanCode": "Clean Code",
@@ -301,7 +304,7 @@
     "team": "Team",
     "role": "Role",
     "github": "GitHub",
-    "liveDemo": "Live Demo",
+    "liveDemo": "Live site",
     "externalLink": "External Link",
     "overview": "Project Overview",
     "background": "Background",

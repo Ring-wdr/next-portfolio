@@ -185,7 +185,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 								<h3 className="mb-2 text-sm font-semibold text-primary">
 									{t("features")}
 								</h3>
-								<ul className="list-disc list-inside space-y-2">
+								<ul className="list-disc space-y-2 pl-5 marker:text-primary">
 									{project.overview.features.map((feature) => (
 										<li key={feature} className="text-base leading-relaxed">
 											{feature}
@@ -240,8 +240,8 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 								className="rounded-xl border border-border/70 bg-card/60 p-4"
 							>
 								<div className="flex flex-col gap-2">
-									<div className="flex items-center gap-2">
-										<span className="text-sm font-bold text-primary">
+									<div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+										<span className="shrink-0 whitespace-nowrap text-sm font-bold text-primary">
 											{t("challenge")} {index + 1}
 										</span>
 										<h3 className="text-lg font-semibold">{challenge.title}</h3>
@@ -259,8 +259,8 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 
 								{project.tech.solutions[index] && (
 									<div className="mt-4 flex flex-col gap-2 border-l-2 border-primary/60 pl-4">
-										<div className="flex items-center gap-2">
-											<span className="text-sm font-bold text-primary">
+										<div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+											<span className="shrink-0 whitespace-nowrap text-sm font-bold text-primary">
 												{t("solution")}
 											</span>
 											<h4 className="text-lg font-semibold">
@@ -308,14 +308,10 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 								<h3 className="mb-4 text-lg font-semibold text-muted-foreground">
 									{t("feedback")}
 								</h3>
-								<ul className="space-y-2">
+								<ul className="list-disc space-y-2 pl-5 marker:text-primary">
 									{feedback.map((item) => (
-										<li
-											key={item}
-											className="text-base leading-relaxed flex items-start gap-2"
-										>
-											<span className="text-primary">•</span>
-											<span>{item}</span>
+										<li key={item} className="text-base leading-relaxed">
+											{item}
 										</li>
 									))}
 								</ul>
@@ -327,14 +323,10 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 								<h3 className="mb-4 text-lg font-semibold text-muted-foreground">
 									{t("improvements")}
 								</h3>
-								<ul className="space-y-2">
+								<ul className="list-disc space-y-2 pl-5 marker:text-primary">
 									{improvements.map((item) => (
-										<li
-											key={item}
-											className="text-base leading-relaxed flex items-start gap-2"
-										>
-											<span className="text-primary">✓</span>
-											<span>{item}</span>
+										<li key={item} className="text-base leading-relaxed">
+											{item}
 										</li>
 									))}
 								</ul>

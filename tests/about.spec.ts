@@ -8,7 +8,7 @@ test.describe("About page", () => {
     await expect(hero).toBeVisible();
     await expect(hero.getByRole("heading", { level: 1 })).toBeVisible();
     await expect(
-      hero.getByRole("img", { name: /portrait of manjoong kim/i }),
+      hero.getByRole("img", { name: /GitHub profile image/i }),
     ).toBeVisible();
     const focus = page.getByTestId("about-focus");
     await expect(focus).toBeVisible();

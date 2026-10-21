@@ -8,7 +8,10 @@
     "menu": "메뉴 열기",
     "closeMenu": "메뉴 닫기",
     "fit": "JD 매칭",
-    "resume": "이력서"
+    "resume": "이력서",
+    "menuTitle": "메뉴",
+    "mainNavigation": "주 메뉴",
+    "skipToContent": "본문으로 건너뛰기"
   },
   "Footer": {
     "allRightsReserved": "All rights reserved.",
@@ -180,7 +183,7 @@
     "role": "프론트엔드 개발자 · 실무 4년",
     "intro": "실무 4년 차 프론트엔드 개발자입니다. 스캐터엑스에서 3년 동안 데이터 분석·시각화 B2B SaaS의 프론트엔드를 개발했고, jQuery 기반 분석 플랫폼을 Next.js로 옮기는 작업에서 초기 세팅, UI 코어, 구조 설계를 맡았습니다. 그전에는 슈가브릭스에서 병원 대상 회계 처리 서비스의 프론트엔드를, 시스웨어에서 ERP 개발을 했습니다. 개인 프로젝트는 기획부터 서버, 배포까지 혼자 만들어 운영합니다.",
     "heroEyebrow": "소개",
-    "portraitAlt": "김만중 프로필 사진",
+    "portraitAlt": "Ring-wdr GitHub 프로필 이미지",
     "strengthsTitle": "강점",
     "focusTitle": "현재 집중 영역",
     "cleanCode": "깔끔한 코드",
@@ -301,7 +304,7 @@
     "team": "팀",
     "role": "역할",
     "github": "GitHub",
-    "liveDemo": "Live Demo",
+    "liveDemo": "라이브 사이트",
     "externalLink": "외부 링크",
     "overview": "프로젝트 개요",
     "background": "배경",
@@ -338,7 +341,7 @@
     }
   },
   "FitPage": {
-    "eyebrow": "Role Fit",
+    "eyebrow": "JD 매칭",
     "title": "채용공고로 적합도 확인하기",
     "description": "채용공고(JD)를 붙여넣으면 요구사항마다 포트폴리오의 근거 프로젝트를 연결한 적합도 리포트를 만듭니다.",
     "honesty": "근거가 없는 요구사항은 부풀리지 않고 '공백'으로 표시합니다. 결과는 저장되지 않습니다.",

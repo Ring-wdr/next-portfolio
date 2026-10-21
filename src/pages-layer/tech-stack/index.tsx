@@ -28,7 +28,7 @@ export function TechStackPage() {
         <section className="relative overflow-hidden rounded-[2rem] border border-border/70 bg-[linear-gradient(145deg,color-mix(in_oklch,var(--color-surface),transparent_4%)_0%,color-mix(in_oklch,var(--color-surface),var(--color-highlight)_8%)_100%)] px-6 py-8 shadow-[0_34px_90px_-72px_color-mix(in_oklch,var(--color-primary),transparent_24%)] md:px-8 md:py-10">
           <div className="absolute inset-y-0 right-0 hidden w-[38%] bg-[radial-gradient(circle_at_top,color-mix(in_oklch,var(--color-highlight),transparent_82%),transparent_58%)] lg:block" />
           <div className="relative grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_17rem] lg:items-end">
-            <div className="space-y-5">
+            <div className="min-w-0 space-y-5">
               <h1 className="max-w-[10ch] text-[clamp(3rem,7vw,5.8rem)] font-bold leading-[0.92] tracking-[-0.06em]">
                 {t("title")}
               </h1>
@@ -37,7 +37,7 @@ export function TechStackPage() {
               </p>
               <div className="grid gap-6 border-t border-border/70 pt-6 sm:grid-cols-3">
                 <div className="space-y-1 border-t border-border/60 pt-3 sm:border-t-0 sm:pt-0">
-                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                     {t("stats.totalTech")}
                   </p>
                   <p className="text-2xl font-semibold tracking-[-0.04em]">
@@ -45,7 +45,7 @@ export function TechStackPage() {
                   </p>
                 </div>
                 <div className="space-y-1 border-t border-border/60 pt-3 sm:border-t-0 sm:pt-0">
-                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                     {t("stats.categories")}
                   </p>
                   <p className="text-2xl font-semibold tracking-[-0.04em]">
@@ -53,7 +53,7 @@ export function TechStackPage() {
                   </p>
                 </div>
                 <div className="space-y-1 border-t border-border/60 pt-3 sm:border-t-0 sm:pt-0">
-                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                     {t("stats.primaryTrack")}
                   </p>
                   <p className="text-2xl font-semibold tracking-[-0.04em]">
@@ -64,23 +64,23 @@ export function TechStackPage() {
             </div>
 
             <aside className="space-y-4 border-t border-border/70 pt-6 lg:border-t-0 lg:border-l lg:pl-6 lg:pt-0">
-              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                 {t("methodTitle")}
               </p>
               <p className="text-sm leading-6 text-muted-foreground md:text-base">
                 {t("methodDescription")}
               </p>
               <div className="flex flex-wrap gap-2">
-                <span className="rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[0.72rem] font-medium">
+                <span className="rounded-full border border-border/70 bg-background/70 px-3 py-1 text-xs font-medium">
                   {t("methodTags.architecture")}
                 </span>
-                <span className="rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[0.72rem] font-medium">
+                <span className="rounded-full border border-border/70 bg-background/70 px-3 py-1 text-xs font-medium">
                   {t("methodTags.designSystem")}
                 </span>
-                <span className="rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[0.72rem] font-medium">
+                <span className="rounded-full border border-border/70 bg-background/70 px-3 py-1 text-xs font-medium">
                   {t("methodTags.performance")}
                 </span>
-                <span className="rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[0.72rem] font-medium">
+                <span className="rounded-full border border-border/70 bg-background/70 px-3 py-1 text-xs font-medium">
                   {t("methodTags.collaboration")}
                 </span>
               </div>
@@ -109,7 +109,7 @@ export function TechStackPage() {
           return (
             <Fragment key={category}>
               <section className="grid gap-6 border-t border-border/70 pt-8 lg:grid-cols-[13rem_minmax(0,1fr)]">
-                <div className="space-y-3 lg:pr-4">
+                <div className="min-w-0 space-y-3 lg:pr-4">
                   <h2 className="text-xl font-semibold md:text-2xl">
                     {t(category)}
                   </h2>
@@ -120,7 +120,7 @@ export function TechStackPage() {
                   )}
                 </div>
 
-                <div className="space-y-5">
+                <div className="min-w-0 space-y-5">
                   <div className="grid gap-6 md:grid-cols-2">
                     {stacks.slice(0, 2).map((tech) => (
                       <article

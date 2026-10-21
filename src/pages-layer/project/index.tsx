@@ -89,7 +89,7 @@ export function ProjectPage({ projects }: { projects: ProjectCard[] }) {
 								key={mode}
 								type="button"
 								className={classNames(
-									"flex h-8 shrink-0 items-center justify-center rounded-full border px-4 text-sm font-medium transition-colors",
+									"flex h-11 shrink-0 items-center justify-center rounded-full border px-4 text-sm font-medium transition-colors",
 									viewMode === mode
 										? "border-primary bg-primary text-primary-foreground"
 										: "border-border bg-secondary text-foreground hover:border-primary",
@@ -106,7 +106,7 @@ export function ProjectPage({ projects }: { projects: ProjectCard[] }) {
 								key={category}
 								type="button"
 								className={classNames(
-									"flex h-8 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg px-4",
+									"flex h-11 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg px-4",
 									selectedCategory === category
 										? "bg-primary text-primary-foreground"
 										: "bg-secondary text-foreground",
@@ -151,7 +151,7 @@ export function ProjectPage({ projects }: { projects: ProjectCard[] }) {
 									type="button"
 									aria-pressed={selectedTech === tech}
 									className={classNames(
-										"min-h-9 rounded-full border px-3 py-1 text-xs font-medium transition-colors",
+										"min-h-11 rounded-full border px-3 py-1 text-xs font-medium transition-colors",
 										selectedTech === tech
 											? "border-primary text-primary"
 											: "border-border text-muted-foreground hover:border-primary",

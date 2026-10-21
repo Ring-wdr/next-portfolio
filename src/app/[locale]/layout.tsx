@@ -61,16 +61,7 @@ export const metadata: Metadata = {
 	},
 	icons: {
 		icon: [{ url: "/favicon.ico" }],
-		apple: [
-			{ url: "/icon/apple-icon-57x57.png", sizes: "57x57" },
-			{ url: "/icon/apple-icon-60x60.png", sizes: "60x60" },
-			{ url: "/icon/apple-icon-72x72.png" },
-			{ url: "/icon/apple-icon-76x76.png" },
-			{ url: "/icon/apple-icon-120x120.png" },
-			{ url: "/icon/apple-icon-144x144.png" },
-			{ url: "/icon/apple-icon-152x152.png" },
-			{ url: "/icon/apple-icon-180x180.png" },
-		],
+		apple: [{ url: "/icon/apple-icon-180x180.png", sizes: "180x180" }],
 		other: [
 			{ url: "/icon/favicon-16x16.png" },
 			{ url: "/icon/favicon-32x32.png" },
@@ -132,7 +123,9 @@ export default async function LocaleLayout({
 						<ChatProvider>
 							<div className="flex h-full grow flex-col">
 								<Header />
-								{children}
+								<div id="main-content" tabIndex={-1} className="flex flex-1 flex-col outline-none">
+									{children}
+								</div>
 								{modal}
 								<Footer />
 								<ChatWidget />

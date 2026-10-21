@@ -16,7 +16,7 @@ export function LanguageToggle() {
   return (
     <button
       onClick={handleLanguageChange}
-      className="flex items-center justify-center h-10 px-3 rounded-lg hover:bg-secondary transition-colors text-sm font-medium"
+      className="flex items-center justify-center h-11 min-w-11 px-3 rounded-lg hover:bg-secondary transition-colors text-sm font-medium"
       aria-label={`Switch to ${locale === "ko" ? "English" : "한국어"}`}
     >
       {locale === "ko" ? "EN" : "KO"}

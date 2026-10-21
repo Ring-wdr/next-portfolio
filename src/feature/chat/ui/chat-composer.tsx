@@ -46,12 +46,12 @@ export function ChatComposer({
           placeholder={t("placeholder")}
           disabled={isDisabled}
           rows={2}
-          className="w-full resize-none rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary disabled:opacity-50"
+          className="w-full resize-none rounded-lg border border-border bg-background px-3 py-2 text-base text-foreground placeholder:text-muted-foreground md:text-sm focus:outline-none focus:ring-1 focus:ring-primary disabled:opacity-50"
         />
         <button
           type="submit"
           disabled={isDisabled || !input.trim()}
-          className="shrink-0 self-end rounded-lg bg-primary px-3 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-40"
+          className="min-h-11 shrink-0 self-end rounded-lg bg-primary px-3 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-40"
         >
           {isDisabled ? t("sending") : t("send")}
         </button>

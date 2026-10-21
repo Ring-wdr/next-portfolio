@@ -9,7 +9,7 @@ export function Footer() {
   const t = useTranslations("Footer");
 
   return (
-    <footer className="mt-auto border-t border-border/70 py-8">
+    <footer className="mt-auto border-t border-border/70 pt-8 pb-24 md:pb-8">
       <div className="section-shell mx-auto">
         <div className="glass-panel flex flex-col items-center justify-between gap-5 rounded-2xl px-4 py-5 md:flex-row md:px-6">
           <div className="flex flex-col items-center md:items-start">
@@ -25,7 +25,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t("github")}
-              className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground"
+              className="flex h-11 w-11 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground"
             >
               <GithubIcon width={18} height={18} />
             </Link>
@@ -34,18 +34,18 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t("linkedin")}
-              className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground"
+              className="flex h-11 w-11 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground"
             >
               <LinkedinIcon width={18} height={18} />
             </Link>
             <Link
               href={`mailto:${contactEmail}`}
               aria-label={t("email")}
-              className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground"
+              className="flex h-11 w-11 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground"
             >
               <Mail size={18} />
             </Link>
-            <ModeToggle />
+            <ModeToggle className="h-11 w-11" />
           </div>
         </div>
       </div>

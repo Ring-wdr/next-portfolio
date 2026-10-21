@@ -128,7 +128,7 @@ export function FitPage({
 						rows={10}
 						disabled={isLoading}
 						aria-describedby="fit-jd-hint"
-						className="mt-3 w-full resize-y rounded-2xl border border-border bg-background/80 px-4 py-3 text-sm leading-6 placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/60 disabled:opacity-60"
+						className="mt-3 w-full resize-y rounded-2xl border border-border bg-background/80 px-4 py-3 text-base leading-6 md:text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/60 disabled:opacity-60"
 					/>
 					<div className="mt-3 flex flex-wrap items-center justify-between gap-3">
 						<p

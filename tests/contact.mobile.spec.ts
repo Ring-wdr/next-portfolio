@@ -7,7 +7,7 @@ test.describe("Recruiter mobile smoke @mobile", () => {
     await page.getByRole("button", { name: /메뉴 열기|Open menu/i }).click();
     // The home page also has a "Contact" CTA, so stay inside the drawer.
     await page
-      .getByRole("navigation", { name: /메뉴 열기|Open menu/i })
+      .getByRole("navigation", { name: /^(메뉴|Menu)$/i })
       .getByRole("link", { name: /연락하기|Contact/i })
       .click();
 

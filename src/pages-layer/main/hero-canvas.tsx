@@ -107,12 +107,10 @@ export function HeroCanvas({ className }: HeroCanvasProps) {
 			const reducedMotion = window.matchMedia(
 				"(prefers-reduced-motion: reduce)",
 			).matches;
-			const isMobile = container.clientWidth < 640;
+			// Gate on the viewport: on desktop the canvas only fills the column beside the copy.
+			const isMobile = window.innerWidth < 640;
 
-			if (isMobile) {
-				container.style.background = "oklch(0.10 0.014 258)";
-				return;
-			}
+			if (isMobile) return;
 
 			const particleCount = cores < 4 ? 40 : 80;
 			const fieldOversample = cores < 4 ? 1 : 2;
@@ -523,7 +521,7 @@ export function HeroCanvas({ className }: HeroCanvasProps) {
 			)}
 			aria-hidden="true"
 			role="presentation"
-			style={{ background: "oklch(0.10 0.014 258)" }}
+			style={{ background: "var(--hero-bg)" }}
 		/>
 	);
 }

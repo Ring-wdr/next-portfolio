@@ -86,7 +86,8 @@ export function buildPageMetadata({
 
   return {
     metadataBase: new URL(getBaseUrl()),
-    title,
+    // Page titles already carry the name; skip the layout's "%s | Manjoong Kim" template.
+    title: { absolute: title },
     description,
     keywords,
     alternates: {
