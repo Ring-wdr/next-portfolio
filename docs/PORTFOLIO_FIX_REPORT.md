@@ -140,3 +140,64 @@ portfolio-content
 - /about의 "강점"(깔끔한 코드, UI/UX 디자인, 접근성, 성능 최적화)과 "현재 집중 영역"은 지시서 범위 밖이라 그대로 두었습니다. 일반론에 가까워 지우거나 근거를 붙일지 정해 주세요.
 - 영어 경력 문장은 확정 한국어 문장을 뜻이 같게 옮긴 것입니다. 영문 이력서 표현이 따로 있으면 맞추겠습니다.
 - `next dev`가 실행될 때마다 `AGENTS.md`의 Next.js 블록을 다시 쓰면서 "pnpm을 쓴다"는 저장소 규칙 줄을 지웁니다. 이 변경은 커밋하지 않았습니다. 규칙을 블록 밖으로 옮기는 것을 권합니다.
+
+---
+
+## Phase 3. 프로젝트 서술 재구성
+
+### 1. 변경 파일과 요약
+
+next-portfolio
+- `src/shared/content/project-schema.ts`: `brief`(audience, problem, contribution, outcome, 각각 선택값), 챌린지의 `plain`(비개발자용 한 줄)
+- `src/pages-layer/project/[slug]/index.tsx`: 상단 요약 박스(누구를 위한 것인가 / 어떤 문제였나 / 내가 한 일 / 결과, 값이 있는 줄만), 챌린지마다 한 줄 요약을 먼저 표시, 기술 스택은 작은 태그로 페이지 하단, 히어로 이미지 16:10
+- `src/pages-layer/project/item/index.tsx`: 카드에 서비스 설명과 결과 문장을 먼저, 기술은 작은 태그로. "프로젝트 스토리" 칩과 "임팩트/결과" 라벨 제거, 썸네일 16:10 고정 + `object-top`
+- `src/pages-layer/project/index.tsx`: 기술 필터 칩(30개 이상)을 기본 접힘 "기술로 필터" 토글 안으로, 모바일에서 통계 카드 숨김
+- `src/pages-layer/main/index.tsx`: 홈 대표 작업 목록에 기술 나열 대신 서비스 설명, 썸네일 16:10
+- `src/shared/ui/image-gallery.tsx`: 썸네일 16:10, `object-top`
+- `src/pages-layer/tech-stack/agent-engineering-panel.tsx`, `src/shared/constant/agent-engineering.ts`, `messages/*`: AI 섹션을 카드 3개 + 4단계 하니스에서 확정 도입 문단, 결과 3줄, 검증 명령, 링크 2개로 축소
+- 테스트: `project-detail.test.tsx`(요약 박스, 숨김 이미지, 빈 섹션, 한 줄 요약), `agent-engineering.test.ts`, `tests/tech-stack.spec.ts` 갱신
+- fixture: Phase 2 커밋 직전 미리보기 스크립트가 fixture를 되돌리면서 빠진 XMORSE 항목을 다시 넣음
+
+portfolio-content
+- 모든 프로젝트에 `brief`와 챌린지 `plain` 추가. 확인되지 않은 칸(역대카·대도의 "내가 한 일", 대도의 "어떤 문제였나")은 비워 두어 렌더링하지 않음
+- POCAZ(풀스택 대표작): 저장소에서 확인한 내용으로 챌린지/해결책 5개를 새로 씀. Elysia를 `src/app/api/[[...slugs]]/route.ts`에 마운트하고 Eden 클라이언트로 타입 공유(트레이드오프: Next 서버가 Node라 Bun 전용 기능 금지), Prisma는 서버 DB 접근 전담·Supabase는 Auth/Storage/Realtime, public 테이블 전체 RLS와 ChatMessage 멤버 읽기 정책, ChatRoomMember의 (roomId, userId) 유니크와 lastReadAt 기반 안 읽은 수, 테스트 파일 59개(API 23, UI 26, 유틸 6, lib 4, 직접 셈), 좋아요 API 5초 10회 제한, Prisma 마이그레이션 8개와 `db:migrate:prod`(prisma migrate deploy). "Intersection Observer 이미지 lazy loading" 서술은 저장소에서 확인되지 않아 삭제(IntersectionObserver는 채팅/알림 목록에만 있음). 아키텍처 다이어그램(`images/pocaz-architecture.svg`)
+- 티키타카 TICKET: "왜 만들었나, 누가 쓰나" 요약 박스, 구조 다이어그램(`images/ticket-sim-architecture.svg`: 메인 스레드 Preact와 Web Worker 가상 서버, clock/miniRedis/queueService/bookingEngine/mq/rateLimiter, 고정 시드, 도착 분포 곡선, Vitest)
+- Travel Records: 기존 서술(OffsetTimeOriginal, 180km/h, 700m, Zod 빌드 게이트, 4개국 36일 626장) 유지, 요약 박스 추가
+- 법률사무소 대도: 비개발자용 배경·목표·기능으로 재작성(라이브 사이트에서 확인한 기능 위주), "SvelteKit 라우팅 학습" 챌린지 삭제, 역할은 챌린지(DB, RLS)와 범위가 맞지 않아 제거 후 TODO. 운영 도메인 지표 추가
+- react-devtool-cli: 요약을 쉬운 한 줄로("React 앱 안의 컴포넌트 상태와 렌더링 성능을 터미널 명령으로 확인하는 개발 도구"), 역할·배운 점의 "실행 표면" 같은 표현 정리, 문서 사이트 링크 추가
+- 프론트엔드 주니어 스터디: 저장소와 라이브 사이트가 22주인데 사이트에는 15주로 적혀 있어 22주로 수정, 테스트 파일 11개 지표
+- 스크린샷: Playwright로 라이브 사이트를 캡처해 갤러리를 1장에서 2~3장으로(Travel Records, POCAZ, 티키타카, react-devtool-cli, 주니어 스터디, 역대카, 대도). 캡션은 화면에 보이는 것만 적음
+- 핫링크: `postfiles.pstatic.net` 이미지를 `images/daedo-law.png`로 옮김(`projects.json`에서 0건). 대도 썸네일은 사이트 첫 화면 캡처로 바꿈
+
+### 2. 검증
+
+- `pnpm lint && pnpm test -- --run && pnpm build`: 통과 (0 errors, 기존 경고 1건, 테스트 63개)
+- `pnpm validate`(portfolio-content): 통과 (이미지 참조 전부 존재)
+- grep: `postfiles.pstatic.net` 0건(projects.json), 카피 내 `→`, `⇒`, `—`, `↔` 0건(projects.json)
+- 미리보기(실제 콘텐츠): 390px에서 /project의 첫 프로젝트가 첫 화면 안에 들어옴(통계 카드 숨김, 기술 필터 접힘)
+
+### 3. 스크린샷
+
+수정 후: `/`, `/project`, `/project/{pocaz,ticket-sim,daedo-law,react-devtool-cli,tour-record}`, `/tech-stack` (390, 1440).
+
+### 4. 남은 TODO(user) (추가분)
+
+| 위치 | TODO | 질문 |
+|---|---|---|
+| POCAZ | Elysia를 Next.js 라우트 안에 둔 이유 | 별도 서버 대신 Next.js 안에 Elysia를 둔 판단 이유가 무엇이었나요? (구조와 트레이드오프는 저장소 기준으로 적었습니다) |
+| POCAZ | 채팅 화면 캡처 | 로그인이 필요해 자동 캡처를 못 했습니다. 채팅 화면 캡처를 주실 수 있나요? |
+| Travel Records | 운영 지표 | 새 여행 하나를 추가하는 데 걸리는 시간 같은 운영 지표가 있나요? |
+| 법률사무소 대도 | 이전 문제 | 사이트를 만들기 전 사무소는 콘텐츠를 어떻게 수정했나요? |
+| 법률사무소 대도 | 역할 | 2인 팀에서 맡은 범위가 프론트엔드만인가요, DB 설계와 RLS까지인가요? |
+| 법률사무소 대도 | 고객 커뮤니케이션 | 고객과 요구사항을 어떻게 주고받았나요? |
+| 법률사무소 대도 | 공개일, 유지보수 | 2023.05 공개가 맞나요? 지금도 유지보수를 하나요? |
+| 법률사무소 대도 | 관리자 화면 범위 | 관리자 화면에서 무엇을 수정할 수 있나요? (공개 사이트에서는 확인할 수 없음) |
+| 프론트엔드 주니어 스터디 | 기간 | 2025.11 - 2026.01이 맞나요? 저장소 마지막 커밋은 2026.04입니다. |
+| 메뉴 고르기 | 기능별 캡처 | 첫 화면 외에는 입력이 필요해 캡처하지 못했습니다. |
+
+### 5. 보류한 항목
+
+- 대도 갤러리의 현판 이미지에는 변호사 실명이 들어 있습니다. 기존 사이트에서 이미 쓰던 이미지라 옮기기만 했고, 빼야 하면 알려 주세요.
+- 역대카 첫 화면 캡처에는 사이트의 견적/계약 건수가 보여서 갤러리에 넣지 않았습니다(친환경 차량 목록 캡처만 추가).
+- `next.config.ts`의 `postfiles.pstatic.net` remotePatterns는 유지했습니다. 현재 운영 매니페스트가 아직 그 이미지를 쓰므로, portfolio-content 머지 후 지우면 됩니다.
+- 메뉴 고르기의 "협업 필터링" 등 외부에서 확인할 수 없는 서술은 그대로 두고 한 줄 요약만 붙였습니다.
