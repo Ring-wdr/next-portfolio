@@ -62,3 +62,21 @@ export function summarizeCoverage(requirements: FitRequirement[]) {
 export type FitApiResponse =
   | { ok: true; report: FitReport }
   | { ok: false; error: "invalid_input" | "unavailable" | "invalid_output" };
+
+/** What the model has finished writing so far. */
+export type FitPartialReport = {
+  summary?: string;
+  requirements: FitRequirement[];
+};
+
+/**
+ * One line of the NDJSON stream /api/fit sends once input checks pass, so the
+ * page can show the report as the model writes it.
+ */
+export type FitStreamEvent =
+  | { type: "progress"; partial: FitPartialReport }
+  | { type: "retry" }
+  | { type: "done"; report: FitReport }
+  | { type: "error"; error: "unavailable" | "invalid_output" };
+
+export const FIT_STREAM_CONTENT_TYPE = "application/x-ndjson; charset=utf-8";

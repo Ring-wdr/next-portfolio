@@ -34,6 +34,50 @@ test.describe("Role fit page", () => {
   });
 });
 
+test.describe("Role fit progress", () => {
+  test("shows real progress while the report streams in", async ({ page }) => {
+    let release: () => void = () => {};
+    const held = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    await page.route("**/api/fit", async (route) => {
+      await held;
+      await route.fulfill({
+        headers: { "content-type": "application/x-ndjson; charset=utf-8" },
+        body: [
+          { type: "progress", partial: { summary: report.report.summary, requirements: [report.report.requirements[0]] } },
+          { type: "done", report: report.report },
+        ]
+          .map((event) => JSON.stringify(event))
+          .join("\n"),
+      });
+    });
+    await page.goto("/en/fit");
+    await page.getByRole("button", { name: "Use a sample job post" }).click();
+    await page.getByRole("button", { name: "Analyze fit" }).click();
+
+    const progress = page.getByTestId("fit-progress");
+    await expect(progress).toContainText("The AI is reading the job description");
+    await expect(progress.locator('[aria-current="step"]')).toContainText("AI reading");
+    await expect(progress.getByRole("link").first()).toHaveAttribute("target", "_blank");
+
+    release();
+    await expect(page.getByTestId("fit-report")).toContainText("50%");
+    await expect(progress).toHaveCount(0);
+  });
+
+  test("cancel returns to the form", async ({ page }) => {
+    await page.route("**/api/fit", () => new Promise(() => {}));
+    await page.goto("/en/fit");
+    await page.getByRole("button", { name: "Use a sample job post" }).click();
+    await page.getByRole("button", { name: "Analyze fit" }).click();
+
+    await page.getByRole("button", { name: "Cancel analysis" }).click();
+    await expect(page.getByTestId("fit-progress")).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Analyze fit" })).toBeEnabled();
+  });
+});
+
 test.describe("Home hero ask", () => {
   test("sends a persona starter question into the chat panel", async ({ page }) => {
     await page.route("**/api/chat", (route) =>

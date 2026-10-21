@@ -1,6 +1,7 @@
 // @vitest-environment node
 import { APICallError } from "ai";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import type { FitStreamEvent } from "@/feature/fit/lib/report";
 
 const envMock = vi.hoisted(() => ({
   OPENROUTER_API_KEY: "test-key" as string | undefined,
@@ -12,10 +13,10 @@ vi.mock("@/shared/content/project-source", async () => {
   return { getProjects: async () => getFixtureProjects() };
 });
 
-const generateTextMock = vi.hoisted(() => vi.fn());
+const streamTextMock = vi.hoisted(() => vi.fn());
 vi.mock("ai", async (importOriginal) => ({
   ...(await importOriginal<typeof import("ai")>()),
-  generateText: generateTextMock,
+  streamText: streamTextMock,
 }));
 
 import { POST } from "./route";
@@ -24,10 +25,33 @@ const jd = "React와 Next.js 기반 프론트엔드 개발. TypeScript 3년 이�
 
 const report = {
   summary: "요약",
-  requirements: [{ requirement: "React", match: "strong", evidence: "근거", projectSlugs: ["pocaz"] }],
+  requirements: [
+    { requirement: "React", match: "strong", evidence: "근거", projectSlugs: ["pocaz"] },
+    { requirement: "Vue", match: "gap", evidence: "없음", projectSlugs: [] },
+  ],
   gaps: [],
   questions: [],
 };
+
+/** A fake streamText result that emits `text` in small deltas. */
+function textStream(text: string, chunkSize = 8) {
+  return {
+    fullStream: (async function* () {
+      for (let i = 0; i < text.length; i += chunkSize) {
+        yield { type: "text-delta", text: text.slice(i, i + chunkSize) };
+      }
+      yield { type: "finish", finishReason: "stop" };
+    })(),
+  };
+}
+
+function failingStream(error: unknown) {
+  return {
+    fullStream: (async function* () {
+      yield { type: "error", error };
+    })(),
+  };
+}
 
 function post(body: unknown) {
   return POST(
@@ -39,10 +63,18 @@ function post(body: unknown) {
   );
 }
 
+async function readEvents(response: Response): Promise<FitStreamEvent[]> {
+  const body = await response.text();
+  return body
+    .split("\n")
+    .filter(Boolean)
+    .map((line) => JSON.parse(line) as FitStreamEvent);
+}
+
 describe("POST /api/fit", () => {
   beforeEach(() => {
     envMock.OPENROUTER_API_KEY = "test-key";
-    generateTextMock.mockReset();
+    streamTextMock.mockReset();
   });
 
   it("rejects job descriptions outside the length bounds", async () => {
@@ -51,33 +83,52 @@ describe("POST /api/fit", () => {
     expect(await response.json()).toEqual({ ok: false, error: "invalid_input" });
   });
 
-  it("returns a validated report", async () => {
-    generateTextMock.mockResolvedValue({ text: `\`\`\`json\n${JSON.stringify(report)}\n\`\`\`` });
+  it("streams progress and ends with the validated report", async () => {
+    // Each delta counts as a second later, so the progress throttle never skips one.
+    let clock = 0;
+    const now = vi.spyOn(Date, "now").mockImplementation(() => (clock += 1000));
+    streamTextMock.mockReturnValue(
+      textStream(`\`\`\`json\n${JSON.stringify(report)}\n\`\`\``),
+    );
     const response = await post({ jd, locale: "ko" });
-    expect(response.status).toBe(200);
-    expect(await response.json()).toEqual({ ok: true, report });
+
+    expect(response.headers.get("content-type")).toMatch(/ndjson/);
+    const events = await readEvents(response);
+    now.mockRestore();
+    expect(events.at(-1)).toEqual({ type: "done", report });
+
+    const progress = events.filter((event) => event.type === "progress");
+    expect(progress.length).toBeGreaterThan(0);
+    for (const event of progress) {
+      if (event.type !== "progress") continue;
+      // Rows only appear once the model has moved past them.
+      expect(report.requirements).toEqual(
+        expect.arrayContaining(event.partial.requirements),
+      );
+    }
   });
 
-  it("retries once on malformed output, then gives up", async () => {
-    generateTextMock.mockResolvedValue({ text: "not json" });
-    const response = await post({ jd });
-    expect(generateTextMock).toHaveBeenCalledTimes(2);
-    expect(response.status).toBe(502);
+  it("retries once on malformed output, then reports invalid output", async () => {
+    streamTextMock.mockImplementation(() => textStream("not json"));
+    const events = await readEvents(await post({ jd }));
+    expect(streamTextMock).toHaveBeenCalledTimes(2);
+    expect(events).toEqual([{ type: "retry" }, { type: "error", error: "invalid_output" }]);
   });
 
   it("reports unavailability when the provider is rate limited", async () => {
-    generateTextMock.mockRejectedValue(
-      new APICallError({ message: "Rate limit exceeded", url: "x", requestBodyValues: {}, statusCode: 429 }),
+    streamTextMock.mockReturnValue(
+      failingStream(
+        new APICallError({ message: "Rate limit exceeded", url: "x", requestBodyValues: {}, statusCode: 429 }),
+      ),
     );
-    const response = await post({ jd });
-    expect(response.status).toBe(503);
-    expect(await response.json()).toEqual({ ok: false, error: "unavailable" });
+    const events = await readEvents(await post({ jd }));
+    expect(events).toEqual([{ type: "error", error: "unavailable" }]);
   });
 
   it("does not call a model without an API key", async () => {
     envMock.OPENROUTER_API_KEY = undefined;
     const response = await post({ jd });
     expect(response.status).toBe(503);
-    expect(generateTextMock).not.toHaveBeenCalled();
+    expect(streamTextMock).not.toHaveBeenCalled();
   });
 });

@@ -2,7 +2,13 @@ import { WIKI } from "@/feature/chat/server/wiki";
 import { buildProjectKnowledge } from "@/feature/chat/server/knowledge";
 import type { AppLocale } from "@/shared/constant/site";
 import type { Project } from "@/shared/content/project";
-import { fitReportSchema, type FitReport } from "../lib/report";
+import { parsePartialJson } from "ai";
+import {
+  fitReportSchema,
+  fitRequirementSchema,
+  type FitPartialReport,
+  type FitReport,
+} from "../lib/report";
 
 const LANGUAGE: Record<AppLocale, string> = {
   ko: "한국어",
@@ -130,4 +136,47 @@ export function parseFitReport(
       ),
     })),
   };
+}
+
+/**
+ * Reads an unfinished reply and keeps only what is complete enough to show:
+ * the summary once its field is closed, and requirement rows the model has
+ * moved past (the last row may still be mid-sentence).
+ */
+export async function parsePartialFitReport(
+  text: string,
+  projects: Pick<Project, "slug">[],
+): Promise<FitPartialReport | null> {
+  const start = text.indexOf("{");
+  if (start === -1) return null;
+  const { value } = await parsePartialJson(text.slice(start));
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+
+  const record = value as Record<string, unknown>;
+  const rawRequirements = Array.isArray(record.requirements)
+    ? record.requirements
+    : [];
+  const finished = "gaps" in record || "questions" in record;
+  const settled = finished ? rawRequirements : rawRequirements.slice(0, -1);
+  const knownSlugs = new Set(projects.map((project) => project.slug));
+
+  const requirements = settled.flatMap((item) => {
+    const parsed = fitRequirementSchema.safeParse(item);
+    if (!parsed.success) return [];
+    return [
+      {
+        ...parsed.data,
+        projectSlugs: [...new Set(parsed.data.projectSlugs)].filter((slug) =>
+          knownSlugs.has(slug),
+        ),
+      },
+    ];
+  });
+  const summary =
+    "requirements" in record && typeof record.summary === "string"
+      ? record.summary.trim().slice(0, 800)
+      : undefined;
+
+  if (!summary && requirements.length === 0) return null;
+  return { summary, requirements };
 }

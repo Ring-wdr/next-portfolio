@@ -26,5 +26,14 @@ export default async function Page({ params }: PageProps<"/[locale]/fit">) {
     projects.map((project) => [project.slug, project.title]),
   );
 
-  return <FitPage projectTitles={projectTitles} />;
+  // Something to read while the analysis runs: the first two featured case studies.
+  const featured = projects
+    .filter((project) => project.card.featured)
+    .slice(0, 2)
+    .map((project) => ({
+      slug: project.slug,
+      title: project.shortTitle ?? project.title,
+    }));
+
+  return <FitPage projectTitles={projectTitles} featured={featured} />;
 }

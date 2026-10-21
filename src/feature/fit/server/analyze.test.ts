@@ -7,6 +7,7 @@ import {
   describeFitParseFailure,
   extractJsonObject,
   parseFitReport,
+  parsePartialFitReport,
 } from "./analyze";
 
 const projects = getFixtureProjects();
@@ -86,6 +87,28 @@ describe("parseFitReport leniency", () => {
     expect(describeFitParseFailure(JSON.stringify({ summary: "x", requirements: [] }))).toMatch(
       /requirements/,
     );
+  });
+});
+
+describe("parsePartialFitReport", () => {
+  const full = JSON.stringify(validReport);
+
+  it("shows nothing before the summary is finished", async () => {
+    expect(await parsePartialFitReport('{"summary":"React 중심', projects)).toBeNull();
+  });
+
+  it("keeps only rows the model has moved past", async () => {
+    const cut = full.indexOf('"requirement":"Vue');
+    const partial = await parsePartialFitReport(full.slice(0, cut + 12), projects);
+    expect(partial?.summary).toBe(validReport.summary);
+    expect(partial?.requirements.map((row) => row.requirement)).toEqual(["React 실무 3년"]);
+    expect(partial?.requirements[0].projectSlugs).toEqual(["pocaz"]);
+  });
+
+  it("keeps every row once the requirements list is closed", async () => {
+    const cut = full.indexOf('"gaps"');
+    const partial = await parsePartialFitReport(full.slice(0, cut + 9), projects);
+    expect(partial?.requirements).toHaveLength(3);
   });
 });
 

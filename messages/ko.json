@@ -351,7 +351,6 @@
     "lengthHint": "{count}자 · 최소 {min}자, 최대 {max}자",
     "submit": "적합도 분석하기",
     "analyzing": "분석 중…",
-    "loading": "무료 AI 모델로 분석하고 있어요. 혼잡도에 따라 30초~2분 정도 걸립니다. ({seconds}초 경과)",
     "sampleJd": "[프론트엔드 엔지니어]\n주요 업무\n- React/Next.js 기반 웹 서비스의 신규 기능 개발 및 유지보수\n- 디자인 시스템 컴포넌트 설계와 운영\n- 웹 성능(Core Web Vitals) 개선과 모니터링\n\n자격 요건\n- TypeScript, React 실무 경험 3년 이상\n- Next.js App Router 기반 SSR/SSG 이해\n- 테스트 코드 작성 경험 (Vitest, Playwright 등)\n\n우대 사항\n- 접근성(a11y)을 고려한 UI 개발 경험\n- AI 도구/에이전트를 활용한 개발 생산성 개선 경험\n- 백엔드(Node.js, DB) 경험",
     "errors": {
       "invalid_input": "채용공고가 너무 짧거나 깁니다. 길이를 확인해 주세요.",
@@ -375,6 +374,22 @@
       "questionsTitle": "면접에서 확인해 볼 질문",
       "contactCta": "이 포지션으로 연락하기",
       "disclaimer": "AI가 포트폴리오 내용만으로 생성한 참고용 분석입니다."
+    },
+    "progress": {
+      "steps": {
+        "sent": "공고 전달",
+        "reading": "AI가 읽는 중",
+        "writing": "요구사항 정리",
+        "done": "리포트 완성"
+      },
+      "readingTitle": "AI가 채용공고를 읽고 있어요",
+      "readingBody": "무료 AI 모델이라 첫 내용이 나오기까지 수십 초 걸릴 수 있어요. 내용이 나오는 대로 아래에 바로 채워집니다.",
+      "writingTitle": "요구사항을 하나씩 정리하고 있어요",
+      "writingBody": "지금까지 {count}개를 정리했어요. 나머지도 정리되는 대로 아래에 추가됩니다.",
+      "retryTitle": "결과 형식이 맞지 않아 한 번 더 분석하고 있어요",
+      "elapsed": "{seconds}초 경과",
+      "cancel": "분석 취소",
+      "meanwhile": "기다리는 동안 대표 작업을 새 탭에서 볼 수 있어요."
     }
   }
 }
