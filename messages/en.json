@@ -181,7 +181,7 @@
   "AboutPage": {
     "title": "About Me",
     "role": "Frontend developer · 4 years of experience",
-    "intro": "I'm a frontend developer with four years of professional experience. At ScatterX I spent three years building the frontend of a B2B data analysis and visualization SaaS, and on the move of a jQuery analytics platform to Next.js I handled the initial setup, the UI core, and the architecture. Before that I built the frontend of an accounting service for hospitals at 슈가브릭스 and worked on ERP development at 시스웨어. I build and run my personal projects on my own, from planning through the server and deployment.",
+    "intro": "I'm a frontend developer with four years of professional experience. At ScatterX I spent three years building the frontend of a B2B data analysis and visualization SaaS, and on the move of a jQuery analytics platform to Next.js I handled the initial setup, the UI core, and the architecture. Before that I built the frontend of an accounting service for hospitals at SUGARBRICKS and worked on ERP development at sysware. I build and run my personal projects on my own, from planning through the server and deployment.",
     "heroEyebrow": "About",
     "portraitAlt": "Ring-wdr GitHub profile image",
     "strengthsTitle": "Strengths",
@@ -236,14 +236,14 @@
         ]
       },
       "sugarbricks": {
-        "company": "슈가브릭스",
+        "company": "SUGARBRICKS",
         "role": "Frontend developer",
         "highlights": [
           "I built the frontend of an accounting service for hospitals."
         ]
       },
       "sysware": {
-        "company": "시스웨어",
+        "company": "sysware",
         "role": "Development",
         "highlights": [
           "ERP development"
