@@ -57,16 +57,56 @@ export function buildFitUserPrompt(jd: string): string {
   return `다음 채용공고를 분석하세요.\n\n<job_description>\n${jd}\n</job_description>`;
 }
 
-/** Pulls the first JSON object out of a model reply (tolerates code fences and preambles). */
+/** End index (exclusive) of the balanced JSON object starting at `start`. */
+function findObjectEnd(text: string, start: number): number {
+  let depth = 0;
+  let inString = false;
+  for (let i = start; i < text.length; i += 1) {
+    const ch = text[i];
+    if (inString) {
+      if (ch === "\\") i += 1;
+      else if (ch === '"') inString = false;
+    } else if (ch === '"') inString = true;
+    else if (ch === "{") depth += 1;
+    else if (ch === "}") {
+      depth -= 1;
+      if (depth === 0) return i + 1;
+    }
+  }
+  return -1;
+}
+
+/**
+ * Pulls the first JSON object out of a model reply. Tolerates code fences,
+ * preambles, and trailing notes that contain braces of their own.
+ */
 export function extractJsonObject(text: string): unknown {
   const start = text.indexOf("{");
-  const end = text.lastIndexOf("}");
-  if (start === -1 || end <= start) return undefined;
-  try {
-    return JSON.parse(text.slice(start, end + 1));
-  } catch {
-    return undefined;
+  if (start === -1) return undefined;
+  const candidates = [text.lastIndexOf("}") + 1, findObjectEnd(text, start)];
+  for (const end of candidates) {
+    if (end <= start) continue;
+    try {
+      return JSON.parse(text.slice(start, end));
+    } catch {
+      // try the next candidate
+    }
   }
+  return undefined;
+}
+
+/** Why a reply was rejected, for server logs (never shown to visitors). */
+export function describeFitParseFailure(text: string): string {
+  const json = extractJsonObject(text);
+  if (json === undefined) {
+    return `no JSON object (length ${text.length}, starts ${JSON.stringify(text.slice(0, 80))})`;
+  }
+  const parsed = fitReportSchema.safeParse(json);
+  if (parsed.success) return "ok";
+  return parsed.error.issues
+    .slice(0, 5)
+    .map((issue) => `${issue.path.join(".") || "(root)"}: ${issue.message}`)
+    .join("; ");
 }
 
 /**

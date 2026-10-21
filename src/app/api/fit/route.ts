@@ -11,6 +11,7 @@ import {
 import {
   buildFitSystemPrompt,
   buildFitUserPrompt,
+  describeFitParseFailure,
   parseFitReport,
 } from "@/feature/fit/server/analyze";
 import { getProjects } from "@/shared/content/project-source";
@@ -54,7 +55,7 @@ export async function POST(request: Request) {
 
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt += 1) {
     try {
-      const { text } = await generateText({
+      const { text, finishReason } = await generateText({
         model,
         system: buildFitSystemPrompt(input.data.locale, projects),
         prompt: buildFitUserPrompt(input.data.jd),
@@ -66,7 +67,9 @@ export async function POST(request: Request) {
       if (report) {
         return json({ ok: true, report }, 200);
       }
-      console.error(`[fit] unparseable model output (attempt ${attempt})`);
+      console.error(
+        `[fit] unparseable model output (attempt ${attempt}, finish: ${finishReason}): ${describeFitParseFailure(text)}`,
+      );
     } catch (error) {
       if (isProviderUnavailable(error)) {
         console.error("[fit] provider unavailable:", error);
