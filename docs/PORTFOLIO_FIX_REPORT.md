@@ -88,3 +88,55 @@ portfolio-content (`projects.json`, `scripts/schema.ts`)
 - 역대카 `card.category`는 `Product`로 유지했습니다. 성격이 외주로 확인되면 `Client`로 바꿔야 합니다.
 - 영어 카피의 회사명: 스캐터엑스는 도메인(scatterx.co.kr)에 맞춰 ScatterX로 썼고, 슈가브릭스·시스웨어는 공식 영문 표기를 몰라 한글로 두었습니다.
 - 메뉴 고르기의 "협업 필터링 기반 추천" 등 외부에서 확인할 수 없는 기술 서술은 지시서 범위 밖이라 그대로 두었습니다.
+
+---
+
+## Phase 2. 경력과 포지셔닝
+
+### 1. 변경 파일과 요약
+
+next-portfolio
+- `src/pages-layer/about/index.tsx`, `src/shared/constant/profile.ts`, `messages/*`: /about 상단을 이름·역할·소개(사실 4문장)·통계로 정리하고, 바로 아래에 확정 경력 블록(스캐터엑스, 슈가브릭스, 시스웨어, 최신순)을 넣음. 시스웨어는 "개발 / ERP 개발" 한 줄만. 스캐터엑스 항목에 XMORSE 2.0 케이스 스터디 링크. 기존 "2026 포트폴리오 리빌드 / 2025 / 2024" 타임라인은 삭제(개인 작업은 /project에 있음). 반복되던 /about 대형 문구(heroStatement)와 portraitCaption 삭제
+- `src/pages-layer/main/index.tsx`: 히어로 eyebrow "Frontend · Product Engineer", 헤드라인과 서브를 확정 문장으로 교체, 히어로 하단에 "실무 4년 차 · 데이터 시각화 SaaS 3년 · Next.js 마이그레이션 구조 설계". "현재 집중: Next.js 16 / 에이전트 하니스 설계" 통계 삭제. "일하는 방식"은 큰 제목 하나만 남기고(PretextStatement 삭제), 세 원칙을 XMORSE 2.0의 확정 사실(구조 설계, API 계약, 테스트)로 교체. 하단 CTA 문구 교체
+- `src/shared/constant/site.ts`, `src/app/[locale]/opengraph-image.tsx`, `layout.tsx`, `about/page.tsx`, `project/page.tsx`, `src/app/llms.txt/route.ts`: title "Manjoong Kim | Frontend · Product Engineer", 설명·OG·JSON-LD jobTitle·llms.txt 소개를 새 포지셔닝으로
+- `src/shared/content/project-schema.ts`: `Work` 카테고리, `organization`, `shortTitle`, `narrative`, `diagram`, 갤러리 `hidden`/`source`, `overview.goal` 선택값
+- `src/pages-layer/project/[slug]/index.tsx`: 회사 정보 표시, 내러티브 섹션, 구조 다이어그램, 빈 기능/챌린지 섹션 숨김, `hidden` 갤러리 이미지 제외, SVG 썸네일은 잘리지 않게 표시하고 썸네일과 같은 다이어그램은 한 번만 표시
+- `src/shared/utils/image.ts`: SVG는 이미지 최적화를 건너뜀
+- `next.config.ts`, `src/shared/constant/contact.ts`, `src/shared/ui/header.tsx`: 빌드 시 `public/resume.pdf`가 있을 때만 헤더(데스크탑, 모바일 메뉴)와 /contact에 "이력서" 버튼 렌더링
+- `src/pages-layer/contact/*`, `src/feature/mail/ui/email-form.tsx`: 이메일 주소 텍스트와 복사 버튼, 필수 항목 `*` 표시와 안내
+- `src/feature/chat/server/{wiki,prompt,model}.ts`, `src/feature/fit/server/analyze.ts`, `messages/*`: "Kim Manjoong"을 "Manjoong Kim"으로 통일, 챗봇 지식에 확정 경력과 AI 도구 사용 이력 반영
+- `docs/agent-engineering.md`: "Codex가 주 실행 도구" 서술을 확정 AI 사용 이력 문단으로 교체, 없는 파일 경로 정리
+- 테스트: fixture에 XMORSE(Work, 다이어그램, 숨김 이미지) 추가, `tests/about.spec.ts`(경력 블록), `tests/main.spec.ts`(요약 줄, title에 Frontend Portfolio 없음)
+
+portfolio-content
+- `projects.json`: 목록 맨 앞에 `xmorse` 케이스 스터디. 제목, 메타(스캐터엑스 · 2024.11 ~ 2026.03 · FE 2 / BE 4 / Infra 3 · 역할), 한 줄 요약, 배경, 프레임워크 결정, 구조 설계, 임베드 화면, 서버 렌더링 차트 그리드, 검증, 결과를 확정 문장 그대로 사용. 카드의 임팩트/결과는 확정 경력 문장 그대로
+- `images/xmorse-architecture.svg`: 레거시(JSP+Spring 같은 포트)와 이후(Next.js 안의 세 화면과 공통 시각화 코어, FSD 참고 화면 계층, openapi-fetch API 계층, 별도 Spring 서비스의 OpenAPI 스펙에서 openapi-typescript 타입 생성) 구조도. 확정 콘텐츠에 있는 내용만 그렸고 썸네일로도 씀
+- 이미지 블록: 스캐터엑스 제품 페이지 이미지는 받지 않았고 `gallery`는 비워 둠. 허락 후 넣는 방법(캡션, 출처 링크, `hidden`)을 `todo`에 적어 둠
+- `scripts/schema.ts`, `scripts/publish.mts`: 사이트 스키마와 같은 필드 추가, 다이어그램 이미지도 업로드
+
+### 2. 검증
+
+- `pnpm lint && pnpm test -- --run && pnpm build`: 통과 (0 errors, 기존 경고 1건, 테스트 61개)
+- Playwright(Chromium, 로컬): `tests/main.spec.ts`, `tests/about.spec.ts`, `tests/tech-stack.spec.ts`, `tests/contact.mobile.spec.ts` 4개 통과
+- grep (src, messages): `Frontend Portfolio` 0, `프론트엔드 엔지니어 포트폴리오` 0, `Kim Manjoong` 0, `움직임까지 설계된` 0, `표면과 시스템` 0, `노이즈 없는` 0
+- 완료 기준: 홈 첫 화면(390, 1440 모두)에서 "실무 4년 차", "데이터 분석·시각화 SaaS 회사에서 3년간", "jQuery로 만든 분석 플랫폼을 Next.js로 옮기는 작업에서 구조 설계"가 보임. title/OG에 FE 전용 문구 없음
+
+### 3. 스크린샷
+
+수정 후: `/`, `/about`, `/project`, `/project/xmorse`, `/contact` (390, 1440). 수정 전: 라이브 사이트 같은 화면.
+
+### 4. 남은 TODO(user) (Phase 1 목록에 추가)
+
+| 위치 | TODO | 질문 |
+|---|---|---|
+| XMORSE | 제품 페이지 이미지 사용 허락 | 스캐터엑스 제품 페이지(https://scatterx.co.kr/ko/products/xmorse/) 갤러리 이미지 1~2장을 포트폴리오에 써도 되는지 회사에 확인하셨나요? 허락되면 어떤 이미지를 쓸까요? |
+| XMORSE | 운영 상태 | XMORSE 2.0이 지금 서비스 중인가요? (카드에 "운영 중"으로 표시됨) |
+| 이력서 | `public/resume.pdf` | 이력서 PDF를 `public/resume.pdf`로 넣어 주세요. 넣고 다시 배포하면 버튼이 나타납니다. |
+| 영문 회사명 | 슈가브릭스, 시스웨어 | 영어 페이지에 쓸 공식 영문 회사명이 있나요? (지금은 한글 표기) |
+
+### 5. 보류한 항목
+
+- 홈 히어로 아래 한 줄은 2-1의 "jQuery에서 Next.js로 마이그레이션 구조 설계"가 아니라 작성자 검토가 끝난 확정 콘텐츠의 "Next.js 마이그레이션 구조 설계"를 썼습니다.
+- /about의 "강점"(깔끔한 코드, UI/UX 디자인, 접근성, 성능 최적화)과 "현재 집중 영역"은 지시서 범위 밖이라 그대로 두었습니다. 일반론에 가까워 지우거나 근거를 붙일지 정해 주세요.
+- 영어 경력 문장은 확정 한국어 문장을 뜻이 같게 옮긴 것입니다. 영문 이력서 표현이 따로 있으면 맞추겠습니다.
+- `next dev`가 실행될 때마다 `AGENTS.md`의 Next.js 블록을 다시 쓰면서 "pnpm을 쓴다"는 저장소 규칙 줄을 지웁니다. 이 변경은 커밋하지 않았습니다. 규칙을 블록 밖으로 옮기는 것을 권합니다.
