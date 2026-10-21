@@ -14,6 +14,15 @@ type ProjectDetailPageProps = {
 
 export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 	const t = useTranslations("ProjectDetailPage");
+	const facts = [
+		{ label: t("period"), value: project.period },
+		{ label: t("team"), value: project.team },
+		{ label: t("role"), value: project.role },
+	].filter((fact): fact is { label: string; value: string } => Boolean(fact.value));
+	const { metrics, feedback, improvements } = project.achievements;
+	const hasAchievements = Boolean(
+		metrics?.length || feedback?.length || improvements?.length,
+	);
 
 	return (
 		<main className="flex flex-1 justify-center py-6 md:py-10">
@@ -37,20 +46,17 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 						</p>
 					</div>
 
-					<div className="mt-5 grid gap-2 sm:grid-cols-3">
-						<div className="rounded-xl border border-border/70 bg-card/70 px-4 py-3">
-							<p className="text-xs text-muted-foreground">{t("period")}</p>
-							<p className="mt-1 text-sm font-semibold">{project.period}</p>
-						</div>
-						<div className="rounded-xl border border-border/70 bg-card/70 px-4 py-3">
-							<p className="text-xs text-muted-foreground">{t("team")}</p>
-							<p className="mt-1 text-sm font-semibold">{project.team}</p>
-						</div>
-						<div className="rounded-xl border border-border/70 bg-card/70 px-4 py-3">
-							<p className="text-xs text-muted-foreground">{t("role")}</p>
-							<p className="mt-1 text-sm font-semibold">{project.role}</p>
-						</div>
-					</div>
+					<dl className="mt-5 grid gap-2 sm:grid-cols-3">
+						{facts.map((fact) => (
+							<div
+								key={fact.label}
+								className="rounded-xl border border-border/70 bg-card/70 px-4 py-3"
+							>
+								<dt className="text-xs text-muted-foreground">{fact.label}</dt>
+								<dd className="mt-1 text-sm font-semibold">{fact.value}</dd>
+							</div>
+						))}
+					</dl>
 
 					<div className="mt-5 flex flex-wrap gap-2">
 						{project.links.github && (
@@ -201,16 +207,17 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 					</div>
 				</section>
 
+				{hasAchievements && (
 				<section className="glass-panel rounded-2xl p-5 md:p-6">
 					<h2 className="mb-6 text-2xl font-bold">{t("achievements")}</h2>
 					<div className="flex flex-col gap-6">
-						{project.achievements.metrics && (
+						{metrics && metrics.length > 0 && (
 							<div>
 								<h3 className="mb-4 text-lg font-semibold text-muted-foreground">
 									{t("metrics")}
 								</h3>
 								<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-									{project.achievements.metrics.map((metric) => (
+									{metrics.map((metric) => (
 										<div
 											key={metric.label}
 											className="rounded-lg border border-border bg-secondary p-4"
@@ -225,13 +232,13 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 							</div>
 						)}
 
-						{project.achievements.feedback && (
+						{feedback && feedback.length > 0 && (
 							<div>
 								<h3 className="mb-4 text-lg font-semibold text-muted-foreground">
 									{t("feedback")}
 								</h3>
 								<ul className="space-y-2">
-									{project.achievements.feedback.map((item) => (
+									{feedback.map((item) => (
 										<li
 											key={item}
 											className="text-base leading-relaxed flex items-start gap-2"
@@ -244,13 +251,13 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 							</div>
 						)}
 
-						{project.achievements.improvements && (
+						{improvements && improvements.length > 0 && (
 							<div>
 								<h3 className="mb-4 text-lg font-semibold text-muted-foreground">
 									{t("improvements")}
 								</h3>
 								<ul className="space-y-2">
-									{project.achievements.improvements.map((item) => (
+									{improvements.map((item) => (
 										<li
 											key={item}
 											className="text-base leading-relaxed flex items-start gap-2"
@@ -264,6 +271,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 						)}
 					</div>
 				</section>
+				)}
 
 				{project.gallery.length > 0 && (
 					<section className="glass-panel rounded-2xl p-5 md:p-6">

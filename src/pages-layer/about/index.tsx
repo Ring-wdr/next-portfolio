@@ -15,15 +15,15 @@ export function AboutPage({ projectCount }: { projectCount: number }) {
 	const stats = [
 		{
 			label: t("stats.projects"),
-			value: `${projectCount}+`,
+			value: `${projectCount}`,
 		},
 		{
 			label: t("stats.technologies"),
-			value: `${TechStack.length}+`,
+			value: `${TechStack.length}`,
 		},
 		{
 			label: t("stats.years"),
-			value: "3+",
+			value: t("stats.yearsValue"),
 		},
 	] as const;
 	const focusLabels = FocusAreas.map((focus) => t(focus.labelKey));

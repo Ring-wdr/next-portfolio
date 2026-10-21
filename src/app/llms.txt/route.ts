@@ -13,12 +13,16 @@ export async function GET() {
         .filter(Boolean)
         .join(" · ");
 
+      const role = [project.role, project.team && `(${project.team})`]
+        .filter(Boolean)
+        .join(" ");
+
       return [
         `### ${project.title} (${project.period})`,
         "",
         `${project.summary}`,
         "",
-        `- Role: ${project.role} (${project.team})`,
+        ...(role ? [`- Role: ${role}`] : []),
         `- Stack: ${project.tech.stack.join(", ")}`,
         `- Links: ${links}`,
       ].join("\n");

@@ -36,7 +36,7 @@
     "featuredLabel": "메인 케이스",
     "viewAll": "전체 보기",
     "stats": {
-      "projects": "출시한 프로젝트",
+      "projects": "공개 프로젝트",
       "tech": "핵심 도구",
       "currentFocus": "현재 집중",
       "currentFocusValue": "Next.js 16 / 에이전트 하니스 설계"
@@ -97,7 +97,7 @@
   },
   "ProjectsPage": {
     "title": "프로젝트",
-    "description": "프론트엔드 개발 기술을 보여주는 최근 프로젝트 모음을 살펴보세요. 각 프로젝트에는 간단한 설명, 스크린샷, 라이브 데모 또는 저장소 링크가 포함될 것입니다.",
+    "description": "개인·외주 프로젝트와 학습 저장소를 모았습니다. 프로젝트마다 설명, 화면, 라이브 사이트 또는 저장소 링크를 정리했습니다.",
     "stats": {
       "total": "전체 프로젝트",
       "featured": "주요 프로젝트",
@@ -159,40 +159,6 @@
     "Testing": "테스팅",
     "Tools": "도구",
     "Backend": "백엔드",
-    "showcase": {
-      "eyebrow": "성장 증거",
-      "title": "초보 코드에서 전문가 시스템으로",
-      "description": "단순히 동작하는 수준에서 확장 가능한 구현으로 기준이 올라갈 때, 제가 어떤 식으로 코드를 바꾸는지 보여주는 스택만 골랐습니다.",
-      "selectLabel": "스택 선택",
-      "before": "이전 · 초보",
-      "after": "이후 · 전문가",
-      "whatChanged": "무엇이 달라졌는가",
-      "loading": "코드 워크스루 준비 중…",
-      "items": {
-        "react": {
-          "summary": "수동 loading 상태를 React 19의 내장 액션 모델로 교체합니다.",
-          "improvement": "임시 useState 플래그에서 useActionState로 넘어갑니다. form의 action prop이 비동기 흐름을 담당하고, isPending이 수동 토글을 대체하며, 성공 콜백이 깔끔하게 합성됩니다."
-        },
-        "nextjs": {
-          "summary": "PageProps와 async params로 완전한 타입 안전성을 갖춘 서버 우선 라우트를 만듭니다.",
-          "improvement": "클라이언트 중심 페이지 셸에서 PageProps<'/route'>로 타입이 지정된 async 서버 컴포넌트로 전환합니다. next typegen이 생성하는 글로벌 헬퍼로 수동 타입 선언 없이 params를 Promise로 안전하게 다룰 수 있습니다."
-        },
-        "typescript": {
-          "summary": "판별 유니온과 satisfies로 도메인 규칙을 타입 레이어에 담습니다.",
-          "improvement": "느슨한 객체 리터럴에서 satisfies로 검증된 판별 유니온(kind: 'code' | 'narrative')으로 바뀝니다. 누락된 필드를 호출부가 아닌 정의 시점에서 TypeScript가 잡아냅니다."
-        },
-        "playwright": {
-          "summary": "테스트를 단조로운 await 나열이 아닌, 읽기 좋은 step 구조로 작성합니다.",
-          "improvement": "단순 페이지 이동에서 이름 있는 test.step 블록으로 전환합니다. 각 assertion이 범위를 가지고, 실패 시 어느 step이 깨졌는지 바로 파악되며, 테스트 리포트가 제품 스펙처럼 읽힙니다."
-        },
-        "supabase": {
-          "summary": "BaaS 속도와 Postgres 깊이를 함께 — 인증, 실시간, RLS를 하나의 플랫폼에서.",
-          "improvement": "인가 로직을 애플리케이션 코드에서 꺼내 DB 레이어의 Row Level Security 정책으로 옮깁니다. 버그 발생 여지가 줄고, 접근 규칙이 스키마와 함께 버전 관리됩니다.",
-          "detail": "Supabase는 BaaS 속도로 빠르게 구축하면서도 Postgres의 완전한 제어권을 포기하지 않아도 될 때 선택합니다. Row Level Security는 인가 규칙을 DB 안에 직접 담아 API 라우트를 얇게 유지하고, 접근 정책을 스키마와 함께 버전 관리할 수 있게 합니다. 실시간 레이어는 폴링 없이 WebSocket push 방식으로 데이터를 전달해 협업·라이브 업데이트 UI에 자연스럽게 맞아떨어집니다. Supabase의 자동 생성 REST API와 타입드 클라이언트 덕분에 스키마 자체가 계약이 되고, 브레이킹 체인지는 운영 환경이 아닌 빌드 타임에 드러납니다."
-        }
-      },
-      "narrativeLabel": "설명 중심 워크스루"
-    },
     "agentEngineering": {
       "eyebrow": "AI 에이전트 엔지니어링",
       "title": "에이전트를 만능 해법이 아니라 실제 작업 수단으로 다룹니다.",
@@ -275,7 +241,7 @@
     "portraitAlt": "김만중 프로필 사진",
     "portraitCaption": "제품 판단, 시각적 절제, 구현 완성도가 실제 전달 환경 안에서 함께 버텨야 하는 작업에 강합니다.",
     "aboutMeTitle": "소개",
-    "aboutMeDescription": "React와 같은 최신 기술을 사용하여 웹 애플리케이션을 구축한 3년 이상의 경험을 가진 프론트엔드 개발자입니다. HTML, CSS, JavaScript에 대한 깊은 이해를 가지고 있으며 항상 새로운 프레임워크와 라이브러리를 배우고자 합니다. 제 개발 철학은 깔끔하고 유지보수 가능한 코드와 사용자 우선 접근 방식을 중심으로 합니다. 훌륭한 디자인은 미학뿐만 아니라 사용성과 접근성에 관한 것이라고 믿습니다. 모두가 사용하기 쉬운 아름다운 제품을 만들기 위해 노력합니다.",
+    "aboutMeDescription": "실무 4년 차 프론트엔드 개발자입니다. 스캐터엑스에서 3년 동안 데이터 분석·시각화 B2B SaaS의 프론트엔드를 개발했고, jQuery 기반 분석 플랫폼을 Next.js로 옮기는 작업에서 초기 세팅, UI 코어, 구조 설계를 맡았습니다. 그전에는 슈가브릭스에서 병원 대상 회계 처리 서비스의 프론트엔드를, 시스웨어에서 ERP 개발을 했습니다. 개인 프로젝트는 기획부터 서버, 배포까지 혼자 만들어 운영합니다.",
     "strengthsTitle": "저의 강점",
     "narrativeEyebrow": "작업 방식",
     "focusTitle": "현재 집중 영역",
@@ -284,9 +250,10 @@
     "accessibility": "접근성",
     "performance": "성능 최적화",
     "stats": {
-      "projects": "출시한 프로젝트",
+      "projects": "공개 프로젝트",
       "technologies": "사용 기술",
-      "years": "실무/학습 연차"
+      "years": "실무 경력",
+      "yearsValue": "4년"
     },
     "timelineTitle": "커리어 타임라인",
     "timelineEyebrow": "최근 흐름",

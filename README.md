@@ -24,7 +24,7 @@
   - 프로젝트 상세 페이지 (URL 및 모달 뷰 지원)
   - 프로젝트별 기술 스택, 챌린지, 해결책, 성과 등 상세 정보
   - 이미지 갤러리 (라이트박스 기능 지원)
-- 🛠️ **Tech Stack**: 카테고리별 기술 스택과 데모 패널(Shiki Magic Move 코드 전환), AI 에이전트 엔지니어링 증거 섹션
+- 🛠️ **Tech Stack**: 카테고리별 기술 스택, AI 에이전트 엔지니어링 섹션
 - 👤 **About**: 커리어 타임라인/작업 원칙/집중 분야 중심 내러티브 섹션
 - 📧 **Contact**: 이메일 문의 폼 (Nodemailer + React Email, 요청 빈도 제한)
 - 🌓 **Dark Mode**: 다크/라이트 테마 지원
@@ -60,7 +60,6 @@
 - **AI**: Vercel AI SDK 7 (`ai`, `@ai-sdk/react`) + OpenRouter (`@openrouter/ai-sdk-provider`)
 - **Content**: Vercel Blob (`@vercel/blob`) + `unstable_cache` 태그 기반 ISR
 - **Markdown**: react-markdown + remark-gfm + rehype-sanitize
-- **Code Highlight**: Shiki + Shiki Magic Move
 - **Text Layout**: `@chenglou/pretext` (히어로 캔버스, 문장 레이아웃)
 - **i18n**: next-intl 4
 - **Email**: Nodemailer + React Email

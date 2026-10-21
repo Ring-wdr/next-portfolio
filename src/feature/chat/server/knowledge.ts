@@ -53,8 +53,8 @@ export function buildProjectKnowledge(projects: Project[]) {
     .map((project) => {
       const lines = [
         `### ${project.title} (${project.period})`,
-        `- 분류: ${project.team}`,
-        `- 역할: ${project.role}`,
+        project.team && `- 분류: ${project.team}`,
+        project.role && `- 역할: ${project.role}`,
         `- 개요: ${project.summary}`,
         `- 배경: ${project.overview.background}`,
         `- 목표: ${project.overview.goal}`,
@@ -68,13 +68,13 @@ export function buildProjectKnowledge(projects: Project[]) {
         ),
         `- 임팩트: ${project.card.impact}`,
         `- 결과: ${project.card.result}`,
-        project.achievements.metrics &&
+        project.achievements.metrics?.length &&
           `- 지표: ${project.achievements.metrics
             .map((metric) => `${metric.label} ${metric.value}`)
             .join(", ")}`,
-        project.achievements.improvements &&
+        project.achievements.improvements?.length &&
           `- 개선: ${list(project.achievements.improvements)}`,
-        project.achievements.feedback &&
+        project.achievements.feedback?.length &&
           `- 피드백: ${list(project.achievements.feedback)}`,
         `- 상태: ${project.card.status}`,
       ];

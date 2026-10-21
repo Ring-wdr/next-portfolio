@@ -210,8 +210,6 @@
       "thumbnail": "/ms-icon-150x150.png",
       "summary": "역대카 test fixture summary.",
       "period": "2024.06 - 2024.08",
-      "team": "개인 프로젝트",
-      "role": "풀스택 개발 (Next.js, Supabase)",
       "card": {
         "category": "Product",
         "featured": true,
@@ -270,7 +268,10 @@
           "Supabase",
           "Real-time Data"
         ]
-      }
+      },
+      "todo": [
+        "TODO(user): fixture note that must never render"
+      ]
     },
     {
       "slug": "frontend-junior-study",

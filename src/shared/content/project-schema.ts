@@ -21,8 +21,9 @@ export const projectSchema = z.object({
   /** One-line summary */
   summary: text,
   period: text,
-  team: text,
-  role: text,
+  /** Omitted while unconfirmed; the site hides empty facts. */
+  team: text.optional(),
+  role: text.optional(),
 
   /** Project card / list page metadata */
   card: z.object({
@@ -69,7 +70,24 @@ export const projectSchema = z.object({
     updatedAt: z.iso.datetime().optional(),
     tags: z.array(text),
   }),
+
+  /** Author notes for unconfirmed facts. Never rendered. */
+  todo: z.array(text).optional(),
 });
+
+/** Paths of strings outside `todo` that still carry a TODO marker. */
+function findTodoMarkers(value: unknown, path: (string | number)[] = []): (string | number)[][] {
+  if (typeof value === "string") return /TODO/.test(value) ? [path] : [];
+  if (Array.isArray(value)) {
+    return value.flatMap((item, index) => findTodoMarkers(item, [...path, index]));
+  }
+  if (value && typeof value === "object") {
+    return Object.entries(value).flatMap(([key, item]) =>
+      key === "todo" ? [] : findTodoMarkers(item, [...path, key]),
+    );
+  }
+  return [];
+}
 
 export const projectManifestSchema = z
   .object({ projects: z.array(projectSchema) })
@@ -84,6 +102,14 @@ export const projectManifestSchema = z
         });
       }
       seen.add(project.slug);
+
+      for (const markerPath of findTodoMarkers(project)) {
+        ctx.addIssue({
+          code: "custom",
+          message: "TODO markers belong in `todo`, not in rendered fields",
+          path: ["projects", index, ...markerPath],
+        });
+      }
     });
   });
 

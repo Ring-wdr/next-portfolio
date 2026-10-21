@@ -2,7 +2,7 @@ export const WIKI = `
 ## 기본 프로필
 - 이름: Kim Manjoong (김만중)
 - 직함: 프론트엔드 개발자
-- 경력: React/Next.js/TypeScript 중심 3년 이상
+- 경력: 실무 4년
 - 소개: 명확한 프로덕트 인터페이스, 유지보수 가능한 프론트엔드 시스템, AI 에이전트 워크플로우에 집중하는 프론트엔드 개발자
 - 포트폴리오: https://next-portfolio-ringring.vercel.app
 - GitHub: https://github.com/Ring-wdr

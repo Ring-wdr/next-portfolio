@@ -1,28 +1,14 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("Tech Stack page", () => {
-  test("shows the before and after showcase", async ({ page }) => {
+  test("shows the stack inventory and agent engineering section", async ({ page }) => {
     await page.goto("/en/tech-stack");
 
     await expect(
       page.getByRole("heading", { name: /Tech Stack/i, level: 1 }),
     ).toBeVisible();
 
-    const showcase = page.getByTestId("tech-stack-showcase");
-    await expect(showcase).toBeVisible();
-
-    await expect(
-      page.getByRole("button", { name: "React" }).first(),
-    ).toBeVisible();
-
-    const expertButton = page.getByTestId("tech-stack-mode-after");
-    await expertButton.click();
-
-    await expect(expertButton).toHaveAttribute("aria-pressed", "true");
-    await expect(showcase.getByText(/What changed/i)).toBeVisible();
-
-    await page.getByRole("button", { name: "Supabase" }).first().click();
-    await expect(showcase).toContainText(/Explanation-only walkthrough/i);
+    await expect(page.getByTestId("tech-stack-showcase")).toHaveCount(0);
 
     const agentEngineering = page.getByTestId("agent-engineering-section");
     await expect(agentEngineering).toBeVisible();

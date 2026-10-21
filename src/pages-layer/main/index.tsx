@@ -17,11 +17,11 @@ export function MainPage({ projects }: { projects: ProjectCard[] }) {
 	const proofItems = [
 		{
 			label: t("stats.projects"),
-			value: `${projects.length}+`,
+			value: `${projects.length}`,
 		},
 		{
 			label: t("stats.tech"),
-			value: `${TechStack.length}+`,
+			value: `${TechStack.length}`,
 		},
 		{
 			label: t("stats.currentFocus"),

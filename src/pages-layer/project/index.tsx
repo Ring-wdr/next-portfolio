@@ -9,11 +9,11 @@ import { ProjectItem } from "./item";
 type ProjectViewMode = "All" | "Featured";
 type ProjectCategoryFilter = "All" | ProjectCard["category"];
 
-const viewModes: ProjectViewMode[] = ["Featured", "All"];
+const viewModes: ProjectViewMode[] = ["All", "Featured"];
 
 export function ProjectPage({ projects }: { projects: ProjectCard[] }) {
 	const t = useTranslations("ProjectsPage");
-	const [viewMode, setViewMode] = useState<ProjectViewMode>("Featured");
+	const [viewMode, setViewMode] = useState<ProjectViewMode>("All");
 	const [selectedCategory, setSelectedCategory] =
 		useState<ProjectCategoryFilter>("All");
 	const [selectedTech, setSelectedTech] = useState<string>(
