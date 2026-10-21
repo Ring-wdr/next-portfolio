@@ -201,3 +201,91 @@ portfolio-content
 - 역대카 첫 화면 캡처에는 사이트의 견적/계약 건수가 보여서 갤러리에 넣지 않았습니다(친환경 차량 목록 캡처만 추가).
 - `next.config.ts`의 `postfiles.pstatic.net` remotePatterns는 유지했습니다. 현재 운영 매니페스트가 아직 그 이미지를 쓰므로, portfolio-content 머지 후 지우면 됩니다.
 - 메뉴 고르기의 "협업 필터링" 등 외부에서 확인할 수 없는 서술은 그대로 두고 한 줄 요약만 붙였습니다.
+
+---
+
+## Phase 4. UI / 접근성
+
+### 1. 변경 파일과 요약
+
+| 우선 | 문제 | 처리 |
+|---|---|---|
+| High | 라이트박스가 섹션 안에 갇힘, 캡션이 이미지 가림, role 없음, 열 때 헤더 밀림 | `src/shared/ui/image-gallery.tsx`를 네이티브 `<dialog>` + `showModal()`로 바꿈(top layer라 조상 transform 영향 없음, 전체 화면, ESC 닫기, 닫으면 트리거로 포커스 복귀, 나머지 페이지 inert). 이미지는 `object-contain`, 캡션은 이미지 아래 별도 줄, 닫기 버튼은 상단 바. `html { scrollbar-gutter: stable }`. 출처 링크(`source`) 표시 |
+| High | `/tech-stack` 모바일 가로 스크롤 | Phase 1에서 magic-move 위젯 제거로 해소, 그리드 자식 `min-w-0`, `html { overflow-x: clip }`, 검증 명령 코드 블록 `max-w-full overflow-x-auto` |
+| High | 모바일 메뉴 패널 반투명, 제목 "메뉴 열기" | 패널 `bg-background` 불투명, 뒤에 `bg-black/55` 오버레이, 패널 제목과 nav 이름 "메뉴"(토글 버튼 이름은 "메뉴 열기" 유지), 모바일 메뉴에 GitHub/LinkedIn 링크 |
+| High | 히어로 ASCII가 본문·입력창 위로 지나감 | 데스크탑에서 캔버스를 오른쪽 36% 열로 제한(본문은 왼쪽), 모바일은 애니메이션 없이 낮은 투명도 배경. 기존 `prefers-reduced-motion` 처리(한 번만 그림) 유지. 모바일 판정을 캔버스 폭이 아니라 viewport 폭으로 |
+| High | 모바일에서 첫 프로젝트가 1.4화면 아래 | Phase 3에서 통계 카드 숨김, 기술 필터 접힘. 홈 히어로는 모바일에서 화면 높이 고정을 풀어 대표 작업이 바로 이어짐 |
+| Med | 한국어 단어 중간 줄바꿈 | `body { word-break: keep-all; overflow-wrap: anywhere }`, 제목 `text-wrap: balance` |
+| Med | 채팅 버튼이 본문/CTA 가림 | 푸터 하단 여백(모바일 `pb-24`). 스크롤 중 축소/숨김은 하지 않음 |
+| Med | 입력창 14px | 히어로 입력, 채팅 textarea, /fit textarea를 모바일 16px |
+| Med | 터치 영역 작음 | 헤더/푸터 아이콘 44px, 히어로 칩·링크, 필터 버튼, 카드 링크, 채팅 닫기/추천 질문 `min-h-11` |
+| Med | "일하는 방식" 큰 제목 2개 | Phase 2에서 제목 하나로 |
+| Med | 현재 페이지 표시 없음 | 헤더 링크 활성 스타일 + `aria-current="page"` |
+| Med | 아이콘 링크 이름 없음 | GitHub/LinkedIn `aria-label` |
+| Low | title 이름 중복 | `buildPageMetadata`가 `title.absolute` 사용 |
+| Low | skip link 없음, 로고가 h2 | "본문으로 건너뛰기" 링크와 `#main-content`, 로고 텍스트는 span, 로고 이미지는 장식(alt="") |
+| Low | /about 이미지 alt, 모바일에서 큼 | alt "Ring-wdr GitHub 프로필 이미지", 모바일에서 숨기고 sm 이상에서 작게 |
+| Low | 목록 둘째 줄이 불릿 아래로 | `list-disc pl-5`(outside), 글리프 불릿 제거 |
+| Low | 모바일 채팅 패널 여백 | 기존 `right-4` + `100vw-2rem` 폭으로 좌우 16px 같음(390px 캡처로 확인). 변경 없음 |
+| Low | 10.88px 아이브로 | 12px(`text-xs`)로 |
+| Low | 테마 토글이 푸터에만, 히어로 항상 검정 | 헤더에 테마 토글, 히어로 배경/글자를 `--hero-bg`/`--hero-fg` 토큰으로 바꿔 라이트에서는 밝게 |
+| Low | 채팅 버튼 색 불일치, 영어 라벨 | 채팅 버튼은 두 테마 같은 `--brand` 색. 한국어에서 "Live Demo"를 "라이브 사이트", "Role Fit"을 "JD 매칭"으로 |
+| Low | apple-touch-icon 8개 | 180×180 하나 |
+
+### 2. 검증
+
+- `pnpm lint && pnpm test -- --run && pnpm build`: 통과 (0 errors, 기존 경고 1건, 테스트 63개)
+- Playwright 전체(로컬 Chromium): 20개 통과
+- 새 `tests/layout-a11y.spec.ts`(CI E2E 단계에 추가):
+  - 390×844, 1440×900에서 `/`, `/project`, 모든 상세, `/about`, `/tech-stack`, `/fit`, `/contact`의 `scrollWidth - clientWidth <= 0`
+  - 라이트박스 bounding box가 viewport 전체(0, 0, 폭, 높이), ESC로 닫히고 트리거로 포커스 복귀 (390, 1440)
+  - 헤더의 모든 링크/버튼이 접근 가능한 이름 보유, 데스크탑에서 `aria-current="page"` 1개
+  - 모든 라우트 title에 "Manjoong Kim"이 정확히 1번
+  - 390px에서 `/`(채팅 열기 포함), `/contact`, `/fit`의 입력 요소 font-size >= 16px
+
+### 3. 스크린샷
+
+수정 후: 홈 라이트/다크(1440), 홈·메뉴 열림·라이트박스·채팅 열림·상세(390), 라이트박스·갤러리(1440), /tech-stack(390). 수정 전은 라이브 사이트 캡처.
+
+### 4. 남은 TODO(user)
+
+Phase 4에서 새로 생긴 TODO는 없습니다.
+
+### 5. 보류한 항목
+
+- 채팅 버튼을 스크롤 중 숨기거나 줄이는 동작은 넣지 않고 하단 여백만 확보했습니다.
+- `next dev`가 `AGENTS.md`의 pnpm 규칙 줄을 지우는 문제(Phase 2 참고)는 그대로입니다.
+
+---
+
+## 전체 TODO(user) 목록과 질문
+
+모두 portfolio-content `projects.json`의 `todo` 필드(렌더링 안 함)나 이 문서에만 있고, 사이트에 노출되는 문구에는 없습니다(검증 스크립트와 단위 테스트가 막음).
+
+1. 역대카: 프로젝트 성격(개인/외주/참여)과 팀 구성, 사이트 사업자와의 관계는?
+2. 역대카: 본인 역할과 담당 범위는?
+3. 역대카: 사이트에 보이는 견적/계약 건수 중 본인 작업과 연결해 말할 수 있는 부분이 있나요?
+4. 역대카: 기간 2024.06 - 2024.08이 맞나요? 지금도 유지보수하나요?
+5. 역대카: "비교 조건 표준화", "복합 인덱스" 해결책이 실제로 한 일인가요? 외주로 확인되면 카테고리를 Client로 바꿀까요?
+6. 법률사무소 대도: 페이지 수 등 운영 규모 값이 있나요?
+7. 법률사무소 대도: 사이트 이전에 콘텐츠를 어떻게 수정했나요?
+8. 법률사무소 대도: 2인 팀에서 본인 범위(프론트엔드만 / DB·RLS 포함)는?
+9. 법률사무소 대도: 고객과의 커뮤니케이션 방식은?
+10. 법률사무소 대도: 공개일 2023.05가 맞나요? 유지보수 여부는?
+11. 법률사무소 대도: 관리자 화면에서 수정할 수 있는 범위는?
+12. POCAZ: 원 프로젝트 팀 구성, 본인 역할, 리메이크에서 새로 만든 범위는?
+13. POCAZ: Elysia를 Next.js 라우트 안에 둔 이유는?
+14. POCAZ: 채팅 화면 캡처를 주실 수 있나요?
+15. 메뉴 고르기: "메뉴 200+, 5개 브랜드"의 근거가 있나요? 기능별 캡처를 주실 수 있나요?
+16. Travel Records: 새 여행 추가에 걸리는 시간 같은 운영 지표가 있나요?
+17. 프론트엔드 주니어 스터디: 기간 2025.11 - 2026.01이 맞나요? (마지막 커밋 2026.04)
+18. XMORSE: 스캐터엑스 제품 페이지 이미지 사용 허락을 받으셨나요? 어떤 이미지를 쓸까요?
+19. XMORSE: XMORSE 2.0이 현재 서비스 중인가요? (카드에 "운영 중")
+20. 이력서: `public/resume.pdf`를 넣어 주세요.
+21. 영어 페이지용 슈가브릭스, 시스웨어 공식 영문 표기가 있나요?
+
+## 머지와 배포 순서
+
+1. next-portfolio `portfolio-fix/persona-review`를 먼저 머지·배포 (새 스키마 필드는 모두 선택값이라 지금 운영 매니페스트도 그대로 읽음)
+2. 그다음 portfolio-content `portfolio-fix/persona-review`를 main에 머지 (머지 시 Blob publish와 revalidate가 실행됨). 순서가 바뀌면 옛 사이트가 `Work` 카테고리를 읽지 못해 마지막 정상 페이지를 계속 보여 줍니다
+3. 콘텐츠 머지 후 `next.config.ts`의 `postfiles.pstatic.net` remotePatterns 제거 가능
