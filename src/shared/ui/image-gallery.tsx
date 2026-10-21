@@ -5,6 +5,7 @@ import type { StaticImageData } from "next/image";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useEffect, useEffectEvent, useState } from "react";
+import { isSvgSource } from "@/shared/utils/image";
 
 type GalleryImage = {
 	src: string | StaticImageData;
@@ -89,6 +90,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
 					>
 						<Image
 							src={image.src}
+							unoptimized={isSvgSource(image.src)}
 							alt={image.alt}
 							fill
 							sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -146,6 +148,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
 						<div className="relative w-full h-full">
 							<Image
 								src={images[selectedIndex].src}
+								unoptimized={isSvgSource(images[selectedIndex].src)}
 								alt={images[selectedIndex].alt}
 								fill
 								sizes="100vw"

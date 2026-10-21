@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { ViewTransition } from "react";
 import type { ProjectCard } from "@/shared/content/project";
 import { TransitionLink } from "@/shared/ui/transition-link";
+import { isSvgSource } from "@/shared/utils/image";
 
 export function ProjectItem({
 	src,
@@ -39,6 +40,7 @@ export function ProjectItem({
 					>
 						<Image
 							src={src}
+							unoptimized={isSvgSource(src)}
 							alt={title}
 							fill
 							sizes="(min-width: 1280px) 360px, (min-width: 768px) 50vw, 100vw"

@@ -14,6 +14,10 @@ test.describe("Main Page Navigation", () => {
     await expect(
       page.getByRole("link", { name: /프로젝트 보기|View Projects/i }).first(),
     ).toBeVisible();
+    await expect(page.getByTestId("home-summary")).toContainText(
+      /실무 4년 차|4 years of professional experience/,
+    );
+    await expect(page).not.toHaveTitle(/Frontend Portfolio/);
     await expect(page.getByTestId("home-selected-work")).toBeVisible();
     await expect(
       page.getByRole("heading", {

@@ -17,7 +17,7 @@ export function buildFitSystemPrompt(
     .map((project) => `- ${project.slug}: ${project.title}`)
     .join("\n");
 
-  return `당신은 채용공고(JD)와 Kim Manjoong의 포트폴리오를 비교하는 분석가입니다.
+  return `당신은 채용공고(JD)와 Manjoong Kim의 포트폴리오를 비교하는 분석가입니다.
 반드시 [지식 베이스]와 [프로젝트 케이스 스터디]에 있는 사실만 근거로 사용하고, 없는 경력·수치·기술을 만들어내지 마세요.
 근거가 없으면 match를 "gap"으로 표시하고 솔직하게 적습니다. 과장보다 정확성이 중요합니다.
 

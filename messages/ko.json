@@ -7,7 +7,8 @@
     "contact": "연락하기",
     "menu": "메뉴 열기",
     "closeMenu": "메뉴 닫기",
-    "fit": "JD 매칭"
+    "fit": "JD 매칭",
+    "resume": "이력서"
   },
   "Footer": {
     "allRightsReserved": "All rights reserved.",
@@ -24,44 +25,36 @@
     "next": "다음"
   },
   "HomePage": {
-    "eyebrow": "프론트엔드 엔지니어 포트폴리오",
-    "greeting": "명확하고 빠르며, 움직임까지 설계된 프로덕트 인터페이스를 만듭니다.",
-    "description": "Next.js, React, TypeScript를 바탕으로 읽기 쉬운 화면과 운영까지 이어지는 프론트엔드 구조를 함께 설계합니다.",
+    "eyebrow": "Frontend · Product Engineer",
+    "greeting": "데이터 분석·시각화 SaaS 회사에서 3년간 프론트엔드를 개발했습니다. jQuery로 만든 분석 플랫폼을 Next.js로 옮기는 작업에서 구조 설계를 맡았습니다.",
+    "description": "개인 프로젝트는 기획부터 서버, 배포까지 혼자 만들어 운영합니다.",
     "viewProjects": "프로젝트 보기",
     "aboutCta": "소개",
     "featuredProjects": "선별한 작업",
-    "selectedWorkEyebrow": "최근 케이스 스터디",
-    "selectedWorkDescription": "UX 결정, 인터랙션 완성도, 구현 선명도를 기준으로 추린 프로젝트입니다.",
+    "selectedWorkEyebrow": "대표 작업",
+    "selectedWorkDescription": "회사에서 진행한 마이그레이션과, 혼자 만들어 운영하는 개인 프로젝트입니다.",
     "techStack": "기술 스택",
-    "featuredLabel": "메인 케이스",
     "viewAll": "전체 보기",
-    "stats": {
-      "projects": "공개 프로젝트",
-      "tech": "핵심 도구",
-      "currentFocus": "현재 집중",
-      "currentFocusValue": "Next.js 16 / 에이전트 하니스 설계"
-    },
     "craftEyebrow": "일하는 방식",
-    "craftTitle": "디자인, 코드, 전달력이 하나의 시스템처럼 읽혀야 한다고 믿습니다.",
-    "craftDescription": "먼저 제품의 형태를 정리하고, 화면은 차분하게 만들며, 모션은 위계를 선명하게 할 때만 사용합니다.",
-    "craftStatement": "한눈에 읽히고, 움직임은 정확하며, 운영까지 이어지는 프론트엔드.",
+    "craftTitle": "구조를 먼저 나누고, 스펙과 테스트로 확인합니다.",
+    "craftDescription": "XMORSE 2.0에서는 화면 코드에서 API 호출을 떼어 내고 백엔드 OpenAPI 스펙에서 타입을 생성했습니다. 개인 프로젝트에서도 스키마 검증과 테스트를 빌드와 CI에 넣었습니다 (Travel Records의 Zod 빌드 게이트, POCAZ의 API 테스트).",
     "stackLabel": "현재 툴킷",
-    "finalEyebrow": "대화를 시작할 준비",
-    "finalTitle": "표면과 시스템을 함께 다루는 프론트엔드 엔지니어가 필요하다면",
-    "finalDescription": "케이스 스터디를 먼저 보고, 제품 작업·협업·채용 관련 이야기로 이어가세요.",
+    "finalEyebrow": "연락",
+    "finalTitle": "프론트엔드나 Product Engineer 포지션으로 함께 일할 사람을 찾고 있다면 연락 주세요.",
+    "finalDescription": "프로젝트를 먼저 살펴보고, 채용이나 협업 이야기는 연락하기 페이지에 남겨 주세요.",
     "contactCta": "연락하기",
     "pillars": {
-      "productThinking": {
-        "title": "프로덕트 우선 판단",
-        "description": "사용자 흐름과 의사결정 가치를 먼저 보고, 거기에 맞는 기술 깊이를 선택합니다."
+      "architecture": {
+        "title": "구조 설계",
+        "description": "레거시 화면의 분기를 계층별로 나누고, 공통 컴포넌트를 가져다 넣는 방식으로 바꿨습니다."
       },
-      "modernFrontend": {
-        "title": "모던 프론트엔드 시스템",
-        "description": "React 19와 App Router, 전환을 고려한 UI를 쓰되 화면 자체가 데모처럼 보이지 않게 다룹니다."
+      "apiContract": {
+        "title": "API 계약",
+        "description": "백엔드 OpenAPI 스펙에서 요청·응답 타입을 자동으로 생성하게 만들어, 스펙이 바뀌면 빌드 단계에서 바로 알 수 있게 했습니다."
       },
-      "deliveryFocus": {
-        "title": "노이즈 없는 전달",
-        "description": "코드베이스는 예측 가능하게, 화면은 절제되게, 프로토타입에서 운영까지의 거리는 짧게 유지합니다."
+      "testing": {
+        "title": "테스트",
+        "description": "연산 로직은 유닛 테스트, UI 컴포넌트는 React Testing Library, 차트 코어와 iframe 화면은 Playwright E2E로 검증했습니다."
       }
     },
     "fitCta": "채용공고로 적합도 보기",
@@ -83,7 +76,7 @@
           "가장 최근에 집중하는 분야는?"
         ],
         "engineer": [
-          "POCAZ에서 이미지 성능 문제를 어떻게 풀었어?",
+          "XMORSE 2.0 마이그레이션에서 구조를 어떻게 나눴어?",
           "상태 관리와 컴포넌트 경계는 어떻게 설계해?",
           "에이전트 작업을 어떻게 검증해?"
         ],
@@ -93,11 +86,17 @@
           "문서화와 커뮤니케이션은 어떻게 해?"
         ]
       }
-    }
+    },
+    "summary": {
+      "years": "실무 4년 차",
+      "domain": "데이터 시각화 SaaS 3년",
+      "migration": "Next.js 마이그레이션 구조 설계"
+    },
+    "summaryLabel": "경력 요약"
   },
   "ProjectsPage": {
     "title": "프로젝트",
-    "description": "개인·외주 프로젝트와 학습 저장소를 모았습니다. 프로젝트마다 설명, 화면, 라이브 사이트 또는 저장소 링크를 정리했습니다.",
+    "description": "스캐터엑스에서 진행한 XMORSE 2.0 마이그레이션과 개인·외주 프로젝트, 학습 저장소를 모았습니다. 프로젝트마다 설명, 화면, 라이브 사이트 또는 저장소 링크를 정리했습니다.",
     "stats": {
       "total": "전체 프로젝트",
       "featured": "주요 프로젝트",
@@ -117,6 +116,7 @@
     "stackLabel": "기술 스택",
     "resultLabel": "결과",
     "categories": {
+      "Work": "실무",
       "Product": "프로덕트",
       "Client": "클라이언트",
       "Study": "학습"
@@ -233,17 +233,11 @@
   },
   "AboutPage": {
     "title": "소개",
-    "greeting": "안녕하세요, 저는 김만중입니다",
-    "role": "프론트엔드 개발자",
-    "intro": "명확한 프로덕트 인터페이스, 유지보수 가능한 프론트엔드 시스템, 그리고 엔지니어링 검증을 견디는 AI 에이전트 워크플로우에 집중하는 프론트엔드 개발자입니다.",
-    "heroEyebrow": "만드는 사람에 대해",
-    "heroStatement": "차분한 제품 인터페이스, 명확한 프론트엔드 시스템, 그리고 꼭 필요한 움직임을 만듭니다.",
+    "role": "프론트엔드 개발자 · 실무 4년",
+    "intro": "실무 4년 차 프론트엔드 개발자입니다. 스캐터엑스에서 3년 동안 데이터 분석·시각화 B2B SaaS의 프론트엔드를 개발했고, jQuery 기반 분석 플랫폼을 Next.js로 옮기는 작업에서 초기 세팅, UI 코어, 구조 설계를 맡았습니다. 그전에는 슈가브릭스에서 병원 대상 회계 처리 서비스의 프론트엔드를, 시스웨어에서 ERP 개발을 했습니다. 개인 프로젝트는 기획부터 서버, 배포까지 혼자 만들어 운영합니다.",
+    "heroEyebrow": "소개",
     "portraitAlt": "김만중 프로필 사진",
-    "portraitCaption": "제품 판단, 시각적 절제, 구현 완성도가 실제 전달 환경 안에서 함께 버텨야 하는 작업에 강합니다.",
-    "aboutMeTitle": "소개",
-    "aboutMeDescription": "실무 4년 차 프론트엔드 개발자입니다. 스캐터엑스에서 3년 동안 데이터 분석·시각화 B2B SaaS의 프론트엔드를 개발했고, jQuery 기반 분석 플랫폼을 Next.js로 옮기는 작업에서 초기 세팅, UI 코어, 구조 설계를 맡았습니다. 그전에는 슈가브릭스에서 병원 대상 회계 처리 서비스의 프론트엔드를, 시스웨어에서 ERP 개발을 했습니다. 개인 프로젝트는 기획부터 서버, 배포까지 혼자 만들어 운영합니다.",
-    "strengthsTitle": "저의 강점",
-    "narrativeEyebrow": "작업 방식",
+    "strengthsTitle": "강점",
     "focusTitle": "현재 집중 영역",
     "cleanCode": "깔끔한 코드",
     "uiuxDesign": "UI/UX 디자인",
@@ -255,36 +249,20 @@
       "years": "실무 경력",
       "yearsValue": "4년"
     },
-    "timelineTitle": "커리어 타임라인",
-    "timelineEyebrow": "최근 흐름",
-    "timeline": {
-      "2024": {
-        "title": "현대적 React 생태계 기반 구축",
-        "description": "React, Next.js, TypeScript 역량을 확장하며 접근성과 성능 중심 개발 습관을 정립했습니다."
-      },
-      "2025": {
-        "title": "프로덕트 중심 프론트엔드 전달력 강화",
-        "description": "필터링, 모달 플로우, 컴포넌트 경계를 개선하며 여러 제품 인터페이스를 구현·배포했습니다."
-      },
-      "2026": {
-        "title": "포트폴리오 리빌드와 스토리 중심 구조화",
-        "description": "스토리 중심 섹션, 토큰 기반 테마, 다국어 UX 일관성, 그리고 명시적인 AI 에이전트 엔지니어링 증거를 포함하도록 포트폴리오를 재설계했습니다."
-      }
-    },
     "principlesTitle": "일하는 원칙",
     "principlesEyebrow": "협업 태도",
     "principles": {
       "product": {
-        "title": "먼저 제품 문제를 해결합니다",
-        "description": "사용자와 비즈니스 목표를 먼저 정의하고, 확장 가능한 최소 구현을 선택합니다."
+        "title": "먼저 제품 문제를 정의합니다",
+        "description": "사용자와 비즈니스 목표를 먼저 정하고, 그에 맞는 가장 작은 구현을 고릅니다."
       },
       "craft": {
-        "title": "디자인과 코드를 하나의 시스템으로 봅니다",
-        "description": "재사용 가능한 UI 프리미티브와 토큰을 설계해 기능이 늘어도 일관성이 유지되도록 합니다."
+        "title": "공통 UI를 먼저 만듭니다",
+        "description": "재사용할 UI 컴포넌트와 디자인 토큰을 먼저 정해, 기능이 늘어도 화면이 일관되게 유지되도록 합니다."
       },
       "team": {
-        "title": "명확하게 소통합니다",
-        "description": "명시적인 네이밍, 예측 가능한 구조, 문서화 가능한 프롬프트/체크리스트를 통해 팀원과 에이전트 모두가 안전하게 실행할 수 있게 만듭니다."
+        "title": "이름과 구조를 명확하게 씁니다",
+        "description": "명시적인 네이밍, 예측 가능한 구조, 문서로 남긴 체크리스트로 팀원과 에이전트가 같은 기준으로 작업하게 합니다."
       }
     },
     "focus": {
@@ -292,11 +270,43 @@
       "designSystem": "디자인 시스템",
       "performance": "성능 최적화",
       "agentOrchestration": "에이전트 오케스트레이션"
+    },
+    "name": "김만중",
+    "careerEyebrow": "경력",
+    "careerTitle": "경력",
+    "careerCaseStudy": "XMORSE 2.0 케이스 스터디 보기",
+    "career": {
+      "scatterx": {
+        "company": "스캐터엑스",
+        "role": "플랫폼개발팀 프론트엔드 개발자",
+        "summary": "국내 대기업 제조 계열사가 쓰는 데이터 분석·시각화 B2B SaaS (XMORSE, SaharaX)",
+        "highlights": [
+          "jQuery 기반 분석 플랫폼을 동료 한 명과 1년 5개월 동안 Next.js로 옮겨 XMORSE 2.0을 만들었습니다. 초기 세팅, UI 코어, 구조 설계를 맡았습니다.",
+          "백엔드 OpenAPI 스펙에서 요청·응답 타입을 자동으로 생성하게 만들어, 스펙이 바뀌면 빌드 단계에서 바로 알 수 있게 했습니다.",
+          "다른 서비스에 임베드되는 차트 iframe 화면을 SSR에서 SSG로 바꿔 첫 진입을 0.5초 이내로 줄이고, 호스트와의 통신을 핸드셰이크 방식으로 바꿨습니다.",
+          "유닛 테스트, React Testing Library, Playwright E2E 테스트를 직접 작성했고, 팀 컨벤션을 기준으로 PR 리뷰를 했습니다.",
+          "신규 제품 SaharaX 초기 개발에서 프레임워크 없이 Web Components로 에디터 코어를 뺀 UI 대부분을 만들었습니다."
+        ]
+      },
+      "sugarbricks": {
+        "company": "슈가브릭스",
+        "role": "프론트엔드 개발자",
+        "highlights": [
+          "병원 대상 회계 처리 서비스의 프론트엔드를 개발했습니다."
+        ]
+      },
+      "sysware": {
+        "company": "시스웨어",
+        "role": "개발",
+        "highlights": [
+          "ERP 개발"
+        ]
+      }
     }
   },
   "ContactPage": {
     "title": "연락하기",
-    "description": "항상 새로운 기회와 협업에 열려있습니다. 이메일로 연락하시거나 LinkedIn에서 연결해주세요.",
+    "description": "채용, 프로젝트, 협업 제안은 아래 폼이나 이메일로 보내 주세요. LinkedIn으로도 연락할 수 있습니다.",
     "name": "이름",
     "email": "이메일",
     "message": "메시지",
@@ -317,7 +327,13 @@
     },
     "messagePlaceholder": "어떤 포지션인지, 어떤 프로젝트인지, 어떤 도움이 필요한지 알려주세요.",
     "website": "웹사이트",
-    "privacyNote": "남겨주신 정보는 답변과 후속 연락을 위해서만 사용합니다."
+    "privacyNote": "남겨주신 정보는 답변과 후속 연락을 위해서만 사용합니다.",
+    "emailLabel": "이메일 주소",
+    "copyEmail": "이메일 주소 복사",
+    "copied": "복사했습니다",
+    "resume": "이력서 (PDF)",
+    "requiredHint": "* 표시는 필수 항목입니다.",
+    "required": "필수"
   },
   "Chat": {
     "title": "AI 어시스턴트",
@@ -329,7 +345,7 @@
     "close": "닫기",
     "openChat": "채팅 열기",
     "emptyTitle": "무엇이든 물어보세요",
-    "emptyDescription": "Kim Manjoong의 커리어, 프로젝트, 기술 스택에 대해 질문해보세요.",
+    "emptyDescription": "Manjoong Kim의 커리어, 프로젝트, 기술 스택에 대해 질문해보세요.",
     "suggestions": [
       "가장 자신 있는 프로젝트 하나를 소개해줘",
       "React와 Next.js로 어떤 문제를 해결해봤어?",
@@ -365,7 +381,9 @@
         "stack": "{title}의 기술 스택은 왜 그렇게 선택했어?",
         "role": "{title}에서 맡은 역할과 성과를 요약해줘"
       }
-    }
+    },
+    "organization": "회사",
+    "diagram": "구조"
   },
   "FitPage": {
     "eyebrow": "Role Fit",

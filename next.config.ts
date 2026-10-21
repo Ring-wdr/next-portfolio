@@ -1,9 +1,17 @@
+import { existsSync } from "node:fs";
+import path from "node:path";
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
+// Decided at build time: serverless ISR renders can't see public/ on disk.
+const resumePath = existsSync(path.join(process.cwd(), "public", "resume.pdf"))
+	? "/resume.pdf"
+	: "";
+
 const nextConfig: NextConfig = {
+	env: { NEXT_PUBLIC_RESUME_PATH: resumePath },
 	reactStrictMode: true,
 	reactCompiler: true,
 	images: {

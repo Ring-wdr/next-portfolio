@@ -14,13 +14,13 @@ export async function generateMetadata({
     pathname: "/about",
     title: "About | Manjoong Kim",
     description:
-      "Career timeline, working principles, and agent-ready frontend engineering strengths behind Manjoong Kim's portfolio work.",
+      "Manjoong Kim's experience: four years of frontend work, including three years on a data analysis and visualization SaaS at ScatterX.",
     keywords: [
-      "about frontend engineer",
-      "career timeline",
-      "working principles",
-      "agent workflows",
-      "engineering systems",
+      "frontend engineer",
+      "product engineer",
+      "career",
+      "next.js migration",
+      "data visualization",
     ],
   });
 }
@@ -29,5 +29,9 @@ export default async function Page({ params }: PageProps<"/[locale]/about">) {
   setRequestLocale((await params).locale);
   const projects = await getProjects();
 
-  return <AboutPage projectCount={projects.length} />;
+  const publicProjects = projects.filter(
+    (project) => project.card.category !== "Work",
+  );
+
+  return <AboutPage projectCount={publicProjects.length} />;
 }

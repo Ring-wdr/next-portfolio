@@ -13,21 +13,27 @@ const imageRef = text;
 
 const titledItem = z.object({ title: text, description: text });
 
+const figure = z.object({ src: imageRef, alt: text, caption: text.optional() });
+
 export const projectSchema = z.object({
   /** URL segment for /project/[slug] */
   slug: text.regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "kebab-case slug"),
   title: text,
+  /** Short name for chat prompts when the title is a full sentence. */
+  shortTitle: text.optional(),
   thumbnail: imageRef,
   /** One-line summary */
   summary: text,
   period: text,
+  /** Employer for company work (card.category "Work"). */
+  organization: text.optional(),
   /** Omitted while unconfirmed; the site hides empty facts. */
   team: text.optional(),
   role: text.optional(),
 
   /** Project card / list page metadata */
   card: z.object({
-    category: z.enum(["Product", "Client", "Study"]),
+    category: z.enum(["Work", "Product", "Client", "Study"]),
     featured: z.boolean(),
     status: z.enum(["Live", "Prototype", "Archived"]),
     impact: text,
@@ -45,9 +51,15 @@ export const projectSchema = z.object({
 
   overview: z.object({
     background: text,
-    goal: text,
+    goal: text.optional(),
     features: z.array(text),
   }),
+
+  /** Extra case-study sections rendered after the overview, in order. */
+  narrative: z.array(titledItem).optional(),
+
+  /** Architecture diagram rendered with the overview. */
+  diagram: figure.optional(),
 
   tech: z.object({
     stack: z.array(text),
@@ -62,7 +74,12 @@ export const projectSchema = z.object({
   }),
 
   gallery: z.array(
-    z.object({ src: imageRef, alt: text, caption: text.optional() }),
+    figure.extend({
+      /** Kept out of the page until the image may be shown (e.g. usage permission). */
+      hidden: z.boolean().optional(),
+      /** Where the image comes from, linked under the caption. */
+      source: z.object({ label: text, url: z.url() }).optional(),
+    }),
   ),
 
   metadata: z.object({

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
+import { resumeHref } from "@/shared/constant/contact";
 import { classNames } from "@/shared/utils/classnames";
 import LogoImage from "../../../public/ms-icon-150x150.png";
 import { GithubIcon, LinkedinIcon } from "./icon/brand";
@@ -55,6 +56,16 @@ export function Header() {
 								{item.label}
 							</Link>
 						))}
+						{resumeHref && (
+							<a
+								href={resumeHref}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="rounded-full border border-border/70 px-3 py-1.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+							>
+								{t("resume")}
+							</a>
+						)}
 					</div>
 
 					<div className="glass-panel flex items-center gap-1 rounded-xl px-1.5 py-1">
@@ -136,6 +147,16 @@ export function Header() {
 								{item.label}
 							</Link>
 						))}
+						{resumeHref && (
+							<a
+								href={resumeHref}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="rounded-xl border border-border/60 bg-card/70 px-4 py-3 text-sm font-semibold transition-colors hover:border-primary/40 hover:bg-secondary"
+							>
+								{t("resume")}
+							</a>
+						)}
 					</div>
 				</nav>
 			</div>

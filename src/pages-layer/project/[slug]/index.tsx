@@ -7,6 +7,7 @@ import { ProjectAsk } from "@/feature/chat/ui/project-ask";
 import { Link } from "@/i18n/routing";
 import type { Project } from "@/shared/content/project";
 import { ImageGallery } from "@/shared/ui/image-gallery";
+import { isSvgSource } from "@/shared/utils/image";
 
 type ProjectDetailPageProps = {
 	project: Project;
@@ -15,6 +16,7 @@ type ProjectDetailPageProps = {
 export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 	const t = useTranslations("ProjectDetailPage");
 	const facts = [
+		{ label: t("organization"), value: project.organization },
 		{ label: t("period"), value: project.period },
 		{ label: t("team"), value: project.team },
 		{ label: t("role"), value: project.role },
@@ -23,6 +25,11 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 	const hasAchievements = Boolean(
 		metrics?.length || feedback?.length || improvements?.length,
 	);
+	const visibleGallery = project.gallery.filter((image) => !image.hidden);
+	// A diagram used as the thumbnail is shown once, in the hero slot.
+	const heroDiagram =
+		project.diagram?.src === project.thumbnail ? project.diagram : undefined;
+	const thumbnailIsSvg = isSvgSource(project.thumbnail);
 
 	return (
 		<main className="flex flex-1 justify-center py-6 md:py-10">
@@ -46,7 +53,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 						</p>
 					</div>
 
-					<dl className="mt-5 grid gap-2 sm:grid-cols-3">
+					<dl className="mt-5 grid grid-cols-2 gap-2 lg:grid-cols-4">
 						{facts.map((fact) => (
 							<div
 								key={fact.label}
@@ -93,9 +100,12 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 					</div>
 				</section>
 
-				<ProjectAsk slug={project.slug} title={project.title} />
+				<ProjectAsk
+					slug={project.slug}
+					title={project.shortTitle ?? project.title}
+				/>
 
-				<section className="glass-panel rounded-2xl p-4 md:p-5">
+				<figure className="glass-panel rounded-2xl p-4 md:p-5">
 					<ViewTransition
 						name={`project-detail-image-${project.slug}`}
 						default="vt-project-image"
@@ -107,15 +117,21 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 						<div className="relative aspect-video w-full overflow-hidden rounded-xl">
 							<Image
 								src={project.thumbnail}
-								alt={project.title}
+								alt={heroDiagram?.alt ?? project.title}
 								fill
 								sizes="(min-width: 1024px) 1024px, 100vw"
-								className="object-cover"
+								className={thumbnailIsSvg ? "bg-white object-contain" : "object-cover"}
+								unoptimized={thumbnailIsSvg}
 								priority
 							/>
 						</div>
 					</ViewTransition>
-				</section>
+					{heroDiagram?.caption && (
+						<figcaption className="mt-3 text-sm leading-relaxed text-muted-foreground">
+							{heroDiagram.caption}
+						</figcaption>
+					)}
+				</figure>
 
 				<section className="glass-panel rounded-2xl p-5 md:p-6">
 					<h2 className="mb-5 text-2xl font-bold">{t("overview")}</h2>
@@ -128,28 +144,63 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 								{project.overview.background}
 							</p>
 						</div>
-						<div>
-							<h3 className="mb-2 text-sm font-semibold text-primary">
-								{t("goal")}
-							</h3>
-							<p className="text-base leading-relaxed">
-								{project.overview.goal}
-							</p>
-						</div>
-						<div>
-							<h3 className="mb-2 text-sm font-semibold text-primary">
-								{t("features")}
-							</h3>
-							<ul className="list-disc list-inside space-y-2">
-								{project.overview.features.map((feature) => (
-									<li key={feature} className="text-base leading-relaxed">
-										{feature}
-									</li>
-								))}
-							</ul>
-						</div>
+						{project.overview.goal && (
+							<div>
+								<h3 className="mb-2 text-sm font-semibold text-primary">
+									{t("goal")}
+								</h3>
+								<p className="text-base leading-relaxed">
+									{project.overview.goal}
+								</p>
+							</div>
+						)}
+						{project.overview.features.length > 0 && (
+							<div>
+								<h3 className="mb-2 text-sm font-semibold text-primary">
+									{t("features")}
+								</h3>
+								<ul className="list-disc list-inside space-y-2">
+									{project.overview.features.map((feature) => (
+										<li key={feature} className="text-base leading-relaxed">
+											{feature}
+										</li>
+									))}
+								</ul>
+							</div>
+						)}
+						{project.diagram && !heroDiagram && (
+							<figure className="space-y-3">
+								<h3 className="text-sm font-semibold text-primary">
+									{t("diagram")}
+								</h3>
+								<Image
+									src={project.diagram.src}
+									alt={project.diagram.alt}
+									width={1600}
+									height={1000}
+									sizes="(min-width: 1024px) 1024px, 100vw"
+									className="h-auto w-full rounded-xl border border-border/70 bg-white"
+									unoptimized={isSvgSource(project.diagram.src)}
+								/>
+								{project.diagram.caption && (
+									<figcaption className="text-sm leading-relaxed text-muted-foreground">
+										{project.diagram.caption}
+									</figcaption>
+								)}
+							</figure>
+						)}
 					</div>
 				</section>
+
+				{project.narrative?.map((section) => (
+					<section
+						key={section.title}
+						className="glass-panel rounded-2xl p-5 md:p-6"
+					>
+						<h2 className="mb-4 text-2xl font-bold">{section.title}</h2>
+						<p className="text-base leading-relaxed">{section.description}</p>
+					</section>
+				))}
 
 				<section className="glass-panel rounded-2xl p-5 md:p-6">
 					<h2 className="mb-5 text-2xl font-bold">{t("techStack")}</h2>
@@ -165,6 +216,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 					</div>
 				</section>
 
+				{project.tech.challenges.length > 0 && (
 				<section className="glass-panel rounded-2xl p-5 md:p-6">
 					<h2 className="mb-6 text-2xl font-bold">
 						{t("challengesAndSolutions")}
@@ -206,6 +258,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 						))}
 					</div>
 				</section>
+				)}
 
 				{hasAchievements && (
 				<section className="glass-panel rounded-2xl p-5 md:p-6">
@@ -273,10 +326,10 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 				</section>
 				)}
 
-				{project.gallery.length > 0 && (
+				{visibleGallery.length > 0 && (
 					<section className="glass-panel rounded-2xl p-5 md:p-6">
 						<h2 className="mb-6 text-2xl font-bold">{t("screenshots")}</h2>
-						<ImageGallery images={project.gallery} />
+						<ImageGallery images={visibleGallery} />
 					</section>
 				)}
 

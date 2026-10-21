@@ -7,7 +7,8 @@
     "contact": "Contact",
     "menu": "Open menu",
     "closeMenu": "Close menu",
-    "fit": "Role Fit"
+    "fit": "Role Fit",
+    "resume": "Resume"
   },
   "Footer": {
     "allRightsReserved": "All rights reserved.",
@@ -24,44 +25,36 @@
     "next": "Next"
   },
   "HomePage": {
-    "eyebrow": "Frontend Engineer Portfolio",
-    "greeting": "Building product interfaces with clarity, speed, and a strong eye for motion.",
-    "description": "I design and ship readable product surfaces in Next.js, React, and TypeScript, with enough structure to survive production.",
+    "eyebrow": "Frontend · Product Engineer",
+    "greeting": "I spent three years building the frontend of a data analysis and visualization SaaS, and designed the architecture when we moved its jQuery analytics platform to Next.js.",
+    "description": "I build and run my personal projects on my own, from planning through the server and deployment.",
     "viewProjects": "View Projects",
     "aboutCta": "About",
     "featuredProjects": "Selected Work",
-    "selectedWorkEyebrow": "Recent case studies",
-    "selectedWorkDescription": "A tighter set of product work focused on UX decisions, interaction quality, and engineering clarity.",
+    "selectedWorkEyebrow": "Key work",
+    "selectedWorkDescription": "A migration I worked on at my company, and personal products I build and run on my own.",
     "techStack": "Tech Stack",
-    "featuredLabel": "Featured case",
     "viewAll": "View all",
-    "stats": {
-      "projects": "Public projects",
-      "tech": "Core tools",
-      "currentFocus": "Current focus",
-      "currentFocusValue": "Next.js 16 / Agent harness design"
-    },
     "craftEyebrow": "How I work",
-    "craftTitle": "Design, code, and delivery should read as one system.",
-    "craftDescription": "I start with product shape, keep interfaces calm, and use motion only when it sharpens hierarchy.",
-    "craftStatement": "Readable at a glance. Precise in motion. Ready for production.",
+    "craftTitle": "I split the structure first, then check it with specs and tests.",
+    "craftDescription": "On XMORSE 2.0 I moved API calls out of screen code and generated types from the backend OpenAPI spec. In personal projects I also put schema validation and tests into the build and CI (the Zod build gate in Travel Records, the API tests in POCAZ).",
     "stackLabel": "Current toolkit",
-    "finalEyebrow": "Start a conversation",
-    "finalTitle": "Need a frontend engineer who can shape both the surface and the system?",
-    "finalDescription": "See the case studies, then reach out for product work, collaboration, or hiring conversations.",
+    "finalEyebrow": "Contact",
+    "finalTitle": "Looking for someone for a frontend or product engineer role? Get in touch.",
+    "finalDescription": "Look through the projects first, then leave hiring or collaboration inquiries on the contact page.",
     "contactCta": "Contact",
     "pillars": {
-      "productThinking": {
-        "title": "Product-first thinking",
-        "description": "Start from user flow and decision value, then choose the engineering depth that supports it."
+      "architecture": {
+        "title": "Architecture",
+        "description": "I split the branching of the legacy screens into layers, so new work became placing a shared component."
       },
-      "modernFrontend": {
-        "title": "Modern frontend systems",
-        "description": "Use React 19, App Router patterns, and transition-aware UI without turning the surface into a demo."
+      "apiContract": {
+        "title": "API contract",
+        "description": "Request and response types are generated from the backend OpenAPI spec, so a spec change shows up at build time."
       },
-      "deliveryFocus": {
-        "title": "Delivery without noise",
-        "description": "Keep the codebase predictable, the UI restrained, and the path from prototype to production short."
+      "testing": {
+        "title": "Testing",
+        "description": "Unit tests for calculation logic, React Testing Library for UI components, and Playwright E2E for the chart core and iframe screens."
       }
     },
     "fitCta": "Check fit against a job post",
@@ -83,7 +76,7 @@
           "What are you focusing on right now?"
         ],
         "engineer": [
-          "How did you solve image performance in POCAZ?",
+          "How did you structure the XMORSE 2.0 migration?",
           "How do you design state and component boundaries?",
           "How do you verify agent-generated work?"
         ],
@@ -93,11 +86,17 @@
           "How do you approach docs and communication?"
         ]
       }
-    }
+    },
+    "summary": {
+      "years": "4 years of professional experience",
+      "domain": "3 years on a data visualization SaaS",
+      "migration": "Architecture of a Next.js migration"
+    },
+    "summaryLabel": "Career summary"
   },
   "ProjectsPage": {
     "title": "Projects",
-    "description": "Personal and client projects plus a study repository. Each one has a description, screenshots, and a link to the live site or repository.",
+    "description": "The XMORSE 2.0 migration I worked on at ScatterX, plus personal and client projects and a study repository. Each one has a description, screenshots, and a link to the live site or repository.",
     "stats": {
       "total": "Total projects",
       "featured": "Featured projects",
@@ -117,6 +116,7 @@
     "stackLabel": "Stack",
     "resultLabel": "Outcome",
     "categories": {
+      "Work": "Work",
       "Product": "Product",
       "Client": "Client",
       "Study": "Study"
@@ -233,17 +233,11 @@
   },
   "AboutPage": {
     "title": "About Me",
-    "greeting": "Hi, I'm Manjoong",
-    "role": "Front-End Developer",
-    "intro": "I'm a front-end developer focused on clear product interfaces, maintainable frontend systems, and recent AI-agent workflows that still hold up under engineering scrutiny.",
-    "heroEyebrow": "About the builder",
-    "heroStatement": "Calm product interfaces, clear frontend systems, and motion that earns its place.",
+    "role": "Frontend developer · 4 years of experience",
+    "intro": "I'm a frontend developer with four years of professional experience. At ScatterX I spent three years building the frontend of a B2B data analysis and visualization SaaS, and on the move of a jQuery analytics platform to Next.js I handled the initial setup, the UI core, and the architecture. Before that I built the frontend of an accounting service for hospitals at 슈가브릭스 and worked on ERP development at 시스웨어. I build and run my personal projects on my own, from planning through the server and deployment.",
+    "heroEyebrow": "About",
     "portraitAlt": "Portrait of Manjoong Kim",
-    "portraitCaption": "I work best where product judgment, visual restraint, and implementation quality need to hold together under real delivery pressure.",
-    "aboutMeTitle": "About Me",
-    "aboutMeDescription": "I'm a frontend developer with four years of professional experience. At ScatterX I spent three years building the frontend of a B2B data analysis and visualization SaaS, and on the move of a jQuery analytics platform to Next.js I handled the initial setup, the UI core, and the architecture. Before that I built the frontend of an accounting service for hospitals at 슈가브릭스 and worked on ERP development at 시스웨어. I build and run my personal projects on my own, from planning through the server and deployment.",
-    "strengthsTitle": "My Strengths",
-    "narrativeEyebrow": "Narrative",
+    "strengthsTitle": "Strengths",
     "focusTitle": "Current focus",
     "cleanCode": "Clean Code",
     "uiuxDesign": "UI/UX Design",
@@ -255,36 +249,20 @@
       "years": "Professional experience",
       "yearsValue": "4 years"
     },
-    "timelineTitle": "Career Timeline",
-    "timelineEyebrow": "Recent path",
-    "timeline": {
-      "2026": {
-        "title": "Portfolio rebuild and narrative-driven architecture",
-        "description": "Redesigned this portfolio around story-first sections, tokenized theming, stronger international UX consistency, and explicit AI-agent engineering proof."
-      },
-      "2025": {
-        "title": "Product-focused frontend delivery",
-        "description": "Built and shipped multiple product interfaces with improved filtering, modal flows, and maintainable component boundaries."
-      },
-      "2024": {
-        "title": "Foundation in modern React ecosystem",
-        "description": "Expanded expertise in React, Next.js, and TypeScript with a strong emphasis on accessibility and performance."
-      }
-    },
     "principlesTitle": "Working Principles",
     "principlesEyebrow": "Working style",
     "principles": {
       "product": {
-        "title": "Solve product problems first",
-        "description": "Start from user and business goals, then select the simplest implementation that can scale."
+        "title": "Define the product problem first",
+        "description": "Start from user and business goals, then pick the smallest implementation that serves them."
       },
       "craft": {
-        "title": "Design and code as one system",
-        "description": "Build reusable UI primitives and design tokens so consistency improves as features grow."
+        "title": "Build shared UI first",
+        "description": "Decide reusable UI components and design tokens early so screens stay consistent as features grow."
       },
       "team": {
-        "title": "Communicate with clarity",
-        "description": "Prefer explicit naming, predictable structures, and documentation-ready prompts/checklists so both teammates and agents can execute safely."
+        "title": "Name and structure things clearly",
+        "description": "Explicit naming, predictable structure, and written checklists let teammates and agents work to the same standard."
       }
     },
     "focus": {
@@ -292,11 +270,43 @@
       "designSystem": "Design system",
       "performance": "Performance tuning",
       "agentOrchestration": "Agent orchestration"
+    },
+    "name": "Manjoong Kim",
+    "careerEyebrow": "Experience",
+    "careerTitle": "Experience",
+    "careerCaseStudy": "Read the XMORSE 2.0 case study",
+    "career": {
+      "scatterx": {
+        "company": "ScatterX (스캐터엑스)",
+        "role": "Frontend developer, Platform Development team",
+        "summary": "A B2B data analysis and visualization SaaS used by manufacturing affiliates of large Korean companies (XMORSE, SaharaX)",
+        "highlights": [
+          "With one teammate, I moved a jQuery analytics platform to Next.js over one year and five months, producing XMORSE 2.0. I handled the initial setup, the UI core, and the architecture.",
+          "Request and response types are generated automatically from the backend OpenAPI spec, so a spec change shows up at build time.",
+          "I moved the chart iframe screen embedded in other services from SSR to SSG, bringing first load under 0.5 seconds, and changed host communication to a handshake.",
+          "I wrote unit tests, React Testing Library tests, and Playwright E2E tests myself, and reviewed PRs against the team conventions.",
+          "In early development of the new product SaharaX, I built most of the UI except the editor core with Web Components and no framework."
+        ]
+      },
+      "sugarbricks": {
+        "company": "슈가브릭스",
+        "role": "Frontend developer",
+        "highlights": [
+          "I built the frontend of an accounting service for hospitals."
+        ]
+      },
+      "sysware": {
+        "company": "시스웨어",
+        "role": "Development",
+        "highlights": [
+          "ERP development"
+        ]
+      }
     }
   },
   "ContactPage": {
     "title": "Contact",
-    "description": "I'm always open to new opportunities and collaborations. Feel free to reach out to me via email or connect with me on LinkedIn.",
+    "description": "Send hiring, project, or collaboration inquiries through the form below or by email. You can also reach me on LinkedIn.",
     "name": "Name",
     "email": "Email",
     "message": "Message",
@@ -317,7 +327,13 @@
     },
     "messagePlaceholder": "Tell me about the role, project, or collaboration you're considering.",
     "website": "Website",
-    "privacyNote": "I will only use this information to reply to your inquiry."
+    "privacyNote": "I will only use this information to reply to your inquiry.",
+    "emailLabel": "Email address",
+    "copyEmail": "Copy email address",
+    "copied": "Copied",
+    "resume": "Resume (PDF)",
+    "requiredHint": "Fields marked * are required.",
+    "required": "required"
   },
   "Chat": {
     "title": "AI Assistant",
@@ -329,7 +345,7 @@
     "close": "Close",
     "openChat": "Open chat",
     "emptyTitle": "Ask me anything",
-    "emptyDescription": "Ask about Manjoong's career, projects, or tech stack.",
+    "emptyDescription": "Ask about Manjoong Kim's career, projects, or tech stack.",
     "suggestions": [
       "Walk me through the project you're proudest of",
       "What problems have you solved with React and Next.js?",
@@ -365,7 +381,9 @@
         "stack": "Why was this tech stack chosen for {title}?",
         "role": "Summarize the role and outcomes in {title}"
       }
-    }
+    },
+    "organization": "Company",
+    "diagram": "Architecture"
   },
   "FitPage": {
     "eyebrow": "Role Fit",

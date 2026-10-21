@@ -1,48 +1,38 @@
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { TechStack } from "@/shared/constant/tech-stack";
 import { getFeaturedProjects, type ProjectCard } from "@/shared/content/project";
 import { HeroAsk } from "./hero-ask";
 import { HeroCanvas } from "./hero-canvas";
-import { PretextStatement } from "@/shared/ui/pretext-statement";
+import { isSvgSource } from "@/shared/utils/image";
 
 export function MainPage({ projects }: { projects: ProjectCard[] }) {
-	const locale = useLocale();
 	const t = useTranslations("HomePage");
 	const categoryT = useTranslations("ProjectsPage.categories");
 	const supportingProjects = getFeaturedProjects(projects, 3);
 	const spotlightTech = TechStack.slice(0, 8).map((tech) => tech.name);
-	const proofItems = [
-		{
-			label: t("stats.projects"),
-			value: `${projects.length}`,
-		},
-		{
-			label: t("stats.tech"),
-			value: `${TechStack.length}`,
-		},
-		{
-			label: t("stats.currentFocus"),
-			value: t("stats.currentFocusValue"),
-		},
+	const summaryItems = [
+		t("summary.years"),
+		t("summary.domain"),
+		t("summary.migration"),
 	] as const;
 	const principles = [
 		{
 			id: "01",
-			title: t("pillars.productThinking.title"),
-			description: t("pillars.productThinking.description"),
+			title: t("pillars.architecture.title"),
+			description: t("pillars.architecture.description"),
 		},
 		{
 			id: "02",
-			title: t("pillars.modernFrontend.title"),
-			description: t("pillars.modernFrontend.description"),
+			title: t("pillars.apiContract.title"),
+			description: t("pillars.apiContract.description"),
 		},
 		{
 			id: "03",
-			title: t("pillars.deliveryFocus.title"),
-			description: t("pillars.deliveryFocus.description"),
+			title: t("pillars.testing.title"),
+			description: t("pillars.testing.description"),
 		},
 	] as const;
 
@@ -55,11 +45,11 @@ export function MainPage({ projects }: { projects: ProjectCard[] }) {
 				<HeroCanvas className="absolute inset-0 -z-10" />
 				<div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(8,10,14,0.78)_0%,rgba(8,10,14,0.18)_50%,rgba(8,10,14,0.48)_100%)]" />
 				<div className="section-shell relative z-10 flex min-h-[calc(100svh-4.5rem)] items-end pt-16 pb-12 md:pt-20 md:pb-14 lg:pt-24 lg:pb-16">
-					<div className="home-hero-copy flex max-w-[44rem] flex-col gap-6 text-white md:gap-7">
+					<div className="home-hero-copy flex max-w-[46rem] flex-col gap-6 text-white md:gap-7">
 						<p className="home-kicker text-white/72">{t("eyebrow")}</p>
 						<h1 className="max-w-[12ch] text-[clamp(3.2rem,7vw,5.6rem)] font-bold leading-[0.9] tracking-[-0.06em] text-white">
 							<span className="block">Manjoong Kim</span>
-							<span className="mt-4 block max-w-[20ch] break-keep text-[clamp(1.25rem,2.6vw,1.75rem)] font-medium leading-tight tracking-[-0.03em] text-white/88">
+							<span className="mt-4 block max-w-[34ch] break-keep text-[clamp(1.25rem,2.4vw,1.625rem)] font-medium leading-snug tracking-[-0.03em] text-white/88">
 								{t("greeting")}
 							</span>
 						</h1>
@@ -89,18 +79,22 @@ export function MainPage({ projects }: { projects: ProjectCard[] }) {
 								{t("aboutCta")}
 							</Link>
 						</div>
-						<dl className="grid gap-5 border-t border-white/18 pt-6 text-white sm:grid-cols-3">
-							{proofItems.map((item) => (
-								<div key={item.label} className="space-y-1">
-									<dt className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-white/58">
-										{item.label}
-									</dt>
-									<dd className="text-lg font-semibold tracking-[-0.03em] text-white md:text-xl">
-										{item.value}
-									</dd>
-								</div>
+						<ul
+							aria-label={t("summaryLabel")}
+							className="flex flex-col gap-1 border-t border-white/18 pt-5 text-sm font-semibold text-white sm:flex-row sm:flex-wrap sm:gap-x-3 md:text-base"
+							data-testid="home-summary"
+						>
+							{summaryItems.map((item, index) => (
+								<li key={item} className="flex items-center gap-3">
+									{index > 0 && (
+										<span aria-hidden className="hidden text-white/50 sm:inline">
+											·
+										</span>
+									)}
+									{item}
+								</li>
 							))}
-						</dl>
+						</ul>
 					</div>
 				</div>
 			</section>
@@ -159,6 +153,7 @@ export function MainPage({ projects }: { projects: ProjectCard[] }) {
 								<div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-secondary/40">
 									<Image
 										src={project.src}
+										unoptimized={isSvgSource(project.src)}
 										alt={project.title}
 										fill
 										sizes="(max-width: 768px) 100vw, 272px"
@@ -178,18 +173,13 @@ export function MainPage({ projects }: { projects: ProjectCard[] }) {
 						<p className="home-kicker text-muted-foreground">
 							{t("craftEyebrow")}
 						</p>
-						<PretextStatement
-							locale={locale}
-							text={t("craftStatement")}
-							className="mt-5 max-w-[19ch]"
-						/>
+						<h2 className="mt-5 max-w-[16ch] text-3xl font-semibold tracking-[-0.04em] md:text-5xl">
+							{t("craftTitle")}
+						</h2>
 					</div>
 
 					<div className="space-y-10">
 						<div className="space-y-4 border-t border-border/70 pt-8">
-							<h2 className="max-w-[12ch] text-3xl font-semibold tracking-[-0.04em] md:text-5xl">
-								{t("craftTitle")}
-							</h2>
 							<p className="max-w-2xl text-sm leading-6 text-muted-foreground md:text-base md:leading-7">
 								{t("craftDescription")}
 							</p>

@@ -3,6 +3,7 @@ import { Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./icon/brand";
 import { ModeToggle } from "./theme-toggle";
 import { useTranslations } from "next-intl";
+import { contactEmail } from "@/shared/constant/contact";
 
 export function Footer() {
   const t = useTranslations("Footer");
@@ -38,7 +39,7 @@ export function Footer() {
               <LinkedinIcon width={18} height={18} />
             </Link>
             <Link
-              href="mailto:akswnd55@gmail.com"
+              href={`mailto:${contactEmail}`}
               aria-label={t("email")}
               className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground"
             >

@@ -35,6 +35,7 @@ export const metadata: Metadata = {
 	applicationName: siteConfig.name,
 	keywords: [
 		"Frontend Developer",
+		"Product Engineer",
 		"Next.js",
 		"React",
 		"Portfolio",
