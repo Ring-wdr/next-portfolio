@@ -41,10 +41,10 @@ export function HeroAsk() {
 							chat.setPersona(option);
 						}}
 						className={classNames(
-							"rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors",
+							"min-h-11 rounded-full border px-4 text-sm font-semibold transition-colors",
 							persona === option
-								? "border-white bg-white text-slate-950"
-								: "border-white/24 bg-white/8 text-white/82 hover:bg-white/14",
+								? "border-hero-fg bg-hero-fg text-hero-bg"
+								: "border-hero-fg/24 bg-hero-fg/8 text-hero-fg/82 hover:bg-hero-fg/14",
 						)}
 					>
 						{t(`personas.${option}`)}
@@ -57,7 +57,7 @@ export function HeroAsk() {
 					event.preventDefault();
 					submit(question);
 				}}
-				className="flex items-center gap-2 rounded-2xl border border-white/24 bg-white/10 p-1.5 pl-4 backdrop-blur-md focus-within:border-white/60"
+				className="flex items-center gap-2 rounded-2xl border border-hero-fg/24 bg-hero-fg/10 p-1.5 pl-4 backdrop-blur-md focus-within:border-hero-fg/60"
 			>
 				<label htmlFor="hero-ask-input" className="sr-only">
 					{t("label")}
@@ -69,13 +69,13 @@ export function HeroAsk() {
 					placeholder={t("placeholder")}
 					maxLength={500}
 					autoComplete="off"
-					className="min-w-0 flex-1 bg-transparent text-sm text-white placeholder:text-white/56 focus:outline-none md:text-base"
+					className="min-w-0 flex-1 bg-transparent text-base text-hero-fg placeholder:text-hero-fg/56 focus:outline-none md:text-base"
 				/>
 				<button
 					type="submit"
 					disabled={isBusy || !question.trim()}
 					aria-label={t("submit")}
-					className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-slate-950 transition-opacity disabled:opacity-40"
+					className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-hero-fg text-hero-bg transition-opacity disabled:opacity-40"
 				>
 					<ArrowUp size={18} />
 				</button>
@@ -88,7 +88,7 @@ export function HeroAsk() {
 							type="button"
 							onClick={() => submit(starter)}
 							disabled={isBusy}
-							className="rounded-full border border-white/16 bg-black/20 px-3 py-1.5 text-left text-xs text-white/80 transition-colors hover:border-white/40 hover:text-white disabled:opacity-50"
+							className="min-h-11 rounded-full border border-hero-fg/16 bg-hero-bg/40 px-4 py-2 text-left text-sm text-hero-fg/80 transition-colors hover:border-hero-fg/40 hover:text-hero-fg disabled:opacity-50"
 						>
 							{starter}
 						</button>

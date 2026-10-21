@@ -2,7 +2,13 @@
 import { describe, expect, it } from "vitest";
 import { summarizeCoverage } from "../lib/report";
 import { getFixtureProjects } from "@/shared/content/fixture-projects";
-import { buildFitSystemPrompt, extractJsonObject, parseFitReport } from "./analyze";
+import {
+  buildFitSystemPrompt,
+  describeFitParseFailure,
+  extractJsonObject,
+  parseFitReport,
+  parsePartialFitReport,
+} from "./analyze";
 
 const projects = getFixtureProjects();
 
@@ -28,6 +34,12 @@ describe("extractJsonObject", () => {
     expect(extractJsonObject("no json here")).toBeUndefined();
     expect(extractJsonObject("{broken")).toBeUndefined();
   });
+
+  it("ignores trailing notes that contain braces", () => {
+    expect(
+      extractJsonObject('{"a":"x}"}\n\nNote: slugs use {kebab-case}.'),
+    ).toEqual({ a: "x}" });
+  });
 });
 
 describe("parseFitReport", () => {
@@ -48,6 +60,55 @@ describe("parseFitReport", () => {
         projects,
       ),
     ).toBeNull();
+  });
+});
+
+describe("parseFitReport leniency", () => {
+  it("clips over-long text and extra items instead of rejecting the report", () => {
+    const report = parseFitReport(
+      JSON.stringify({
+        ...validReport,
+        summary: "가".repeat(900),
+        requirements: [
+          { requirement: "React", match: "Strong", evidence: "나".repeat(700), projectSlugs: null },
+        ],
+        questions: ["1", "2", "3", "4", "5", "6"],
+      }),
+      projects,
+    );
+    expect(report?.summary).toHaveLength(800);
+    expect(report?.requirements[0]).toMatchObject({ match: "strong", projectSlugs: [] });
+    expect(report?.requirements[0].evidence).toHaveLength(600);
+    expect(report?.questions).toHaveLength(5);
+  });
+
+  it("explains rejected output for the server log", () => {
+    expect(describeFitParseFailure("sorry, no report")).toMatch(/no JSON object/);
+    expect(describeFitParseFailure(JSON.stringify({ summary: "x", requirements: [] }))).toMatch(
+      /requirements/,
+    );
+  });
+});
+
+describe("parsePartialFitReport", () => {
+  const full = JSON.stringify(validReport);
+
+  it("shows nothing before the summary is finished", async () => {
+    expect(await parsePartialFitReport('{"summary":"React 중심', projects)).toBeNull();
+  });
+
+  it("keeps only rows the model has moved past", async () => {
+    const cut = full.indexOf('"requirement":"Vue');
+    const partial = await parsePartialFitReport(full.slice(0, cut + 12), projects);
+    expect(partial?.summary).toBe(validReport.summary);
+    expect(partial?.requirements.map((row) => row.requirement)).toEqual(["React 실무 3년"]);
+    expect(partial?.requirements[0].projectSlugs).toEqual(["pocaz"]);
+  });
+
+  it("keeps every row once the requirements list is closed", async () => {
+    const cut = full.indexOf('"gaps"');
+    const partial = await parsePartialFitReport(full.slice(0, cut + 9), projects);
+    expect(partial?.requirements).toHaveLength(3);
   });
 });
 

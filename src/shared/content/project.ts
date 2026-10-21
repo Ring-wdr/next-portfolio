@@ -16,7 +16,7 @@ export type ProjectCard = {
 	featured: boolean;
 	category: ProjectCategory;
 	year: number;
-	role: string;
+	role?: string;
 	impact: string;
 	result: string;
 	status: ProjectStatus;

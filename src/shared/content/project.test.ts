@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import en from "../../../messages/en.json";
+import ko from "../../../messages/ko.json";
 import fixture from "./fixture/projects.json";
 import { getFixtureProjects } from "./fixture-projects";
 import {
@@ -21,6 +23,19 @@ describe("project content", () => {
 		const [first] = fixture.projects;
 		const result = projectManifestSchema.safeParse({ projects: [first, first] });
 		expect(result.success).toBe(false);
+	});
+
+	it("rejects TODO markers outside the author-only todo notes", () => {
+		const [first] = fixture.projects;
+		const result = projectManifestSchema.safeParse({
+			projects: [{ ...first, role: "TODO(user): role" }],
+		});
+		expect(result.success).toBe(false);
+	});
+
+	it("keeps TODO markers out of rendered copy", () => {
+		expect(JSON.stringify(ko)).not.toMatch(/TODO/);
+		expect(JSON.stringify(en)).not.toMatch(/TODO/);
 	});
 
 	it("featured project helper only returns featured entries", () => {

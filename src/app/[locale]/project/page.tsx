@@ -15,13 +15,13 @@ export async function generateMetadata({
     pathname: "/project",
     title: "Projects | Manjoong Kim",
     description:
-      "Browse frontend case studies covering product UX, agent tooling, interaction design, and delivery outcomes.",
+      "Case studies: the XMORSE 2.0 move from jQuery to Next.js at ScatterX, and personal products built and run end to end.",
     keywords: [
-      "frontend case studies",
-      "portfolio projects",
+      "case studies",
+      "next.js migration",
       "product engineering",
-      "agent tooling",
-      "cli workflows",
+      "full stack",
+      "portfolio projects",
     ],
   });
 }

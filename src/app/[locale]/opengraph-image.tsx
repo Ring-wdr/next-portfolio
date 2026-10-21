@@ -37,14 +37,14 @@ export default function OpenGraphImage() {
             width: "auto",
           }}
         >
-          Frontend Portfolio
+          Frontend · Product Engineer
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 20, maxWidth: 840 }}>
           <div style={{ display: "flex", fontSize: 72, fontWeight: 700, lineHeight: 1.08 }}>
             Manjoong Kim
           </div>
           <div style={{ display: "flex", fontSize: 30, lineHeight: 1.4, color: "#cbd5e1" }}>
-            Product-focused frontend case studies, interaction design, and engineering outcomes.
+            3 years on a data visualization SaaS, architecture of its jQuery to Next.js migration.
           </div>
         </div>
         <div style={{ display: "flex", fontSize: 24, color: "#94a3b8" }}>{siteConfig.siteUrl}</div>

@@ -7,7 +7,11 @@
     "contact": "연락하기",
     "menu": "메뉴 열기",
     "closeMenu": "메뉴 닫기",
-    "fit": "JD 매칭"
+    "fit": "JD 매칭",
+    "resume": "이력서",
+    "menuTitle": "메뉴",
+    "mainNavigation": "주 메뉴",
+    "skipToContent": "본문으로 건너뛰기"
   },
   "Footer": {
     "allRightsReserved": "All rights reserved.",
@@ -24,44 +28,36 @@
     "next": "다음"
   },
   "HomePage": {
-    "eyebrow": "프론트엔드 엔지니어 포트폴리오",
-    "greeting": "명확하고 빠르며, 움직임까지 설계된 프로덕트 인터페이스를 만듭니다.",
-    "description": "Next.js, React, TypeScript를 바탕으로 읽기 쉬운 화면과 운영까지 이어지는 프론트엔드 구조를 함께 설계합니다.",
+    "eyebrow": "Frontend · Product Engineer",
+    "greeting": "데이터 분석·시각화 SaaS 회사에서 3년간 프론트엔드를 개발했습니다. jQuery로 만든 분석 플랫폼을 Next.js로 옮기는 작업에서 구조 설계를 맡았습니다.",
+    "description": "개인 프로젝트는 기획부터 서버, 배포까지 혼자 만들어 운영합니다.",
     "viewProjects": "프로젝트 보기",
     "aboutCta": "소개",
     "featuredProjects": "선별한 작업",
-    "selectedWorkEyebrow": "최근 케이스 스터디",
-    "selectedWorkDescription": "UX 결정, 인터랙션 완성도, 구현 선명도를 기준으로 추린 프로젝트입니다.",
+    "selectedWorkEyebrow": "대표 작업",
+    "selectedWorkDescription": "회사에서 진행한 마이그레이션과, 혼자 만들어 운영하는 개인 프로젝트입니다.",
     "techStack": "기술 스택",
-    "featuredLabel": "메인 케이스",
     "viewAll": "전체 보기",
-    "stats": {
-      "projects": "출시한 프로젝트",
-      "tech": "핵심 도구",
-      "currentFocus": "현재 집중",
-      "currentFocusValue": "Next.js 16 / 에이전트 하니스 설계"
-    },
     "craftEyebrow": "일하는 방식",
-    "craftTitle": "디자인, 코드, 전달력이 하나의 시스템처럼 읽혀야 한다고 믿습니다.",
-    "craftDescription": "먼저 제품의 형태를 정리하고, 화면은 차분하게 만들며, 모션은 위계를 선명하게 할 때만 사용합니다.",
-    "craftStatement": "한눈에 읽히고, 움직임은 정확하며, 운영까지 이어지는 프론트엔드.",
+    "craftTitle": "구조를 먼저 나누고, 스펙과 테스트로 확인합니다.",
+    "craftDescription": "XMORSE 2.0에서는 화면 코드에서 API 호출을 떼어 내고 백엔드 OpenAPI 스펙에서 타입을 생성했습니다. 개인 프로젝트에서도 스키마 검증과 테스트를 빌드와 CI에 넣었습니다 (Travel Records의 Zod 빌드 게이트, POCAZ의 API 테스트).",
     "stackLabel": "현재 툴킷",
-    "finalEyebrow": "대화를 시작할 준비",
-    "finalTitle": "표면과 시스템을 함께 다루는 프론트엔드 엔지니어가 필요하다면",
-    "finalDescription": "케이스 스터디를 먼저 보고, 제품 작업·협업·채용 관련 이야기로 이어가세요.",
+    "finalEyebrow": "연락",
+    "finalTitle": "프론트엔드나 Product Engineer 포지션으로 함께 일할 사람을 찾고 있다면 연락 주세요.",
+    "finalDescription": "프로젝트를 먼저 살펴보고, 채용이나 협업 이야기는 연락하기 페이지에 남겨 주세요.",
     "contactCta": "연락하기",
     "pillars": {
-      "productThinking": {
-        "title": "프로덕트 우선 판단",
-        "description": "사용자 흐름과 의사결정 가치를 먼저 보고, 거기에 맞는 기술 깊이를 선택합니다."
+      "architecture": {
+        "title": "구조 설계",
+        "description": "레거시 화면의 분기를 계층별로 나누고, 공통 컴포넌트를 가져다 넣는 방식으로 바꿨습니다."
       },
-      "modernFrontend": {
-        "title": "모던 프론트엔드 시스템",
-        "description": "React 19와 App Router, 전환을 고려한 UI를 쓰되 화면 자체가 데모처럼 보이지 않게 다룹니다."
+      "apiContract": {
+        "title": "API 계약",
+        "description": "백엔드 OpenAPI 스펙에서 요청·응답 타입을 자동으로 생성하게 만들어, 스펙이 바뀌면 빌드 단계에서 바로 알 수 있게 했습니다."
       },
-      "deliveryFocus": {
-        "title": "노이즈 없는 전달",
-        "description": "코드베이스는 예측 가능하게, 화면은 절제되게, 프로토타입에서 운영까지의 거리는 짧게 유지합니다."
+      "testing": {
+        "title": "테스트",
+        "description": "연산 로직은 유닛 테스트, UI 컴포넌트는 React Testing Library, 차트 코어와 iframe 화면은 Playwright E2E로 검증했습니다."
       }
     },
     "fitCta": "채용공고로 적합도 보기",
@@ -83,7 +79,7 @@
           "가장 최근에 집중하는 분야는?"
         ],
         "engineer": [
-          "POCAZ에서 이미지 성능 문제를 어떻게 풀었어?",
+          "XMORSE 2.0 마이그레이션에서 구조를 어떻게 나눴어?",
           "상태 관리와 컴포넌트 경계는 어떻게 설계해?",
           "에이전트 작업을 어떻게 검증해?"
         ],
@@ -93,11 +89,17 @@
           "문서화와 커뮤니케이션은 어떻게 해?"
         ]
       }
-    }
+    },
+    "summary": {
+      "years": "실무 4년 차",
+      "domain": "데이터 시각화 SaaS 3년",
+      "migration": "Next.js 마이그레이션 구조 설계"
+    },
+    "summaryLabel": "경력 요약"
   },
   "ProjectsPage": {
     "title": "프로젝트",
-    "description": "프론트엔드 개발 기술을 보여주는 최근 프로젝트 모음을 살펴보세요. 각 프로젝트에는 간단한 설명, 스크린샷, 라이브 데모 또는 저장소 링크가 포함될 것입니다.",
+    "description": "스캐터엑스에서 진행한 XMORSE 2.0 마이그레이션과 개인·외주 프로젝트, 학습 저장소를 모았습니다. 프로젝트마다 설명, 화면, 라이브 사이트 또는 저장소 링크를 정리했습니다.",
     "stats": {
       "total": "전체 프로젝트",
       "featured": "주요 프로젝트",
@@ -110,13 +112,11 @@
     "results": "총 {count}개 프로젝트",
     "emptyTitle": "조건에 맞는 프로젝트가 없습니다",
     "emptyDescription": "카테고리 또는 기술 필터를 변경해보세요.",
-    "storyLabel": "프로젝트 스토리",
     "openDetail": "전체 케이스 보기",
     "roleLabel": "역할",
-    "impactLabel": "임팩트",
     "stackLabel": "기술 스택",
-    "resultLabel": "결과",
     "categories": {
+      "Work": "실무",
       "Product": "프로덕트",
       "Client": "클라이언트",
       "Study": "학습"
@@ -125,7 +125,8 @@
       "Live": "운영 중",
       "Prototype": "프로토타입",
       "Archived": "보관"
-    }
+    },
+    "filterByTech": "기술로 필터"
   },
   "TechStackPage": {
     "title": "기술 스택",
@@ -159,165 +160,56 @@
     "Testing": "테스팅",
     "Tools": "도구",
     "Backend": "백엔드",
-    "showcase": {
-      "eyebrow": "성장 증거",
-      "title": "초보 코드에서 전문가 시스템으로",
-      "description": "단순히 동작하는 수준에서 확장 가능한 구현으로 기준이 올라갈 때, 제가 어떤 식으로 코드를 바꾸는지 보여주는 스택만 골랐습니다.",
-      "selectLabel": "스택 선택",
-      "before": "이전 · 초보",
-      "after": "이후 · 전문가",
-      "whatChanged": "무엇이 달라졌는가",
-      "loading": "코드 워크스루 준비 중…",
-      "items": {
-        "react": {
-          "summary": "수동 loading 상태를 React 19의 내장 액션 모델로 교체합니다.",
-          "improvement": "임시 useState 플래그에서 useActionState로 넘어갑니다. form의 action prop이 비동기 흐름을 담당하고, isPending이 수동 토글을 대체하며, 성공 콜백이 깔끔하게 합성됩니다."
-        },
-        "nextjs": {
-          "summary": "PageProps와 async params로 완전한 타입 안전성을 갖춘 서버 우선 라우트를 만듭니다.",
-          "improvement": "클라이언트 중심 페이지 셸에서 PageProps<'/route'>로 타입이 지정된 async 서버 컴포넌트로 전환합니다. next typegen이 생성하는 글로벌 헬퍼로 수동 타입 선언 없이 params를 Promise로 안전하게 다룰 수 있습니다."
-        },
-        "typescript": {
-          "summary": "판별 유니온과 satisfies로 도메인 규칙을 타입 레이어에 담습니다.",
-          "improvement": "느슨한 객체 리터럴에서 satisfies로 검증된 판별 유니온(kind: 'code' | 'narrative')으로 바뀝니다. 누락된 필드를 호출부가 아닌 정의 시점에서 TypeScript가 잡아냅니다."
-        },
-        "playwright": {
-          "summary": "테스트를 단조로운 await 나열이 아닌, 읽기 좋은 step 구조로 작성합니다.",
-          "improvement": "단순 페이지 이동에서 이름 있는 test.step 블록으로 전환합니다. 각 assertion이 범위를 가지고, 실패 시 어느 step이 깨졌는지 바로 파악되며, 테스트 리포트가 제품 스펙처럼 읽힙니다."
-        },
-        "supabase": {
-          "summary": "BaaS 속도와 Postgres 깊이를 함께 — 인증, 실시간, RLS를 하나의 플랫폼에서.",
-          "improvement": "인가 로직을 애플리케이션 코드에서 꺼내 DB 레이어의 Row Level Security 정책으로 옮깁니다. 버그 발생 여지가 줄고, 접근 규칙이 스키마와 함께 버전 관리됩니다.",
-          "detail": "Supabase는 BaaS 속도로 빠르게 구축하면서도 Postgres의 완전한 제어권을 포기하지 않아도 될 때 선택합니다. Row Level Security는 인가 규칙을 DB 안에 직접 담아 API 라우트를 얇게 유지하고, 접근 정책을 스키마와 함께 버전 관리할 수 있게 합니다. 실시간 레이어는 폴링 없이 WebSocket push 방식으로 데이터를 전달해 협업·라이브 업데이트 UI에 자연스럽게 맞아떨어집니다. Supabase의 자동 생성 REST API와 타입드 클라이언트 덕분에 스키마 자체가 계약이 되고, 브레이킹 체인지는 운영 환경이 아닌 빌드 타임에 드러납니다."
-        }
-      },
-      "narrativeLabel": "설명 중심 워크스루"
-    },
     "agentEngineering": {
-      "eyebrow": "AI 에이전트 엔지니어링",
-      "title": "에이전트를 만능 해법이 아니라 실제 작업 수단으로 다룹니다.",
-      "description": "중요한 신호는 Codex나 Claude Code를 쓸 줄 안다는 사실 자체가 아닙니다. 사람과 에이전트 모두가 실행 가능한 범위, 입력 계약, 검증 루프, 증거 산출물을 설계할 수 있다는 점입니다.",
-      "labels": {
-        "claim": "핵심 주장",
-        "workflow": "워크플로우",
-        "codex": "Codex",
-        "claude": "Claude Code",
-        "contract": "입력 계약",
-        "verification": "검증",
-        "proof": "증거 링크"
+      "eyebrow": "AI 에이전트",
+      "title": "AI 코딩 에이전트로 일하는 방식",
+      "intro": "시기마다 가장 일을 잘하는 모델로 월 구독을 바꿔 가며 써 왔습니다. Claude Code 초기 버전부터 실무에 썼고, GPT-5.3 이후에는 Codex를, 지금은 Opus 5.5와 Claude Code를 주로 씁니다. 도구를 바꿀 때마다 기존 skill과 설정을 점검해서 필요 없어진 규칙은 지웠습니다.",
+      "results": {
+        "travelRecords": "Travel Records는 Claude Code와 함께 만들었고, 작업 규칙과 맥락을 CLAUDE.md로 관리해 새 여행 추가를 반복 가능한 흐름으로 정리했습니다.",
+        "devtoolCli": "react-devtool-cli는 에이전트가 브라우저 개발자 도구 없이 React 앱을 조사할 수 있게 만든 CLI이고, Codex, Claude Code, Gemini CLI용 스킬을 함께 배포합니다.",
+        "verification": "이 포트폴리오와 POCAZ는 에이전트 작업 규칙을 AGENTS.md에 두고, lint, 테스트, 빌드를 통과해야 작업을 끝난 것으로 봅니다."
       },
+      "verificationLabel": "검증 명령",
+      "verificationDescription": "에이전트가 바꾼 코드도 이 명령을 통과해야 합니다.",
+      "proofLabel": "관련 자료",
       "artifacts": {
-        "doc": "에이전트 엔지니어링 문서",
+        "doc": "에이전트 작업 문서",
         "project": "react-devtool-cli 케이스 스터디"
-      },
-      "items": {
-        "taskDecomposition": {
-          "title": "작업 분해와 스펙 작성",
-          "claim": "모호한 요청을 범위, 제약, 성공 기준이 선명한 구현 단위로 바꿉니다.",
-          "workflow": "먼저 저장소의 실제 구조와 제약을 확인한 뒤, 인계 가능한 작업 단위와 인터페이스, 완료 기준으로 분해합니다.",
-          "codexRole": "Codex는 실제 저장소 편집, 테스트 실행, 반복 검증이 필요한 구현 작업에서 주 실행 표면으로 사용합니다.",
-          "claudeRole": "Claude Code는 코딩 전후로 스펙 구조, 프롬프트 선명도, 작업 분해가 맞는지 다른 시각으로 점검할 때 유용합니다.",
-          "contract": "모든 작업에는 목표, 핵심 제약, 변경 범위, 기대 산출물, 완료를 증명할 체크를 함께 넣습니다.",
-          "verification": "에이전트가 답을 냈다는 사실로 끝내지 않습니다. 결과가 소스, 문서, 테스트와 함께 맞물려야 합니다."
-        },
-        "toolFluency": {
-          "title": "도구 / 오케스트레이션 숙련도",
-          "claim": "CLI 도구, 저장소 지침, 프롬프트, 브라우저 자동화를 한 흐름으로 엮어도 맥락을 잃지 않게 설계합니다.",
-          "workflow": "AGENTS.md, 작업별 프롬프트, 관련 경로, 허용된 명령 표면을 명시해 에이전트가 경계 안에서 움직이게 합니다.",
-          "codexRole": "Codex는 실제 프로젝트 문맥 안에서 저장소 중심 구현, 셸 기반 탐색, 테스트 중심 반복 작업을 담당합니다.",
-          "claudeRole": "Claude Code는 프롬프트 구조와 작업 분해, 고맥락 리뷰 루프를 다른 관점에서 보완할 때 함께 사용합니다.",
-          "contract": "에이전트에게 느낌만 전달하지 않습니다. 정확한 파일/서브시스템 범위, 사용 가능한 도구, 기대 출력 형식을 같이 줍니다.",
-          "verification": "오케스트레이션의 품질은 다른 엔지니어가 같은 산출물을 다시 보고 같은 결론에 도달할 수 있는지로 판단합니다."
-        },
-        "verificationHarness": {
-          "title": "검증과 하니스 설계",
-          "claim": "에이전트 출력이 그럴듯한 문장이 아니라 증거 기반 엔지니어링이 되도록 검증을 워크플로우에 내장합니다.",
-          "workflow": "저장소 기본 체크, 페이지 단위 assertion, 그리고 무엇이 증거인지 설명하는 Markdown 기록으로 루프를 닫습니다.",
-          "codexRole": "Codex는 소스 수정, 라우트 메타데이터, 실행 가능한 체크를 하나의 작동하는 하니스로 묶는 데 사용합니다.",
-          "claudeRole": "Claude Code는 작업 브리프, 프롬프트 표면, 관찰 결과가 계속 일치하는지 대조 리뷰어처럼 활용합니다.",
-          "contract": "계약은 서술형 요약으로 끝나지 않습니다. 실행 가능한 체크와 이름 붙은 증거 산출물까지 포함해야 합니다.",
-          "verification": "이 포트폴리오에서는 UI, 소스 데이터, 테스트, markdown 문서가 서로 같은 이야기를 할 때만 증명이 성립합니다."
-        }
-      },
-      "harness": {
-        "eyebrow": "엔지니어블 하니스",
-        "title": "제가 에이전트 작업에 요구하는 생존 조건",
-        "description": "인계, 재실행, 검증 단계를 견디지 못하는 워크플로우는 프로덕션 수준 엔지니어링이라고 보지 않습니다.",
-        "commandLabel": "예시 표면",
-        "steps": {
-          "brief": {
-            "title": "브리프와 제약",
-            "description": "실제 목표, 강한 경계, 변경 범위, 중요한 완료 기준부터 고정합니다."
-          },
-          "surface": {
-            "title": "에이전트 실행 표면",
-            "description": "저장소 계약, 작업 프롬프트, 관련 경로를 함께 줘서 에이전트가 경계 안에서 작업하게 합니다."
-          },
-          "verification": {
-            "title": "검증 루프",
-            "description": "패치가 존재한다는 사실이 아니라 출력이 실제로 동작한다는 점을 증명하는 저장소 기본 체크를 돌립니다."
-          },
-          "proof": {
-            "title": "증거 산출물",
-            "description": "다른 엔지니어가 의도를 다시 추측하지 않아도 되도록 문서, 소스, 테스트 증거를 남깁니다."
-          }
-        }
       }
     }
   },
   "AboutPage": {
     "title": "소개",
-    "greeting": "안녕하세요, 저는 김만중입니다",
-    "role": "프론트엔드 개발자",
-    "intro": "명확한 프로덕트 인터페이스, 유지보수 가능한 프론트엔드 시스템, 그리고 엔지니어링 검증을 견디는 AI 에이전트 워크플로우에 집중하는 프론트엔드 개발자입니다.",
-    "heroEyebrow": "만드는 사람에 대해",
-    "heroStatement": "차분한 제품 인터페이스, 명확한 프론트엔드 시스템, 그리고 꼭 필요한 움직임을 만듭니다.",
-    "portraitAlt": "김만중 프로필 사진",
-    "portraitCaption": "제품 판단, 시각적 절제, 구현 완성도가 실제 전달 환경 안에서 함께 버텨야 하는 작업에 강합니다.",
-    "aboutMeTitle": "소개",
-    "aboutMeDescription": "React와 같은 최신 기술을 사용하여 웹 애플리케이션을 구축한 3년 이상의 경험을 가진 프론트엔드 개발자입니다. HTML, CSS, JavaScript에 대한 깊은 이해를 가지고 있으며 항상 새로운 프레임워크와 라이브러리를 배우고자 합니다. 제 개발 철학은 깔끔하고 유지보수 가능한 코드와 사용자 우선 접근 방식을 중심으로 합니다. 훌륭한 디자인은 미학뿐만 아니라 사용성과 접근성에 관한 것이라고 믿습니다. 모두가 사용하기 쉬운 아름다운 제품을 만들기 위해 노력합니다.",
-    "strengthsTitle": "저의 강점",
-    "narrativeEyebrow": "작업 방식",
+    "role": "프론트엔드 개발자 · 실무 4년",
+    "intro": "실무 4년 차 프론트엔드 개발자입니다. 스캐터엑스에서 3년 동안 데이터 분석·시각화 B2B SaaS의 프론트엔드를 개발했고, jQuery 기반 분석 플랫폼을 Next.js로 옮기는 작업에서 초기 세팅, UI 코어, 구조 설계를 맡았습니다. 그전에는 슈가브릭스에서 병원 대상 회계 처리 서비스의 프론트엔드를, 시스웨어에서 ERP 개발을 했습니다. 개인 프로젝트는 기획부터 서버, 배포까지 혼자 만들어 운영합니다.",
+    "heroEyebrow": "소개",
+    "portraitAlt": "Ring-wdr GitHub 프로필 이미지",
+    "strengthsTitle": "강점",
     "focusTitle": "현재 집중 영역",
     "cleanCode": "깔끔한 코드",
     "uiuxDesign": "UI/UX 디자인",
     "accessibility": "접근성",
     "performance": "성능 최적화",
     "stats": {
-      "projects": "출시한 프로젝트",
+      "projects": "공개 프로젝트",
       "technologies": "사용 기술",
-      "years": "실무/학습 연차"
-    },
-    "timelineTitle": "커리어 타임라인",
-    "timelineEyebrow": "최근 흐름",
-    "timeline": {
-      "2024": {
-        "title": "현대적 React 생태계 기반 구축",
-        "description": "React, Next.js, TypeScript 역량을 확장하며 접근성과 성능 중심 개발 습관을 정립했습니다."
-      },
-      "2025": {
-        "title": "프로덕트 중심 프론트엔드 전달력 강화",
-        "description": "필터링, 모달 플로우, 컴포넌트 경계를 개선하며 여러 제품 인터페이스를 구현·배포했습니다."
-      },
-      "2026": {
-        "title": "포트폴리오 리빌드와 스토리 중심 구조화",
-        "description": "스토리 중심 섹션, 토큰 기반 테마, 다국어 UX 일관성, 그리고 명시적인 AI 에이전트 엔지니어링 증거를 포함하도록 포트폴리오를 재설계했습니다."
-      }
+      "years": "실무 경력",
+      "yearsValue": "4년"
     },
     "principlesTitle": "일하는 원칙",
     "principlesEyebrow": "협업 태도",
     "principles": {
       "product": {
-        "title": "먼저 제품 문제를 해결합니다",
-        "description": "사용자와 비즈니스 목표를 먼저 정의하고, 확장 가능한 최소 구현을 선택합니다."
+        "title": "먼저 제품 문제를 정의합니다",
+        "description": "사용자와 비즈니스 목표를 먼저 정하고, 그에 맞는 가장 작은 구현을 고릅니다."
       },
       "craft": {
-        "title": "디자인과 코드를 하나의 시스템으로 봅니다",
-        "description": "재사용 가능한 UI 프리미티브와 토큰을 설계해 기능이 늘어도 일관성이 유지되도록 합니다."
+        "title": "공통 UI를 먼저 만듭니다",
+        "description": "재사용할 UI 컴포넌트와 디자인 토큰을 먼저 정해, 기능이 늘어도 화면이 일관되게 유지되도록 합니다."
       },
       "team": {
-        "title": "명확하게 소통합니다",
-        "description": "명시적인 네이밍, 예측 가능한 구조, 문서화 가능한 프롬프트/체크리스트를 통해 팀원과 에이전트 모두가 안전하게 실행할 수 있게 만듭니다."
+        "title": "이름과 구조를 명확하게 씁니다",
+        "description": "명시적인 네이밍, 예측 가능한 구조, 문서로 남긴 체크리스트로 팀원과 에이전트가 같은 기준으로 작업하게 합니다."
       }
     },
     "focus": {
@@ -325,11 +217,43 @@
       "designSystem": "디자인 시스템",
       "performance": "성능 최적화",
       "agentOrchestration": "에이전트 오케스트레이션"
+    },
+    "name": "김만중",
+    "careerEyebrow": "경력",
+    "careerTitle": "경력",
+    "careerCaseStudy": "XMORSE 2.0 케이스 스터디 보기",
+    "career": {
+      "scatterx": {
+        "company": "스캐터엑스",
+        "role": "플랫폼개발팀 프론트엔드 개발자",
+        "summary": "국내 대기업 제조 계열사가 쓰는 데이터 분석·시각화 B2B SaaS (XMORSE, SaharaX)",
+        "highlights": [
+          "jQuery 기반 분석 플랫폼을 동료 한 명과 1년 5개월 동안 Next.js로 옮겨 XMORSE 2.0을 만들었습니다. 초기 세팅, UI 코어, 구조 설계를 맡았습니다.",
+          "백엔드 OpenAPI 스펙에서 요청·응답 타입을 자동으로 생성하게 만들어, 스펙이 바뀌면 빌드 단계에서 바로 알 수 있게 했습니다.",
+          "다른 서비스에 임베드되는 차트 iframe 화면을 SSR에서 SSG로 바꿔 첫 진입을 0.5초 이내로 줄이고, 호스트와의 통신을 핸드셰이크 방식으로 바꿨습니다.",
+          "유닛 테스트, React Testing Library, Playwright E2E 테스트를 직접 작성했고, 팀 컨벤션을 기준으로 PR 리뷰를 했습니다.",
+          "신규 제품 SaharaX 초기 개발에서 프레임워크 없이 Web Components로 에디터 코어를 뺀 UI 대부분을 만들었습니다."
+        ]
+      },
+      "sugarbricks": {
+        "company": "슈가브릭스",
+        "role": "프론트엔드 개발자",
+        "highlights": [
+          "병원 대상 회계 처리 서비스의 프론트엔드를 개발했습니다."
+        ]
+      },
+      "sysware": {
+        "company": "시스웨어",
+        "role": "개발",
+        "highlights": [
+          "ERP 개발"
+        ]
+      }
     }
   },
   "ContactPage": {
     "title": "연락하기",
-    "description": "항상 새로운 기회와 협업에 열려있습니다. 이메일로 연락하시거나 LinkedIn에서 연결해주세요.",
+    "description": "채용, 프로젝트, 협업 제안은 아래 폼이나 이메일로 보내 주세요. LinkedIn으로도 연락할 수 있습니다.",
     "name": "이름",
     "email": "이메일",
     "message": "메시지",
@@ -350,7 +274,13 @@
     },
     "messagePlaceholder": "어떤 포지션인지, 어떤 프로젝트인지, 어떤 도움이 필요한지 알려주세요.",
     "website": "웹사이트",
-    "privacyNote": "남겨주신 정보는 답변과 후속 연락을 위해서만 사용합니다."
+    "privacyNote": "남겨주신 정보는 답변과 후속 연락을 위해서만 사용합니다.",
+    "emailLabel": "이메일 주소",
+    "copyEmail": "이메일 주소 복사",
+    "copied": "복사했습니다",
+    "resume": "이력서 (PDF)",
+    "requiredHint": "* 표시는 필수 항목입니다.",
+    "required": "필수"
   },
   "Chat": {
     "title": "AI 어시스턴트",
@@ -362,7 +292,7 @@
     "close": "닫기",
     "openChat": "채팅 열기",
     "emptyTitle": "무엇이든 물어보세요",
-    "emptyDescription": "Kim Manjoong의 커리어, 프로젝트, 기술 스택에 대해 질문해보세요.",
+    "emptyDescription": "Manjoong Kim의 커리어, 프로젝트, 기술 스택에 대해 질문해보세요.",
     "suggestions": [
       "가장 자신 있는 프로젝트 하나를 소개해줘",
       "React와 Next.js로 어떤 문제를 해결해봤어?",
@@ -374,7 +304,7 @@
     "team": "팀",
     "role": "역할",
     "github": "GitHub",
-    "liveDemo": "Live Demo",
+    "liveDemo": "라이브 사이트",
     "externalLink": "외부 링크",
     "overview": "프로젝트 개요",
     "background": "배경",
@@ -398,10 +328,20 @@
         "stack": "{title}의 기술 스택은 왜 그렇게 선택했어?",
         "role": "{title}에서 맡은 역할과 성과를 요약해줘"
       }
+    },
+    "organization": "회사",
+    "diagram": "구조",
+    "plainLabel": "한 줄 요약",
+    "brief": {
+      "title": "요약",
+      "audience": "누구를 위한 것인가",
+      "problem": "어떤 문제였나",
+      "contribution": "내가 한 일",
+      "outcome": "결과"
     }
   },
   "FitPage": {
-    "eyebrow": "Role Fit",
+    "eyebrow": "JD 매칭",
     "title": "채용공고로 적합도 확인하기",
     "description": "채용공고(JD)를 붙여넣으면 요구사항마다 포트폴리오의 근거 프로젝트를 연결한 적합도 리포트를 만듭니다.",
     "honesty": "근거가 없는 요구사항은 부풀리지 않고 '공백'으로 표시합니다. 결과는 저장되지 않습니다.",
@@ -411,7 +351,6 @@
     "lengthHint": "{count}자 · 최소 {min}자, 최대 {max}자",
     "submit": "적합도 분석하기",
     "analyzing": "분석 중…",
-    "loading": "무료 AI 모델로 분석하고 있어요. 혼잡도에 따라 30초~2분 정도 걸립니다. ({seconds}초 경과)",
     "sampleJd": "[프론트엔드 엔지니어]\n주요 업무\n- React/Next.js 기반 웹 서비스의 신규 기능 개발 및 유지보수\n- 디자인 시스템 컴포넌트 설계와 운영\n- 웹 성능(Core Web Vitals) 개선과 모니터링\n\n자격 요건\n- TypeScript, React 실무 경험 3년 이상\n- Next.js App Router 기반 SSR/SSG 이해\n- 테스트 코드 작성 경험 (Vitest, Playwright 등)\n\n우대 사항\n- 접근성(a11y)을 고려한 UI 개발 경험\n- AI 도구/에이전트를 활용한 개발 생산성 개선 경험\n- 백엔드(Node.js, DB) 경험",
     "errors": {
       "invalid_input": "채용공고가 너무 짧거나 깁니다. 길이를 확인해 주세요.",
@@ -435,6 +374,22 @@
       "questionsTitle": "면접에서 확인해 볼 질문",
       "contactCta": "이 포지션으로 연락하기",
       "disclaimer": "AI가 포트폴리오 내용만으로 생성한 참고용 분석입니다."
+    },
+    "progress": {
+      "steps": {
+        "sent": "공고 전달",
+        "reading": "AI가 읽는 중",
+        "writing": "요구사항 정리",
+        "done": "리포트 완성"
+      },
+      "readingTitle": "AI가 채용공고를 읽고 있어요",
+      "readingBody": "무료 AI 모델이라 첫 내용이 나오기까지 수십 초 걸릴 수 있어요. 내용이 나오는 대로 아래에 바로 채워집니다.",
+      "writingTitle": "요구사항을 하나씩 정리하고 있어요",
+      "writingBody": "지금까지 {count}개를 정리했어요. 나머지도 정리되는 대로 아래에 추가됩니다.",
+      "retryTitle": "결과 형식이 맞지 않아 한 번 더 분석하고 있어요",
+      "elapsed": "{seconds}초 경과",
+      "cancel": "분석 취소",
+      "meanwhile": "기다리는 동안 대표 작업을 새 탭에서 볼 수 있어요."
     }
   }
 }

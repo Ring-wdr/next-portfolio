@@ -22,7 +22,7 @@ export function createFreeModel(apiKey: string, modelsEnv: string | undefined) {
     apiKey,
     headers: {
       "HTTP-Referer": siteConfig.siteUrl,
-      "X-Title": "Kim Manjoong Portfolio Chat",
+      "X-Title": "Manjoong Kim Portfolio Chat",
     },
   });
   const models = resolveFreeModels(modelsEnv);

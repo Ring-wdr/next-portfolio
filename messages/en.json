@@ -7,7 +7,11 @@
     "contact": "Contact",
     "menu": "Open menu",
     "closeMenu": "Close menu",
-    "fit": "Role Fit"
+    "fit": "Role Fit",
+    "resume": "Resume",
+    "menuTitle": "Menu",
+    "mainNavigation": "Main navigation",
+    "skipToContent": "Skip to content"
   },
   "Footer": {
     "allRightsReserved": "All rights reserved.",
@@ -24,44 +28,36 @@
     "next": "Next"
   },
   "HomePage": {
-    "eyebrow": "Frontend Engineer Portfolio",
-    "greeting": "Building product interfaces with clarity, speed, and a strong eye for motion.",
-    "description": "I design and ship readable product surfaces in Next.js, React, and TypeScript, with enough structure to survive production.",
+    "eyebrow": "Frontend · Product Engineer",
+    "greeting": "I spent three years building the frontend of a data analysis and visualization SaaS, and designed the architecture when we moved its jQuery analytics platform to Next.js.",
+    "description": "I build and run my personal projects on my own, from planning through the server and deployment.",
     "viewProjects": "View Projects",
     "aboutCta": "About",
     "featuredProjects": "Selected Work",
-    "selectedWorkEyebrow": "Recent case studies",
-    "selectedWorkDescription": "A tighter set of product work focused on UX decisions, interaction quality, and engineering clarity.",
+    "selectedWorkEyebrow": "Key work",
+    "selectedWorkDescription": "A migration I worked on at my company, and personal products I build and run on my own.",
     "techStack": "Tech Stack",
-    "featuredLabel": "Featured case",
     "viewAll": "View all",
-    "stats": {
-      "projects": "Projects shipped",
-      "tech": "Core tools",
-      "currentFocus": "Current focus",
-      "currentFocusValue": "Next.js 16 / Agent harness design"
-    },
     "craftEyebrow": "How I work",
-    "craftTitle": "Design, code, and delivery should read as one system.",
-    "craftDescription": "I start with product shape, keep interfaces calm, and use motion only when it sharpens hierarchy.",
-    "craftStatement": "Readable at a glance. Precise in motion. Ready for production.",
+    "craftTitle": "I split the structure first, then check it with specs and tests.",
+    "craftDescription": "On XMORSE 2.0 I moved API calls out of screen code and generated types from the backend OpenAPI spec. In personal projects I also put schema validation and tests into the build and CI (the Zod build gate in Travel Records, the API tests in POCAZ).",
     "stackLabel": "Current toolkit",
-    "finalEyebrow": "Start a conversation",
-    "finalTitle": "Need a frontend engineer who can shape both the surface and the system?",
-    "finalDescription": "See the case studies, then reach out for product work, collaboration, or hiring conversations.",
+    "finalEyebrow": "Contact",
+    "finalTitle": "Looking for someone for a frontend or product engineer role? Get in touch.",
+    "finalDescription": "Look through the projects first, then leave hiring or collaboration inquiries on the contact page.",
     "contactCta": "Contact",
     "pillars": {
-      "productThinking": {
-        "title": "Product-first thinking",
-        "description": "Start from user flow and decision value, then choose the engineering depth that supports it."
+      "architecture": {
+        "title": "Architecture",
+        "description": "I split the branching of the legacy screens into layers, so new work became placing a shared component."
       },
-      "modernFrontend": {
-        "title": "Modern frontend systems",
-        "description": "Use React 19, App Router patterns, and transition-aware UI without turning the surface into a demo."
+      "apiContract": {
+        "title": "API contract",
+        "description": "Request and response types are generated from the backend OpenAPI spec, so a spec change shows up at build time."
       },
-      "deliveryFocus": {
-        "title": "Delivery without noise",
-        "description": "Keep the codebase predictable, the UI restrained, and the path from prototype to production short."
+      "testing": {
+        "title": "Testing",
+        "description": "Unit tests for calculation logic, React Testing Library for UI components, and Playwright E2E for the chart core and iframe screens."
       }
     },
     "fitCta": "Check fit against a job post",
@@ -83,7 +79,7 @@
           "What are you focusing on right now?"
         ],
         "engineer": [
-          "How did you solve image performance in POCAZ?",
+          "How did you structure the XMORSE 2.0 migration?",
           "How do you design state and component boundaries?",
           "How do you verify agent-generated work?"
         ],
@@ -93,11 +89,17 @@
           "How do you approach docs and communication?"
         ]
       }
-    }
+    },
+    "summary": {
+      "years": "4 years of professional experience",
+      "domain": "3 years on a data visualization SaaS",
+      "migration": "Architecture of a Next.js migration"
+    },
+    "summaryLabel": "Career summary"
   },
   "ProjectsPage": {
     "title": "Projects",
-    "description": "Explore a selection of my recent projects, showcasing my skills in front-end development. Each project will include a brief description, screenshots, and links to live demos or repositories.",
+    "description": "The XMORSE 2.0 migration I worked on at ScatterX, plus personal and client projects and a study repository. Each one has a description, screenshots, and a link to the live site or repository.",
     "stats": {
       "total": "Total projects",
       "featured": "Featured projects",
@@ -110,13 +112,11 @@
     "results": "{count} projects",
     "emptyTitle": "No projects found",
     "emptyDescription": "Try a different category or tech filter.",
-    "storyLabel": "Project Story",
     "openDetail": "Read full case",
     "roleLabel": "Role",
-    "impactLabel": "Impact",
     "stackLabel": "Stack",
-    "resultLabel": "Outcome",
     "categories": {
+      "Work": "Work",
       "Product": "Product",
       "Client": "Client",
       "Study": "Study"
@@ -125,7 +125,8 @@
       "Live": "Live",
       "Prototype": "Prototype",
       "Archived": "Archived"
-    }
+    },
+    "filterByTech": "Filter by technology"
   },
   "TechStackPage": {
     "title": "Tech Stack",
@@ -159,165 +160,56 @@
     "Testing": "Testing",
     "Tools": "Tools",
     "Backend": "Backend",
-    "showcase": {
-      "eyebrow": "Proof of growth",
-      "title": "From newbie code to expert systems",
-      "description": "Selected stacks where I can show how my implementation changes when the bar moves from “it works” to “it scales.”",
-      "selectLabel": "Choose a stack",
-      "before": "Before · Newbie",
-      "after": "After · Expert",
-      "whatChanged": "What changed",
-      "loading": "Preparing code walkthrough…",
-      "items": {
-        "react": {
-          "summary": "Replace manual loading state with React 19's built-in action model.",
-          "improvement": "Moves from ad-hoc useState flags to useActionState — the form's action prop drives the async lifecycle, isPending replaces manual toggles, and success callbacks compose cleanly."
-        },
-        "nextjs": {
-          "summary": "Use PageProps and async params to keep the route server-first with full type safety.",
-          "improvement": "Moves from a client-heavy page shell to an async Server Component typed with PageProps<'/route'> — the globally available helper generated by next typegen that resolves params as a Promise and eliminates manual type annotations."
-        },
-        "typescript": {
-          "summary": "Use discriminated unions and satisfies to encode domain rules in the type layer.",
-          "improvement": "Moves from a loose object literal to a discriminated union (kind: 'code' | 'narrative') verified with satisfies — TypeScript catches missing fields at the definition site, not at the call site."
-        },
-        "playwright": {
-          "summary": "Structure tests as readable steps, not a flat sequence of awaits.",
-          "improvement": "Moves from a single navigation to named test.step blocks — each assertion is scoped, failures point to the broken step, and the test report reads like a product spec."
-        },
-        "supabase": {
-          "summary": "BaaS speed with full Postgres control — auth, real-time, and RLS in one platform.",
-          "improvement": "Moves authorization out of application code and into Row Level Security policies at the database layer, reducing surface area for bugs and making access rules auditable alongside the schema.",
-          "detail": "I reach for Supabase when I need to prototype at BaaS speed without giving up Postgres depth. Row Level Security encodes authorization rules inside the database itself — keeping API routes thin and access policies version-controlled. The real-time layer replaces polling with a WebSocket push channel, a natural fit for collaborative or live-updating surfaces. Supabase's auto-generated REST and typed client mean the schema becomes the contract, and breaking changes surface at build time rather than in production."
-        }
-      },
-      "narrativeLabel": "Explanation-only walkthrough"
-    },
     "agentEngineering": {
-      "eyebrow": "AI agent engineering",
-      "title": "I use agents like working surfaces, not magic shortcuts.",
-      "description": "The strongest signal is not that I can prompt Codex or Claude Code. It is that I can shape bounded tasks, explicit contracts, verification loops, and proof artifacts so the work is engineerable by both humans and agents.",
-      "labels": {
-        "claim": "Claim",
-        "workflow": "Workflow",
-        "codex": "Codex",
-        "claude": "Claude Code",
-        "contract": "Input contract",
-        "verification": "Verification",
-        "proof": "Proof links"
+      "eyebrow": "AI agents",
+      "title": "How I work with AI coding agents",
+      "intro": "I have switched my monthly subscription to whichever model did the work best at the time. I used Claude Code at work from its early versions, moved to Codex after GPT-5.3, and now mainly use Opus 5.5 with Claude Code. Each time I switched tools I reviewed the existing skills and settings and deleted rules that were no longer needed.",
+      "results": {
+        "travelRecords": "I built Travel Records with Claude Code and keep its working rules and context in CLAUDE.md, so adding a new trip is a repeatable flow.",
+        "devtoolCli": "react-devtool-cli is a CLI that lets agents inspect React apps without the browser DevTools, and it ships skills for Codex, Claude Code, and Gemini CLI.",
+        "verification": "This portfolio and POCAZ keep agent rules in AGENTS.md, and a change counts as done only after lint, tests, and the build pass."
       },
+      "verificationLabel": "Verification command",
+      "verificationDescription": "Code an agent changed has to pass this command too.",
+      "proofLabel": "Related",
       "artifacts": {
-        "doc": "Agent engineering doc",
+        "doc": "Agent workflow doc",
         "project": "react-devtool-cli case study"
-      },
-      "items": {
-        "taskDecomposition": {
-          "title": "Task decomposition & spec writing",
-          "claim": "I turn vague requests into implementation-ready work packets with clear scope, constraints, and success criteria.",
-          "workflow": "I start from repository truth, then break the job into bounded tasks, interfaces, and acceptance checks that can survive handoff.",
-          "codexRole": "Codex is my primary implementation surface when the repo needs grounded edits, test runs, and iterative verification.",
-          "claudeRole": "Claude Code is useful when I want a second execution lens on spec shape, prompt clarity, or task framing before or alongside coding.",
-          "contract": "Every task gets a brief with the goal, hard constraints, changed surfaces, expected artifact, and the exact proof needed to call it done.",
-          "verification": "I do not stop at 'the agent answered.' The output must line up with source, docs, and tests."
-        },
-        "toolFluency": {
-          "title": "Tool / orchestration fluency",
-          "claim": "I know how to route work across CLI tools, repo instructions, prompts, and browser automation without losing the thread.",
-          "workflow": "I keep the execution surface explicit: AGENTS.md, task-specific prompts, repo paths, and the command surface the agent is allowed to use.",
-          "codexRole": "Codex handles repo-native implementation, shell-driven inspection, and test-backed iteration inside the actual project context.",
-          "claudeRole": "Claude Code complements that with alternate reasoning on prompt shape, decomposition, and high-context review loops when I want contrast.",
-          "contract": "The agent does not get a vibe-based ask. It gets the exact file or subsystem scope, allowed tools, and the expected output format.",
-          "verification": "The orchestration is only good if another engineer can rerun it, inspect the same artifacts, and reach the same conclusion."
-        },
-        "verificationHarness": {
-          "title": "Verification & harness design",
-          "claim": "I build verification into the workflow so agent output becomes evidence-backed engineering instead of plausible text.",
-          "workflow": "I close the loop with repo-native checks, page-level assertions, and markdown decision records that explain what the system proves.",
-          "codexRole": "Codex is where I wire the source edits, route metadata, and executable checks into a single working harness.",
-          "claudeRole": "Claude Code is useful as a contrasting reviewer for whether the brief, prompt surface, and observed result still line up.",
-          "contract": "The contract ends with runnable checks and named proof artifacts, not with a narrative summary alone.",
-          "verification": "For this portfolio, the proof is the combination of UI, source data, tests, and markdown documentation all agreeing."
-        }
-      },
-      "harness": {
-        "eyebrow": "Engineerable harness",
-        "title": "The workflow I expect an agent task to survive",
-        "description": "If a workflow cannot survive a handoff, a rerun, and a verification pass, I do not consider it production-ready engineering.",
-        "commandLabel": "Example surface",
-        "steps": {
-          "brief": {
-            "title": "Brief and constraints",
-            "description": "Start with the actual goal, hard boundaries, changed surfaces, and the acceptance criteria that matter."
-          },
-          "surface": {
-            "title": "Agent execution surface",
-            "description": "Give the agent the repo contract, task prompt, and relevant paths so it can operate inside a bounded system."
-          },
-          "verification": {
-            "title": "Verification loop",
-            "description": "Run the repo-native checks that prove the output works, not just that the patch exists."
-          },
-          "proof": {
-            "title": "Proof artifacts",
-            "description": "Leave behind docs, source, and test evidence that another engineer can inspect without re-discovering intent."
-          }
-        }
       }
     }
   },
   "AboutPage": {
     "title": "About Me",
-    "greeting": "Hi, I'm Manjoong",
-    "role": "Front-End Developer",
-    "intro": "I'm a front-end developer focused on clear product interfaces, maintainable frontend systems, and recent AI-agent workflows that still hold up under engineering scrutiny.",
-    "heroEyebrow": "About the builder",
-    "heroStatement": "Calm product interfaces, clear frontend systems, and motion that earns its place.",
-    "portraitAlt": "Portrait of Manjoong Kim",
-    "portraitCaption": "I work best where product judgment, visual restraint, and implementation quality need to hold together under real delivery pressure.",
-    "aboutMeTitle": "About Me",
-    "aboutMeDescription": "I'm a front-end developer with 3+ years of experience in building web applications using modern technologies like React. I have a strong understanding of HTML, CSS, and JavaScript, and I'm always eager to learn new frameworks and libraries. My development philosophy centers around clean, maintainable code and a user-first approach. I believe that great design is not just about aesthetics but also about usability and accessibility. I strive to create products that are both beautiful and easy to use for everyone.",
-    "strengthsTitle": "My Strengths",
-    "narrativeEyebrow": "Narrative",
+    "role": "Frontend developer · 4 years of experience",
+    "intro": "I'm a frontend developer with four years of professional experience. At ScatterX I spent three years building the frontend of a B2B data analysis and visualization SaaS, and on the move of a jQuery analytics platform to Next.js I handled the initial setup, the UI core, and the architecture. Before that I built the frontend of an accounting service for hospitals at SUGARBRICKS and worked on ERP development at sysware. I build and run my personal projects on my own, from planning through the server and deployment.",
+    "heroEyebrow": "About",
+    "portraitAlt": "Ring-wdr GitHub profile image",
+    "strengthsTitle": "Strengths",
     "focusTitle": "Current focus",
     "cleanCode": "Clean Code",
     "uiuxDesign": "UI/UX Design",
     "accessibility": "Accessibility",
     "performance": "Performance Optimization",
     "stats": {
-      "projects": "Projects shipped",
+      "projects": "Public projects",
       "technologies": "Technologies used",
-      "years": "Years of practice"
-    },
-    "timelineTitle": "Career Timeline",
-    "timelineEyebrow": "Recent path",
-    "timeline": {
-      "2026": {
-        "title": "Portfolio rebuild and narrative-driven architecture",
-        "description": "Redesigned this portfolio around story-first sections, tokenized theming, stronger international UX consistency, and explicit AI-agent engineering proof."
-      },
-      "2025": {
-        "title": "Product-focused frontend delivery",
-        "description": "Built and shipped multiple product interfaces with improved filtering, modal flows, and maintainable component boundaries."
-      },
-      "2024": {
-        "title": "Foundation in modern React ecosystem",
-        "description": "Expanded expertise in React, Next.js, and TypeScript with a strong emphasis on accessibility and performance."
-      }
+      "years": "Professional experience",
+      "yearsValue": "4 years"
     },
     "principlesTitle": "Working Principles",
     "principlesEyebrow": "Working style",
     "principles": {
       "product": {
-        "title": "Solve product problems first",
-        "description": "Start from user and business goals, then select the simplest implementation that can scale."
+        "title": "Define the product problem first",
+        "description": "Start from user and business goals, then pick the smallest implementation that serves them."
       },
       "craft": {
-        "title": "Design and code as one system",
-        "description": "Build reusable UI primitives and design tokens so consistency improves as features grow."
+        "title": "Build shared UI first",
+        "description": "Decide reusable UI components and design tokens early so screens stay consistent as features grow."
       },
       "team": {
-        "title": "Communicate with clarity",
-        "description": "Prefer explicit naming, predictable structures, and documentation-ready prompts/checklists so both teammates and agents can execute safely."
+        "title": "Name and structure things clearly",
+        "description": "Explicit naming, predictable structure, and written checklists let teammates and agents work to the same standard."
       }
     },
     "focus": {
@@ -325,11 +217,43 @@
       "designSystem": "Design system",
       "performance": "Performance tuning",
       "agentOrchestration": "Agent orchestration"
+    },
+    "name": "Manjoong Kim",
+    "careerEyebrow": "Experience",
+    "careerTitle": "Experience",
+    "careerCaseStudy": "Read the XMORSE 2.0 case study",
+    "career": {
+      "scatterx": {
+        "company": "ScatterX (스캐터엑스)",
+        "role": "Frontend developer, Platform Development team",
+        "summary": "A B2B data analysis and visualization SaaS used by manufacturing affiliates of large Korean companies (XMORSE, SaharaX)",
+        "highlights": [
+          "With one teammate, I moved a jQuery analytics platform to Next.js over one year and five months, producing XMORSE 2.0. I handled the initial setup, the UI core, and the architecture.",
+          "Request and response types are generated automatically from the backend OpenAPI spec, so a spec change shows up at build time.",
+          "I moved the chart iframe screen embedded in other services from SSR to SSG, bringing first load under 0.5 seconds, and changed host communication to a handshake.",
+          "I wrote unit tests, React Testing Library tests, and Playwright E2E tests myself, and reviewed PRs against the team conventions.",
+          "In early development of the new product SaharaX, I built most of the UI except the editor core with Web Components and no framework."
+        ]
+      },
+      "sugarbricks": {
+        "company": "SUGARBRICKS",
+        "role": "Frontend developer",
+        "highlights": [
+          "I built the frontend of an accounting service for hospitals."
+        ]
+      },
+      "sysware": {
+        "company": "sysware",
+        "role": "Development",
+        "highlights": [
+          "ERP development"
+        ]
+      }
     }
   },
   "ContactPage": {
     "title": "Contact",
-    "description": "I'm always open to new opportunities and collaborations. Feel free to reach out to me via email or connect with me on LinkedIn.",
+    "description": "Send hiring, project, or collaboration inquiries through the form below or by email. You can also reach me on LinkedIn.",
     "name": "Name",
     "email": "Email",
     "message": "Message",
@@ -350,7 +274,13 @@
     },
     "messagePlaceholder": "Tell me about the role, project, or collaboration you're considering.",
     "website": "Website",
-    "privacyNote": "I will only use this information to reply to your inquiry."
+    "privacyNote": "I will only use this information to reply to your inquiry.",
+    "emailLabel": "Email address",
+    "copyEmail": "Copy email address",
+    "copied": "Copied",
+    "resume": "Resume (PDF)",
+    "requiredHint": "Fields marked * are required.",
+    "required": "required"
   },
   "Chat": {
     "title": "AI Assistant",
@@ -362,7 +292,7 @@
     "close": "Close",
     "openChat": "Open chat",
     "emptyTitle": "Ask me anything",
-    "emptyDescription": "Ask about Manjoong's career, projects, or tech stack.",
+    "emptyDescription": "Ask about Manjoong Kim's career, projects, or tech stack.",
     "suggestions": [
       "Walk me through the project you're proudest of",
       "What problems have you solved with React and Next.js?",
@@ -374,7 +304,7 @@
     "team": "Team",
     "role": "Role",
     "github": "GitHub",
-    "liveDemo": "Live Demo",
+    "liveDemo": "Live site",
     "externalLink": "External Link",
     "overview": "Project Overview",
     "background": "Background",
@@ -398,6 +328,16 @@
         "stack": "Why was this tech stack chosen for {title}?",
         "role": "Summarize the role and outcomes in {title}"
       }
+    },
+    "organization": "Company",
+    "diagram": "Architecture",
+    "plainLabel": "In short",
+    "brief": {
+      "title": "Summary",
+      "audience": "Who it is for",
+      "problem": "The problem",
+      "contribution": "What I did",
+      "outcome": "Outcome"
     }
   },
   "FitPage": {
@@ -411,7 +351,6 @@
     "lengthHint": "{count} chars · min {min}, max {max}",
     "submit": "Analyze fit",
     "analyzing": "Analyzing…",
-    "loading": "Analyzing with a free AI model. Depending on load this takes 30 seconds to 2 minutes. ({seconds}s elapsed)",
     "sampleJd": "[Frontend Engineer]\nResponsibilities\n- Build and maintain features in a React/Next.js web product\n- Design and operate design-system components\n- Improve and monitor web performance (Core Web Vitals)\n\nRequirements\n- 3+ years of professional TypeScript and React\n- Understanding of SSR/SSG with the Next.js App Router\n- Experience writing tests (Vitest, Playwright, etc.)\n\nNice to have\n- Accessible (a11y) UI development\n- Improving productivity with AI tools or agents\n- Backend experience (Node.js, databases)",
     "errors": {
       "invalid_input": "The job description is too short or too long. Please check its length.",
@@ -435,6 +374,22 @@
       "questionsTitle": "Questions worth asking in an interview",
       "contactCta": "Get in touch about this role",
       "disclaimer": "Reference analysis generated by AI from portfolio content only."
+    },
+    "progress": {
+      "steps": {
+        "sent": "Sent",
+        "reading": "AI reading",
+        "writing": "Matching requirements",
+        "done": "Report ready"
+      },
+      "readingTitle": "The AI is reading the job description",
+      "readingBody": "This runs on a free AI model, so the first results can take a few tens of seconds. They appear below as soon as they are written.",
+      "writingTitle": "Matching requirements one by one",
+      "writingBody": "{count} matched so far. The rest appear below as they are written.",
+      "retryTitle": "The result was malformed, so the AI is trying once more",
+      "elapsed": "{seconds}s elapsed",
+      "cancel": "Cancel analysis",
+      "meanwhile": "While you wait, you can open key case studies in a new tab."
     }
   }
 }

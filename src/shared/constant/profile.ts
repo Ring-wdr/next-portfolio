@@ -1,22 +1,8 @@
-export const CareerTimeline = [
-  {
-    id: "timeline-2026",
-    period: "2026",
-    titleKey: "timeline.2026.title",
-    descriptionKey: "timeline.2026.description",
-  },
-  {
-    id: "timeline-2025",
-    period: "2025",
-    titleKey: "timeline.2025.title",
-    descriptionKey: "timeline.2025.description",
-  },
-  {
-    id: "timeline-2024",
-    period: "2024",
-    titleKey: "timeline.2024.title",
-    descriptionKey: "timeline.2024.description",
-  },
+/** Work history, newest first. Copy lives under AboutPage.career.<id>. */
+export const Career = [
+  { id: "scatterx", period: "2023.05 ~ 2026.05", projectSlug: "xmorse" },
+  { id: "sugarbricks", period: "2022.12 ~ 2023.05" },
+  { id: "sysware", period: "2021.06 ~ 2022.01" },
 ] as const;
 
 export const WorkingPrinciples = [

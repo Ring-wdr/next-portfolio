@@ -1,6 +1,67 @@
 {
   "projects": [
     {
+      "slug": "xmorse",
+      "title": "XMORSE 2.0",
+      "shortTitle": "XMORSE 2.0",
+      "thumbnail": "/vercel.svg",
+      "summary": "XMORSE 2.0 test fixture summary.",
+      "period": "2024.11 ~ 2026.03",
+      "organization": "스캐터엑스",
+      "team": "FE 2 / BE 4 / Infra 3",
+      "role": "초기 세팅, UI 코어, 구조 설계",
+      "card": {
+        "category": "Work",
+        "featured": true,
+        "status": "Live",
+        "impact": "Fixture impact.",
+        "result": "Fixture result."
+      },
+      "brief": {
+        "audience": "Fixture audience.",
+        "outcome": "Fixture outcome."
+      },
+      "aliases": [
+        "xmorse"
+      ],
+      "links": {},
+      "overview": {
+        "background": "Fixture background.",
+        "features": []
+      },
+      "narrative": [
+        {
+          "title": "Fixture section",
+          "description": "Fixture narrative."
+        }
+      ],
+      "diagram": {
+        "src": "/vercel.svg",
+        "alt": "XMORSE fixture diagram"
+      },
+      "tech": {
+        "stack": [
+          "Next.js"
+        ],
+        "challenges": [],
+        "solutions": []
+      },
+      "achievements": {},
+      "gallery": [
+        {
+          "src": "/ms-icon-150x150.png",
+          "alt": "Hidden fixture image",
+          "hidden": true
+        }
+      ],
+      "metadata": {
+        "publishedAt": "2026-10-21T00:00:00Z",
+        "tags": [
+          "Next.js"
+        ]
+      }
+    },
+    {
       "slug": "pocaz",
       "title": "POCAZ Remake",
       "thumbnail": "/ms-icon-150x150.png",
@@ -44,7 +105,8 @@
         "challenges": [
           {
             "title": "pocaz challenge",
-            "description": "Fixture challenge."
+            "description": "Fixture challenge.",
+            "plain": "Fixture plain summary."
           }
         ],
         "solutions": [
@@ -210,8 +272,6 @@
       "thumbnail": "/ms-icon-150x150.png",
       "summary": "역대카 test fixture summary.",
       "period": "2024.06 - 2024.08",
-      "team": "개인 프로젝트",
-      "role": "풀스택 개발 (Next.js, Supabase)",
       "card": {
         "category": "Product",
         "featured": true,
@@ -270,7 +330,10 @@
           "Supabase",
           "Real-time Data"
         ]
-      }
+      },
+      "todo": [
+        "TODO(user): fixture note that must never render"
+      ]
     },
     {
       "slug": "frontend-junior-study",

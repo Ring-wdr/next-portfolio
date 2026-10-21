@@ -13,12 +13,16 @@ export async function GET() {
         .filter(Boolean)
         .join(" · ");
 
+      const role = [project.role, project.team && `(${project.team})`]
+        .filter(Boolean)
+        .join(" ");
+
       return [
         `### ${project.title} (${project.period})`,
         "",
         `${project.summary}`,
         "",
-        `- Role: ${project.role} (${project.team})`,
+        ...(role ? [`- Role: ${role}`] : []),
         `- Stack: ${project.tech.stack.join(", ")}`,
         `- Links: ${links}`,
       ].join("\n");
@@ -29,7 +33,7 @@ export async function GET() {
 
 > ${siteConfig.description}
 
-Manjoong Kim (김만중) is a frontend engineer working with React, Next.js, and TypeScript, focused on product UX, maintainable frontend systems, and verifiable AI-agent workflows. Content is primarily in Korean; English pages live under /en.
+Manjoong Kim (김만중) is a frontend and product engineer with four years of professional experience. At ScatterX, Manjoong spent three years on the frontend of a B2B data analysis and visualization SaaS and designed the architecture of its move from jQuery to Next.js (XMORSE 2.0). Personal projects are planned, built, deployed, and run by Manjoong alone. Content is primarily in Korean; English pages live under /en.
 
 ## Pages
 
@@ -37,7 +41,7 @@ Manjoong Kim (김만중) is a frontend engineer working with React, Next.js, and
 - [Projects](${absoluteUrl("/project")}): case studies with problems, decisions, and outcomes
 - [Role Fit](${absoluteUrl("/fit")}): paste a job description to get an evidence-linked fit report
 - [Tech Stack](${absoluteUrl("/tech-stack")}): tools and how agents are used in engineering work
-- [About](${absoluteUrl("/about")}): career timeline and working principles
+- [About](${absoluteUrl("/about")}): work experience and working principles
 - [Contact](${absoluteUrl("/contact")})
 
 ## Projects

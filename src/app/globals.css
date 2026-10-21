@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "@shikijs/magic-move/style.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -38,6 +37,11 @@
 	--fit-gap: oklch(0.76 0.07 259);
 	--fit-partial: oklch(0.62 0.14 259);
 	--fit-strong: oklch(0.48 0.2 259);
+	/* Home hero follows the theme; the chat button keeps one brand color in both themes */
+	--hero-bg: oklch(0.965 0.012 255);
+	--hero-fg: oklch(0.215 0.02 258);
+	--brand: oklch(0.52 0.2 259);
+	--brand-foreground: oklch(0.988 0.003 255);
 }
 
 .dark {
@@ -72,6 +76,8 @@
 	--fit-gap: oklch(0.46 0.06 200);
 	--fit-partial: oklch(0.62 0.1 196);
 	--fit-strong: oklch(0.8 0.13 192);
+	--hero-bg: oklch(0.1 0.014 258);
+	--hero-fg: oklch(0.985 0.004 255);
 }
 
 @theme inline {
@@ -99,6 +105,10 @@
 	--color-highlight: var(--highlight);
 	--color-fit-gap: var(--fit-gap);
 	--color-fit-partial: var(--fit-partial);
+	--color-hero-bg: var(--hero-bg);
+	--color-hero-fg: var(--hero-fg);
+	--color-brand: var(--brand);
+	--color-brand-foreground: var(--brand-foreground);
 	--color-fit-strong: var(--fit-strong);
 	--radius-sm: calc(var(--radius) - 4px);
 	--radius-md: calc(var(--radius) - 2px);
@@ -110,7 +120,15 @@
 	* {
 		@apply border-border outline-ring/50;
 	}
+	html {
+		/* Keep the layout from shifting when a dialog locks scrolling */
+		scrollbar-gutter: stable;
+		overflow-x: clip;
+	}
 	body {
+		/* Korean wraps at word boundaries; long URLs still break */
+		word-break: keep-all;
+		overflow-wrap: anywhere;
 		font-family: var(--font-body), sans-serif;
 		@apply bg-background text-foreground;
 		background-image:
@@ -133,6 +151,7 @@
 	h4 {
 		font-family: var(--font-display), var(--font-body), sans-serif;
 		letter-spacing: -0.02em;
+		text-wrap: balance;
 	}
 }
 
@@ -164,7 +183,7 @@
 	}
 
 	.home-kicker {
-		@apply text-[0.68rem] font-semibold uppercase tracking-[0.18em];
+		@apply text-xs font-semibold uppercase tracking-[0.16em];
 	}
 
 	.home-section-reveal {
@@ -176,7 +195,7 @@
 	}
 
 	.editorial-kicker {
-		@apply text-[0.68rem] font-semibold uppercase tracking-[0.18em];
+		@apply text-xs font-semibold uppercase tracking-[0.16em];
 	}
 
 	.editorial-section-reveal {

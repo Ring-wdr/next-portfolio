@@ -5,6 +5,15 @@ import { useLocale, useTranslations } from "next-intl";
 import { FormButton } from "@/shared/ui/form-button";
 import { sendEmail } from "../action/send-mail";
 
+function RequiredMark({ label }: { label: string }) {
+  return (
+    <span className="ml-0.5 text-destructive">
+      <span aria-hidden="true">*</span>
+      <span className="sr-only">({label})</span>
+    </span>
+  );
+}
+
 export function EmailForm() {
   const t = useTranslations("ContactPage");
   const locale = useLocale();
@@ -20,6 +29,7 @@ export function EmailForm() {
   return (
     <form action={formAction} className="space-y-5">
       <input type="hidden" name="locale" value={locale} />
+      <p className="text-xs text-muted-foreground">{t("requiredHint")}</p>
       <div className="hidden" aria-hidden="true">
         <label htmlFor="website">{t("website")}</label>
         <input
@@ -35,6 +45,7 @@ export function EmailForm() {
         <div className="space-y-2">
           <label htmlFor="userName" className="text-sm font-medium">
             {t("name")}
+            <RequiredMark label={t("required")} />
           </label>
           <input
             type="text"
@@ -49,6 +60,7 @@ export function EmailForm() {
         <div className="space-y-2">
           <label htmlFor="userEmail" className="text-sm font-medium">
             {t("email")}
+            <RequiredMark label={t("required")} />
           </label>
           <input
             type="email"
@@ -97,6 +109,7 @@ export function EmailForm() {
       <div className="space-y-2">
         <label htmlFor="content" className="text-sm font-medium">
           {t("message")}
+          <RequiredMark label={t("required")} />
         </label>
         <textarea
           name="content"

@@ -7,11 +7,11 @@ export type AppLocale = (typeof routing.locales)[number];
 
 export const siteConfig = {
   name: "Manjoong Kim Portfolio",
-  title: "Manjoong Kim | Frontend Portfolio",
+  title: "Manjoong Kim | Frontend · Product Engineer",
   description:
-    "Frontend developer portfolio focused on product UX, modern web architecture, AI-agent-ready workflows, and performance-aware implementation.",
+    "Frontend and product engineer with four years of experience, including three years on a data analysis and visualization SaaS where I designed the architecture of its move from jQuery to Next.js.",
   defaultDescription:
-    "Portfolio showcasing frontend case studies, interaction design, and engineering outcomes.",
+    "Case studies from Manjoong Kim: a jQuery to Next.js migration at a data visualization SaaS, and personal products built and run end to end.",
   siteUrl: "https://next-portfolio-ringring.vercel.app",
   repositoryUrl: repositoryConfig.url,
   social: {
@@ -86,7 +86,8 @@ export function buildPageMetadata({
 
   return {
     metadataBase: new URL(getBaseUrl()),
-    title,
+    // Page titles already carry the name; skip the layout's "%s | Manjoong Kim" template.
+    title: { absolute: title },
     description,
     keywords,
     alternates: {
@@ -128,7 +129,7 @@ export function buildPersonJsonLd(locale: AppLocale) {
       "@type": "Person",
       name: "Manjoong Kim",
       url: absoluteUrl(localizePath(locale, "/")),
-      jobTitle: locale === "ko" ? "프론트엔드 개발자" : "Frontend Engineer",
+      jobTitle: "Frontend · Product Engineer",
       sameAs: [siteConfig.social.github, siteConfig.social.linkedin],
       knowsAbout: [
         "Next.js",
@@ -136,8 +137,8 @@ export function buildPersonJsonLd(locale: AppLocale) {
         "TypeScript",
         "Frontend Architecture",
         "Performance Optimization",
-        "AI Agent Tooling",
-        "Verification Harness Design",
+        "Data Visualization",
+        "OpenAPI",
       ],
     },
   ];

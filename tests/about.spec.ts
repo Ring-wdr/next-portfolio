@@ -1,22 +1,26 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("About page", () => {
-  test("shows the editorial hero and timeline", async ({ page }) => {
+  test("shows the hero and work experience", async ({ page }) => {
     await page.goto("/en/about");
 
     const hero = page.getByTestId("about-hero");
     await expect(hero).toBeVisible();
     await expect(hero.getByRole("heading", { level: 1 })).toBeVisible();
     await expect(
-      hero.getByRole("img", { name: /portrait of manjoong kim/i }),
+      hero.getByRole("img", { name: /GitHub profile image/i }),
     ).toBeVisible();
     const focus = page.getByTestId("about-focus");
     await expect(focus).toBeVisible();
     await expect(focus).toContainText(/Agent orchestration/i);
 
-    const timeline = page.getByTestId("about-timeline");
-    await expect(timeline).toBeVisible();
-    await expect(timeline.getByText(/2026/)).toBeVisible();
-    await expect(timeline).toContainText(/AI-agent engineering proof/i);
+    const career = page.getByTestId("about-career");
+    await expect(career).toBeVisible();
+    await expect(career).toContainText(/ScatterX/);
+    await expect(career).toContainText(/2023\.05 ~ 2026\.05/);
+    await expect(career.getByRole("link", { name: /XMORSE 2\.0/ })).toHaveAttribute(
+      "href",
+      "/en/project/xmorse",
+    );
   });
 });

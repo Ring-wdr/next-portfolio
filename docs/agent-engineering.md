@@ -13,19 +13,11 @@ The value comes from shaping work so it can survive:
 
 If a task cannot be rerun by another engineer with the same repo context and reach the same result, I do not treat it as reliable agent-assisted work.
 
-## When I choose Codex vs Claude Code
+## Which agent I use
 
-### Codex
+I have switched my monthly subscription to whichever model did the work best at the time. I used Claude Code at work from its early versions, moved to Codex after GPT-5.3, and now mainly use Opus 5.5 with Claude Code. Each time I switched tools I reviewed the existing skills and settings and deleted rules that were no longer needed.
 
-- Use when I need grounded repository work inside the real project.
-- Best fit for source edits, shell-driven inspection, tests, and verification loops.
-- I treat it as the primary execution surface for implementation-heavy tasks.
-
-### Claude Code
-
-- Use when I want an alternate reasoning pass on problem framing, prompt shape, or task decomposition.
-- Best fit for comparing approaches, tightening a brief, or pressure-testing assumptions around execution.
-- I treat it as a complementary lane, not a replacement for repo-grounded verification.
+The workflow below does not depend on the tool: whichever agent runs the task gets the same brief, repo instructions (`AGENTS.md`), and verification commands.
 
 ## How I make agent work engineerable
 
@@ -59,9 +51,8 @@ The public proof is intentionally spread across UI, source, tests, and markdown:
 
 - `/tech-stack` contains the AI-agent engineering section and the engineerable harness sequence.
 - `src/shared/constant/agent-engineering.ts` is the canonical source for agent claims, harness steps, and proof links.
-- `src/shared/constant/project-detail.tsx` includes the `react-devtool-cli` case study, which is the strongest project-level proof of deterministic agent-facing contracts.
+- The `react-devtool-cli` case study (`/project/react-devtool-cli`, content in `Ring-wdr/portfolio-content`) covers a CLI built for agents and developers to inspect React apps.
 - `src/pages-layer/tech-stack/tech-stack-page.test.tsx` and `tests/tech-stack.spec.ts` verify that the public proof section renders and keeps its evidence links.
-- `tests/about.spec.ts` verifies that the About narrative also reflects current agent-orchestration focus.
 
 ## Repo-specific checks
 

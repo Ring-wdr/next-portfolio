@@ -13,25 +13,45 @@ const imageRef = text;
 
 const titledItem = z.object({ title: text, description: text });
 
+/** A challenge, with an optional one-line summary for non-developers. */
+const challengeItem = titledItem.extend({ plain: text.optional() });
+
+const figure = z.object({ src: imageRef, alt: text, caption: text.optional() });
+
 export const projectSchema = z.object({
   /** URL segment for /project/[slug] */
   slug: text.regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "kebab-case slug"),
   title: text,
+  /** Short name for chat prompts when the title is a full sentence. */
+  shortTitle: text.optional(),
   thumbnail: imageRef,
   /** One-line summary */
   summary: text,
   period: text,
-  team: text,
-  role: text,
+  /** Employer for company work (card.category "Work"). */
+  organization: text.optional(),
+  /** Omitted while unconfirmed; the site hides empty facts. */
+  team: text.optional(),
+  role: text.optional(),
 
   /** Project card / list page metadata */
   card: z.object({
-    category: z.enum(["Product", "Client", "Study"]),
+    category: z.enum(["Work", "Product", "Client", "Study"]),
     featured: z.boolean(),
     status: z.enum(["Live", "Prototype", "Archived"]),
     impact: text,
     result: text,
   }),
+
+  /** Summary box at the top of the detail page; unconfirmed rows stay empty. */
+  brief: z
+    .object({
+      audience: text.optional(),
+      problem: text.optional(),
+      contribution: text.optional(),
+      outcome: text.optional(),
+    })
+    .optional(),
 
   /** Extra names visitors (and models) use for this project in chat */
   aliases: z.array(text).default([]),
@@ -44,13 +64,19 @@ export const projectSchema = z.object({
 
   overview: z.object({
     background: text,
-    goal: text,
+    goal: text.optional(),
     features: z.array(text),
   }),
 
+  /** Extra case-study sections rendered after the overview, in order. */
+  narrative: z.array(titledItem).optional(),
+
+  /** Architecture diagram rendered with the overview. */
+  diagram: figure.optional(),
+
   tech: z.object({
     stack: z.array(text),
-    challenges: z.array(titledItem),
+    challenges: z.array(challengeItem),
     solutions: z.array(titledItem),
   }),
 
@@ -61,7 +87,12 @@ export const projectSchema = z.object({
   }),
 
   gallery: z.array(
-    z.object({ src: imageRef, alt: text, caption: text.optional() }),
+    figure.extend({
+      /** Kept out of the page until the image may be shown (e.g. usage permission). */
+      hidden: z.boolean().optional(),
+      /** Where the image comes from, linked under the caption. */
+      source: z.object({ label: text, url: z.url() }).optional(),
+    }),
   ),
 
   metadata: z.object({
@@ -69,7 +100,24 @@ export const projectSchema = z.object({
     updatedAt: z.iso.datetime().optional(),
     tags: z.array(text),
   }),
+
+  /** Author notes for unconfirmed facts. Never rendered. */
+  todo: z.array(text).optional(),
 });
+
+/** Paths of strings outside `todo` that still carry a TODO marker. */
+function findTodoMarkers(value: unknown, path: (string | number)[] = []): (string | number)[][] {
+  if (typeof value === "string") return /TODO/.test(value) ? [path] : [];
+  if (Array.isArray(value)) {
+    return value.flatMap((item, index) => findTodoMarkers(item, [...path, index]));
+  }
+  if (value && typeof value === "object") {
+    return Object.entries(value).flatMap(([key, item]) =>
+      key === "todo" ? [] : findTodoMarkers(item, [...path, key]),
+    );
+  }
+  return [];
+}
 
 export const projectManifestSchema = z
   .object({ projects: z.array(projectSchema) })
@@ -84,6 +132,14 @@ export const projectManifestSchema = z
         });
       }
       seen.add(project.slug);
+
+      for (const markerPath of findTodoMarkers(project)) {
+        ctx.addIssue({
+          code: "custom",
+          message: "TODO markers belong in `todo`, not in rendered fields",
+          path: ["projects", index, ...markerPath],
+        });
+      }
     });
   });
 
