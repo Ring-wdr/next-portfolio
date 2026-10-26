@@ -480,6 +480,78 @@
           "Claude Code"
         ]
       }
+    },
+    {
+      "slug": "vis-a-lot",
+      "title": "vis-a-lot",
+      "thumbnail": "/ms-icon-150x150.png",
+      "summary": "vis-a-lot test fixture summary.",
+      "period": "2026.10 -",
+      "team": "개인 프로젝트",
+      "role": "기획, 브라우저 내 MSA 서버 설계, 렌더링 파이프라인과 작업 화면 구현",
+      "card": {
+        "category": "Product",
+        "featured": false,
+        "status": "Prototype",
+        "impact": "서버에서 PNG 차트를 그리는 B2B 시각화 구조를 서버 유지비 없이 브라우저 안에서 재현했습니다.",
+        "result": "auth · data · chart 서비스와 렌더 job, 툴팁, history, 공유까지 이어지는 프로토타입을 구현했습니다."
+      },
+      "aliases": [
+        "비저랏",
+        "vis a lot",
+        "visalot"
+      ],
+      "links": {
+        "github": "https://github.com/Ring-wdr/vis-a-lot"
+      },
+      "overview": {
+        "background": "Fixture background.",
+        "goal": "Fixture goal.",
+        "features": [
+          "Fixture feature"
+        ]
+      },
+      "tech": {
+        "stack": [
+          "Next.js",
+          "React",
+          "TypeScript",
+          "MSW",
+          "Hono",
+          "PGlite",
+          "Web Worker"
+        ],
+        "challenges": [
+          {
+            "title": "vis-a-lot challenge",
+            "description": "Fixture challenge."
+          }
+        ],
+        "solutions": [
+          {
+            "title": "vis-a-lot solution",
+            "description": "Fixture solution."
+          }
+        ]
+      },
+      "achievements": {},
+      "gallery": [
+        {
+          "src": "/ms-icon-150x150.png",
+          "alt": "vis-a-lot fixture image"
+        }
+      ],
+      "metadata": {
+        "publishedAt": "2026-10-26T00:00:00Z",
+        "tags": [
+          "Next.js",
+          "MSW",
+          "PGlite",
+          "Data Visualization",
+          "Web Worker",
+          "OpenAPI"
+        ]
+      }
     }
   ]
 }

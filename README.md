@@ -307,6 +307,13 @@ pnpm lint && pnpm exec vitest run && SKIP_ENV_VALIDATION=true pnpm build
 - **기술**: TypeScript, Preact, Vanilla Extract, Vite, Vitest, Web Worker
 - **링크**: [GitHub](https://github.com/Ring-wdr/ticket-sim) · [Demo](https://ring-wdr.github.io/ticket-sim/)
 
+### 9. vis-a-lot
+
+- **설명**: 서버사이드에서 PNG로 그린 차트를 띄우는 B2B 시각화 솔루션을, MSA 서버까지 브라우저 안에서 돌려 유지비 0원으로 재현한 프로토타입
+- **역할**: 1인 기획·설계·구현 (MSW gateway와 Hono 서비스 3개, PGlite DB Worker, OffscreenCanvas Render Worker, OAS 기반 타입 생성), Claude Code와 협업
+- **기술**: Next.js, React, TypeScript, MSW, Hono, Zod, PGlite, OffscreenCanvas, Web Worker, TanStack Query, zustand
+- **링크**: [GitHub](https://github.com/Ring-wdr/vis-a-lot)
+
 ## 💡 주요 특징
 
 ### Feature-Sliced Design (FSD)
