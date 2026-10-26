@@ -11,7 +11,7 @@ import { isSvgSource } from "@/shared/utils/image";
 export function MainPage({ projects }: { projects: ProjectCard[] }) {
 	const t = useTranslations("HomePage");
 	const categoryT = useTranslations("ProjectsPage.categories");
-	const supportingProjects = getFeaturedProjects(projects, 3);
+	const supportingProjects = getFeaturedProjects(projects, 4);
 	const spotlightTech = TechStack.slice(0, 8).map((tech) => tech.name);
 	const summaryItems = [
 		t("summary.years"),
