@@ -51,7 +51,7 @@ export function ChatWidget() {
         onClick={chat.toggle}
         aria-label={chat.isOpen ? t("close") : t("openChat")}
         aria-expanded={chat.isOpen}
-        className="flex h-12 w-12 items-center justify-center rounded-full bg-brand text-brand-foreground shadow-lg transition-all hover:scale-105 hover:shadow-xl"
+        className="flex h-14 w-14 items-center justify-center rounded-full bg-tangerine text-on-block shadow-[0_12px_32px_-12px_rgb(16_17_20/0.5)] transition-transform hover:scale-105"
       >
         {chat.isOpen ? <X size={20} /> : <MessageCircle size={20} />}
       </button>

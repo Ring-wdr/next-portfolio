@@ -43,7 +43,7 @@ export function EmailForm() {
 
       <div className="grid gap-5 md:grid-cols-2">
         <div className="space-y-2">
-          <label htmlFor="userName" className="text-sm font-medium">
+          <label htmlFor="userName" className="text-sm font-bold">
             {t("name")}
             <RequiredMark label={t("required")} />
           </label>
@@ -54,11 +54,11 @@ export function EmailForm() {
             placeholder={t("namePlaceholder")}
             autoComplete="name"
             required
-            className="w-full rounded-xl border border-border bg-background px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full rounded-2xl border-2 border-transparent bg-background px-4 py-3 text-base transition-colors focus:border-primary focus:outline-none"
           />
         </div>
         <div className="space-y-2">
-          <label htmlFor="userEmail" className="text-sm font-medium">
+          <label htmlFor="userEmail" className="text-sm font-bold">
             {t("email")}
             <RequiredMark label={t("required")} />
           </label>
@@ -69,14 +69,14 @@ export function EmailForm() {
             placeholder={t("emailPlaceholder")}
             autoComplete="email"
             required
-            className="w-full rounded-xl border border-border bg-background px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full rounded-2xl border-2 border-transparent bg-background px-4 py-3 text-base transition-colors focus:border-primary focus:outline-none"
           />
         </div>
       </div>
 
       <div className="grid gap-5 md:grid-cols-2">
         <div className="space-y-2">
-          <label htmlFor="company" className="text-sm font-medium">
+          <label htmlFor="company" className="text-sm font-bold">
             {t("company")}
           </label>
           <input
@@ -85,18 +85,18 @@ export function EmailForm() {
             id="company"
             placeholder={t("companyPlaceholder")}
             autoComplete="organization"
-            className="w-full rounded-xl border border-border bg-background px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full rounded-2xl border-2 border-transparent bg-background px-4 py-3 text-base transition-colors focus:border-primary focus:outline-none"
           />
         </div>
         <div className="space-y-2">
-          <label htmlFor="purpose" className="text-sm font-medium">
+          <label htmlFor="purpose" className="text-sm font-bold">
             {t("purpose")}
           </label>
           <select
             name="purpose"
             id="purpose"
             defaultValue="job-opportunity"
-            className="w-full rounded-xl border border-border bg-background px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full rounded-2xl border-2 border-transparent bg-background px-4 py-3 text-base transition-colors focus:border-primary focus:outline-none"
           >
             <option value="job-opportunity">{t("purposeOptions.jobOpportunity")}</option>
             <option value="project-inquiry">{t("purposeOptions.projectInquiry")}</option>
@@ -107,7 +107,7 @@ export function EmailForm() {
       </div>
 
       <div className="space-y-2">
-        <label htmlFor="content" className="text-sm font-medium">
+        <label htmlFor="content" className="text-sm font-bold">
           {t("message")}
           <RequiredMark label={t("required")} />
         </label>
@@ -117,7 +117,7 @@ export function EmailForm() {
           placeholder={t("messagePlaceholder")}
           required
           rows={7}
-          className="w-full rounded-xl border border-border bg-background px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary"
+          className="w-full rounded-2xl border-2 border-transparent bg-background px-4 py-3 text-base transition-colors focus:border-primary focus:outline-none"
         />
       </div>
 

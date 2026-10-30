@@ -45,18 +45,18 @@ export function ChatPanel({
     <div
       role="dialog"
       aria-label={t("title")}
-      className="flex h-[min(560px,calc(100svh-7rem))] w-[min(24rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-border/70 bg-background shadow-2xl"
+      className="flex h-[min(560px,calc(100svh-7rem))] w-[min(24rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-[1.75rem] bg-background shadow-[0_24px_64px_-24px_rgb(16_17_20/0.45)] ring-1 ring-border"
     >
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-border/60 px-4 py-3">
+      <div className="flex items-center justify-between bg-cobalt py-3 pr-2 pl-5 text-on-cobalt">
         <div>
-          <p className="text-sm font-semibold">{t("title")}</p>
-          <p className="text-xs text-muted-foreground">{t("description")}</p>
+          <p className="text-base type-heading">{t("title")}</p>
+          <p className="text-xs text-on-cobalt/76">{t("description")}</p>
         </div>
         <button
           type="button"
           onClick={onClose}
-          className="flex h-11 w-11 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground"
+          className="flex h-11 w-11 items-center justify-center rounded-full transition-colors hover:bg-on-cobalt/14"
           aria-label={t("close")}
         >
           <X size={16} />
@@ -68,14 +68,14 @@ export function ChatPanel({
         {errorMessage ? (
           <div
             role="alert"
-            className="rounded-xl border border-destructive/30 bg-destructive/10 px-3 py-2 text-xs text-destructive"
+            className="rounded-2xl bg-destructive/12 px-3 py-2 text-xs font-medium text-destructive"
           >
             {errorMessage}
           </div>
         ) : null}
         {messages.length === 0 ? (
           <div className="flex h-full flex-col items-center justify-center gap-2 text-center">
-            <p className="text-sm font-medium">{t("emptyTitle")}</p>
+            <p className="text-base type-heading">{t("emptyTitle")}</p>
             <p className="text-xs text-muted-foreground">{t("emptyDescription")}</p>
             {suggestions.length > 0 && onSuggestion ? (
               <ul className="mt-3 flex w-full flex-col gap-2">
@@ -84,7 +84,7 @@ export function ChatPanel({
                     <button
                       type="button"
                       onClick={() => onSuggestion(question)}
-                      className="min-h-11 w-full rounded-xl border border-border/60 bg-card/70 px-3 py-2 text-left text-sm transition-colors hover:border-primary/40 hover:bg-secondary"
+                      className="min-h-11 w-full rounded-2xl bg-card px-4 py-2 text-left text-sm font-bold transition-colors hover:bg-foreground hover:text-background"
                     >
                       {question}
                     </button>

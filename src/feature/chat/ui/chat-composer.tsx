@@ -29,7 +29,7 @@ export function ChatComposer({
   }
 
   return (
-    <div className="border-t border-border/60 p-3">
+    <div className="border-t border-border p-3">
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -46,12 +46,12 @@ export function ChatComposer({
           placeholder={t("placeholder")}
           disabled={isDisabled}
           rows={2}
-          className="w-full resize-none rounded-lg border border-border bg-background px-3 py-2 text-base text-foreground placeholder:text-muted-foreground md:text-sm focus:outline-none focus:ring-1 focus:ring-primary disabled:opacity-50"
+          className="w-full resize-none rounded-2xl border-2 border-transparent bg-card px-3 py-2 text-base text-foreground placeholder:text-muted-foreground md:text-sm focus:border-primary focus:outline-none disabled:opacity-50"
         />
         <button
           type="submit"
           disabled={isDisabled || !input.trim()}
-          className="min-h-11 shrink-0 self-end rounded-lg bg-primary px-3 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-40"
+          className="min-h-11 shrink-0 self-end rounded-full bg-tangerine px-4 py-2 text-sm font-bold text-on-block transition-transform hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0"
         >
           {isDisabled ? t("sending") : t("send")}
         </button>
