@@ -15,7 +15,6 @@ export function HeroAsk() {
 		chat.persona ?? "recruiter",
 	);
 	const [question, setQuestion] = useState("");
-	const starters = t.raw(`starters.${persona}`) as string[];
 	const isBusy = chat.status === "submitted" || chat.status === "streaming";
 
 	function submit(text: string) {
@@ -85,20 +84,40 @@ export function HeroAsk() {
 				</button>
 			</form>
 
-			<ul className="flex flex-wrap gap-2" aria-label={t("startersLabel")}>
-				{starters.map((starter) => (
-					<li key={starter}>
-						<button
-							type="button"
-							onClick={() => submit(starter)}
-							disabled={isBusy}
-							className="min-h-10 rounded-full border-2 border-on-cobalt/28 px-4 py-1.5 text-left text-sm font-medium text-on-cobalt transition-colors hover:border-on-cobalt hover:bg-on-cobalt hover:text-cobalt disabled:opacity-50"
+			{/*
+			 * Every persona's starters share one grid cell, so the cell is always as
+			 * tall as the longest set and switching personas never moves the page.
+			 */}
+			<div className="grid">
+				{chatPersonas.map((option) => {
+					const active = option === persona;
+					return (
+						<ul
+							key={option}
+							className={classNames(
+								"flex flex-wrap content-start gap-2 [grid-area:1/1]",
+								!active && "invisible",
+							)}
+							aria-label={t("startersLabel")}
+							aria-hidden={!active}
+							inert={!active}
 						>
-							{starter}
-						</button>
-					</li>
-				))}
-			</ul>
+							{(t.raw(`starters.${option}`) as string[]).map((starter) => (
+								<li key={starter}>
+									<button
+										type="button"
+										onClick={() => submit(starter)}
+										disabled={isBusy}
+										className="min-h-10 rounded-full border-2 border-on-cobalt/28 px-4 py-1.5 text-left text-sm font-medium text-on-cobalt transition-colors hover:border-on-cobalt hover:bg-on-cobalt hover:text-cobalt disabled:opacity-50"
+									>
+										{starter}
+									</button>
+								</li>
+							))}
+						</ul>
+					);
+				})}
+			</div>
 		</div>
 	);
 }
