@@ -54,11 +54,11 @@ export function MainPage({ projects }: { projects: ProjectCard[] }) {
 		<main className="flex flex-1 flex-col">
 			<section className="bg-hero-bg text-hero-fg" data-testid="home-hero">
 				<div className="section-shell flex flex-col gap-10 pt-10 pb-12 md:gap-14 md:pt-16 md:pb-16">
-					<div className="rise flex flex-col gap-5">
+					<div className="rise @container flex flex-col gap-5">
 						<p className="kicker w-fit rounded-full border-2 border-on-cobalt/36 px-3.5 py-1.5">
 							{t("eyebrow")}
 						</p>
-						<h1 className="type-display text-[clamp(2.5rem,10.5vw,8rem)]">
+						<h1 className="type-display display-fit-xl">
 							<span className="block">Manjoong</span>{" "}
 							<span className="block">Kim</span>
 						</h1>
@@ -189,8 +189,8 @@ export function MainPage({ projects }: { projects: ProjectCard[] }) {
 					</h2>
 				</div>
 				<div className="mt-10 grid gap-3 md:grid-cols-2">
-					<div className="flex flex-col gap-6 rounded-[2rem] bg-tangerine p-7 text-on-block md:p-9">
-						<h3 className="type-display text-[clamp(1.75rem,3.4vw,2.75rem)]">{t("tools.fitTitle")}</h3>
+					<div className="@container flex min-w-0 flex-col gap-6 rounded-[2rem] bg-tangerine p-7 text-on-block md:p-9">
+						<h3 className="type-display text-[clamp(1.5rem,8cqi,2.75rem)]">{t("tools.fitTitle")}</h3>
 						<p className="max-w-md text-sm leading-6 font-medium md:text-base md:leading-7">
 							{t("tools.fitDescription")}
 						</p>
@@ -202,8 +202,8 @@ export function MainPage({ projects }: { projects: ProjectCard[] }) {
 							<ArrowRight size={16} aria-hidden />
 						</Link>
 					</div>
-					<div className="flex flex-col gap-6 rounded-[2rem] bg-mint p-7 text-on-block md:p-9">
-						<h3 className="type-display text-[clamp(1.75rem,3.4vw,2.75rem)]">{t("tools.askTitle")}</h3>
+					<div className="@container flex min-w-0 flex-col gap-6 rounded-[2rem] bg-mint p-7 text-on-block md:p-9">
+						<h3 className="type-display text-[clamp(1.5rem,8cqi,2.75rem)]">{t("tools.askTitle")}</h3>
 						<p className="max-w-md text-sm leading-6 font-medium md:text-base md:leading-7">
 							{t("tools.askDescription")}
 						</p>

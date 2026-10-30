@@ -44,7 +44,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 		<main className="flex flex-1 flex-col">
 			{/* The opening band takes the project's category color */}
 			<section className={block}>
-				<div className="section-shell flex flex-col gap-6 pt-8 pb-10 md:pt-12 md:pb-14">
+				<div className="section-shell @container flex flex-col gap-6 pt-8 pb-10 md:pt-12 md:pb-14">
 					<Link
 						href="/project"
 						className="inline-flex h-10 w-fit items-center gap-2 rounded-full border-2 border-current/30 px-4 text-sm font-bold transition-colors hover:border-current"
@@ -63,7 +63,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 						share="vt-project-title"
 						update="vt-project-title"
 					>
-						<h1 className="type-display max-w-[16ch] text-[clamp(2.25rem,7vw,5.5rem)]">
+						<h1 className="type-display text-[clamp(2rem,9cqi,5.5rem)]">
 							{project.title}
 						</h1>
 					</ViewTransition>

@@ -180,10 +180,23 @@
 		letter-spacing: -0.02em;
 		line-height: 0.95;
 		text-transform: uppercase;
-		/* Display words never split; the size clamp keeps them inside the column */
-		overflow-wrap: normal;
+		/*
+		 * Words split only when one cannot fit even at the clamp minimum
+		 * (long CMS titles); the cqi sizes below keep normal words whole.
+		 */
+		overflow-wrap: break-word;
 		word-break: keep-all;
 	}
+
+	/*
+	 * Display sizes measured against the nearest @container, not the viewport.
+	 * An 8-letter word in expanded black runs about 7.6em wide, so 12cqi keeps
+	 * it inside its box at any column count.
+	 */
+	.display-fit-xl {
+		font-size: clamp(2.25rem, 12cqi, 8rem);
+	}
+
 
 	.type-heading {
 		font-family: var(--font-archivo), var(--font-gothic), sans-serif;

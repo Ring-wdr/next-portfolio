@@ -4,6 +4,7 @@ import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { categoryBlockClassName, type ProjectCard } from "@/shared/content/project";
+import { StatGrid } from "@/shared/ui/stat-grid";
 import { classNames } from "@/shared/utils/classnames";
 import { ProjectItem } from "./item";
 
@@ -48,16 +49,16 @@ export function ProjectPage({ projects }: { projects: ProjectCard[] }) {
 	).length;
 
 	const stats = [
-		{ value: projects.length, label: t("stats.total"), color: "bg-butter" },
-		{ value: featuredCount, label: t("stats.featured"), color: "bg-mint" },
-		{ value: filteredProjects.length, label: t("stats.filtered"), color: "bg-tangerine" },
+		{ value: `${projects.length}`, label: t("stats.total"), color: "bg-butter" },
+		{ value: `${featuredCount}`, label: t("stats.featured"), color: "bg-mint" },
+		{ value: `${filteredProjects.length}`, label: t("stats.filtered"), color: "bg-tangerine" },
 	] as const;
 
 	return (
 		<main className="flex flex-1 flex-col">
 			<section className="bg-hero-bg text-hero-fg">
-				<div className="section-shell flex flex-col gap-6 pt-10 pb-10 md:pt-14 md:pb-14">
-					<h1 className="type-display text-[clamp(2.75rem,9vw,7rem)]">{t("title")}</h1>
+				<div className="section-shell @container flex flex-col gap-6 pt-10 pb-10 md:pt-14 md:pb-14">
+					<h1 className="type-display display-fit-xl">{t("title")}</h1>
 					<p className="max-w-3xl text-sm leading-6 text-on-cobalt/84 md:text-base md:leading-7">
 						{t("description")}
 					</p>
@@ -65,17 +66,7 @@ export function ProjectPage({ projects }: { projects: ProjectCard[] }) {
 			</section>
 
 			<div className="section-shell flex w-full flex-col gap-8 pt-3 pb-14 md:pb-20">
-				<ul className="hidden gap-3 sm:grid sm:grid-cols-3">
-					{stats.map((stat) => (
-						<li
-							key={stat.label}
-							className={`${stat.color} flex items-end justify-between gap-3 rounded-[1.75rem] p-5 text-on-block`}
-						>
-							<span className="text-sm font-bold">{stat.label}</span>
-							<span className="type-display text-5xl tabular-nums">{stat.value}</span>
-						</li>
-					))}
-				</ul>
+				<StatGrid stats={stats} className="hidden sm:grid" />
 
 				<section className="flex flex-col gap-4 border-b border-border pb-6">
 					<div className="flex flex-wrap items-center gap-x-6 gap-y-3">

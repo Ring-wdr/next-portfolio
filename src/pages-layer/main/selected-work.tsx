@@ -73,9 +73,9 @@ function LeadProject({ project }: { project: ProjectCard }) {
 						className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
 					/>
 				</div>
-				<div className="flex flex-col gap-4 p-6 md:p-9">
+				<div className="@container flex min-w-0 flex-col gap-4 p-6 md:p-9">
 					<ProjectMeta project={project} tone="light" />
-					<h3 className="type-display text-[clamp(2rem,4.4vw,3.5rem)]">{project.title}</h3>
+					<h3 className="type-display text-[clamp(1.75rem,10cqi,3.5rem)]">{project.title}</h3>
 					<p className="text-sm leading-6 text-white/72 md:text-base md:leading-7">
 						{project.description}
 					</p>

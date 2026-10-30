@@ -15,10 +15,12 @@ export function Footer() {
 		<footer className="mt-auto bg-ink pb-24 text-white md:pb-0 dark:bg-card dark:text-foreground">
 			<div className="section-shell flex flex-col gap-10 py-12 md:py-16">
 				<div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-					<p className="type-display text-[clamp(2.5rem,9vw,6.5rem)]">
-						<span className="block">Manjoong</span>{" "}
-						<span className="block">Kim</span>
-					</p>
+					<div className="@container min-w-0 flex-1">
+						<p className="type-display display-fit-xl">
+							<span className="block">Manjoong</span>{" "}
+							<span className="block">Kim</span>
+						</p>
+					</div>
 					<nav aria-label={t("linksLabel")} className="grid grid-cols-2 gap-x-10 text-sm md:text-base">
 						<Link href="/project" className={linkClassName}>
 							{tHeader("projects")}

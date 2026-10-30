@@ -15,8 +15,8 @@ export function ContactPage() {
 	return (
 		<main className="flex flex-1 flex-col">
 			<section className="bg-hero-bg text-hero-fg">
-				<div className="section-shell flex flex-col gap-6 pt-10 pb-10 md:pt-14 md:pb-14">
-					<h1 className="type-display text-[clamp(2.75rem,9vw,7rem)]">{t("title")}</h1>
+				<div className="section-shell @container flex flex-col gap-6 pt-10 pb-10 md:pt-14 md:pb-14">
+					<h1 className="type-display display-fit-xl">{t("title")}</h1>
 					<p className="max-w-3xl text-sm leading-6 text-on-cobalt/84 md:text-base md:leading-7">
 						{t("description")}
 					</p>

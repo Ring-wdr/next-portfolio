@@ -9,6 +9,7 @@ import {
 	WorkingPrinciples,
 } from "@/shared/constant/profile";
 import { TechStack } from "@/shared/constant/tech-stack";
+import { StatGrid } from "@/shared/ui/stat-grid";
 
 // Principles are parallel, not a sequence, so each gets a block color instead of a number
 const principleColors = ["bg-cobalt text-on-cobalt", "bg-tangerine text-on-block", "bg-mint text-on-block"] as const;
@@ -35,11 +36,11 @@ export function AboutPage({ projectCount }: { projectCount: number }) {
 		<main className="flex flex-1 flex-col">
 			<section className="bg-hero-bg text-hero-fg" data-testid="about-hero">
 				<div className="section-shell grid grid-cols-1 gap-8 pt-10 pb-12 md:pt-14 md:pb-16 lg:grid-cols-[minmax(0,1fr)_17rem] lg:items-end lg:gap-12">
-					<div className="flex flex-col gap-6">
+					<div className="@container flex min-w-0 flex-col gap-6">
 						<p className="kicker w-fit rounded-full border-2 border-on-cobalt/36 px-3.5 py-1.5">
 							{t("heroEyebrow")}
 						</p>
-						<h1 className="type-display text-[clamp(3rem,10vw,7.5rem)]">{t("name")}</h1>
+						<h1 className="type-display display-fit-xl">{t("name")}</h1>
 						<p className="font-heading text-lg font-extrabold tracking-[-0.02em] md:text-2xl">{t("role")}</p>
 						<p className="max-w-3xl text-base leading-7 text-on-cobalt/84 md:text-lg md:leading-8">
 							{t("intro")}
@@ -62,17 +63,12 @@ export function AboutPage({ projectCount }: { projectCount: number }) {
 			</section>
 
 			<section className="section-shell pt-3">
-				<dl className="grid grid-cols-3 gap-3">
-					{stats.map((item, index) => (
-						<div
-							key={item.label}
-							className={`${["bg-butter", "bg-mint", "bg-tangerine"][index]} flex flex-col justify-between gap-6 rounded-[1.75rem] p-4 text-on-block md:p-6`}
-						>
-							<dt className="text-xs font-bold md:text-sm">{item.label}</dt>
-							<dd className="type-display text-3xl tabular-nums md:text-5xl">{item.value}</dd>
-						</div>
-					))}
-				</dl>
+				<StatGrid
+					stats={stats.map((item, index) => ({
+						...item,
+						color: ["bg-butter", "bg-mint", "bg-tangerine"][index],
+					}))}
+				/>
 			</section>
 
 			<section className="section-shell section-pad" data-testid="about-career">

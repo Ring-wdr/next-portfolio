@@ -8,6 +8,8 @@ import {
 import { TechStack, TechStackCategory } from "@/shared/constant/tech-stack";
 import { TechCategoryMeta } from "@/shared/constant/profile";
 
+import { StatGrid } from "@/shared/ui/stat-grid";
+
 import { AgentEngineeringPanel } from "./agent-engineering-panel";
 
 export function TechStackPage() {
@@ -36,8 +38,8 @@ export function TechStackPage() {
   return (
     <main className="flex flex-1 flex-col">
       <section className="bg-hero-bg text-hero-fg">
-        <div className="section-shell flex flex-col gap-6 pt-10 pb-10 md:pt-14 md:pb-14">
-          <h1 className="type-display text-[clamp(2.75rem,9vw,7rem)]">{t("title")}</h1>
+        <div className="section-shell @container flex flex-col gap-6 pt-10 pb-10 md:pt-14 md:pb-14">
+          <h1 className="type-display display-fit-xl">{t("title")}</h1>
           <p className="max-w-3xl text-sm leading-6 text-on-cobalt/84 md:text-base md:leading-7">
             {t("description")}
           </p>
@@ -45,17 +47,7 @@ export function TechStackPage() {
       </section>
 
       <div className="section-shell flex w-full flex-col gap-3 pt-3 pb-14 md:pb-20">
-        <dl className="grid grid-cols-3 gap-3">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className={`${stat.color} flex flex-col justify-between gap-6 rounded-[1.75rem] p-4 text-on-block md:p-6`}
-            >
-              <dt className="text-xs font-bold md:text-sm">{stat.label}</dt>
-              <dd className="type-display text-[clamp(1.25rem,3.6vw,3rem)]">{stat.value}</dd>
-            </div>
-          ))}
-        </dl>
+        <StatGrid stats={stats} />
 
         <section className="flex flex-col gap-4 rounded-[2rem] bg-card p-6 md:flex-row md:items-start md:gap-10 md:p-8">
           <h2 className="kicker shrink-0 text-primary md:w-48">{t("methodTitle")}</h2>
