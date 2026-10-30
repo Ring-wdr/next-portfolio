@@ -1,16 +1,14 @@
-import { ArrowRight, ArrowUpRight } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { TechStack } from "@/shared/constant/tech-stack";
 import { getFeaturedProjects, type ProjectCard } from "@/shared/content/project";
 import { HeroAsk } from "./hero-ask";
 import { HeroCanvas } from "./hero-canvas";
-import { isSvgSource } from "@/shared/utils/image";
+import { SelectedWork } from "./selected-work";
 
 export function MainPage({ projects }: { projects: ProjectCard[] }) {
 	const t = useTranslations("HomePage");
-	const categoryT = useTranslations("ProjectsPage.categories");
 	const supportingProjects = getFeaturedProjects(projects, 4);
 	const spotlightTech = TechStack.slice(0, 8).map((tech) => tech.name);
 	const summaryItems = [
@@ -125,47 +123,7 @@ export function MainPage({ projects }: { projects: ProjectCard[] }) {
 					</Link>
 				</div>
 
-				<div className="mt-12 border-t border-border/70">
-					{supportingProjects.map((project) => (
-						<article
-							key={project.slug}
-							className="group border-b border-border/65 py-6 md:py-8"
-						>
-							<Link
-								href={`/project/${project.slug}`}
-								className="grid gap-6 md:grid-cols-[minmax(0,1fr)_17rem] md:items-center"
-							>
-								<div className="space-y-3">
-									<p className="home-kicker text-muted-foreground/72">
-										{categoryT(project.category)} · {project.year}
-									</p>
-									<div className="flex items-start justify-between gap-4">
-										<h3 className="max-w-[15ch] text-2xl font-semibold tracking-[-0.04em] transition-colors group-hover:text-foreground/82 md:text-4xl">
-											{project.title}
-										</h3>
-										<span className="mt-1 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border/70 text-muted-foreground transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-foreground">
-											<ArrowUpRight size={18} />
-										</span>
-									</div>
-									<p className="max-w-2xl text-sm leading-6 text-muted-foreground md:text-base">
-										{project.description}
-									</p>
-								</div>
-								<div className="relative aspect-16/10 overflow-hidden rounded-[1.75rem] bg-secondary/40">
-									<Image
-										src={project.src}
-										unoptimized={isSvgSource(project.src)}
-										alt={project.title}
-										fill
-										sizes="(max-width: 768px) 100vw, 272px"
-										className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
-									/>
-									<div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,14,18,0)_30%,rgba(12,14,18,0.24)_100%)]" />
-								</div>
-							</Link>
-						</article>
-					))}
-				</div>
+				<SelectedWork projects={supportingProjects} />
 			</section>
 
 			<section className="section-shell home-section-shell home-section-reveal">
