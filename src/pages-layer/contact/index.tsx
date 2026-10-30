@@ -1,7 +1,7 @@
 import { EmailForm } from "@/feature/mail/ui/email-form";
 import { useTranslations } from "next-intl";
 import { contactEmail, resumeHref } from "@/shared/constant/contact";
-import { CopyEmailButton } from "./copy-email";
+import { CopyEmailButton } from "@/shared/ui/copy-email-button";
 
 export function ContactPage() {
   const t = useTranslations("ContactPage");

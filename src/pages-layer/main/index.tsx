@@ -1,14 +1,19 @@
-import { ArrowRight, FileCode2, FlaskConical, Layers3 } from "lucide-react";
+import { ArrowRight, FileCode2, FileText, FlaskConical, Layers3 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
+import { contactEmail, resumeHref } from "@/shared/constant/contact";
+import { siteConfig } from "@/shared/constant/site";
 import { TechStack } from "@/shared/constant/tech-stack";
 import { getFeaturedProjects, type ProjectCard } from "@/shared/content/project";
+import { CopyEmailButton } from "@/shared/ui/copy-email-button";
+import { GithubIcon, LinkedinIcon } from "@/shared/ui/icon/brand";
 import { HeroAsk } from "./hero-ask";
 import { HeroCanvas } from "./hero-canvas";
 import { SelectedWork } from "./selected-work";
 
 export function MainPage({ projects }: { projects: ProjectCard[] }) {
 	const t = useTranslations("HomePage");
+	const contactT = useTranslations("ContactPage");
 	const supportingProjects = getFeaturedProjects(projects, 4);
 	const spotlightTech = TechStack.slice(0, 8);
 	const summaryItems = [
@@ -198,31 +203,79 @@ export function MainPage({ projects }: { projects: ProjectCard[] }) {
 			</section>
 
 			<section className="section-shell pb-12 pt-4 md:pb-16">
-				<div className="home-cta-shell home-section-reveal flex flex-col gap-8 rounded-[2rem] border border-border/70 px-6 py-8 md:px-10 md:py-10 lg:flex-row lg:items-end lg:justify-between">
-					<div className="max-w-2xl space-y-4">
+				<div className="home-cta-shell home-section-reveal grid gap-10 rounded-[2rem] border border-border/70 px-6 py-8 md:px-10 md:py-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-end lg:gap-16">
+					<div className="space-y-4">
 						<p className="home-kicker text-muted-foreground">
 							{t("finalEyebrow")}
 						</p>
-						<h2 className="max-w-[16ch] text-3xl font-semibold tracking-[-0.04em] md:text-5xl">
+						<h2 className="max-w-[20ch] break-keep text-3xl font-semibold leading-[1.15] tracking-[-0.04em] md:text-[2.75rem]">
 							{t("finalTitle")}
 						</h2>
-						<p className="text-sm leading-6 text-muted-foreground md:text-base md:leading-7">
+						<p className="max-w-xl text-sm leading-6 text-muted-foreground md:text-base md:leading-7">
 							{t("finalDescription")}
 						</p>
 					</div>
-					<div className="flex flex-wrap gap-3">
-						<Link
-							href="/project"
-							className="inline-flex h-11 items-center justify-center rounded-full bg-foreground px-6 text-sm font-semibold text-background transition-transform duration-300 hover:-translate-y-0.5"
-						>
-							{t("viewProjects")}
-						</Link>
-						<Link
-							href="/contact"
-							className="inline-flex h-11 items-center justify-center rounded-full border border-border bg-background px-6 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
-						>
-							{t("contactCta")}
-						</Link>
+
+					{/* Direct channels, so reaching out doesn't need a second page */}
+					<div className="flex flex-col gap-5 rounded-3xl border border-border/70 bg-background/70 p-5 md:p-6">
+						<div className="space-y-1">
+							<p className="text-xs font-semibold text-muted-foreground">
+								{contactT("emailLabel")}
+							</p>
+							<a
+								href={`mailto:${contactEmail}`}
+								className="block break-all text-xl font-semibold tracking-[-0.03em] underline-offset-4 hover:underline md:text-2xl"
+							>
+								{contactEmail}
+							</a>
+						</div>
+						<div className="flex flex-wrap gap-2">
+							<Link
+								href="/contact"
+								className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-foreground px-5 text-sm font-semibold text-background transition-transform duration-300 hover:-translate-y-0.5"
+							>
+								{t("contactCta")}
+								<ArrowRight size={15} />
+							</Link>
+							<CopyEmailButton email={contactEmail} />
+						</div>
+						<ul className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-border/70 pt-4 text-sm font-medium text-muted-foreground">
+							<li>
+								<a
+									href={siteConfig.social.linkedin}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="inline-flex min-h-11 items-center gap-2 transition-colors hover:text-foreground"
+								>
+									<LinkedinIcon width={16} height={16} aria-hidden />
+									LinkedIn
+								</a>
+							</li>
+							<li>
+								<a
+									href={siteConfig.social.github}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="inline-flex min-h-11 items-center gap-2 transition-colors hover:text-foreground"
+								>
+									<GithubIcon width={16} height={16} aria-hidden />
+									GitHub
+								</a>
+							</li>
+							{resumeHref && (
+								<li>
+									<a
+										href={resumeHref}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="inline-flex min-h-11 items-center gap-2 transition-colors hover:text-foreground"
+									>
+										<FileText size={16} aria-hidden />
+										{contactT("resume")}
+									</a>
+								</li>
+							)}
+						</ul>
 					</div>
 				</div>
 			</section>
