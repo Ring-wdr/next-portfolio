@@ -47,7 +47,7 @@ export function MainPage({ projects }: { projects: ProjectCard[] }) {
 				<HeroCanvas className="absolute inset-y-0 right-0 -z-10 w-full opacity-35 lg:w-[36%] lg:opacity-100" />
 				<div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,color-mix(in_oklch,var(--hero-bg),transparent_8%)_0%,color-mix(in_oklch,var(--hero-bg),transparent_40%)_55%,transparent_100%)] lg:hidden" />
 				<div className="section-shell relative z-10 flex items-end md:min-h-[calc(100svh-4.5rem)] pt-16 pb-12 md:pt-20 md:pb-14 lg:pt-24 lg:pb-16">
-					<div className="home-hero-copy flex max-w-[46rem] flex-col gap-6 text-hero-fg md:gap-7">
+					<div className="home-hero-copy flex w-full min-w-0 max-w-[46rem] flex-col gap-6 text-hero-fg md:gap-7">
 						<p className="home-kicker text-hero-fg/72">{t("eyebrow")}</p>
 						<h1 className="max-w-[12ch] text-[clamp(3.2rem,7vw,5.6rem)] font-bold leading-[0.9] tracking-[-0.06em] text-hero-fg">
 							<span className="block">Manjoong Kim</span>
@@ -58,29 +58,28 @@ export function MainPage({ projects }: { projects: ProjectCard[] }) {
 						<p className="max-w-2xl text-sm leading-6 text-hero-fg/78 md:text-base md:leading-7">
 							{t("description")}
 						</p>
-						<HeroAsk />
-						<div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-semibold">
+						<div className="flex flex-wrap items-center gap-3 text-sm font-semibold">
 							<Link
 								href="/project"
-								className="min-h-11 inline-flex items-center gap-1.5 text-hero-fg transition-opacity hover:opacity-80"
+								className="inline-flex h-11 items-center gap-1.5 rounded-full bg-hero-fg px-5 text-hero-bg transition-transform duration-300 hover:-translate-y-0.5"
 							>
 								{t("viewProjects")}
 								<ArrowRight size={15} />
 							</Link>
 							<Link
 								href="/fit"
-								className="min-h-11 inline-flex items-center gap-1.5 text-hero-fg/80 transition-colors hover:text-hero-fg"
+								className="inline-flex h-11 items-center gap-1.5 rounded-full border border-hero-fg/24 px-5 text-hero-fg transition-colors hover:bg-hero-fg/8"
 							>
 								{t("fitCta")}
-								<ArrowRight size={15} />
 							</Link>
 							<Link
 								href="/about"
-								className="min-h-11 inline-flex items-center gap-1.5 text-hero-fg/80 transition-colors hover:text-hero-fg"
+								className="hidden h-11 items-center px-2 text-hero-fg/72 sm:inline-flex underline-offset-4 transition-colors hover:text-hero-fg hover:underline"
 							>
 								{t("aboutCta")}
 							</Link>
 						</div>
+						<HeroAsk />
 						<ul
 							aria-label={t("summaryLabel")}
 							className="flex flex-col gap-1 border-t border-hero-fg/18 pt-5 text-sm font-semibold text-hero-fg sm:flex-row sm:flex-wrap sm:gap-x-3 md:text-base"
