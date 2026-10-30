@@ -1,12 +1,14 @@
 "use client";
 
 import { ArrowUpRight, Menu, X } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/routing";
 import { resumeHref } from "@/shared/constant/contact";
 import { siteConfig } from "@/shared/constant/site";
 import { classNames } from "@/shared/utils/classnames";
+import LogoImage from "../../../public/ms-icon-150x150.png";
 import { GithubIcon, LinkedinIcon } from "./icon/brand";
 import { LanguageToggle } from "./language-toggle";
 import { ModeToggle } from "./theme-toggle";
@@ -52,11 +54,8 @@ export function Header() {
 			</a>
 			<div className="section-shell flex h-16 items-center justify-between gap-4">
 				<Link href="/" className="flex min-h-11 items-center gap-2.5" aria-label="Manjoong Kim">
-					<span
-						aria-hidden
-						className="type-display flex h-9 w-9 items-center justify-center rounded-lg bg-cobalt text-[0.8rem] text-on-cobalt"
-					>
-						MK
+					<span className="flex h-9 w-9 items-center justify-center rounded-lg border-2 border-border bg-background">
+						<Image src={LogoImage} alt="" width={22} height={22} />
 					</span>
 					<span aria-hidden className="type-display hidden text-sm sm:inline">
 						Manjoong Kim
