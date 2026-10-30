@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, FileCode2, FlaskConical, Layers3 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { TechStack } from "@/shared/constant/tech-stack";
@@ -10,7 +10,7 @@ import { SelectedWork } from "./selected-work";
 export function MainPage({ projects }: { projects: ProjectCard[] }) {
 	const t = useTranslations("HomePage");
 	const supportingProjects = getFeaturedProjects(projects, 4);
-	const spotlightTech = TechStack.slice(0, 8).map((tech) => tech.name);
+	const spotlightTech = TechStack.slice(0, 8);
 	const summaryItems = [
 		t("summary.years"),
 		t("summary.domain"),
@@ -19,16 +19,19 @@ export function MainPage({ projects }: { projects: ProjectCard[] }) {
 	const principles = [
 		{
 			id: "01",
+			icon: Layers3,
 			title: t("pillars.architecture.title"),
 			description: t("pillars.architecture.description"),
 		},
 		{
 			id: "02",
+			icon: FileCode2,
 			title: t("pillars.apiContract.title"),
 			description: t("pillars.apiContract.description"),
 		},
 		{
 			id: "03",
+			icon: FlaskConical,
 			title: t("pillars.testing.title"),
 			description: t("pillars.testing.description"),
 		},
@@ -127,62 +130,70 @@ export function MainPage({ projects }: { projects: ProjectCard[] }) {
 			</section>
 
 			<section className="section-shell home-section-shell home-section-reveal">
-				<div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-					<div className="lg:sticky lg:top-24 lg:self-start">
+				<div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-end lg:gap-16">
+					<div className="space-y-5">
 						<p className="home-kicker text-muted-foreground">
 							{t("craftEyebrow")}
 						</p>
-						<h2 className="mt-5 max-w-[16ch] text-3xl font-semibold tracking-[-0.04em] md:text-5xl">
+						<h2 className="max-w-[16ch] break-keep text-3xl font-semibold tracking-[-0.04em] md:text-5xl">
 							{t("craftTitle")}
 						</h2>
 					</div>
+					<p className="max-w-2xl text-sm leading-6 text-muted-foreground md:text-base md:leading-7">
+						{t("craftDescription")}
+					</p>
+				</div>
 
-					<div className="space-y-10">
-						<div className="space-y-4 border-t border-border/70 pt-8">
-							<p className="max-w-2xl text-sm leading-6 text-muted-foreground md:text-base md:leading-7">
-								{t("craftDescription")}
-							</p>
-						</div>
-
-						<div className="space-y-6">
-							{principles.map((principle) => (
-								<article
-									key={principle.id}
-									className="grid gap-4 border-t border-border/70 pt-6 md:grid-cols-[4rem_minmax(0,1fr)]"
-								>
-									<p className="home-kicker text-muted-foreground/70">
-										{principle.id}
-									</p>
-									<div className="space-y-2">
-										<h3 className="text-xl font-semibold tracking-[-0.03em] md:text-2xl">
-											{principle.title}
-										</h3>
-										<p className="max-w-2xl text-sm leading-6 text-muted-foreground md:text-base">
-											{principle.description}
-										</p>
-									</div>
-								</article>
-							))}
-						</div>
-
-						<div className="border-t border-border/70 pt-8">
-							<div className="flex flex-wrap items-center justify-between gap-3">
-								<p className="home-kicker text-muted-foreground">
-									{t("stackLabel")}
-								</p>
-								<Link
-									href="/tech-stack"
-									className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-								>
-									{t("techStack")}
-									<ArrowRight size={16} />
-								</Link>
+				<ol className="mt-12 grid gap-4 md:grid-cols-3">
+					{principles.map(({ id, icon: Icon, title, description }) => (
+						<li
+							key={id}
+							className="flex flex-col gap-8 rounded-[1.75rem] border border-border/70 bg-secondary/24 p-6 md:gap-12 md:p-7"
+						>
+							<div className="flex items-center justify-between">
+								<span className="text-4xl font-semibold tracking-[-0.06em] text-foreground/24 md:text-5xl">
+									{id}
+								</span>
+								<span className="flex h-10 w-10 items-center justify-center rounded-full border border-border/70 bg-background/70 text-foreground/80">
+									<Icon size={18} aria-hidden />
+								</span>
 							</div>
-							<p className="mt-5 max-w-3xl text-base leading-8 tracking-[-0.02em] text-foreground/86 md:text-lg">
-								{spotlightTech.join(" · ")}
-							</p>
-						</div>
-					</div>
+							<div className="space-y-2">
+								<h3 className="text-xl font-semibold tracking-[-0.03em] md:text-2xl">
+									{title}
+								</h3>
+								<p className="break-keep text-sm leading-6 text-muted-foreground md:text-[0.9375rem] md:leading-7">
+									{description}
+								</p>
+							</div>
+						</li>
+					))}
+				</ol>
+
+				<div className="mt-10 flex flex-col gap-4 border-t border-border/70 pt-8 md:flex-row md:items-baseline md:gap-10">
+					<p className="home-kicker shrink-0 text-muted-foreground">
+						{t("stackLabel")}
+					</p>
+					<ul className="flex flex-wrap gap-2">
+						{spotlightTech.map((tech) => (
+							<li
+								key={tech.name}
+								className="inline-flex h-9 items-center gap-2 rounded-full border border-border/70 px-3 text-sm text-foreground/86 [&_svg]:h-4 [&_svg]:w-4"
+							>
+								{tech.icon}
+								{tech.name}
+							</li>
+						))}
+						<li>
+							<Link
+								href="/tech-stack"
+								className="inline-flex h-9 items-center gap-1.5 rounded-full px-3 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+							>
+								{t("techStack")}
+								<ArrowRight size={15} />
+							</Link>
+						</li>
+					</ul>
 				</div>
 			</section>
 
