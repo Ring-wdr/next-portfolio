@@ -18,7 +18,8 @@
     "builtWith": "Next.js와 Tailwind CSS로 제작하였습니다.",
     "github": "깃허브",
     "linkedin": "링크드인",
-    "email": "이메일"
+    "email": "이메일",
+    "linksLabel": "사이트 링크"
   },
   "Common": {
     "toggleTheme": "테마 전환",
@@ -95,7 +96,17 @@
       "domain": "데이터 시각화 SaaS 3년",
       "migration": "Next.js 마이그레이션 구조 설계"
     },
-    "summaryLabel": "경력 요약"
+    "summaryLabel": "경력 요약",
+    "tools": {
+      "eyebrow": "직접 물어보기",
+      "title": "다 읽기 전에, 궁금한 것부터 물어보세요.",
+      "fitTitle": "JD 매칭",
+      "fitDescription": "채용공고를 붙여넣으면 요구사항마다 근거 프로젝트를 연결한 적합도 리포트를 만듭니다. 근거가 없는 항목은 공백으로 표시합니다.",
+      "fitCta": "적합도 분석하기",
+      "askTitle": "AI 어시스턴트",
+      "askDescription": "채용 담당자, 엔지니어, 협업 파트너 관점에서 프로젝트와 일하는 방식을 물어볼 수 있습니다. 답변은 케이스 스터디를 근거로 합니다.",
+      "askCta": "대화 시작하기"
+    }
   },
   "ProjectsPage": {
     "title": "프로젝트",

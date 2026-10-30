@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { Noto_Sans_KR, Space_Grotesk } from "next/font/google";
+import { Archivo, Gothic_A1, Noto_Sans_KR } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
@@ -15,9 +15,17 @@ import { Header } from "@/shared/ui/header";
 import { classNames } from "@/shared/utils/classnames";
 import "../globals.css";
 
-const displayFont = Space_Grotesk({
+// Archivo carries the width axis so display type can run expanded
+const displayFont = Archivo({
 	subsets: ["latin"],
-	variable: "--font-display",
+	axes: ["wdth"],
+	variable: "--font-archivo",
+});
+
+const headingFont = Gothic_A1({
+	subsets: ["latin"],
+	weight: ["500", "700", "800", "900"],
+	variable: "--font-gothic",
 });
 
 const bodyFont = Noto_Sans_KR({
@@ -99,11 +107,11 @@ export default async function LocaleLayout({
 			<body
 				className={classNames(
 					displayFont.variable,
+					headingFont.variable,
 					bodyFont.variable,
 					"antialiased relative flex size-full min-h-screen flex-col overflow-x-hidden bg-background text-foreground",
 				)}
 			>
-				<div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_15%_15%,color-mix(in_oklch,var(--color-highlight),transparent_84%),transparent_42%),radial-gradient(circle_at_85%_0%,color-mix(in_oklch,var(--color-surface-strong),transparent_86%),transparent_48%),linear-gradient(180deg,var(--background),color-mix(in_oklch,var(--background),black_5%))]" />
 				{personJsonLd.map((schema, index) => (
 					<script
 						key={`${locale}-structured-data-${index}`}

@@ -52,7 +52,7 @@ export function Modal({ children }: ModalProps) {
     >
       <dialog
         ref={dialogRef}
-        className="fixed inset-0 z-50 w-screen h-screen overflow-hidden"
+        className="fixed inset-0 z-50 h-screen w-screen max-h-none max-w-none overflow-hidden bg-ink/72"
         onClose={onDismiss}
       >
         <ViewTransition
@@ -66,7 +66,7 @@ export function Modal({ children }: ModalProps) {
           <div className="relative h-full w-full flex items-start justify-center overflow-y-auto py-8">
             <button
               onClick={onDismiss}
-              className="fixed top-4 right-4 z-60 rounded-full border border-border/70 bg-background/70 p-2 text-foreground backdrop-blur-sm transition-colors hover:bg-secondary"
+              className="fixed top-4 right-4 z-60 flex h-11 w-11 items-center justify-center rounded-full bg-foreground text-background transition-transform hover:scale-105"
               aria-label={t("closeModal")}
             >
               <svg
@@ -85,7 +85,7 @@ export function Modal({ children }: ModalProps) {
               </svg>
             </button>
 
-            <div className="relative w-full max-w-[1200px] bg-background rounded-lg shadow-xl mx-4">
+            <div className="relative mx-4 w-full max-w-[1200px] overflow-hidden rounded-[var(--radius-xl)] bg-background">
               <ModalDismissContext.Provider value={onDismiss}>
                 {children}
               </ModalDismissContext.Provider>

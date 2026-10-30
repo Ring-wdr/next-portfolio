@@ -7,6 +7,7 @@ import { chatPersonas, type ChatPersona } from "@/feature/chat/lib/context";
 import { usePortfolioChat } from "@/feature/chat/ui/chat-provider";
 import { classNames } from "@/shared/utils/classnames";
 
+/** Sits on the cobalt hero, so it draws with on-cobalt / on-block colors only. */
 export function HeroAsk() {
 	const t = useTranslations("HomePage.ask");
 	const chat = usePortfolioChat();
@@ -24,32 +25,35 @@ export function HeroAsk() {
 	}
 
 	return (
-		<div className="flex flex-col gap-3" data-testid="home-hero-ask">
-			<div
-				role="radiogroup"
-				aria-label={t("personaLabel")}
-				className="flex flex-wrap gap-2"
-			>
-				{chatPersonas.map((option) => (
-					<button
-						key={option}
-						type="button"
-						role="radio"
-						aria-checked={persona === option}
-						onClick={() => {
-							setPersona(option);
-							chat.setPersona(option);
-						}}
-						className={classNames(
-							"min-h-11 rounded-full border px-4 text-sm font-semibold transition-colors",
-							persona === option
-								? "border-hero-fg bg-hero-fg text-hero-bg"
-								: "border-hero-fg/24 bg-hero-fg/8 text-hero-fg/82 hover:bg-hero-fg/14",
-						)}
-					>
-						{t(`personas.${option}`)}
-					</button>
-				))}
+		<div className="flex flex-col gap-4" data-testid="home-hero-ask">
+			<div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+				<p className="text-sm font-bold text-on-cobalt/80">{t("personaLabel")}</p>
+				<div
+					role="radiogroup"
+					aria-label={t("personaLabel")}
+					className="flex rounded-full bg-on-cobalt/14 p-1"
+				>
+					{chatPersonas.map((option) => (
+						<button
+							key={option}
+							type="button"
+							role="radio"
+							aria-checked={persona === option}
+							onClick={() => {
+								setPersona(option);
+								chat.setPersona(option);
+							}}
+							className={classNames(
+								"min-h-10 rounded-full px-4 text-sm font-bold transition-colors",
+								persona === option
+									? "bg-on-cobalt text-cobalt"
+									: "text-on-cobalt/80 hover:text-on-cobalt",
+							)}
+						>
+							{t(`personas.${option}`)}
+						</button>
+					))}
+				</div>
 			</div>
 
 			<form
@@ -57,7 +61,7 @@ export function HeroAsk() {
 					event.preventDefault();
 					submit(question);
 				}}
-				className="flex items-center gap-2 rounded-2xl border border-hero-fg/24 bg-hero-fg/10 p-1.5 pl-4 backdrop-blur-md focus-within:border-hero-fg/60"
+				className="flex items-center gap-2 rounded-full bg-paper p-1.5 pl-5 text-on-block outline-tangerine focus-within:outline-3"
 			>
 				<label htmlFor="hero-ask-input" className="sr-only">
 					{t("label")}
@@ -69,15 +73,15 @@ export function HeroAsk() {
 					placeholder={t("placeholder")}
 					maxLength={500}
 					autoComplete="off"
-					className="min-w-0 flex-1 bg-transparent text-base text-hero-fg placeholder:text-hero-fg/56 focus:outline-none md:text-base"
+					className="min-w-0 flex-1 bg-transparent text-base font-medium text-on-block placeholder:text-on-block/48 focus:outline-none"
 				/>
 				<button
 					type="submit"
 					disabled={isBusy || !question.trim()}
 					aria-label={t("submit")}
-					className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-hero-fg text-hero-bg transition-opacity disabled:opacity-40"
+					className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-tangerine text-on-block transition-transform hover:scale-105 disabled:opacity-60 disabled:hover:scale-100"
 				>
-					<ArrowUp size={18} />
+					<ArrowUp size={20} strokeWidth={2.5} />
 				</button>
 			</form>
 
@@ -88,7 +92,7 @@ export function HeroAsk() {
 							type="button"
 							onClick={() => submit(starter)}
 							disabled={isBusy}
-							className="min-h-11 rounded-full border border-hero-fg/16 bg-hero-bg/40 px-4 py-2 text-left text-sm text-hero-fg/80 transition-colors hover:border-hero-fg/40 hover:text-hero-fg disabled:opacity-50"
+							className="min-h-10 rounded-full border-2 border-on-cobalt/28 px-4 py-1.5 text-left text-sm font-medium text-on-cobalt transition-colors hover:border-on-cobalt hover:bg-on-cobalt hover:text-cobalt disabled:opacity-50"
 						>
 							{starter}
 						</button>

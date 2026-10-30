@@ -1,54 +1,54 @@
-import { Link } from "@/i18n/routing";
-import { Mail } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "./icon/brand";
-import { ModeToggle } from "./theme-toggle";
+import { ArrowUpRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import { contactEmail } from "@/shared/constant/contact";
+import { siteConfig } from "@/shared/constant/site";
+
+const linkClassName =
+	"inline-flex min-h-11 items-center gap-1.5 font-bold transition-opacity hover:opacity-70";
 
 export function Footer() {
-  const t = useTranslations("Footer");
+	const t = useTranslations("Footer");
+	const tHeader = useTranslations("Header");
 
-  return (
-    <footer className="mt-auto border-t border-border/70 pt-8 pb-24 md:pb-8">
-      <div className="section-shell mx-auto">
-        <div className="glass-panel flex flex-col items-center justify-between gap-5 rounded-2xl px-4 py-5 md:flex-row md:px-6">
-          <div className="flex flex-col items-center md:items-start">
-            <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Manjoong Kim. {t("allRightsReserved")}
-            </p>
-            <p className="mt-1 text-xs text-muted-foreground/90">{t("builtWith")}</p>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Link
-              href="https://github.com/Ring-wdr"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={t("github")}
-              className="flex h-11 w-11 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <GithubIcon width={18} height={18} />
-            </Link>
-            <Link
-              href="https://linkedin.com/in/dust-shooter-408560340/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={t("linkedin")}
-              className="flex h-11 w-11 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <LinkedinIcon width={18} height={18} />
-            </Link>
-            <Link
-              href={`mailto:${contactEmail}`}
-              aria-label={t("email")}
-              className="flex h-11 w-11 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <Mail size={18} />
-            </Link>
-            <ModeToggle className="h-11 w-11" />
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
+	return (
+		<footer className="mt-auto bg-ink pb-24 text-white md:pb-0 dark:bg-card dark:text-foreground">
+			<div className="section-shell flex flex-col gap-10 py-12 md:py-16">
+				<div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+					<p className="type-display text-[clamp(2.5rem,9vw,6.5rem)]">
+						<span className="block">Manjoong</span>{" "}
+						<span className="block">Kim</span>
+					</p>
+					<nav aria-label={t("linksLabel")} className="grid grid-cols-2 gap-x-10 text-sm md:text-base">
+						<Link href="/project" className={linkClassName}>
+							{tHeader("projects")}
+						</Link>
+						<a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer" className={linkClassName}>
+							{t("github")}
+							<ArrowUpRight size={14} aria-hidden />
+						</a>
+						<Link href="/about" className={linkClassName}>
+							{tHeader("about")}
+						</Link>
+						<a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" className={linkClassName}>
+							{t("linkedin")}
+							<ArrowUpRight size={14} aria-hidden />
+						</a>
+						<Link href="/contact" className={linkClassName}>
+							{tHeader("contact")}
+						</Link>
+						<a href={`mailto:${contactEmail}`} className={linkClassName}>
+							{t("email")}
+						</a>
+					</nav>
+				</div>
+				<div className="flex flex-col gap-1 border-t border-white/16 pt-6 text-xs text-white/64 sm:flex-row sm:justify-between dark:border-border dark:text-muted-foreground">
+					<p>
+						© {new Date().getFullYear()} Manjoong Kim. {t("allRightsReserved")}
+					</p>
+					<p>{t("builtWith")}</p>
+				</div>
+			</div>
+		</footer>
+	);
 }
