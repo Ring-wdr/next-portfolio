@@ -63,3 +63,11 @@ export function toProjectCard(project: Project): ProjectCard {
 export function getFeaturedProjects(projects: ProjectCard[], limit = 3) {
 	return projects.filter((project) => project.featured).slice(0, limit);
 }
+
+/** Block color per category, so a project reads the same on every page. */
+export const categoryBlockClassName: Record<ProjectCategory, string> = {
+	Work: "bg-cobalt text-on-cobalt",
+	Product: "bg-tangerine text-on-block",
+	Client: "bg-mint text-on-block",
+	Study: "bg-butter text-on-block",
+};

@@ -19,7 +19,7 @@ type ImageGalleryProps = {
 };
 
 const controlClassName =
-	"flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border/70 bg-background text-foreground transition-colors hover:bg-secondary";
+	"flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-secondary text-foreground transition-colors hover:bg-foreground hover:text-background";
 
 export function ImageGallery({ images }: ImageGalleryProps) {
 	const t = useTranslations("Common");
@@ -51,7 +51,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
 							type="button"
 							onClick={() => setSelectedIndex(index)}
 							aria-haspopup="dialog"
-							className="group relative block aspect-16/10 w-full cursor-zoom-in overflow-hidden rounded-lg border border-border transition-colors hover:border-primary"
+							className="group relative block aspect-16/10 w-full cursor-zoom-in overflow-hidden rounded-[var(--radius-lg)] bg-card"
 						>
 							<Image
 								src={image.src}

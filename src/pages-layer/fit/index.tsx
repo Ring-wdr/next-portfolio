@@ -145,36 +145,38 @@ export function FitPage({
 
 	return (
 		<main className="flex flex-1 flex-col">
-			<section className="section-shell editorial-section-shell pt-10 md:pt-14">
-				<div className="max-w-3xl space-y-5">
-					<p className="editorial-kicker text-muted-foreground">
+			<section className="bg-tangerine text-on-block">
+				<div className="section-shell flex flex-col gap-5 pt-10 pb-10 md:pt-14 md:pb-14">
+					<p className="kicker w-fit rounded-full border-2 border-on-block/30 px-3.5 py-1.5">
 						{t("eyebrow")}
 					</p>
-					<h1 className="text-4xl font-semibold tracking-[-0.04em] md:text-6xl">
+					<h1 className="max-w-[18ch] text-[clamp(2.25rem,6vw,4.5rem)] leading-[1.05] break-keep type-heading">
 						{t("title")}
 					</h1>
-					<p className="text-base leading-7 text-muted-foreground md:text-lg">
+					<p className="max-w-3xl text-base leading-7 font-medium md:text-lg">
 						{t("description")}
 					</p>
-					<p className="text-sm text-muted-foreground">{t("honesty")}</p>
+					<p className="w-fit rounded-2xl bg-on-block/8 px-4 py-2 text-sm font-bold">{t("honesty")}</p>
 				</div>
+			</section>
 
+			<section className="section-shell pt-3 pb-14 md:pb-20">
 				<form
-					className="glass-panel mt-10 rounded-3xl p-5 md:p-7"
+					className="rounded-[2rem] bg-card p-5 md:p-7"
 					onSubmit={(event) => {
 						event.preventDefault();
 						void analyze();
 					}}
 				>
 					<div className="flex flex-wrap items-center justify-between gap-2">
-						<label htmlFor="fit-jd" className="text-sm font-semibold">
+						<label htmlFor="fit-jd" className="text-sm font-bold">
 							{t("jdLabel")}
 						</label>
 						<button
 							type="button"
 							onClick={() => setJd(t("sampleJd"))}
 							disabled={isLoading}
-							className="text-sm font-medium text-primary underline-offset-4 hover:underline disabled:opacity-50"
+							className="inline-flex min-h-10 items-center rounded-full bg-butter px-4 text-sm font-bold text-on-block disabled:opacity-50"
 						>
 							{t("useSample")}
 						</button>
@@ -188,7 +190,7 @@ export function FitPage({
 						rows={10}
 						disabled={isLoading}
 						aria-describedby="fit-jd-hint"
-						className="mt-3 w-full resize-y rounded-2xl border border-border bg-background/80 px-4 py-3 text-base leading-6 md:text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/60 disabled:opacity-60"
+						className="mt-3 w-full resize-y rounded-[1.25rem] border-2 border-transparent bg-background px-4 py-3 text-base leading-6 placeholder:text-muted-foreground focus:border-primary focus:outline-none disabled:opacity-60 md:text-sm"
 					/>
 					<div className="mt-3 flex flex-wrap items-center justify-between gap-3">
 						<p
@@ -209,7 +211,7 @@ export function FitPage({
 						<button
 							type="submit"
 							disabled={!canSubmit}
-							className="inline-flex h-11 items-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-40"
+							className="inline-flex h-12 items-center gap-2 rounded-full bg-foreground px-6 text-sm font-bold text-background transition-transform hover:-translate-y-0.5 disabled:opacity-40 disabled:hover:translate-y-0"
 						>
 							{isLoading ? (
 								<LoaderCircle size={16} className="animate-spin" />
@@ -291,7 +293,7 @@ function AnalysisProgress({
 
 	return (
 		<section
-			className="glass-panel rounded-3xl p-6 md:p-8"
+			className="rounded-[2rem] bg-card p-6 md:p-8"
 			aria-labelledby="fit-progress-title"
 			data-testid="fit-progress"
 		>
@@ -338,7 +340,7 @@ function AnalysisProgress({
 			</ol>
 
 			<div className="mt-6 space-y-2" aria-live="polite">
-				<h2 id="fit-progress-title" className="text-lg font-semibold md:text-xl">
+				<h2 id="fit-progress-title" className="text-xl type-heading md:text-2xl">
 					{title}
 				</h2>
 				<p className="text-sm leading-6 text-muted-foreground md:text-base">{body}</p>
@@ -351,7 +353,7 @@ function AnalysisProgress({
 				<button
 					type="button"
 					onClick={onCancel}
-					className="inline-flex min-h-11 items-center rounded-full border border-border px-4 font-medium transition-colors hover:bg-secondary"
+					className="inline-flex min-h-11 items-center rounded-full border-2 border-foreground px-4 font-bold transition-colors hover:bg-foreground hover:text-background"
 				>
 					{t("cancel")}
 				</button>
@@ -367,7 +369,7 @@ function AnalysisProgress({
 									href={`/project/${project.slug}`}
 									target="_blank"
 									rel="noopener"
-									className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-border/70 bg-card/70 px-4 text-sm font-medium transition-colors hover:border-primary/40 hover:bg-secondary"
+									className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-background px-4 text-sm font-bold transition-colors hover:bg-foreground hover:text-background"
 								>
 									{project.title}
 									<ArrowRight size={14} aria-hidden />
@@ -394,7 +396,7 @@ function PartialReportView({
 
 	return (
 		<div className="flex flex-col gap-6" data-testid="fit-partial">
-			<section className="glass-panel space-y-4 rounded-3xl p-6 md:p-8">
+			<section className="space-y-4 rounded-[2rem] bg-card p-6 md:p-8">
 				{partial?.summary ? (
 					<p className="text-base leading-7">{partial.summary}</p>
 				) : (
@@ -405,8 +407,8 @@ function PartialReportView({
 				)}
 			</section>
 
-			<section className="glass-panel rounded-3xl p-6 md:p-8">
-				<h2 className="text-xl font-semibold">{t("requirementsTitle")}</h2>
+			<section className="rounded-[2rem] bg-card p-6 md:p-8">
+				<h2 className="text-2xl type-heading">{t("requirementsTitle")}</h2>
 				<RequirementRows
 					requirements={partial?.requirements ?? []}
 					projectTitles={projectTitles}
@@ -435,7 +437,7 @@ function RequirementRows({
 	if (requirements.length === 0) return null;
 
 	return (
-		<ol className="mt-5 divide-y divide-border/70">
+		<ol className="mt-5 divide-y divide-border">
 			{requirements.map((requirement, index) => (
 				<li key={`${index}-${requirement.requirement}`} className="py-4 first:pt-0 last:pb-0">
 					<div className="flex flex-wrap items-center gap-2">
@@ -464,7 +466,7 @@ function RequirementRows({
 								<li key={slug}>
 									<Link
 										href={`/project/${slug}`}
-										className="inline-flex min-h-9 items-center gap-1 rounded-lg border border-border/70 bg-card/70 px-2.5 py-1 text-xs font-medium transition-colors hover:border-primary/40 hover:bg-secondary"
+										className="inline-flex min-h-9 items-center gap-1 rounded-full bg-background px-3 py-1 text-xs font-bold transition-colors hover:bg-foreground hover:text-background"
 									>
 										{projectTitles[slug] ?? slug}
 										<ArrowRight size={12} />
@@ -491,7 +493,7 @@ function ErrorNotice({
 	return (
 		<div
 			role="alert"
-			className="flex flex-col gap-3 rounded-2xl border border-destructive/30 bg-destructive/10 px-5 py-4 text-sm"
+			className="flex flex-col gap-3 rounded-[1.5rem] bg-destructive/12 px-5 py-4 text-sm"
 		>
 			<p>{t(error)}</p>
 			<div className="flex flex-wrap gap-4 font-medium">
@@ -519,7 +521,7 @@ function CoverageMeter({ report }: { report: FitReport }) {
 					<p id="fit-coverage-caption" className="text-sm text-muted-foreground">
 						{t("coverageLabel")}
 					</p>
-					<p className="text-5xl font-semibold tracking-[-0.04em] tabular-nums md:text-6xl">
+					<p className="type-display text-6xl tabular-nums md:text-7xl">
 						{summary.coverage}%
 					</p>
 				</div>
@@ -529,7 +531,7 @@ function CoverageMeter({ report }: { report: FitReport }) {
 			</div>
 
 			{/* Stacked meter: 2px surface gaps between segments, rounded outer ends. */}
-			<div className="flex h-3 w-full gap-0.5 overflow-hidden rounded-[4px]" aria-hidden="true">
+			<div className="flex h-4 w-full gap-1 overflow-hidden rounded-full" aria-hidden="true">
 				{MATCH_ORDER.map((level) =>
 					summary[level] > 0 ? (
 						<div
@@ -568,13 +570,13 @@ function FitReportView({
 
 	return (
 		<article className="flex flex-col gap-6" data-testid="fit-report">
-			<section className="glass-panel space-y-6 rounded-3xl p-6 md:p-8">
+			<section className="space-y-6 rounded-[2rem] bg-card p-6 md:p-8">
 				<CoverageMeter report={report} />
 				<p className="text-base leading-7">{report.summary}</p>
 			</section>
 
-			<section className="glass-panel rounded-3xl p-6 md:p-8">
-				<h2 className="text-xl font-semibold">{t("requirementsTitle")}</h2>
+			<section className="rounded-[2rem] bg-card p-6 md:p-8">
+				<h2 className="text-2xl type-heading">{t("requirementsTitle")}</h2>
 				<RequirementRows
 					requirements={report.requirements}
 					projectTitles={projectTitles}
@@ -583,8 +585,8 @@ function FitReportView({
 
 			<div className="grid gap-6 md:grid-cols-2">
 				{report.gaps.length > 0 ? (
-					<section className="glass-panel rounded-3xl p-6">
-						<h2 className="text-lg font-semibold">{t("gapsTitle")}</h2>
+					<section className="rounded-[2rem] bg-card p-6">
+						<h2 className="text-xl type-heading">{t("gapsTitle")}</h2>
 						<ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-6 text-muted-foreground">
 							{report.gaps.map((gap) => (
 								<li key={gap}>{gap}</li>
@@ -593,8 +595,8 @@ function FitReportView({
 					</section>
 				) : null}
 				{report.questions.length > 0 ? (
-					<section className="glass-panel rounded-3xl p-6">
-						<h2 className="text-lg font-semibold">{t("questionsTitle")}</h2>
+					<section className="rounded-[2rem] bg-card p-6">
+						<h2 className="text-xl type-heading">{t("questionsTitle")}</h2>
 						<ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-6 text-muted-foreground">
 							{report.questions.map((question) => (
 								<li key={question}>{question}</li>
@@ -607,7 +609,7 @@ function FitReportView({
 			<div className="flex flex-wrap items-center gap-4">
 				<Link
 					href="/contact"
-					className="inline-flex h-11 items-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+					className="inline-flex h-12 items-center gap-2 rounded-full bg-foreground px-6 text-sm font-bold text-background transition-transform hover:-translate-y-0.5"
 				>
 					{t("contactCta")}
 					<ArrowRight size={16} />

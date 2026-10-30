@@ -18,7 +18,8 @@
     "builtWith": "Built with Next.js and Tailwind CSS",
     "github": "GitHub",
     "linkedin": "LinkedIn",
-    "email": "Email"
+    "email": "Email",
+    "linksLabel": "Site links"
   },
   "Common": {
     "toggleTheme": "Toggle theme",
@@ -95,7 +96,17 @@
       "domain": "3 years on a data visualization SaaS",
       "migration": "Architecture of a Next.js migration"
     },
-    "summaryLabel": "Career summary"
+    "summaryLabel": "Career summary",
+    "tools": {
+      "eyebrow": "Ask directly",
+      "title": "Before reading it all, ask what you want to know.",
+      "fitTitle": "Job post match",
+      "fitDescription": "Paste a job post and get a fit report that links each requirement to a supporting project. Requirements without evidence are marked as gaps.",
+      "fitCta": "Analyze fit",
+      "askTitle": "AI assistant",
+      "askDescription": "Ask about projects and ways of working from a recruiter, engineer, or collaborator point of view. Answers are grounded in the case studies.",
+      "askCta": "Start a conversation"
+    }
   },
   "ProjectsPage": {
     "title": "Projects",

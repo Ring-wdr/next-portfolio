@@ -41,15 +41,15 @@ export function ChatMessage({ message, isStreamingLatest }: ChatMessageProps) {
         isUser ? "items-end" : "items-start",
       )}
     >
-      <span className="text-[10px] uppercase tracking-widest text-muted-foreground">
+      <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
         {isUser ? "You" : "AI"}
       </span>
       <div
         className={classNames(
-          "max-w-[85%] rounded-2xl px-3 py-2 text-sm leading-relaxed",
+          "max-w-[85%] rounded-[1.25rem] px-4 py-2.5 text-sm leading-relaxed",
           isUser
-            ? "bg-primary text-primary-foreground"
-            : "border border-border/60 bg-card text-foreground",
+            ? "bg-cobalt text-on-cobalt"
+            : "bg-card text-foreground",
         )}
       >
         {text ? (

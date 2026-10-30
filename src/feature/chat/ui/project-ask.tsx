@@ -21,22 +21,22 @@ export function ProjectAsk({ slug, title }: ProjectAskProps) {
 
   return (
     <section
-      className="glass-panel rounded-2xl p-5 md:p-6"
+      className="flex flex-col gap-5 rounded-[2rem] bg-mint p-6 text-on-block md:p-8"
       data-testid="project-ask"
       aria-labelledby="project-ask-title"
     >
-      <div className="flex items-start gap-3">
-        <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/12 text-primary">
-          <MessageCircle size={16} />
+      <div className="flex items-start gap-4">
+        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-ink text-white">
+          <MessageCircle size={20} aria-hidden />
         </span>
-        <div className="space-y-1">
-          <h2 id="project-ask-title" className="text-base font-semibold">
+        <div className="flex flex-col gap-1">
+          <h2 id="project-ask-title" className="text-xl type-heading md:text-2xl">
             {t("title")}
           </h2>
-          <p className="text-sm text-muted-foreground">{t("description")}</p>
+          <p className="text-sm font-medium text-on-block/76">{t("description")}</p>
         </div>
       </div>
-      <ul className="mt-4 flex flex-wrap gap-2">
+      <ul className="flex flex-wrap gap-2">
         {QUESTION_KEYS.map((key) => {
           const question = t(`questions.${key}`, { title });
           return (
@@ -48,7 +48,7 @@ export function ProjectAsk({ slug, title }: ProjectAskProps) {
                   dismissModal?.();
                   chat.ask(question, { projectSlug: slug });
                 }}
-                className="rounded-full border border-border/70 bg-card/70 px-3.5 py-2 text-left text-sm transition-colors hover:border-primary/40 hover:bg-secondary disabled:opacity-50"
+                className="min-h-11 rounded-full bg-paper px-4 py-2 text-left text-sm font-bold text-on-block transition-colors hover:bg-ink hover:text-white disabled:opacity-50"
               >
                 {question}
               </button>

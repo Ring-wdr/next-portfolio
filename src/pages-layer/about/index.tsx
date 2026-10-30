@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
@@ -8,6 +9,10 @@ import {
 	WorkingPrinciples,
 } from "@/shared/constant/profile";
 import { TechStack } from "@/shared/constant/tech-stack";
+import { StatGrid } from "@/shared/ui/stat-grid";
+
+// Principles are parallel, not a sequence, so each gets a block color instead of a number
+const principleColors = ["bg-cobalt text-on-cobalt", "bg-tangerine text-on-block", "bg-mint text-on-block"] as const;
 
 export function AboutPage({ projectCount }: { projectCount: number }) {
 	const t = useTranslations("AboutPage");
@@ -29,170 +34,141 @@ export function AboutPage({ projectCount }: { projectCount: number }) {
 
 	return (
 		<main className="flex flex-1 flex-col">
-			<section
-				className="section-shell editorial-section-shell pt-10 md:pt-14"
-				data-testid="about-hero"
-			>
-				<div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_16rem] lg:items-start">
-					<div className="space-y-6">
-						<p className="editorial-kicker text-muted-foreground">
+			<section className="bg-hero-bg text-hero-fg" data-testid="about-hero">
+				<div className="section-shell grid grid-cols-1 gap-8 pt-10 pb-12 md:pt-14 md:pb-16 lg:grid-cols-[minmax(0,1fr)_17rem] lg:items-end lg:gap-12">
+					<div className="@container flex min-w-0 flex-col gap-6">
+						<p className="kicker w-fit rounded-full border-2 border-on-cobalt/36 px-3.5 py-1.5">
 							{t("heroEyebrow")}
 						</p>
-						<h1 className="text-[clamp(2.5rem,5vw,4rem)] font-bold leading-[0.95] tracking-[-0.05em]">
-							{t("name")}
-						</h1>
-						<p className="text-base font-medium tracking-[-0.02em] text-foreground/90 md:text-lg">
-							{t("role")}
-						</p>
-						<p className="max-w-3xl text-base leading-8 tracking-[-0.02em] text-foreground/88 md:text-lg">
+						<h1 className="type-display display-fit-xl">{t("name")}</h1>
+						<p className="font-heading text-lg font-extrabold tracking-[-0.02em] md:text-2xl">{t("role")}</p>
+						<p className="max-w-3xl text-base leading-7 text-on-cobalt/84 md:text-lg md:leading-8">
 							{t("intro")}
 						</p>
-						<dl className="grid grid-cols-3 gap-5 border-t border-border/70 pt-6">
-							{stats.map((item) => (
-								<div key={item.label} className="space-y-1">
-									<dt className="editorial-kicker text-muted-foreground/72">
-										{item.label}
-									</dt>
-									<dd className="text-lg font-semibold tracking-[-0.03em] text-foreground md:text-xl">
-										{item.value}
-									</dd>
-								</div>
-							))}
-						</dl>
 					</div>
 
-					<div className="relative hidden aspect-square w-40 overflow-hidden rounded-[1.5rem] bg-secondary/40 sm:block lg:w-full">
-						<Image
-							src="https://avatars.githubusercontent.com/u/70439662?v=4"
-							alt={t("portraitAlt")}
-							className="object-cover"
-							fill
-							sizes="(max-width: 1024px) 160px, 256px"
-							priority
-						/>
-					</div>
-				</div>
-			</section>
-
-			<section
-				className="section-shell editorial-section-shell editorial-section-reveal"
-				data-testid="about-career"
-			>
-				<div className="border-t border-border/70 pt-8">
-					<p className="editorial-kicker text-muted-foreground">
-						{t("careerEyebrow")}
-					</p>
-					<h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] md:text-4xl">
-						{t("careerTitle")}
-					</h2>
-
-					<ol className="mt-10 space-y-10">
-						{Career.map((job) => {
-							const highlights = t.raw(`career.${job.id}.highlights`) as string[];
-							const summary = t.has(`career.${job.id}.summary`)
-								? t(`career.${job.id}.summary`)
-								: null;
-
-							return (
-								<li
-									key={job.id}
-									className="grid gap-4 border-t border-border/70 pt-6 md:grid-cols-[13rem_minmax(0,1fr)]"
-								>
-									<p className="editorial-kicker text-primary">{job.period}</p>
-									<article className="space-y-3">
-										<h3 className="text-xl font-semibold tracking-[-0.03em] md:text-2xl">
-											{t(`career.${job.id}.company`)}
-											<span className="ml-2 text-base font-medium text-muted-foreground">
-												{t(`career.${job.id}.role`)}
-											</span>
-										</h3>
-										{summary && (
-											<p className="text-sm leading-6 text-muted-foreground md:text-base">
-												{summary}
-											</p>
-										)}
-										<ul className="list-disc space-y-2 pl-5 marker:text-primary">
-											{highlights.map((item) => (
-												<li
-													key={item}
-													className="text-sm leading-6 text-foreground/88 md:text-base md:leading-7"
-												>
-													{item}
-												</li>
-											))}
-										</ul>
-										{"projectSlug" in job && (
-											<Link
-												href={`/project/${job.projectSlug}`}
-												className="inline-flex min-h-11 items-center text-sm font-semibold text-primary hover:underline"
-											>
-												{t("careerCaseStudy")}
-											</Link>
-										)}
-									</article>
-								</li>
-							);
-						})}
-					</ol>
-				</div>
-			</section>
-
-			<section className="section-shell editorial-section-shell editorial-section-reveal">
-				<div className="grid gap-10 border-t border-border/70 pt-8 md:grid-cols-2">
-					<div>
-						<p className="editorial-kicker text-muted-foreground">
-							{t("strengthsTitle")}
-						</p>
-						<div className="mt-5 grid gap-4 sm:grid-cols-2">
-							{CoreStrengthKeys.map((strength) => (
-								<p
-									key={strength}
-									className="border-t border-border/70 pt-3 text-base font-medium tracking-[-0.02em]"
-								>
-									{t(strength)}
-								</p>
-							))}
+					<div className="relative aspect-square w-36 overflow-hidden rounded-[2rem] bg-tangerine p-2 sm:w-44 lg:w-full">
+						<div className="relative h-full w-full overflow-hidden rounded-[1.5rem]">
+							<Image
+								src="https://avatars.githubusercontent.com/u/70439662?v=4"
+								alt={t("portraitAlt")}
+								className="object-cover"
+								fill
+								sizes="(max-width: 1024px) 176px, 272px"
+								priority
+							/>
 						</div>
 					</div>
-
-					<div data-testid="about-focus">
-						<p className="editorial-kicker text-muted-foreground">
-							{t("focusTitle")}
-						</p>
-						<p className="mt-5 text-base leading-8 tracking-[-0.02em] text-foreground/84 md:text-lg">
-							{focusLabels.join(" / ")}
-						</p>
-					</div>
 				</div>
 			</section>
 
-			<section className="section-shell pb-12 pt-4 md:pb-16">
-				<div className="border-t border-border/70 pt-8">
-					<div className="max-w-2xl space-y-4">
-						<p className="editorial-kicker text-muted-foreground">
-							{t("principlesEyebrow")}
-						</p>
-						<h2 className="text-3xl font-semibold tracking-[-0.04em] md:text-4xl">
-							{t("principlesTitle")}
-						</h2>
-					</div>
+			<section className="section-shell pt-3">
+				<StatGrid
+					stats={stats.map((item, index) => ({
+						...item,
+						color: ["bg-butter", "bg-mint", "bg-tangerine"][index],
+					}))}
+				/>
+			</section>
 
-					<div className="mt-10 grid gap-6 md:grid-cols-3">
-						{WorkingPrinciples.map((principle, index) => (
-							<article key={principle.id} className="border-t border-border/70 pt-4">
-								<p className="editorial-kicker text-muted-foreground/72">
-									{`0${index + 1}`}
-								</p>
-								<h3 className="mt-4 text-xl font-semibold tracking-[-0.03em] md:text-[1.625rem]">
-									{t(principle.titleKey)}
-								</h3>
-								<p className="mt-3 text-sm leading-6 text-muted-foreground md:text-base">
-									{t(principle.descriptionKey)}
-								</p>
-							</article>
-						))}
-					</div>
+			<section className="section-shell section-pad" data-testid="about-career">
+				<div className="flex flex-col gap-4">
+					<p className="kicker text-primary">{t("careerEyebrow")}</p>
+					<h2 className="type-display text-[clamp(2.25rem,6vw,4.5rem)]">{t("careerTitle")}</h2>
 				</div>
+
+				<ol className="mt-10 flex flex-col gap-3">
+					{Career.map((job) => {
+						const highlights = t.raw(`career.${job.id}.highlights`) as string[];
+						const summary = t.has(`career.${job.id}.summary`)
+							? t(`career.${job.id}.summary`)
+							: null;
+
+						return (
+							<li
+								key={job.id}
+								className="grid grid-cols-1 gap-4 rounded-[1.75rem] bg-card p-6 md:grid-cols-[13rem_minmax(0,1fr)] md:p-8"
+							>
+								<p className="h-fit w-fit rounded-full bg-butter px-3 py-1.5 text-xs font-bold tabular-nums text-on-block">
+									{job.period}
+								</p>
+								<article className="flex flex-col gap-3">
+									<h3 className="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-2xl type-heading">
+										{t(`career.${job.id}.company`)}
+										<span className="text-base font-bold tracking-normal text-muted-foreground">
+											{t(`career.${job.id}.role`)}
+										</span>
+									</h3>
+									{summary && (
+										<p className="text-sm leading-6 text-muted-foreground md:text-base md:leading-7">{summary}</p>
+									)}
+									<ul className="flex flex-col gap-2">
+										{highlights.map((item) => (
+											<li key={item} className="flex gap-3 text-sm leading-6 md:text-base md:leading-7">
+												<span aria-hidden className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-tangerine" />
+												{item}
+											</li>
+										))}
+									</ul>
+									{"projectSlug" in job && (
+										<Link
+											href={`/project/${job.projectSlug}`}
+											className="mt-1 inline-flex h-11 w-fit items-center gap-2 rounded-full bg-foreground px-5 text-sm font-bold text-background transition-transform hover:-translate-y-0.5"
+										>
+											{t("careerCaseStudy")}
+											<ArrowRight size={15} aria-hidden />
+										</Link>
+									)}
+								</article>
+							</li>
+						);
+					})}
+				</ol>
+			</section>
+
+			<section className="section-shell grid grid-cols-1 gap-3 md:grid-cols-2">
+				<div className="flex flex-col gap-5 rounded-[2rem] bg-mint p-6 text-on-block md:p-8">
+					<h2 className="kicker">{t("strengthsTitle")}</h2>
+					<ul className="flex flex-wrap gap-2">
+						{CoreStrengthKeys.map((strength) => (
+							<li key={strength} className="rounded-full bg-paper px-4 py-2 text-sm font-bold">
+								{t(strength)}
+							</li>
+						))}
+					</ul>
+				</div>
+
+				<div className="flex flex-col gap-5 rounded-[2rem] bg-butter p-6 text-on-block md:p-8" data-testid="about-focus">
+					<h2 className="kicker">{t("focusTitle")}</h2>
+					<ul className="flex flex-wrap gap-2">
+						{focusLabels.map((label) => (
+							<li key={label} className="rounded-full bg-paper px-4 py-2 text-sm font-bold">
+								{label}
+							</li>
+						))}
+					</ul>
+				</div>
+			</section>
+
+			<section className="section-shell section-pad">
+				<div className="flex max-w-2xl flex-col gap-4">
+					<p className="kicker text-primary">{t("principlesEyebrow")}</p>
+					<h2 className="text-[clamp(1.875rem,4vw,3rem)] leading-[1.1] break-keep type-heading">
+						{t("principlesTitle")}
+					</h2>
+				</div>
+
+				<ul className="mt-10 grid grid-cols-1 gap-3 md:grid-cols-3">
+					{WorkingPrinciples.map((principle, index) => (
+						<li key={principle.id} className="flex flex-col gap-3 rounded-[1.75rem] bg-card p-6 md:p-7">
+							<span aria-hidden className={`h-3 w-12 rounded-full ${principleColors[index % principleColors.length]}`} />
+							<h3 className="mt-6 text-2xl type-heading">{t(principle.titleKey)}</h3>
+							<p className="text-sm leading-6 text-muted-foreground md:text-base md:leading-7">
+								{t(principle.descriptionKey)}
+							</p>
+						</li>
+					))}
+				</ul>
 			</section>
 		</main>
 	);

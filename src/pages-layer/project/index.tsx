@@ -3,7 +3,8 @@
 import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import type { ProjectCard } from "@/shared/content/project";
+import { categoryBlockClassName, type ProjectCard } from "@/shared/content/project";
+import { StatGrid } from "@/shared/ui/stat-grid";
 import { classNames } from "@/shared/utils/classnames";
 import { ProjectItem } from "./item";
 
@@ -47,114 +48,108 @@ export function ProjectPage({ projects }: { projects: ProjectCard[] }) {
 		(project) => project.featured,
 	).length;
 
+	const stats = [
+		{ value: `${projects.length}`, label: t("stats.total"), color: "bg-butter" },
+		{ value: `${featuredCount}`, label: t("stats.featured"), color: "bg-mint" },
+		{ value: `${filteredProjects.length}`, label: t("stats.filtered"), color: "bg-tangerine" },
+	] as const;
+
 	return (
-		<main className="flex flex-1 justify-center py-6 md:py-10">
-			<div className="section-shell flex w-full flex-col gap-6">
-				<section className="glass-panel rounded-3xl p-6 md:p-8">
-					<div className="space-y-3">
-						<h1 className="text-3xl font-bold leading-tight md:text-4xl">
-							{t("title")}
-						</h1>
-						<p className="max-w-3xl text-sm text-muted-foreground md:text-base">
-							{t("description")}
-						</p>
-					</div>
+		<main className="flex flex-1 flex-col">
+			<section className="bg-hero-bg text-hero-fg">
+				<div className="section-shell @container flex flex-col gap-6 pt-10 pb-10 md:pt-14 md:pb-14">
+					<h1 className="type-display display-fit-xl">{t("title")}</h1>
+					<p className="max-w-3xl text-sm leading-6 text-on-cobalt/84 md:text-base md:leading-7">
+						{t("description")}
+					</p>
+				</div>
+			</section>
 
-					<div className="mt-6 hidden gap-2 sm:grid sm:grid-cols-3">
-						<div className="rounded-xl border border-border/70 bg-card/70 px-4 py-3">
-							<p className="text-lg font-semibold">{projects.length}</p>
-							<p className="text-xs text-muted-foreground">
-								{t("stats.total")}
-							</p>
-						</div>
-						<div className="rounded-xl border border-border/70 bg-card/70 px-4 py-3">
-							<p className="text-lg font-semibold">{featuredCount}</p>
-							<p className="text-xs text-muted-foreground">
-								{t("stats.featured")}
-							</p>
-						</div>
-						<div className="rounded-xl border border-border/70 bg-card/70 px-4 py-3">
-							<p className="text-lg font-semibold">{filteredProjects.length}</p>
-							<p className="text-xs text-muted-foreground">
-								{t("stats.filtered")}
-							</p>
-						</div>
-					</div>
-				</section>
+			<div className="section-shell flex w-full flex-col gap-8 pt-3 pb-14 md:pb-20">
+				<StatGrid stats={stats} className="hidden sm:grid" />
 
-				<section className="glass-panel rounded-2xl p-4">
-					<div className="flex flex-wrap items-center gap-2">
-						{viewModes.map((mode) => (
-							<button
-								key={mode}
-								type="button"
-								className={classNames(
-									"flex h-11 shrink-0 items-center justify-center rounded-full border px-4 text-sm font-medium transition-colors",
-									viewMode === mode
-										? "border-primary bg-primary text-primary-foreground"
-										: "border-border bg-secondary text-foreground hover:border-primary",
-								)}
-								onClick={() => setViewMode(mode)}
-							>
-								{mode === "All" ? t("all") : t("featured")}
-							</button>
-						))}
-					</div>
-					<div className="mt-3 flex flex-wrap gap-2">
-						{categoryFilters.map((category) => (
-							<button
-								key={category}
-								type="button"
-								className={classNames(
-									"flex h-11 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg px-4",
-									selectedCategory === category
-										? "bg-primary text-primary-foreground"
-										: "bg-secondary text-foreground",
-								)}
-								onClick={() => setSelectedCategory(category)}
-							>
-								<p className="text-sm font-medium leading-normal">
+				<section className="flex flex-col gap-4 border-b border-border pb-6">
+					<div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+						<div className="flex rounded-full bg-card p-1">
+							{viewModes.map((mode) => (
+								<button
+									key={mode}
+									type="button"
+									aria-pressed={viewMode === mode}
+									className={classNames(
+										"flex h-10 items-center rounded-full px-4 text-sm font-bold transition-colors",
+										viewMode === mode
+											? "bg-foreground text-background"
+											: "text-muted-foreground hover:text-foreground",
+									)}
+									onClick={() => setViewMode(mode)}
+								>
+									{mode === "All" ? t("all") : t("featured")}
+								</button>
+							))}
+						</div>
+						<div className="flex flex-wrap gap-2">
+							{categoryFilters.map((category) => (
+								<button
+									key={category}
+									type="button"
+									aria-pressed={selectedCategory === category}
+									className={classNames(
+										"flex h-10 items-center rounded-full px-4 text-sm font-bold transition-colors",
+										selectedCategory === category
+											? category === "All"
+												? "bg-foreground text-background"
+												: categoryBlockClassName[category]
+											: "bg-card text-foreground hover:bg-surface-strong",
+									)}
+									onClick={() => setSelectedCategory(category)}
+								>
 									{category === "All"
 										? t("allCategory")
 										: t(`categories.${category}`)}
-								</p>
-							</button>
-						))}
+								</button>
+							))}
+						</div>
 					</div>
-					<button
-						type="button"
-						className="mt-3 inline-flex min-h-11 items-center gap-1.5 rounded-lg px-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-						aria-expanded={isTechFilterOpen}
-						aria-controls="project-tech-filter"
-						onClick={() => setIsTechFilterOpen((open) => !open)}
-					>
-						{t("filterByTech")}
-						{selectedTech !== "All" && (
-							<span className="rounded-full border border-primary px-2 text-xs text-primary">
-								{selectedTech}
-							</span>
-						)}
-						<ChevronDown
-							size={16}
-							aria-hidden
-							className={classNames(
-								"transition-transform",
-								isTechFilterOpen && "rotate-180",
+					<div className="flex flex-wrap items-center justify-between gap-3">
+						<button
+							type="button"
+							className="inline-flex min-h-11 items-center gap-1.5 text-sm font-bold text-muted-foreground transition-colors hover:text-foreground"
+							aria-expanded={isTechFilterOpen}
+							aria-controls="project-tech-filter"
+							onClick={() => setIsTechFilterOpen((open) => !open)}
+						>
+							{t("filterByTech")}
+							{selectedTech !== "All" && (
+								<span className="rounded-full bg-butter px-2.5 py-0.5 text-xs text-on-block">
+									{selectedTech}
+								</span>
 							)}
-						/>
-					</button>
+							<ChevronDown
+								size={16}
+								aria-hidden
+								className={classNames(
+									"transition-transform",
+									isTechFilterOpen && "rotate-180",
+								)}
+							/>
+						</button>
+						<p className="text-sm font-bold" aria-live="polite">
+							{t("results", { count: filteredProjects.length })}
+						</p>
+					</div>
 					{isTechFilterOpen && (
-						<div id="project-tech-filter" className="mt-2 flex flex-wrap gap-2">
+						<div id="project-tech-filter" className="flex flex-wrap gap-2">
 							{techFilters.map((tech) => (
 								<button
 									key={tech}
 									type="button"
 									aria-pressed={selectedTech === tech}
 									className={classNames(
-										"min-h-11 rounded-full border px-3 py-1 text-xs font-medium transition-colors",
+										"min-h-10 rounded-full px-3.5 text-xs font-bold transition-colors",
 										selectedTech === tech
-											? "border-primary text-primary"
-											: "border-border text-muted-foreground hover:border-primary",
+											? "bg-butter text-on-block"
+											: "bg-card text-muted-foreground hover:text-foreground",
 									)}
 									onClick={() => setSelectedTech(tech)}
 								>
@@ -163,12 +158,9 @@ export function ProjectPage({ projects }: { projects: ProjectCard[] }) {
 							))}
 						</div>
 					)}
-					<p className="mt-3 text-sm text-muted-foreground">
-						{t("results", { count: filteredProjects.length })}
-					</p>
 				</section>
 
-				<section className="space-y-3">
+				<section className="grid grid-cols-1 gap-3 md:grid-cols-2">
 					{filteredProjects.map((project) => (
 						<ProjectItem
 							key={project.title}
@@ -189,8 +181,8 @@ export function ProjectPage({ projects }: { projects: ProjectCard[] }) {
 					))}
 				</section>
 				{filteredProjects.length === 0 && (
-					<div className="mx-4 rounded-xl border border-dashed border-border bg-card px-6 py-12 text-center">
-						<p className="text-base font-medium">{t("emptyTitle")}</p>
+					<div className="rounded-[1.75rem] bg-card px-6 py-14 text-center">
+						<p className="text-lg type-heading">{t("emptyTitle")}</p>
 						<p className="mt-2 text-sm text-muted-foreground">
 							{t("emptyDescription")}
 						</p>
