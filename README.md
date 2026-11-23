@@ -314,6 +314,13 @@ pnpm lint && pnpm exec vitest run && SKIP_ENV_VALIDATION=true pnpm build
 - **기술**: Next.js, React, TypeScript, MSW, Hono, Zod, PGlite, OffscreenCanvas, Web Worker, TanStack Query, zustand
 - **링크**: [GitHub](https://github.com/Ring-wdr/vis-a-lot)
 
+### 10. 라이트런 (light-run)
+
+- **설명**: 광고·로그인·서버 없이 누르고 달리면 기록이 남는 러닝 앱. 화면이 꺼져도 백그라운드로 기록하고, 기록은 기기 안(SQLite)에만 저장
+- **역할**: 1인 기획·설계·구현 (GPS 필터와 기록 리플레이 코어, 백그라운드 위치·음성 안내·공유 Android 로컬 모듈, 내 코스·플랜, 3D 다시 보기, Google Play 출시), Claude Code와 협업
+- **기술**: React Native, Expo SDK 57, Expo Router, TypeScript, expo-sqlite, expo-location, Google Maps SDK, Mapbox, Jest, Maestro, EAS
+- **링크**: [GitHub](https://github.com/Ring-wdr/light-run) · [Google Play](https://play.google.com/store/apps/details?id=com.ringwdr.lightrun)
+
 ## 💡 주요 특징
 
 ### Feature-Sliced Design (FSD)
