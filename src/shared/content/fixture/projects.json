@@ -552,6 +552,84 @@
           "OpenAPI"
         ]
       }
+    },
+    {
+      "slug": "light-run",
+      "title": "라이트런",
+      "shortTitle": "라이트런",
+      "thumbnail": "/ms-icon-150x150.png",
+      "summary": "light-run test fixture summary.",
+      "period": "2026.09 -",
+      "team": "개인 프로젝트",
+      "role": "기획, React Native·Expo 앱 설계와 구현, Android 네이티브 모듈, Google Play 출시",
+      "card": {
+        "category": "Product",
+        "featured": false,
+        "status": "Live",
+        "impact": "광고·로그인·서버 없이 누르고 달리면 기록이 남는 러닝 앱을 Google Play에 출시했습니다.",
+        "result": "화면이 꺼져도 끊기지 않는 백그라운드 기록, 음성 안내, 내 코스·플랜, 3D 다시 보기, GPX 백업까지 구현했습니다."
+      },
+      "aliases": [
+        "light-run",
+        "light run",
+        "lightrun",
+        "라이트 런",
+        "러닝 앱"
+      ],
+      "links": {
+        "github": "https://github.com/Ring-wdr/light-run",
+        "demo": "https://play.google.com/store/apps/details?id=com.ringwdr.lightrun"
+      },
+      "overview": {
+        "background": "Fixture background.",
+        "goal": "Fixture goal.",
+        "features": [
+          "Fixture feature"
+        ]
+      },
+      "tech": {
+        "stack": [
+          "React Native",
+          "Expo",
+          "TypeScript",
+          "Expo Router",
+          "SQLite",
+          "Google Maps",
+          "Mapbox",
+          "Jest",
+          "Maestro"
+        ],
+        "challenges": [
+          {
+            "title": "light-run challenge",
+            "description": "Fixture challenge."
+          }
+        ],
+        "solutions": [
+          {
+            "title": "light-run solution",
+            "description": "Fixture solution."
+          }
+        ]
+      },
+      "achievements": {},
+      "gallery": [
+        {
+          "src": "/ms-icon-150x150.png",
+          "alt": "light-run fixture image"
+        }
+      ],
+      "metadata": {
+        "publishedAt": "2026-11-23T00:00:00Z",
+        "tags": [
+          "React Native",
+          "Expo",
+          "Mobile",
+          "Android",
+          "SQLite",
+          "GPS"
+        ]
+      }
     }
   ]
 }
